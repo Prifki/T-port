@@ -1,7 +1,6 @@
-# Transportation
+# T-Shipping
 
-An educational project on developing an application which simulates the operation of the information system of a transport company. 
-*A cool project name will be thought up later*
+An educational project on developing an application which simulates the operation of the information system of a transport company.
 
 ## Estimated design
 
