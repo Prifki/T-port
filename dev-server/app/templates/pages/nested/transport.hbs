@@ -1,0 +1,30 @@
+{{> html/start title="T-shipping - Transport" settings=settings }}
+{{> html/header }}
+    <main>
+	<section class="content clearfix">
+		<h2>Transport</h2>
+		<form>
+		  <p>Sort by: </p>
+		  <select id="sorting" name="places">
+			<option value="number">Number</option>
+			<option value="places">Number of places</option>
+		  </select>
+		</form>
+		<table class="entity_table">
+		  <tr>
+			<th>Number</th>
+			<th>Type</th>
+			<th>Route</th>
+			<th>Number of places</th>
+		  </tr>
+		  <tr>
+			<td><a href="/nested/transport_card">100</a></td>
+			<td>Ship</td>
+			<td><a href="/nested/route_card">66</a></td>
+			<td>1000</td>
+		  </tr>
+		</table>
+	</section>
+	</main>
+	
+{{> html/end }}

@@ -1,0 +1,21 @@
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+	<link rel="stylesheet" href="/static-assets/css/base.css">
+    <link rel="stylesheet" href="/static-assets/css/fonts.css">
+    <link rel="stylesheet" href="/static-assets/css/style.css">
+    <script>
+        (function () {
+            const port = 'ws://localhost:{{ port }}';
+            const socket = new WebSocket(port);
+            // Listen for messages
+            socket.addEventListener('message', function (event) {
+                if (event.data === 'reload') {
+                    window.location.href = window.location.href;
+                }
+            });
+        })();
+    </script>
+</head>
