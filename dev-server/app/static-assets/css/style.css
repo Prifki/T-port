@@ -178,7 +178,7 @@ select {
     background-color: #ddd;
 }
 
-input[type=text] {
+#find {
     width: 100%;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -202,4 +202,34 @@ input[type=text] {
     width: 100%;  /* The width is the width of the web page */
 	max-width: 900px;
 	margin: auto;
+}
+
+.td_link {
+	width: 100%;
+	height: 100%;
+}
+
+#login, #pass {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #51dcba;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #44c1a3;
 }
