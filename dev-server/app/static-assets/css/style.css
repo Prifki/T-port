@@ -28,16 +28,12 @@ header {
   padding: 25px;
 }
 
-.name {
-  text-align: center;
-  margin: auto;
-}
-
 header h1 {
   font-family: 'Roboto Slab', serif;
   color: #333;
   font-size: 42px;
   font-weight: 400;
+  text-align: center;
 }
 
 main {
@@ -53,7 +49,6 @@ nav {
 }
 
 .nav-item {
-	display: inline-block;
     margin: 4px 30px;
     font-size: 16px;
     font-weight: 500;
@@ -66,13 +61,8 @@ nav {
 
 .login {
 	position: absolute;
-	top: 0;
+	top: 10px;
 	right: 10px;
-	display: inline-block;
-    margin: 10px 0;
-    font-size: 16px;
-    float: right;
-    font-weight: 500;
     z-index: 10;
 }
 
@@ -95,44 +85,6 @@ nav {
 
 .simple-text {
 	font-size: 28px;
-}
-
-#map_pic {
-	width: 100%;
-	padding: 5% 0;
-}
-
-  footer {
-    padding: 0 0 20px;
-  }
-  footer > div {
-    width: 148px;
-    margin: 50px auto;
-    display: block;
-  }
-  .copyright {
-    clear: both;
-    display: block;
-    text-align: center;
-    color: #666;
-    font-size: 16px;
-  }
-  
-.super-but {
-  font-size: 38px;
-  font-weight: 400;
-  float: left;
-  text-align: center;
-  width: 100%;
-  text-transform: uppercase;
-}
-
-.super-but:hover, .proj-but:active {
-  color: #bbb;
-}
-
-.proj-but {
-  padding: 5% 0;
 }
   
 .entity_table {
@@ -160,48 +112,26 @@ nav {
     color: white;
 }
 
-form {
+form, .flex-container, #map {
     width: 100%;
 	max-width: 900px;
 	margin: auto;
 }
 
-select {
-    width: 200px;
+select, input[type="time"] {
+    width: 100%;
 	margin-top: 20px;
     padding: 16px 20px;
     border: none;
     border-radius: 4px;
-    background-color: #ddd;
-}
-
-#find {
-    width: 100%;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-image: url('../images/searchicon.png');
-    background-position: 10px 10px; 
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-}
-
-.centered-text {
-	max-width: 900px;
-	margin: auto;
-	font-size: 22px;
 }
 
 #map {
-    height: 400px;  /* The height is 400 pixels */
-    width: 100%;  /* The width is the width of the web page */
-	max-width: 900px;
-	margin: auto;
+    height: 400px;
 }
 
-.td_link {
+td a {
+	display: block;
 	width: 100%;
 	height: 100%;
 }
@@ -229,4 +159,68 @@ input[type=submit] {
 
 input[type=submit]:hover {
     background-color: #44c1a3;
+}
+
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.flex-container label{
+  display: block;
+}
+
+.flex-container > div {
+  width: 250px;
+  margin: 10px auto;
+}
+
+#find-a-route-button {
+	max-width: 340px;
+	min-width: 200px;
+	margin: 10px auto;
+	display: block;
+}
+
+#index-section {
+	background: url(/static-assets/images/1.jpg) no-repeat center center;
+	min-height: 500px;
+	padding-top: 5%;
+}
+
+.substrate {
+	width: 100%;
+	height: 100%;
+	max-width: 1000px;
+    background: rgba(255,255,255,0.8);
+	margin: auto;
+}
+
+#find-a-route-form {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+footer {
+  padding: 0 0 20px;
+}
+
+footer > div {
+  width: 148px;
+  margin: 50px auto;
+  display: block;
+}
+
+.centered-text {
+	max-width: 900px;
+	margin: auto;
+	font-size: 22px;
+}
+
+.copyright {
+  clear: both;
+  display: block;
+  text-align: center;
+  color: #666;
+  font-size: 16px;
 }

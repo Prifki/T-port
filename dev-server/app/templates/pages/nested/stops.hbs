@@ -4,11 +4,31 @@
 	<section class="content clearfix">
 		<h2>Stops</h2>
 		<form>
-		  <p>Sort by: </p>
-		  <select id="sorting" name="places">
-			<option value="number">Number</option>
-			<option value="routes">Routes</option>
-		  </select>
+		<div class="flex-container">
+		  <div>
+			  <label for="sort-by-stops">Sort by:</label>
+			  <select name="sort-by-stops">
+				<option value="number">Stop number</option>
+				<option value="route">Route number</option>
+			  </select>
+		  </div>
+		  <div>
+			  <label for="filter-by-transport">Filter by number:</label>
+			  <select name="filter-by-transport">
+				<option value="1">Stop 1</option>
+				<option value="2">Stop 2</option>
+				<option value="3">Stop 3</option>
+			  </select>
+		  </div>
+		  <div>
+			  <label for="filter-by-route">Filter by route:</label>
+			  <select name="filter-by-route">
+				<option value="66">Route 66</option>
+				<option value="67">Route 67</option>
+				<option value="68">Route 68</option>
+			  </select>
+		  </div>
+		</div>
 		</form>
 		<table class="entity_table">
 		  <tr>
@@ -17,18 +37,18 @@
 			<th>Place</th>
 		  </tr>
 		  <tr>
-			<td><a href="/nested/stop_card"><div class="td_link">1</div></a></td>
-			<td><a href="/nested/route_card"><div class="td_link">66</div></a></td>
+			<td><a href="/nested/stop_card">1</a></td>
+			<td><a href="/nested/route_card">66</a></td>
 			<td>Saint Petersburg</td>
 		  </tr>
 		  <tr>
-			<td><a href="/nested/stop_card"><div class="td_link">2</div></a></td>
-			<td><a href="/nested/route_card"><div class="td_link">66</div></a></td>
+			<td><a href="/nested/stop_card">2</a></td>
+			<td><a href="/nested/route_card">66</a></td>
 			<td>Kopenhagen</td>
 		  </tr>
 		  <tr>
-			<td><a href="/nested/stop_card"><div class="td_link">3</div></a></td>
-			<td><a href="/nested/route_card"><div class="td_link">66</div></a></td>
+			<td><a href="/nested/stop_card">3</a></td>
+			<td><a href="/nested/route_card">66</a></td>
 			<td>New York</td>
 		  </tr>
 		</table>

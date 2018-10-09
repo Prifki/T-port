@@ -4,23 +4,43 @@
 	<section class="content clearfix">
 		<h2>Transport</h2>
 		<form>
-		  <p>Sort by: </p>
-		  <select id="sorting" name="places">
-			<option value="number">Number</option>
-			<option value="places">Number of places</option>
-		  </select>
+		<div class="flex-container">
+		  <div>
+			  <label for="sort-by-places">Sort by:</label>
+			  <select name="sort-by-places">
+				<option value="number">Transport number</option>
+				<option value="places">Number of places</option>
+			  </select>
+		  </div>
+		  <div>
+			  <label for="filter-by-transport">Filter by type:</label>
+			  <select name="filter-by-transport">
+				<option value="train">Train</option>
+				<option value="metro">Metro</option>
+				<option value="bus">Bus</option>
+			  </select>
+		  </div>
+		  <div>
+			  <label for="ilter-by-route">Filter by route:</label>
+			  <select name="filter-by-route">
+				<option value="66">Route 66</option>
+				<option value="67">Route 67</option>
+				<option value="68">Route 68</option>
+			  </select>
+		  </div>
+		</div>
 		</form>
 		<table class="entity_table">
 		  <tr>
-			<th>Number</th>
+			<th>Transport number</th>
 			<th>Type</th>
 			<th>Route</th>
 			<th>Number of places</th>
 		  </tr>
 		  <tr>
-			<td><a href="/nested/transport_card"><div class="td_link">100</div></a></td>
+			<td><a href="/nested/transport_card">100</a></td>
 			<td>Ship</td>
-			<td><a href="/nested/route_card"><div class="td_link">66</div></a></td>
+			<td><a href="/nested/route_card">66</a></td>
 			<td>1000</td>
 		  </tr>
 		</table>
