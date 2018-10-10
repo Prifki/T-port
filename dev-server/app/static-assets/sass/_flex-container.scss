@@ -1,0 +1,17 @@
+.flex-container {
+    width: 100%;
+	max-width: 900px;
+	margin: auto;
+}
+
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  label{
+	display: block;
+  }
+  > div {
+  width: 250px;
+  margin: 10px auto;
+  }
+}

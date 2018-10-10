@@ -1,0 +1,45 @@
+@import 'variables';
+@import 'navigation';
+@import 'page-pieces';
+@import 'tables';
+@import 'login-link';
+@import 'forms';
+@import 'pagination';
+@import 'map';
+@import 'flex-container';
+@import 'find-a-route-section';
+@import 'login-form';
+
+main {
+  width: 100%;
+}
+
+.content{
+  width: 100%;
+  padding: 0 10% 3% 10%;
+  background: linear-gradient(to top, $background-color, $background-gradient-color-to);
+  h2 {
+	  padding: 36px 0;
+	  font-size: 36px;
+	  font-weight: 400;
+	  text-align: center;
+  }
+}
+
+.simple-text {
+	font-size: 28px;
+}
+
+.centered-text {
+	max-width: 900px;
+	margin: auto;
+	font-size: 22px;
+}
+
+.copyright {
+  clear: both;
+  display: block;
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+}
