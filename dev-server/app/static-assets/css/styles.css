@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin,cyrillic);
+@import url("https://fonts.googleapis.com/css?family=Crete+Round|Roboto+Slab");
 nav {
   margin: auto;
   width: 100%;
@@ -90,34 +92,6 @@ td a {
   color: #bbb;
 }
 
-form {
-  width: 100%;
-  max-width: 900px;
-  margin: auto;
-}
-
-select, input[type=time] {
-  width: 100%;
-  margin-top: 20px;
-  padding: 16px 20px;
-  border: none;
-  border-radius: 4px;
-}
-
-input[type=submit] {
-  width: 100%;
-  background-color: #51dcba;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-input[type=submit]:hover {
-  background-color: #26bb96;
-}
-
 .pagination-centering {
   text-align: center;
   margin: 40px 0;
@@ -142,34 +116,6 @@ input[type=submit]:hover {
 }
 .pagination a:hover:not(.active) {
   background-color: #ddd;
-}
-
-#map {
-  width: 100%;
-  max-width: 900px;
-  margin: auto;
-}
-
-#map {
-  height: 400px;
-}
-
-.flex-container {
-  width: 100%;
-  max-width: 900px;
-  margin: auto;
-}
-
-.flex-container {
-  display: flex;
-  flex-flow: row wrap;
-}
-.flex-container label {
-  display: block;
-}
-.flex-container > div {
-  width: 250px;
-  margin: 10px auto;
 }
 
 #index-section {
@@ -209,6 +155,65 @@ input[type=submit]:hover {
   box-sizing: border-box;
 }
 
+* {
+  position: relative;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  outline: none !important;
+  vertical-align: bottom;
+  text-decoration: none;
+  list-style: circle inside;
+  pointer-events: auto;
+  -webkit-border-radius: 0;
+}
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.clearfix:after {
+  clear: both;
+  content: "";
+  display: block;
+}
+
+html {
+  font-family: sans-serif;
+  font-size: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  line-height: 1;
+}
+
+a {
+  background-color: transparent;
+  cursor: pointer;
+  color: inherit;
+}
+a:active, a:hover, a:visited {
+  outline: 0;
+  color: inherit;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+}
+
+.flex-container, form, #map {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+}
+
 main {
   width: 100%;
 }
@@ -233,6 +238,44 @@ main {
   max-width: 900px;
   margin: auto;
   font-size: 22px;
+}
+
+#map {
+  height: 400px;
+}
+
+select, input[type=time] {
+  width: 100%;
+  margin-top: 20px;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #51dcba;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type=submit]:hover {
+  background-color: #26bb96;
+}
+
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+.flex-container label {
+  display: block;
+}
+.flex-container > div {
+  width: 250px;
+  margin: 10px auto;
 }
 
 .copyright {

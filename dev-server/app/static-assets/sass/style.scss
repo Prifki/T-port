@@ -3,12 +3,16 @@
 @import 'page-pieces';
 @import 'tables';
 @import 'login-link';
-@import 'forms';
 @import 'pagination';
-@import 'map';
-@import 'flex-container';
 @import 'find-a-route-section';
 @import 'login-form';
+@import 'base';
+
+%centered-and-limited {
+	width: 100%;
+	max-width: 900px;
+	margin: auto;
+}
 
 main {
   width: 100%;
@@ -34,6 +38,50 @@ main {
 	max-width: 900px;
 	margin: auto;
 	font-size: 22px;
+}
+
+#map {
+    @extend %centered-and-limited;
+	height: 400px;
+}
+
+form {
+    @extend %centered-and-limited;
+}
+
+select, input[type="time"] {
+    width: 100%;
+	margin-top: 20px;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 4px;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: $special-color;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+	&:hover {
+		background-color: darken($special-color,15%);
+	}
+}
+
+.flex-container {
+  @extend %centered-and-limited;
+  display: flex;
+  flex-flow: row wrap;
+  label{
+	display: block;
+  }
+  > div {
+  width: 250px;
+  margin: 10px auto;
+  }
 }
 
 .copyright {
