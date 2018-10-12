@@ -1,8 +1,18 @@
-{{> html/start title="T-shipping - Transport" settings=settings }}
+{{> html/start title="T-shipping - Routes" settings=settings }}
 {{> html/header }}
     <main>
 	<section class="content clearfix">
 		<h2>Routes</h2>
+			<div id="crossing-routes-toggle">
+				<label>Crossing routes: </label>
+        <div class="button r" id="button-9">
+          <input type="checkbox" class="checkbox">
+          <div class="knobs">
+            <span></span>
+          </div>
+          <div class="layer"></div>
+        </div>
+			</div>
 		<table class="entity_table">
 		  <tr>
 			<th>Route number</th>
@@ -52,4 +62,5 @@
 	</section>
 	</main>
 	
+{{> html/footer }}
 {{> html/end }}
