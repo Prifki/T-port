@@ -94,38 +94,50 @@ header h1 {
   }
 }
 .main-section {
-  width: 100%;
-  max-width: 900px;
-  margin: auto;
   display: flex;
   flex-wrap: wrap;
 }
 
+#navigation-bar {
+  padding: 10px;
+  flex: 1;
+}
+
 #main-container {
   padding: 10px 0;
+  flex: 4;
 }
 
 .find-a-route-section {
   background: url(/static-assets/images/1.jpg) no-repeat center center;
   background-size: cover;
   width: 100%;
-  min-width: 550px;
+  min-width: 300px;
   min-height: 550px;
   border: solid 1px #2f3640;
   border-radius: 5px;
 }
 
 #accessory-menu {
-  width: 175px;
   padding: 10px;
+  flex: 1;
 }
 
-#navigation-bar {
-  width: 175px;
-  padding: 10px;
-}
+@media (max-width: 690px) {
+  #navigation-bar {
+    order: 1;
+  }
 
+  #main-container {
+    order: 3;
+  }
+
+  #accessory-menu {
+    order: 2;
+  }
+}
 nav {
+  min-width: 175px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
