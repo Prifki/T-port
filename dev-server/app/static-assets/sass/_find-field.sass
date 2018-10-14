@@ -1,0 +1,40 @@
+.find-box
+  display: inline-block
+  margin-top: 5px
+  background: $header-main-color
+  border-radius: 40px
+  padding: 3px
+  &:hover > .find-txt 
+    width: 200px
+    padding: 0 10px
+  &:hover > .find-btn 
+    background: $header-alternative-color
+    color: black
+
+.find-btn 
+  color: #e84118
+  float: right
+  width: 40px
+  height: 40px
+  border-radius: 50%
+  background: $header-main-color
+  display: flex
+  justify-content: center
+  align-items: center
+  transition: 0.4s
+  color: $header-alternative-color
+  cursor: pointer
+  & > i 
+    font-size: 30px
+
+.find-txt
+  border: none
+  background: none
+  outline: none
+  padding: 0
+  color: $header-alternative-color
+  font-size: 16px
+  transition: 0.4s
+  line-height: 40px
+  width: 0px
+  font-weight: bold

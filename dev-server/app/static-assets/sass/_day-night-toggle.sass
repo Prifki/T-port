@@ -33,7 +33,7 @@
 
 .layer
   width: 100%
-  background-color: lighten($special-color,30%)
+  background-color: lighten($header-main-color,20%)
   transition: 0.3s ease all
   z-index: 1
 
@@ -51,20 +51,21 @@
   transition: 0.4s cubic-bezier(0.18, 0.89, 0.35, 1.15) all
 
 #button-9 .knobs:before
-  content: 'YES'
+  color: #fff
+  content: 'Day'
   left: 4px
 
 #button-9 .knobs:after
-  content: 'NO'
+  color: $header-main-color
+  content: 'Night'
   right: -24px
 
 #button-9 .knobs:before, #button-9 .knobs:after
-  color: #fff
   z-index: 2
 
 #button-9 .knobs span
   left: 4px
-  background-color: $special-color
+  background-color: $header-main-color
   z-index: 1
 
 #button-9 .checkbox:checked + .knobs:before
@@ -75,7 +76,7 @@
 
 #button-9 .checkbox:checked + .knobs span
   left: 42px
-  background-color: #F44336
+  background-color: $header-alternative-color
 
 #button-9 .checkbox:checked ~ .layer
-  background-color: #fcebeb
+  background-color: darken($header-alternative-color,10%)

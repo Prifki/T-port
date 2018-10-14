@@ -1,0 +1,35 @@
+#navigation-bar
+  width: 175px
+  padding: 10px
+
+nav
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  align-content: flex-start
+  border: solid 1px $header-main-color
+  border-radius: 10px
+  padding: 15px
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+  background-image: linear-gradient(to bottom right, $header-gradient-to, $header-gradient-from)
+
+.nav-item
+  font-size: 22px
+  font-family: 'Ubuntu Mono', monospace
+  color: lighten($header-main-color,30%)
+  margin-top: 10px
+  padding: 10px
+  border-radius: 5px
+  text-transform: uppercase
+  font-weight: 500
+  background-color: $header-middle-color
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+  transition: background-color 0.5s, box-shadow 0.1s, transform 0.1s
+  &:hover
+    color: $header-main-color
+    background-color: darken($header-middle-color,5%)
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19)
+    transform: translate(0,1px)
+  &:active
+    transform: translate(0,3px)
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 6px 0 rgba(0, 0, 0, 0.19)

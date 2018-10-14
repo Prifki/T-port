@@ -1,5 +1,6 @@
 #index-section
   background: $bg-image-url no-repeat center center
+  width: 100%
   min-height: 480px
   padding-top: 5%
 
@@ -10,6 +11,8 @@
   background: $substrate-bg-color
   margin: auto
   padding: 0 20px
+  table
+    margin: 0 auto 20px
 
 #find-a-route-form
   font-size: 1.2em
@@ -21,7 +24,7 @@
   width: 100%
   max-width: 340px
   min-width: 200px
-  margin: 10px auto
+  margin: 20px auto
   display: block
   background-color: $special-color
   border: 2px solid darken($special-color,10%)
@@ -29,5 +32,9 @@
   padding: 14px 20px
   border-radius: 4px
   cursor: pointer
+  text-align: center
   &:hover
     background-color: darken($special-color,10%)
+
+#found-routes
+  display: none
