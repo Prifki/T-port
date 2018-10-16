@@ -1,4 +1,4 @@
-nav
+.menu
   min-width: 175px
   display: flex
   flex-direction: column
@@ -9,7 +9,11 @@ nav
   padding: 15px
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
   background-image: linear-gradient(to bottom right, $header-gradient-to, $header-gradient-from)
-
+  h4
+    font-family: $title-font
+    text-align: center
+    font-size: 22px
+    color: lighten($header-main-color,20%)
 .nav-item
   font-size: 22px
   font-family: 'Ubuntu Mono', monospace

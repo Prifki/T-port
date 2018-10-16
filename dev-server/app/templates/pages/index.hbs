@@ -1,9 +1,31 @@
 {{> html/start title="T-shipping" settings=settings }}
 {{> html/header }}
     <main>
+		<div class="burger-base">
+			<div class="burger-menu" onclick="burgerMenuToggle()">
+				<div class="icon">
+					<div class="bar"></div>
+				</div>
+			</div>
+			<div class="icons">
+				<i class="fas fa-bus"></i>
+				<i class="fas fa-map-marked-alt"></i>
+				<i class="fas fa-route"></i>
+			</div>
+			<div class="section">
+				<div class="cover1">
+					<div class="cover2">
+						<a class="content" href="/nested/stops"></a>
+					</div>
+				</div>
+			</div>
+			<a class="section-static top" href="/nested/transport"></a>
+			<a class="section-static bottom" href="/nested/routes"></a>
+		</div>
 	<div class="main-section">
 		<div id="navigation-bar">
-			<nav>
+			<nav class='menu'>
+				<h4>Menu</h4>
 				<a href="/nested/transport" class="nav-item">transport</a>
 				<a href="/nested/stops" class="nav-item">stops</a>
 				<a href="/nested/routes" class="nav-item">routes</a>
@@ -11,75 +33,38 @@
 		</div>
 		<div id="main-container">
 			<div class="find-a-route-section">
-
+				<div class="substrate">
+					<h2>Find a route</h2>
+					<form class="find-route-form">
+						<div class="find-route-field">
+							<label for="stopA">From:</label>
+							<input type="text" name="stopA" placeholder="Stop A">
+						</div>
+						<div class="find-route-field">
+							<label for="stopB">To:</label>
+							<input type="text" name="stopA" placeholder="Stop B">
+						</div>
+						<div class="find-route-field">
+							<label for="time">Time:</label>
+							<div id="time-fields">
+								<input type="time" name="from_time" min="05:00" max="23:30" value="06:00"/>
+								<input type="time" name="till_time" min="05:00" max="23:30" value="23:30"/>
+							</div>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 		<div id="accessory-menu">
-			<nav>
+			<div class="menu">
+				<h4>Favorites</h4>
 				<a href="#" class="nav-item">Route 66</a>
 				<a href="#" class="nav-item">Route 100</a>
 				<a href="#" class="nav-item">Bus 80</a>
-			</nav>
+			</div>
 		</div>
 	</div>
 	</main>
 	
 {{> html/footer }}
 {{> html/end }}
-
-<!--<section class="content clearfix" id="index-section">
-		<div class="substrate">
-			<h2>Find a route</h2>
-			<form id="find-a-route-form">
-			<div class="flex-container">
-				<div>
-					<label for="stopA">From:</label>
-					<select id="sorting" name="places">
-					<option value="number">Stop 1</option>
-					<option value="places">Stop 2</option>
-					<option value="places">Stop 3</option>
-					</select>
-				</div>
-				<div>
-					<label for="stopB">To:</label>
-					<select id="sorting" name="places">
-					<option value="number">Stop 1</option>
-					<option value="places">Stop 2</option>
-					<option value="places">Stop 3</option>
-					</select>
-				</div>
-				<div>
-					<label for="find-a-route-time">Time:</label>
-					<input type="time" name="from_time" min="05:00" max="23:30" value="06:00"/>
-					<input type="time" name="till_time" min="05:00" max="23:30" value="23:30"/>
-				</div>  
-			</div>
-			<a id="find-a-route-button" onclick="findRoute()" href="#">Find</a>
-			</form>
-			<div id="found-routes">
-				<h2>Found routes</h2>
-				<table class="entity_table">
-					<tr>
-						<th>Route number</th>
-						<th>From</th>
-						<th>To</th>
-					</tr>
-					<tr>
-						<td><a href="/nested/route_card">66</a></td>
-						<td>Saint-Petersburg</td>
-						<td>New York</td>
-					</tr>
-					<tr>
-						<td><a href="/nested/route_card">66</a></td>
-						<td>Saint-Petersburg</td>
-						<td>New York</td>
-					</tr>
-					<tr>
-						<td><a href="/nested/route_card">66</a></td>
-						<td>Saint-Petersburg</td>
-						<td>New York</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-	</section>-->

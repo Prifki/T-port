@@ -2,11 +2,11 @@
 @import header-style
 @import index-style
 @import navigation-menu
+@import burger-menu
 
 @import page-pieces
 @import tables
 @import pagination
-@import find-a-route-section
 @import login-form
 @import bases
 @import day-night-toggle
@@ -21,19 +21,28 @@
 main
   width: 100%
 
-.content
-  width: 100%
-  padding: 0 10%
-  background: linear-gradient(to top, $background-color, $background-gradient-color-to)
-  h2
-    padding: 28px 0
-    font-size: 36px
-    font-weight: 400
-    text-align: center
+.main-section
+  display: flex
+  flex-wrap: wrap
+
+#navigation-bar
+  padding: 10px
+  flex: 1
+
+#main-container
+  padding: 10px 0
+  flex: 4
+
+#accessory-menu
+  padding: 10px
+  flex: 1
+
+@media (max-width: 900px)
+  #navigation-bar, #accessory-menu
+    display: none
 
 .simple-text
   font-size: 28px
-
 
 .centered-text
   max-width: 900px
@@ -43,33 +52,6 @@ main
 #map
   @extend %centered-and-limited
   height: 400px
-
-form
-  @extend %centered-and-limited
-
-select, input[type="time"]
-  width: 100%
-  margin-top: 20px
-  padding: 10px 20px
-  border: 2px solid $borders-color
-  border-radius: 4px
-  opacity: 0.8
-  &:hover
-    opacity: 1
-
-.flex-container
-  @extend %centered-and-limited
-  display: flex
-  flex-flow: row wrap 
-  label
-    display: block
-  >div
-    width: 250px
-    margin: 10px auto
-
-label
-  font-size: 22px
-  margin-right: 20px
 
 .copyright
   clear: both

@@ -1,3 +1,3 @@
-function findRoute(){
-	document.getElementById("found-routes").style.display = 'block';
+function burgerMenuToggle() {
+	document.getElementsByClassName("burger-base")[0].classList.toggle("burger-close");
 }
