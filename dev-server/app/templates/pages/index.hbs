@@ -35,22 +35,25 @@
 			<div class="find-a-route-section">
 				<div class="substrate">
 					<h2>Find a route</h2>
-					<form class="find-route-form">
-						<div class="find-route-field">
-							<label for="stopA">From:</label>
-							<input type="text" name="stopA" placeholder="Stop A">
-						</div>
-						<div class="find-route-field">
-							<label for="stopB">To:</label>
-							<input type="text" name="stopA" placeholder="Stop B">
-						</div>
-						<div class="find-route-field">
-							<label for="time">Time:</label>
-							<div id="time-fields">
-								<input type="time" name="from_time" min="05:00" max="23:30" value="06:00"/>
-								<input type="time" name="till_time" min="05:00" max="23:30" value="23:30"/>
+					<form>
+						<div class="find-route-form">
+							<div class="find-route-field">
+								<label for="stopA">From:</label>
+								<input type="text" name="stopA" placeholder="Stop A">
+							</div>
+							<div class="find-route-field">
+								<label for="stopB">To:</label>
+								<input type="text" name="stopA" placeholder="Stop B">
+							</div>
+							<div class="find-route-field">
+								<label for="time">Time:</label>
+								<div id="time-fields">
+									<input type="time" name="from_time" min="05:00" max="23:30" value="06:00"/>
+									<input type="time" name="till_time" min="05:00" max="23:30" value="23:30"/>
+								</div>
 							</div>
 						</div>
+						<input type="submit" value="Find" id="find-a-route-button">
 					</form>
 				</div>
 			</div>
