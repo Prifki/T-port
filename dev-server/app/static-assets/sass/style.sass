@@ -1,8 +1,10 @@
 @import variables
 @import header-style
+
 @import index-style
-@import navigation-menu
-@import burger-menu
+@import burger
+// navigation-menu
+// burger-menu
 
 @import page-pieces
 @import tables
@@ -13,33 +15,17 @@
 @import find-field
 @import sign-in-button
 
-%centered-and-limited
-  width: 100%
-  max-width: 900px
-  margin: auto
-
 main
   width: 100%
 
 .main-section
   display: flex
   flex-wrap: wrap
-
-#navigation-bar
-  padding: 10px
-  flex: 1
+  align-items: flex-start
 
 #main-container
   padding: 10px 0
-  flex: 4
-
-#accessory-menu
-  padding: 10px
-  flex: 1
-
-@media (max-width: 900px)
-  #navigation-bar, #accessory-menu
-    display: none
+  flex: 6
 
 .simple-text
   font-size: 28px
@@ -49,13 +35,17 @@ main
   margin: auto
   font-size: 22px
 
+%centered-and-limited
+  width: 100%
+  max-width: 900px
+  margin: auto
+
 #map
   @extend %centered-and-limited
   height: 400px
 
 .copyright
-  clear: both
   display: block
   text-align: center
-  color: #666
-  font-size: 16px
+  color: #000
+  font-size: 20px
