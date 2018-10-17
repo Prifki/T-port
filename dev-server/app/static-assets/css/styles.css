@@ -99,19 +99,23 @@ nav {
 }
 
 .floating-menu {
+  position: absolute;
+  left: 0;
   top: -130px;
+  z-index: 8;
   transition: top 0.4s ease;
 }
 
 .mobile-find-field {
   position: absolute;
-  top: 62px;
+  top: 0;
   left: -102%;
   display: none;
   background: #f2f2f2;
   width: 100%;
   justify-content: center;
   padding: 20px;
+  z-index: 8;
   transition: left 0.4s ease;
 }
 .mobile-find-field input {
@@ -176,72 +180,7 @@ nav {
 }
 
 .show-menu {
-  top: 62px;
-}
-
-.find-a-route-section {
-  background: url(/static-assets/images/1.jpg) no-repeat center center;
-  background-size: cover;
-  width: 100%;
-  border: solid 1px #2f3640;
-  border-radius: 5px;
-}
-
-.substrate {
-  height: 100%;
-  background: rgba(255, 255, 255, 0.8);
-  margin: 5%;
-  padding: 20px;
-}
-.substrate h2 {
-  text-align: center;
-  font-size: 36px;
-}
-
-.find-route-form {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: flex-start;
-}
-
-.find-route-field label, .find-route-field input {
-  display: block;
-}
-.find-route-field label {
-  font-size: 26px;
-  margin: 15px;
-}
-.find-route-field input {
-  padding: 10px;
-  margin: 15px;
-  background-color: #f7f7f7;
-  min-width: 200px;
-  border: solid 1px #ddd;
-  border-radius: 10px;
-  opacity: 0.9;
-}
-.find-route-field input:hover {
-  opacity: 1;
-  transform: translate(0, -1px);
-}
-
-#find-a-route-button {
-  max-width: 340px;
-  min-width: 200px;
-  margin: 20px auto;
-  display: block;
-  background-color: #51dcba;
-  border: 2px solid #2ad0a7;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  text-align: center;
-}
-#find-a-route-button:hover {
-  background-color: #2ad0a7;
+  top: 0;
 }
 
 .ham {
@@ -299,7 +238,6 @@ nav {
 }
 
 body {
-  position: absolute;
   width: 100%;
   height: 100%;
   font-family: Mission, "Mission Gothic Thin";
@@ -309,8 +247,8 @@ body {
 }
 
 footer {
-  width: 100%;
   position: absolute;
+  width: 100%;
   bottom: 0;
 }
 
@@ -417,6 +355,8 @@ html {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   line-height: 1;
+  width: 100%;
+  height: 100%;
 }
 
 a {
@@ -609,38 +549,23 @@ textarea {
 }
 
 main {
+  position: absolute;
+  top: 60px;
   width: 100%;
-}
-
-.main-section {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-}
-
-#main-container {
-  padding: 10px 0;
-  flex: 6;
+  height: calc(100% - 120px);
 }
 
 .simple-text {
   font-size: 28px;
 }
 
-.centered-text {
-  max-width: 900px;
-  margin: auto;
-  font-size: 22px;
-}
-
-#map {
+.google-map {
   width: 100%;
-  max-width: 900px;
-  margin: auto;
+  height: 100%;
 }
 
 #map {
-  height: 400px;
+  height: 100%;
 }
 
 .copyright {

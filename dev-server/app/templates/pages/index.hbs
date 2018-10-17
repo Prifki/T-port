@@ -1,48 +1,36 @@
 {{> html/start title="T-Port" settings=settings }}
 {{> html/header }}
-    <!--<main>
-		{{> html/burger }}
-	<div class="main-section">
-		<div id="navigation-menu">
-			{{> html/nav_menu }}
-		<!</div>
-		<div id="main-container">
-			<div class="find-a-route-section">
-				<div class="substrate">
-					<h2>Find a route</h2>
-					<form>
-						<div class="find-route-form">
-							<div class="find-route-field">
-								<label for="stopA">From:</label>
-								<input type="text" name="stopA" placeholder="Stop A">
-							</div>
-							<div class="find-route-field">
-								<label for="stopB">To:</label>
-								<input type="text" name="stopA" placeholder="Stop B">
-							</div>
-							<div class="find-route-field">
-								<label for="time">Time:</label>
-								<div id="time-fields">
-									<input type="time" name="from_time" min="05:00" max="23:30" value="06:00"/>
-									<input type="time" name="till_time" min="05:00" max="23:30" value="23:30"/>
-								</div>
-							</div>
-						</div>
-						<input type="submit" value="Find" id="find-a-route-button">
-					</form>
-				</div>
-			</div>
+    <main>
+		<div class="floating-menu">
+			<nav>
+				<a href="/nested/transport" class="nav-item">transport</a>
+				<a href="/nested/stops" class="nav-item">stops</a>
+				<a href="/nested/routes" class="nav-item">routes</a>
+			</nav>
 		</div>
-		<div id="accessory-menu">
-			<div class="menu">
-				<h4>Favorites</h4>
-				<a href="#" class="nav-item">Route 66</a>
-				<a href="#" class="nav-item">Route 100</a>
-				<a href="#" class="nav-item">Bus 80</a>
-			</div>
+		<div class="mobile-find-field">
+			<input type="text" placeholder="Search…">
+			<i class="material-icons close-pic" onclick="mobileSearch()">close</i>
 		</div>
-	</div>
-	</main>-->
+		<div class="google-map">
+			<!-- Google Maps -->
+			<div id="map"></div>
+			<script>
+				function initMap() {
+					var spb = {lat: 59.926789, lng: 30.233772};
+					var map = new google.maps.Map(
+						document.getElementById('map'), {zoom: 10, center: spb});
+					var marker = new google.maps.Marker({position: spb, map: map});
+				}
+			</script>
+			<script async defer
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZFGV9mhO59Iuq-gVjzw5CSdXQm4Ibuvc&callback=initMap">
+			</script>
+			<!-- /Google Maps -->
+		</div>
+
+	
+	</main>
 	
 {{> html/footer }}
 {{> html/end }}
