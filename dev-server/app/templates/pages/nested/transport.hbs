@@ -1,92 +1,102 @@
 {{> html/start title="T-shipping - Transport" settings=settings }}
 {{> html/header }}
-    <main>
-	<section class="content clearfix">
-		<h2>Transport</h2>
-		<form>
-		<div class="flex-container">
-		  <div>
-			  <label for="sort-by-places">Sort by:</label>
-			  <select name="sort-by-places">
-				<option value="number">Transport number</option>
-				<option value="places">Number of places</option>
-			  </select>
-		  </div>
-		  <div>
-			  <label for="filter-by-transport">Filter by type:</label>
-			  <select name="filter-by-transport">
-				<option value="train">Train</option>
-				<option value="metro">Metro</option>
-				<option value="bus">Bus</option>
-			  </select>
-		  </div>
-		  <div>
-			  <label for="ilter-by-route">Filter by route:</label>
-			  <select name="filter-by-route">
-				<option value="66">Route 66</option>
-				<option value="67">Route 67</option>
-				<option value="68">Route 68</option>
-			  </select>
-		  </div>
+		<div class="google-map">
+			<!-- Google Maps -->
+			<div id="map"></div>
+			<script type="text/javascript" src="/static-assets/js/google-map.js"></script>
+			<script async defer
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZFGV9mhO59Iuq-gVjzw5CSdXQm4Ibuvc&callback=initMap">
+			</script>
+			<!-- /Google Maps -->
 		</div>
-		</form>
-		<table class="entity_table">
-		  <tr>
-			<th>Transport number</th>
-			<th>Type</th>
-			<th>Route</th>
-			<th>Number of places</th>
-		  </tr>
-		  <tr>
-			<td><a href="/nested/transport_card">100</a></td>
-			<td>Ship</td>
-			<td><a href="/nested/route_card">66</a></td>
-			<td>1000</td>
-		  </tr>
-		  <tr>
-			<td><a href="/nested/transport_card">100</a></td>
-			<td>Ship</td>
-			<td><a href="/nested/route_card">66</a></td>
-			<td>1000</td>
-		  </tr>
-		  <tr>
-			<td><a href="/nested/transport_card">100</a></td>
-			<td>Ship</td>
-			<td><a href="/nested/route_card">66</a></td>
-			<td>1000</td>
-		  </tr>
-		  <tr>
-			<td><a href="/nested/transport_card">100</a></td>
-			<td>Ship</td>
-			<td><a href="/nested/route_card">66</a></td>
-			<td>1000</td>
-		  </tr>
-		  <tr>
-			<td><a href="/nested/transport_card">100</a></td>
-			<td>Ship</td>
-			<td><a href="/nested/route_card">66</a></td>
-			<td>1000</td>
-		  </tr>
-		  <tr>
-			<td><a href="/nested/transport_card">100</a></td>
-			<td>Ship</td>
-			<td><a href="/nested/route_card">66</a></td>
-			<td>1000</td>
-		  </tr>
-		</table>
-		
-		<div class="pagination-centering">
-		  <div class="pagination">
-			<a href="#">&laquo;</a>
-			<a href="#" class="active">1</a>
-			<a href="#">2</a>
-			<a href="#">3</a>
-			<a href="#">&raquo;</a>
-		  </div>
+		<div class="substrate">
+			<h2>Transport</h2>
+			<div class="filtering-menu">
+				<select name="type">
+					<option value="all">All</option>
+					<option value="trains">Trains</option>
+					<option value="trams">Trams</option>
+					<option value="buses">Buses</option>
+				</select>
+				<select name="routes">
+					<option value="all">All</option>
+					<option value="01">Route 01</option>
+					<option value="02">Route 02</option>
+					<option value="03">Route 03</option>
+				</select>
+			</div>
+			<table>
+				<tr>
+					<th>Type</th>
+					<th>Number</th>
+					<th>From</th>
+					<th>To</th>
+					<th>Seats</th>
+				</tr>
+				<tr>
+					<td>Bus</td>
+					<td>90</td>
+					<td>Maly pr. VO</td>
+					<td>Nevsky pr.</td>
+					<td>48</td>
+				</tr>
+				<tr>
+					<td>Bus</td>
+					<td>90</td>
+					<td>Maly pr. VO</td>
+					<td>Nevsky pr.</td>
+					<td>48</td>
+				</tr>
+				<tr>
+					<td>Bus</td>
+					<td>90</td>
+					<td>Maly pr. VO</td>
+					<td>Nevsky pr.</td>
+					<td>48</td>
+				</tr>
+				<tr>
+					<td>Train</td>
+					<td>190</td>
+					<td>Bolshoy pr. VO</td>
+					<td>Sampsonievsky pr.</td>
+					<td>120</td>
+				</tr>
+				<tr>
+					<td>Train</td>
+					<td>190</td>
+					<td>Bolshoy pr. VO</td>
+					<td>Sampsonievsky pr.</td>
+					<td>120</td>
+				</tr>
+				<tr>
+					<td>Train</td>
+					<td>190</td>
+					<td>Bolshoy pr. VO</td>
+					<td>Sampsonievsky pr.</td>
+					<td>120</td>
+				</tr>
+				<tr>
+					<td>Tram</td>
+					<td>300</td>
+					<td>Devyatkino</td>
+					<td>Kupchino</td>
+					<td>133</td>
+				</tr>
+				<tr>
+					<td>Tram</td>
+					<td>300</td>
+					<td>Devyatkino</td>
+					<td>Kupchino</td>
+					<td>133</td>
+				</tr>
+				<tr>
+					<td>Tram</td>
+					<td>300</td>
+					<td>Devyatkino</td>
+					<td>Kupchino</td>
+					<td>133</td>
+				</tr>
+			</table>
 		</div>
-		
-	</section>
-	</main>
-	
 {{> html/footer }}
 {{> html/end }}

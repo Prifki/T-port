@@ -183,7 +183,53 @@ nav {
   top: 0;
 }
 
+.find-box {
+  background: #fff;
+  border-radius: 40px;
+  height: 48px;
+  padding: 3px;
+  border: 1px solid #ccc;
+}
+.find-box:hover > .find-txt {
+  width: 200px;
+  padding: 0 10px;
+}
+.find-box:hover > .find-btn {
+  background: #ddd;
+}
+
+.find-btn {
+  float: right;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
+  cursor: pointer;
+}
+.find-btn > i {
+  font-size: 30px;
+  color: #000;
+}
+
+.find-txt {
+  border: none;
+  background: none;
+  outline: none;
+  padding: 0;
+  color: #000;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 40px;
+  width: 0px;
+  font-weight: bold;
+}
+
 .google-map {
+  position: absolute;
   width: 100%;
   height: 100%;
 }
@@ -196,7 +242,7 @@ nav {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 7;
+  z-index: 3;
   background: #eee;
   padding: 10px;
   margin: 10px;
@@ -259,7 +305,7 @@ nav {
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 4;
+  z-index: -1;
   background: #eee;
   padding: 10px 25px;
   margin: 10px;
@@ -307,7 +353,7 @@ nav {
   transition: opacity 0.4s ease;
   top: 0;
   right: 0;
-  z-index: 4;
+  z-index: -1;
   background: #eee;
   padding: 10px;
   margin: 10px;
@@ -425,73 +471,6 @@ footer {
 
 footer {
   padding: 20px;
-}
-
-.entity_table {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-  max-width: 900px;
-  margin: 40px auto;
-}
-.entity_table td, .entity_table th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-.entity_table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-.entity_table tr:hover {
-  background-color: #ddd;
-}
-.entity_table th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #51dcba;
-  color: white;
-}
-
-td a {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.pagination-centering {
-  text-align: center;
-  margin: 40px 0;
-}
-
-.pagination {
-  display: inline-block;
-}
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color 0.3s;
-  border: 1px solid #ddd;
-  margin: 0 4px;
-}
-.pagination a.active {
-  background-color: #51dcba;
-  color: white;
-  border: 1px solid #51dcba;
-}
-.pagination a:hover:not(.active) {
-  background-color: #ddd;
-}
-
-#login, #pass {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
 }
 
 * {
@@ -648,77 +627,6 @@ textarea {
   background-color: #ebdbca;
 }
 
-.find-box {
-  background: #fff;
-  border-radius: 40px;
-  height: 48px;
-  padding: 3px;
-  border: 1px solid #ccc;
-}
-.find-box:hover > .find-txt {
-  width: 200px;
-  padding: 0 10px;
-}
-.find-box:hover > .find-btn {
-  background: #ddd;
-}
-
-.find-btn {
-  float: right;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #f2f2f2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.4s;
-  cursor: pointer;
-}
-.find-btn > i {
-  font-size: 30px;
-  color: #000;
-}
-
-.find-txt {
-  border: none;
-  background: none;
-  outline: none;
-  padding: 0;
-  color: #000;
-  font-size: 16px;
-  transition: 0.4s;
-  line-height: 40px;
-  width: 0px;
-  font-weight: bold;
-}
-
-.animate {
-  transition: all 0.1s;
-  -webkit-transition: all 0.1s;
-}
-
-.action-button {
-  position: relative;
-  padding: 5px 10px;
-  margin-top: 5px;
-  float: left;
-  border-radius: 10px;
-  font-size: 25px;
-  text-decoration: none;
-}
-.action-button:active {
-  border-bottom: 1px solid;
-}
-.action-button i {
-  color: #f9f4ef;
-}
-
-.blue {
-  background-color: #2f3640;
-  border-bottom: 5px solid #191d23;
-}
-
 main {
   position: absolute;
   top: 60px;
@@ -728,6 +636,60 @@ main {
 
 .simple-text {
   font-size: 28px;
+}
+
+.substrate {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+}
+.substrate h2 {
+  text-align: center;
+  margin: 20px;
+  font-family: Mission, "Mission Gothic Regular";
+  font-size: 2.2em;
+}
+
+.filtering-menu {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  padding: 5px 20px;
+  justify-content: center;
+}
+.filtering-menu select {
+  padding: 5px 10px;
+  border-radius: 50px;
+  background: #eee;
+  margin: 0 20px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+table tr {
+  background-color: #f8f8f8;
+}
+table tr:hover {
+  background-color: #ddd;
+}
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #29b8ed;
+  color: #fff;
 }
 
 .copyright {
