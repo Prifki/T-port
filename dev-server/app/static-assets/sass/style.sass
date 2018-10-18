@@ -14,6 +14,9 @@ main
   flex-wrap: nowrap
   align-items: center
 
+.index-main
+  height: 100%
+
 .simple-text
   font-size: 28px
 
@@ -26,7 +29,6 @@ main
   z-index: 3
   display: flex
   flex-direction: column
-  justify-content: flex-start
   align-items: center
   h2
     text-align: center
@@ -35,11 +37,11 @@ main
     font-size: 2.2em
 
 table
-  margin: 10px 20px 10px 20px
   border-collapse: collapse
-  width: 90%
+  display: flex
+  margin: 10px
   td, th  
-    border: 1px solid #ddd
+    border-bottom: 1px solid #ddd
     padding: 8px
   tr:nth-child(even)
     background-color: #f2f2f2
@@ -54,10 +56,17 @@ table
     background-color: $main-color
     color: #fff
 
+.filters
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  justify-content: center
+
 .filtering-menu
   display: flex
   flex-direction: row
   justify-content: center
+  margin: 10px
   input[type="checkbox"],
   input[type="radio"]
     display: none

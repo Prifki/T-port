@@ -1,112 +1,106 @@
 {{> html/start title="T-shipping - Stops" settings=settings }}
 {{> html/header }}
-    <main>
-	<section class="content clearfix">
-		<h2>Stops</h2>
-		<form>
-		<div class="flex-container">
-		  <div>
-			  <label for="sort-by-stops">Sort by:</label>
-			  <select name="sort-by-stops">
-				<option value="number">Stop number</option>
-				<option value="route">Route number</option>
-			  </select>
-		  </div>
-		  <div>
-			  <label for="filter-by-transport">Filter by number:</label>
-			  <select name="filter-by-transport">
-				<option value="1">Stop 1</option>
-				<option value="2">Stop 2</option>
-				<option value="3">Stop 3</option>
-			  </select>
-		  </div>
-		  <div>
-			  <label for="filter-by-route">Filter by route:</label>
-			  <select name="filter-by-route">
-				<option value="66">Route 66</option>
-				<option value="67">Route 67</option>
-				<option value="68">Route 68</option>
-			  </select>
-		  </div>
+	<main>
+		<div class="substrate">
+			<h2>Stops</h2>
+			<div class="filtering-menu">
+				<label class="filtering-label">Type:</label>
+				<input type="checkbox" name="bus" id="bus" class="filter-by-type"/>
+				<label for="bus" class="filtering-item"><i class="material-icons">directions_bus</i> Bus</label>
+
+				<input type="checkbox" name="train" id="train" class="filter-by-type"/>
+				<label for="train" class="filtering-item"><i class="material-icons">train</i> Train</label>
+
+				<input type="checkbox" name="tram" id="tram" class="filter-by-type"/>
+				<label for="tram" class="last-filtering-label filtering-item"><i class="material-icons">tram</i> Tram</label>
+			</div>
+			<table>
+				<tr>
+					<th>Type</th>
+					<th>Number</th>
+					<th>From</th>
+					<th>To</th>
+					<th>Seats</th>
+				</tr>
+				<tr>
+					<td><i class="material-icons">directions_bus</i></td>
+					<td>90</td>
+					<td>Maly pr. VO</td>
+					<td>Nevsky pr.</td>
+					<td>48</td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">directions_bus</i></td>
+					<td>90</td>
+					<td>Maly pr. VO</td>
+					<td>Nevsky pr.</td>
+					<td>48</td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">train</i></td>
+					<td>190</td>
+					<td>Bolshoy pr. VO</td>
+					<td>Sampsonievsky pr.</td>
+					<td>120</td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">train</i></td>
+					<td>190</td>
+					<td>Bolshoy pr. VO</td>
+					<td>Sampsonievsky pr.</td>
+					<td>120</td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">train</i></td>
+					<td>190</td>
+					<td>Bolshoy pr. VO</td>
+					<td>Sampsonievsky pr.</td>
+					<td>120</td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">train</i></td>
+					<td>190</td>
+					<td>Bolshoy pr. VO</td>
+					<td>Sampsonievsky pr.</td>
+					<td>120</td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">train</i></td>
+					<td>190</td>
+					<td>Bolshoy pr. VO</td>
+					<td>Sampsonievsky pr.</td>
+					<td>120</td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">tram</i></td>
+					<td>300</td>
+					<td>Devyatkino</td>
+					<td>Kupchino</td>
+					<td>133</td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">tram</i></td>
+					<td>300</td>
+					<td>Devyatkino</td>
+					<td>Kupchino</td>
+					<td>133</td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">tram</i></td>
+					<td>300</td>
+					<td>Devyatkino</td>
+					<td>Kupchino</td>
+					<td>133</td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">tram</i></td>
+					<td>300</td>
+					<td>Devyatkino</td>
+					<td>Kupchino</td>
+					<td>133</td>
+				</tr>
+			</table>
 		</div>
-		</form>
-		<table class="entity_table">
-		  <tr>
-			<th>Number</th>
-			<th>Routes</th>
-			<th>Place</th>
-		  </tr>
-		  <tr>
-			<td><a href="/nested/stop_card">1</a></td>
-			<td><a href="/nested/route_card">66</a></td>
-			<td>Saint Petersburg</td>
-		  </tr>
-		  <tr>
-			<td><a href="/nested/stop_card">2</a></td>
-			<td><a href="/nested/route_card">66</a></td>
-			<td>Kopenhagen</td>
-		  </tr>
-		  <tr>
-			<td><a href="/nested/stop_card">3</a></td>
-			<td><a href="/nested/route_card">66</a></td>
-			<td>New York</td>
-		  </tr>
-		  
-		  <tr>
-			<td><a href="/nested/stop_card">1</a></td>
-			<td><a href="/nested/route_card">66</a></td>
-			<td>Saint Petersburg</td>
-		  </tr>
-		  <tr>
-			<td><a href="/nested/stop_card">2</a></td>
-			<td><a href="/nested/route_card">66</a></td>
-			<td>Kopenhagen</td>
-		  </tr>
-		  <tr>
-			<td><a href="/nested/stop_card">3</a></td>
-			<td><a href="/nested/route_card">66</a></td>
-			<td>New York</td>
-		  </tr>
-		</table>
-		<div class="pagination-centering">
-		  <div class="pagination">
-			<a href="#">&laquo;</a>
-			<a href="#" class="active">1</a>
-			<a href="#">2</a>
-			<a href="#">3</a>
-			<a href="#">&raquo;</a>
-		  </div>
-		</div>
-		
-	<!-- Google Maps -->
-	<div id="map"></div>
-		<script>
-	// Initialize and add the map
-	function initMap() {
-	
-	  var spb = {lat: 59.926789, lng: 30.233772};
-	  
-	  var kopenhagen = {lat: 55.702399, lng: 12.597341};
-	  
-	  var ny = {lat: 40.703690, lng: -74.006854};
-	  
-	  var map_center = {lat: 48.765316, lng: -26.159115};
-	  
-	  var map = new google.maps.Map(
-		  document.getElementById('map'), {zoom: 3, center: map_center});
-		  
-	  var marker = new google.maps.Marker({position: spb, map: map});
-	  var marker = new google.maps.Marker({position: kopenhagen, map: map});
-	  var marker = new google.maps.Marker({position: ny, map: map});
-	}
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZFGV9mhO59Iuq-gVjzw5CSdXQm4Ibuvc&callback=initMap">
-    </script>
-	<!-- /Google Maps -->
-	
-	</section>
-	</main>
-	
+
 {{> html/footer }}
 {{> html/end }}
