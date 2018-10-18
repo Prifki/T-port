@@ -457,6 +457,11 @@ body {
   font-weight: 300;
   background: #fff;
   min-width: 300px;
+}
+
+.index-page-container {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -664,7 +669,7 @@ main {
 
 table {
   border-collapse: collapse;
-  display: flex;
+  width: 90%;
   margin: 10px;
 }
 table td, table th {

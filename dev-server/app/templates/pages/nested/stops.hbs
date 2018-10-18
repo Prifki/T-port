@@ -1,103 +1,103 @@
-{{> html/start title="T-shipping - Stops" settings=settings }}
+{{> html/start title="T-port - Stops" settings=settings }}
 {{> html/header }}
 	<main>
 		<div class="substrate">
 			<h2>Stops</h2>
-			<div class="filtering-menu">
-				<label class="filtering-label">Type:</label>
-				<input type="checkbox" name="bus" id="bus" class="filter-by-type"/>
-				<label for="bus" class="filtering-item"><i class="material-icons">directions_bus</i> Bus</label>
-
-				<input type="checkbox" name="train" id="train" class="filter-by-type"/>
-				<label for="train" class="filtering-item"><i class="material-icons">train</i> Train</label>
-
-				<input type="checkbox" name="tram" id="tram" class="filter-by-type"/>
-				<label for="tram" class="last-filtering-label filtering-item"><i class="material-icons">tram</i> Tram</label>
+			<div class="filters">
+				<div class="filtering-menu">
+					<label class="filtering-label">Number:</label>
+					<input type="checkbox" name="num01" id="num01" class="filter-by-type"/>
+					<label for="num01" class="filtering-item">45</label>
+					<input type="checkbox" name="num02" id="num02" class="filter-by-type"/>
+					<label for="num02" class="filtering-item">46</label>
+					<input type="checkbox" name="num03" id="num03" class="filter-by-type"/>
+					<label for="num03" class="filtering-item">47</label>
+					<input type="checkbox" name="num04" id="num04" class="filter-by-type"/>
+					<label for="num04" class="filtering-item">48</label>
+					<input type="checkbox" name="num05" id="num05" class="filter-by-type"/>
+					<label for="num05" class="filtering-item">49</label>
+					<input type="checkbox" name="num06" id="num06" class="filter-by-type"/>
+					<label for="num06" class="filtering-item">50</label>
+					<input type="checkbox" name="num07" id="num07" class="filter-by-type"/>
+					<label for="num07" class="last-filtering-label filtering-item">51</label>
+				</div>
+				{{> html/route_filtering_menu }}
 			</div>
 			<table>
 				<tr>
-					<th>Type</th>
 					<th>Number</th>
-					<th>From</th>
-					<th>To</th>
-					<th>Seats</th>
+					<th>Route</th>
+					<th>Name</th>
 				</tr>
 				<tr>
-					<td><i class="material-icons">directions_bus</i></td>
-					<td>90</td>
-					<td>Maly pr. VO</td>
+					<td>45</td>
+					<td>01</td>
 					<td>Nevsky pr.</td>
-					<td>48</td>
 				</tr>
 				<tr>
-					<td><i class="material-icons">directions_bus</i></td>
-					<td>90</td>
+					<td>46</td>
+					<td>02</td>
 					<td>Maly pr. VO</td>
-					<td>Nevsky pr.</td>
+				</tr>
+				<tr>
+					<td>46</td>
+					<td>03</td>
+					<td>Bolshoy pr. VO</td>
+				</tr>
+				<tr>
 					<td>48</td>
-				</tr>
-				<tr>
-					<td><i class="material-icons">train</i></td>
-					<td>190</td>
-					<td>Bolshoy pr. VO</td>
+					<td>04</td>
 					<td>Sampsonievsky pr.</td>
-					<td>120</td>
 				</tr>
 				<tr>
-					<td><i class="material-icons">train</i></td>
-					<td>190</td>
-					<td>Bolshoy pr. VO</td>
-					<td>Sampsonievsky pr.</td>
-					<td>120</td>
-				</tr>
-				<tr>
-					<td><i class="material-icons">train</i></td>
-					<td>190</td>
-					<td>Bolshoy pr. VO</td>
-					<td>Sampsonievsky pr.</td>
-					<td>120</td>
-				</tr>
-				<tr>
-					<td><i class="material-icons">train</i></td>
-					<td>190</td>
-					<td>Bolshoy pr. VO</td>
-					<td>Sampsonievsky pr.</td>
-					<td>120</td>
-				</tr>
-				<tr>
-					<td><i class="material-icons">train</i></td>
-					<td>190</td>
-					<td>Bolshoy pr. VO</td>
-					<td>Sampsonievsky pr.</td>
-					<td>120</td>
-				</tr>
-				<tr>
-					<td><i class="material-icons">tram</i></td>
-					<td>300</td>
-					<td>Devyatkino</td>
+					<td>49</td>
+					<td>05</td>
 					<td>Kupchino</td>
-					<td>133</td>
 				</tr>
 				<tr>
-					<td><i class="material-icons">tram</i></td>
-					<td>300</td>
+					<td>50</td>
+					<td>06</td>
 					<td>Devyatkino</td>
-					<td>Kupchino</td>
-					<td>133</td>
 				</tr>
 				<tr>
-					<td><i class="material-icons">tram</i></td>
-					<td>300</td>
-					<td>Devyatkino</td>
-					<td>Kupchino</td>
-					<td>133</td>
+					<td>51</td>
+					<td>07</td>
+					<td>Nahimova str.</td>
 				</tr>
 				<tr>
-					<td><i class="material-icons">tram</i></td>
-					<td>300</td>
-					<td>Devyatkino</td>
+					<td>45</td>
+					<td>01</td>
+					<td>Nevsky pr.</td>
+				</tr>
+				<tr>
+					<td>46</td>
+					<td>02</td>
+					<td>Maly pr. VO</td>
+				</tr>
+				<tr>
+					<td>46</td>
+					<td>03</td>
+					<td>Bolshoy pr. VO</td>
+				</tr>
+				<tr>
+					<td>48</td>
+					<td>04</td>
+					<td>Sampsonievsky pr.</td>
+				</tr>
+				<tr>
+					<td>49</td>
+					<td>05</td>
 					<td>Kupchino</td>
-					<td>133</td>
+				</tr>
+				<tr>
+					<td>50</td>
+					<td>06</td>
+					<td>Devyatkino</td>
+				</tr>
+				<tr>
+					<td>51</td>
+					<td>07</td>
+					<td>Nahimova str.</td>
 				</tr>
 			</table>
 		</div>
