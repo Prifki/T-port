@@ -15,9 +15,6 @@
   src: url(/static-assets/fonts/Mission_Gothic_Thin.otf);
 }
 header {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   z-index: 10;
   background: #f2f2f2;
@@ -78,7 +75,7 @@ nav {
   color: #29b8ed;
 }
 
-.material-icons {
+.favorites-menu .material-icons, header .material-icons {
   font-size: 32px;
 }
 
@@ -108,7 +105,7 @@ nav {
 
 .mobile-find-field {
   position: absolute;
-  top: 0;
+  top: 62px;
   left: -102%;
   display: none;
   background: #f2f2f2;
@@ -180,7 +177,7 @@ nav {
 }
 
 .show-menu {
-  top: 0;
+  top: 62px;
 }
 
 .find-box {
@@ -463,14 +460,16 @@ body {
 }
 
 footer {
-  position: absolute;
   background: #f2f2f2;
   width: 100%;
-  bottom: 0;
+  padding: 20px;
 }
 
-footer {
-  padding: 20px;
+.copyright {
+  display: block;
+  text-align: center;
+  color: #000;
+  font-size: 20px;
 }
 
 * {
@@ -628,10 +627,11 @@ textarea {
 }
 
 main {
-  position: absolute;
-  top: 60px;
   width: 100%;
-  height: calc(100% - 120px);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
 .simple-text {
@@ -639,12 +639,16 @@ main {
 }
 
 .substrate {
-  width: 100%;
+  width: 85%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.8);
+  margin: 5px;
+  border-radius: 10px;
+  background: #f8f8f8;
   z-index: 3;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 .substrate h2 {
   text-align: center;
@@ -653,23 +657,10 @@ main {
   font-size: 2.2em;
 }
 
-.filtering-menu {
-  display: flex;
-  flex-direction: row;
-  margin: 10px;
-  padding: 5px 20px;
-  justify-content: center;
-}
-.filtering-menu select {
-  padding: 5px 10px;
-  border-radius: 50px;
-  background: #eee;
-  margin: 0 20px;
-}
-
 table {
+  margin: 10px 20px 10px 20px;
   border-collapse: collapse;
-  width: 100%;
+  width: 90%;
 }
 table td, table th {
   border: 1px solid #ddd;
@@ -692,11 +683,55 @@ table th {
   color: #fff;
 }
 
-.copyright {
-  display: block;
-  text-align: center;
-  color: #000;
+.filtering-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.filtering-menu input[type=checkbox],
+.filtering-menu input[type=radio] {
+  display: none;
+}
+.filtering-menu input[type=checkbox] + label:hover {
+  background: #41c0ef;
+}
+.filtering-menu input[type=checkbox]:checked + label {
+  background: #87d7f5;
+}
+.filtering-menu input[type=checkbox]:checked + label:hover {
+  background: #70cff3;
+}
+.filtering-menu .filtering-item {
+  cursor: pointer;
+  background: #29b8ed;
+}
+.filtering-menu .filtering-item i {
   font-size: 20px;
+}
+
+.filtering-label, .filtering-menu .filtering-item {
+  padding: 5px 10px;
+  font-size: 1.3em;
+  transition: all 0.2s;
+  display: flex;
+}
+
+.filtering-label {
+  border-radius: 40px 0 0 40px;
+  background: #29b8ed;
+  font-weight: 700;
+}
+
+.last-filtering-label {
+  border-radius: 0 40px 40px 0;
+}
+
+@media (max-width: 585px) {
+  .substrate {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

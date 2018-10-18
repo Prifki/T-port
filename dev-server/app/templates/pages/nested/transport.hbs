@@ -1,29 +1,17 @@
-{{> html/start title="T-shipping - Transport" settings=settings }}
+{{> html/start title="T-port - Transport" settings=settings }}
 {{> html/header }}
-		<div class="google-map">
-			<!-- Google Maps -->
-			<div id="map"></div>
-			<script type="text/javascript" src="/static-assets/js/google-map.js"></script>
-			<script async defer
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZFGV9mhO59Iuq-gVjzw5CSdXQm4Ibuvc&callback=initMap">
-			</script>
-			<!-- /Google Maps -->
-		</div>
 		<div class="substrate">
 			<h2>Transport</h2>
 			<div class="filtering-menu">
-				<select name="type">
-					<option value="all">All</option>
-					<option value="trains">Trains</option>
-					<option value="trams">Trams</option>
-					<option value="buses">Buses</option>
-				</select>
-				<select name="routes">
-					<option value="all">All</option>
-					<option value="01">Route 01</option>
-					<option value="02">Route 02</option>
-					<option value="03">Route 03</option>
-				</select>
+				<label class="filtering-label">Type:</label>
+				<input type="checkbox" name="bus" id="bus" class="filter-by-type"/>
+				<label for="bus" class="filtering-item"><i class="material-icons">directions_bus</i> Bus</label>
+
+				<input type="checkbox" name="train" id="train" class="filter-by-type"/>
+				<label for="train" class="filtering-item"><i class="material-icons">train</i> Train</label>
+
+				<input type="checkbox" name="tram" id="tram" class="filter-by-type"/>
+				<label for="tram" class="last-filtering-label filtering-item"><i class="material-icons">tram</i> Tram</label>
 			</div>
 			<table>
 				<tr>
@@ -34,63 +22,77 @@
 					<th>Seats</th>
 				</tr>
 				<tr>
-					<td>Bus</td>
+					<td><i class="material-icons">directions_bus</i></td>
 					<td>90</td>
 					<td>Maly pr. VO</td>
 					<td>Nevsky pr.</td>
 					<td>48</td>
 				</tr>
 				<tr>
-					<td>Bus</td>
+					<td><i class="material-icons">directions_bus</i></td>
 					<td>90</td>
 					<td>Maly pr. VO</td>
 					<td>Nevsky pr.</td>
 					<td>48</td>
 				</tr>
 				<tr>
-					<td>Bus</td>
-					<td>90</td>
-					<td>Maly pr. VO</td>
-					<td>Nevsky pr.</td>
-					<td>48</td>
-				</tr>
-				<tr>
-					<td>Train</td>
+					<td><i class="material-icons">train</i></td>
 					<td>190</td>
 					<td>Bolshoy pr. VO</td>
 					<td>Sampsonievsky pr.</td>
 					<td>120</td>
 				</tr>
 				<tr>
-					<td>Train</td>
+					<td><i class="material-icons">train</i></td>
 					<td>190</td>
 					<td>Bolshoy pr. VO</td>
 					<td>Sampsonievsky pr.</td>
 					<td>120</td>
 				</tr>
 				<tr>
-					<td>Train</td>
+					<td><i class="material-icons">train</i></td>
 					<td>190</td>
 					<td>Bolshoy pr. VO</td>
 					<td>Sampsonievsky pr.</td>
 					<td>120</td>
 				</tr>
 				<tr>
-					<td>Tram</td>
+					<td><i class="material-icons">train</i></td>
+					<td>190</td>
+					<td>Bolshoy pr. VO</td>
+					<td>Sampsonievsky pr.</td>
+					<td>120</td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">train</i></td>
+					<td>190</td>
+					<td>Bolshoy pr. VO</td>
+					<td>Sampsonievsky pr.</td>
+					<td>120</td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">tram</i></td>
 					<td>300</td>
 					<td>Devyatkino</td>
 					<td>Kupchino</td>
 					<td>133</td>
 				</tr>
 				<tr>
-					<td>Tram</td>
+					<td><i class="material-icons">tram</i></td>
 					<td>300</td>
 					<td>Devyatkino</td>
 					<td>Kupchino</td>
 					<td>133</td>
 				</tr>
 				<tr>
-					<td>Tram</td>
+					<td><i class="material-icons">tram</i></td>
+					<td>300</td>
+					<td>Devyatkino</td>
+					<td>Kupchino</td>
+					<td>133</td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">tram</i></td>
 					<td>300</td>
 					<td>Devyatkino</td>
 					<td>Kupchino</td>
