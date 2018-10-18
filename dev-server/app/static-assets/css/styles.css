@@ -183,6 +183,176 @@ nav {
   top: 0;
 }
 
+.google-map {
+  width: 100%;
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+}
+
+.find-a-route-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 7;
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid #29b8ed;
+}
+.find-a-route-menu h2 {
+  font-family: Mission, "Mission Gothic Light";
+  font-size: 1.7em;
+  margin: 10px;
+}
+
+.find-a-route-inputs {
+  width: 100%;
+  margin: 10px 0;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #ddd;
+  color: #000;
+  font-family: Mission, "Mission Gothic Thin";
+  font-size: 1.2em;
+}
+
+.time-interval {
+  width: 100%;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.time-interval > input {
+  border-radius: 20px;
+  padding: 5px 10px;
+  background: #ddd;
+  color: #000;
+  font-family: Mission, "Mission Gothic Thin";
+  font-size: 1em;
+}
+
+#find-a-route-button {
+  font-size: 1.3em;
+  border: 1px solid #29b8ed;
+  background: #ceeffb;
+  border-radius: 20px;
+  padding: 5px;
+  margin-top: 5px;
+  width: 60%;
+  text-align: center;
+}
+#find-a-route-button:hover {
+  background: #87d7f5;
+}
+
+.favorites-menu {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 4;
+  background: #eee;
+  padding: 10px 25px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  border: 1px solid #29b8ed;
+}
+.favorites-menu h3 {
+  text-align: center;
+  font-family: Mission, "Mission Gothic Light";
+  font-size: 1.5em;
+  margin: 10px;
+}
+.favorites-menu ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1.3em;
+}
+.favorites-menu li {
+  list-style-type: none;
+  margin-top: 10px;
+  text-align: left;
+  width: 100%;
+  background: #e1e1e1;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.favorites-menu li:hover {
+  background: #d5d5d5;
+}
+.favorites-menu li .material-icons {
+  margin-right: 5px;
+}
+
+.fa-map-marker {
+  font-size: 30px;
+  margin: 0 10px 0 5px;
+}
+
+.login-menu {
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.4s ease;
+  top: 0;
+  right: 0;
+  z-index: 4;
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid #29b8ed;
+}
+.login-menu h3 {
+  text-align: center;
+  font-family: Mission, "Mission Gothic Light";
+  font-size: 1.5em;
+  margin: 10px;
+}
+.login-menu input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #ddd;
+  color: #000;
+  font-family: Mission, "Mission Gothic Thin";
+  font-size: 1.2em;
+}
+
+#login-button {
+  font-size: 1.3em;
+  border: 1px solid #29b8ed;
+  background: #ceeffb;
+  border-radius: 20px;
+  padding: 5px;
+  margin-top: 5px;
+  width: 60%;
+  text-align: center;
+}
+#login-button:hover {
+  background: #87d7f5;
+}
+
+.show-additional-menu {
+  opacity: 1;
+  z-index: 5;
+}
+
 .ham {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -248,6 +418,7 @@ body {
 
 footer {
   position: absolute;
+  background: #f2f2f2;
   width: 100%;
   bottom: 0;
 }
@@ -489,7 +660,7 @@ textarea {
   padding: 0 10px;
 }
 .find-box:hover > .find-btn {
-  background: #ccc;
+  background: #ddd;
 }
 
 .find-btn {
@@ -557,15 +728,6 @@ main {
 
 .simple-text {
   font-size: 28px;
-}
-
-.google-map {
-  width: 100%;
-  height: 100%;
-}
-
-#map {
-  height: 100%;
 }
 
 .copyright {

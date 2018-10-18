@@ -15,21 +15,38 @@
 		<div class="google-map">
 			<!-- Google Maps -->
 			<div id="map"></div>
-			<script>
-				function initMap() {
-					var spb = {lat: 59.926789, lng: 30.233772};
-					var map = new google.maps.Map(
-						document.getElementById('map'), {zoom: 10, center: spb});
-					var marker = new google.maps.Marker({position: spb, map: map});
-				}
-			</script>
+			<script type="text/javascript" src="/static-assets/js/google-map.js"></script>
 			<script async defer
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZFGV9mhO59Iuq-gVjzw5CSdXQm4Ibuvc&callback=initMap">
 			</script>
 			<!-- /Google Maps -->
 		</div>
-
-	
+		<div class="find-a-route-menu">
+			<h2>Find a route</h2>
+			<input class="find-a-route-inputs" type="text" placeholder="From">
+			<input class="find-a-route-inputs" type="text" placeholder="To">
+			<div class="time-interval">
+				<input type="time" name="from_time" value="06:00"/>
+				<input type="time" name="till_time" value="23:30"/>
+			</div>
+			<a id="find-a-route-button" href="#">Find</a>
+		</div>
+		<div class="favorites-menu">
+			<h3>Favorites</h3>
+			<ul>
+				<li><a href="#"><i class="material-icons">directions_bus</i>Bus 46</a></li>
+				<li><a href="#"><i class="material-icons">train</i>Train 102</a></li>
+				<li><a href="#"><i class="material-icons">tram</i>Tram 59</a></li>
+				<li><a href="#"><i class="fa fa-map-marker"></i>Maly V.O.</a></li>
+				<li><a href="#"><i class="fa fa-map-marker"></i>Nevsky pr.</a></li>
+			</ul>
+		</div>
+		<div class="login-menu">
+			<h3>Sign in</h3>
+			<input type="text" placeholder="Login">
+			<input type="password" placeholder="Password">
+			<a id="login-button" href="#">Sign in</a>
+		</div>
 	</main>
 	
 {{> html/footer }}
