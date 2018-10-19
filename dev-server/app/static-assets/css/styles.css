@@ -241,19 +241,45 @@ nav {
   top: 0;
   left: 0;
   z-index: 3;
+  transition: all 0.4s ease;
   background: #eee;
   padding: 10px;
   margin: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   border-radius: 10px;
   border: 1px solid #29b8ed;
 }
-.find-a-route-menu h2 {
+.find-a-route-menu .route-wrapped-ico {
+  display: none;
+}
+
+.find-a-route-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.find-a-route-content h2 {
   font-family: Mission, "Mission Gothic Light";
   font-size: 1.7em;
   margin: 10px;
+}
+
+.find-a-route-wrapped {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.find-a-route-wrapped .closing-button {
+  display: none;
+}
+.find-a-route-wrapped .find-a-route-content {
+  display: none;
+}
+.find-a-route-wrapped .route-wrapped-ico {
+  display: block;
+  font-size: 1.4em;
+  cursor: pointer;
 }
 
 .find-a-route-inputs {
@@ -788,6 +814,7 @@ table th {
   top: 0;
   right: 0;
   margin: 10px 0;
+  z-index: 2;
 }
 
 .show-card {

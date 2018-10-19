@@ -12,14 +12,18 @@
 			<!-- /Google Maps -->
 		</div>
 		<div class="find-a-route-menu">
-			<h2>Find a route</h2>
-			<input class="find-a-route-inputs" type="text" placeholder="From">
-			<input class="find-a-route-inputs" type="text" placeholder="To">
-			<div class="time-interval">
-				<input type="time" name="from_time" value="06:00"/>
-				<input type="time" name="till_time" value="23:30"/>
+			<div class="route-wrapped-ico" onclick="closeFindMenu()"><i class="fas fa-route"></i></div>
+			<div class="closing-button" onclick="closeFindMenu()"><i class="material-icons close-pic">close</i></div>
+			<div class="find-a-route-content">
+				<h2>Find a route</h2>
+				<input class="find-a-route-inputs" type="text" placeholder="From">
+				<input class="find-a-route-inputs" type="text" placeholder="To">
+				<div class="time-interval">
+					<input type="time" name="from_time" value="06:00"/>
+					<input type="time" name="till_time" value="23:30"/>
+				</div>
+				<a id="find-a-route-button" href="#">Find</a>
 			</div>
-			<a id="find-a-route-button" href="#">Find</a>
 		</div>
 	
 {{> html/footer }}

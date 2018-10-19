@@ -10,18 +10,38 @@
   top: 0
   left: 0
   z-index: 3
+  transition: all 0.4s ease
   background: #eee
   padding: 10px
   margin: 10px
+  border-radius: 10px
+  border: 1px solid $main-color
+  .route-wrapped-ico
+    display: none
+
+.find-a-route-content
   display: flex
   flex-direction: column
   align-items: center
-  border-radius: 10px
-  border: 1px solid $main-color
   h2
     font-family: $menus-font
     font-size: 1.7em
     margin: 10px
+
+.find-a-route-wrapped
+  width: 50px
+  height: 50px
+  display: flex
+  justify-content: center
+  align-items: center
+  .closing-button
+    display: none
+  .find-a-route-content
+    display: none
+  .route-wrapped-ico
+    display: block
+    font-size: 1.4em
+    cursor: pointer
 
 .find-a-route-inputs
     width: 100%
