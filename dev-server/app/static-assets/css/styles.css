@@ -37,6 +37,7 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
 }
 
 .header-container {
@@ -459,6 +460,11 @@ body {
   min-width: 300px;
 }
 
+@media (max-width: 450px) {
+  body {
+    font-size: 4vw;
+  }
+}
 .index-page-container {
   width: 100%;
   height: 100%;
@@ -681,6 +687,7 @@ table tr:nth-child(even) {
 }
 table tr {
   background-color: #f8f8f8;
+  cursor: pointer;
 }
 table tr:hover {
   background-color: #ddd;
@@ -691,6 +698,7 @@ table th {
   text-align: left;
   background-color: #29b8ed;
   color: #fff;
+  cursor: default;
 }
 
 .filters {
@@ -751,7 +759,7 @@ table th {
     border-radius: 0;
   }
 }
-.transport-card {
+.card {
   width: 90%;
   border-radius: 20px;
   background: #eee;
@@ -763,7 +771,7 @@ table th {
   transition: opacity 0.4s ease;
   opacity: 0;
 }
-.transport-card h3 {
+.card h3 {
   font-size: 1.5em;
   font-family: Mission, "Mission Gothic Regular";
 }

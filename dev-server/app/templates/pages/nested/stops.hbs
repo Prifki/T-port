@@ -24,82 +24,125 @@
 				{{> html/route_filtering_menu }}
 			</div>
 			<table>
-				<tr>
+				<tr onclick="showCard()">
 					<th>Number</th>
 					<th>Route</th>
 					<th>Name</th>
 				</tr>
-				<tr>
+				<tr onclick="showCard()">
 					<td>45</td>
 					<td>01</td>
 					<td>Nevsky pr.</td>
 				</tr>
-				<tr>
+				<tr onclick="showCard()">
 					<td>46</td>
 					<td>02</td>
 					<td>Maly pr. VO</td>
 				</tr>
-				<tr>
+				<tr onclick="showCard()">
 					<td>46</td>
 					<td>03</td>
 					<td>Bolshoy pr. VO</td>
 				</tr>
-				<tr>
+				<tr onclick="showCard()">
 					<td>48</td>
 					<td>04</td>
 					<td>Sampsonievsky pr.</td>
 				</tr>
-				<tr>
+				<tr onclick="showCard()">
 					<td>49</td>
 					<td>05</td>
 					<td>Kupchino</td>
 				</tr>
-				<tr>
+				<tr onclick="showCard()">
 					<td>50</td>
 					<td>06</td>
 					<td>Devyatkino</td>
 				</tr>
-				<tr>
+				<tr onclick="showCard()">
 					<td>51</td>
 					<td>07</td>
 					<td>Nahimova str.</td>
 				</tr>
-				<tr>
+				<tr onclick="showCard()">
 					<td>45</td>
 					<td>01</td>
 					<td>Nevsky pr.</td>
 				</tr>
-				<tr>
+				<tr onclick="showCard()">
 					<td>46</td>
 					<td>02</td>
 					<td>Maly pr. VO</td>
 				</tr>
-				<tr>
+				<tr onclick="showCard()">
 					<td>46</td>
 					<td>03</td>
 					<td>Bolshoy pr. VO</td>
 				</tr>
-				<tr>
+				<tr onclick="showCard()">
 					<td>48</td>
 					<td>04</td>
 					<td>Sampsonievsky pr.</td>
 				</tr>
-				<tr>
+				<tr onclick="showCard()">
 					<td>49</td>
 					<td>05</td>
 					<td>Kupchino</td>
 				</tr>
-				<tr>
+				<tr onclick="showCard()">
 					<td>50</td>
 					<td>06</td>
 					<td>Devyatkino</td>
 				</tr>
-				<tr>
+				<tr onclick="showCard()">
 					<td>51</td>
 					<td>07</td>
 					<td>Nahimova str.</td>
 				</tr>
 			</table>
+			<div class="card">
+				<div class="closing-button" onclick="showCard()"><i class="material-icons close-pic">close</i></div>
+				<h3>Stop name</h3>
+				<table>
+					<tr>
+						<th>Stop</th>
+						<th>Time</th>
+					</tr>
+					<tr>
+						<td>Maly pr. VO</td>
+						<td>12:00</td>
+					</tr>
+					<tr>
+						<td>Nevsky pr.</td>
+						<td>13:00</td>
+					</tr>
+					<tr>
+						<td>Bolshoy pr. VO</td>
+						<td>14:00</td>
+					</tr>
+					<tr>
+						<td>Sampsonievsky pr.</td>
+						<td>15:00</td>
+					</tr>
+					<tr>
+						<td>Nevsky pr.</td>
+						<td>16:00</td>
+					</tr>
+					<tr>
+						<td>Bolshoy pr. VO</td>
+						<td>17:00</td>
+					</tr>
+				</table>
+					<div class="google-map-on-card">
+						<!-- Google Maps -->
+						<div id="map"></div>
+						<script type="text/javascript" src="/static-assets/js/google-map.js"></script>
+						<script async defer
+						src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZFGV9mhO59Iuq-gVjzw5CSdXQm4Ibuvc&callback=initMap">
+						</script>
+						<!-- /Google Maps -->
+					</div>
+			</div>
 		</div>
 
 {{> html/footer }}

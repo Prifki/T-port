@@ -5,8 +5,8 @@ function burgerMenuToggle() {
 	ifOnThenOff(mobileFindFielf,"show-mobile-search");
 }
 
-function showTransportCard(){
-	var transportCard = document.getElementsByClassName("transport-card")[0];
+function showCard(){
+	var transportCard = document.getElementsByClassName("card")[0];
 	transportCard.classList.toggle("show-card");
 	transportCard.scrollIntoView({block: "start", behavior: "smooth"});
 }
