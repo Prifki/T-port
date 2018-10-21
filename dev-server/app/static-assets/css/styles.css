@@ -93,7 +93,7 @@ nav {
   color: #29b8ed;
 }
 
-.find-pic, .burger, .floating-menu {
+.burger, .floating-menu {
   display: none;
 }
 
@@ -129,14 +129,6 @@ nav {
     top: -130px;
   }
 
-  .find-box {
-    display: none;
-  }
-
-  .find-pic {
-    display: block;
-  }
-
   .header-buttons > div {
     margin: 0 5px;
   }
@@ -155,6 +147,10 @@ nav {
 
   .mobile-find-field {
     display: flex;
+  }
+
+  .find-box {
+    display: none;
   }
 }
 @media (max-width: 875px) {
@@ -183,6 +179,8 @@ nav {
 }
 
 .find-box {
+  position: absolute;
+  right: 0;
   background: #fff;
   border-radius: 40px;
   height: 48px;
@@ -286,7 +284,7 @@ nav {
   width: 100%;
   margin: 10px 0;
   padding: 5px 10px;
-  border-radius: 20px;
+  border-radius: 10px;
   background: #ddd;
   color: #000;
   font-family: Mission, "Mission Gothic Thin";
@@ -301,7 +299,7 @@ nav {
   justify-content: space-between;
 }
 .time-interval > input {
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 5px 10px;
   background: #ddd;
   color: #000;
