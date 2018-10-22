@@ -355,19 +355,32 @@ nav {
   font-size: 1.3em;
 }
 .favorites-menu li {
-  list-style-type: none;
-  margin-top: 10px;
-  text-align: left;
   width: 100%;
-  background: #e1e1e1;
-  padding: 5px 10px;
-  border-radius: 10px;
-}
-.favorites-menu li:hover {
-  background: #d5d5d5;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 .favorites-menu li .material-icons {
   margin-right: 5px;
+}
+.favorites-menu a {
+  text-align: left;
+  padding: 5px 10px;
+  margin: 10px;
+  width: 100%;
+  background: #e1e1e1;
+  border-radius: 10px;
+}
+.favorites-menu a:hover {
+  background: #d5d5d5;
+}
+
+.delete-button {
+  display: none;
+}
+.delete-button:hover {
+  color: #29b8ed;
 }
 
 @media (max-width: 470px) {
@@ -824,6 +837,18 @@ table th {
   right: 0;
   margin: 5px;
   z-index: 2;
+}
+
+.edit-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 5px;
+  z-index: 2;
+}
+.edit-button:hover {
+  color: #29b8ed;
+  cursor: pointer;
 }
 
 .show-card {

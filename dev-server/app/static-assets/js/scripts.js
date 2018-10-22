@@ -46,6 +46,12 @@ function showFavorites(){
 		ifOffThenOn(findMenu,"find-a-route-wrapped");
 }
 
+function editFavorites(){
+	deleteButtons = document.getElementsByClassName("delete-button");
+	for (i=0; i < deleteButtons.length; i++)
+		deleteButtons[i].style.display = 'block';
+}
+
 function showLoginMenu(){
 	mobileFindField = document.getElementsByClassName("mobile-find-field")[0],
 	floatingMenu = document.getElementsByClassName("floating-menu")[0],
