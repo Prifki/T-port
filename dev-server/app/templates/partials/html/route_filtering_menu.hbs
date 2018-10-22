@@ -1,17 +1,51 @@
-<div class="filtering-menu">
-	<label class="filtering-label">Route:</label>
-	<input type="checkbox" name="route01" id="route01" class="filter-by-type"/>
-	<label for="route01" class="filtering-item">01</label>
-	<input type="checkbox" name="route02" id="route02" class="filter-by-type"/>
-	<label for="route02" class="filtering-item">02</label>
-	<input type="checkbox" name="route03" id="route03" class="filter-by-type"/>
-	<label for="route03" class="filtering-item">03</label>
-	<input type="checkbox" name="route04" id="route04" class="filter-by-type"/>
-	<label for="route04" class="filtering-item">04</label>
-	<input type="checkbox" name="route05" id="route05" class="filter-by-type"/>
-	<label for="route05" class="filtering-item">05</label>
-	<input type="checkbox" name="route06" id="route06" class="filter-by-type"/>
-	<label for="route06" class="filtering-item">06</label>
-	<input type="checkbox" name="route07" id="route07" class="filter-by-type"/>
-	<label for="route07" class="last-filtering-label filtering-item">07</label>
+<div class="select-wrapper">
+	<span class="autocomplete-select"></span>
 </div>
+<script src="/static-assets/js/bundle.min.js"></script>
+<script>
+	var autocomplete = new SelectPure(".autocomplete-select", {
+	options: [
+		{
+			label: "All",
+			value: "all",
+		},
+		{
+			label: "Maly pr VO",
+			value: "mal",
+		},
+		{
+			label: "Bolshoy pr",
+			value: "bol",
+		},
+		{
+			label: "Nevsky pr",
+			value: "ne",
+		},
+		{
+			label: "Sredny pr",
+			value: "sr",
+		},
+		{
+			label: "Ligovsky pr",
+			value: "lig",
+		},
+		{
+			label: "Liteiny pr",
+			value: "lit",
+		},
+		{
+			label: "Nahimova str",
+			value: "na",
+		},
+		{
+			label: "Chaikovskogo str",
+			value: "ch",
+		},
+		],
+			value: ["all"],
+			multiple: true,
+			autocomplete: true,
+			icon: "fa fa-times",
+			onChange: value => { console.log(value); },
+		});
+</script>
