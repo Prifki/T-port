@@ -76,17 +76,15 @@ nav {
   color: #29b8ed;
 }
 
-.favorites-menu .material-icons, header .material-icons {
+.header-buttons .material-icons {
   font-size: 32px;
 }
 
 .fa-bookmark {
-  font-size: 25px;
+  font-size: 24px;
 }
 
 .close-pic {
-  position: absolute;
-  right: 16px;
   cursor: pointer;
 }
 .close-pic:hover {
@@ -225,6 +223,11 @@ nav {
   font-weight: bold;
 }
 
+.mobile-find-field-closing {
+  position: absolute;
+  right: 16px;
+}
+
 .google-map {
   width: 100%;
   height: 100%;
@@ -278,6 +281,9 @@ nav {
   display: block;
   font-size: 1.4em;
   cursor: pointer;
+}
+.find-a-route-wrapped:hover {
+  color: #29b8ed;
 }
 
 .find-a-route-inputs {
@@ -364,8 +370,13 @@ nav {
   margin-right: 5px;
 }
 
+@media (max-width: 470px) {
+  .favorites-menu, .login-menu {
+    left: 0;
+    width: 95%;
+  }
+}
 .fa-map-marker {
-  font-size: 30px;
   margin: 0 10px 0 5px;
 }
 
@@ -564,105 +575,6 @@ textarea {
   font: inherit;
 }
 
-.knobs, .layer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.button {
-  width: 74px;
-  height: 36px;
-  margin: auto;
-  overflow: hidden;
-  display: inline-block;
-}
-
-.button.r, .button.r .layer {
-  border-radius: 100px;
-}
-
-#crossing-routes-toggle {
-  text-align: center;
-}
-
-.checkbox {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  cursor: pointer;
-  z-index: 3;
-}
-
-.knobs {
-  z-index: 2;
-}
-
-.layer {
-  width: 100%;
-  background-color: #5a687b;
-  transition: 0.3s ease all;
-  z-index: 1;
-}
-
-#button-9 .knobs:before, #button-9 .knobs:after, #button-9 .knobs span {
-  position: absolute;
-  top: 4px;
-  width: 28px;
-  height: 28px;
-  font-size: 10px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 1;
-  padding: 9px 4px;
-  border-radius: 50%;
-  transition: 0.4s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
-}
-
-#button-9 .knobs:before {
-  color: #fff;
-  content: "Day";
-  left: 4px;
-}
-
-#button-9 .knobs:after {
-  color: #2f3640;
-  content: "Night";
-  right: -24px;
-}
-
-#button-9 .knobs:before, #button-9 .knobs:after {
-  z-index: 2;
-}
-
-#button-9 .knobs span {
-  left: 4px;
-  background-color: #2f3640;
-  z-index: 1;
-}
-
-#button-9 .checkbox:checked + .knobs:before {
-  left: -24px;
-}
-
-#button-9 .checkbox:checked + .knobs:after {
-  right: 4px;
-}
-
-#button-9 .checkbox:checked + .knobs span {
-  left: 42px;
-  background-color: #f9f4ef;
-}
-
-#button-9 .checkbox:checked ~ .layer {
-  background-color: #ebdbca;
-}
-
 main {
   width: 100%;
   display: flex;
@@ -811,7 +723,7 @@ table th {
   position: absolute;
   top: 0;
   right: 0;
-  margin: 10px 0;
+  margin: 5px;
   z-index: 2;
 }
 

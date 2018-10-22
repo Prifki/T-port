@@ -42,6 +42,8 @@
     display: block
     font-size: 1.4em
     cursor: pointer
+  &:hover
+    color: $main-color
 
 .find-a-route-inputs
     width: 100%
@@ -116,8 +118,12 @@
     .material-icons
       margin-right: 5px
 
+@media (max-width: 470px)
+  .favorites-menu, .login-menu
+    left: 0
+    width: 95%
+
 .fa-map-marker
-  font-size: 30px
   margin: 0 10px 0 5px
 
 .login-menu
