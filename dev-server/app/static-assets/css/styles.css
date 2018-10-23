@@ -296,6 +296,9 @@ nav {
   font-family: Mission, "Mission Gothic Thin";
   font-size: 1.2em;
 }
+.find-a-route-inputs:focus {
+  background: #fff;
+}
 
 .time-interval {
   width: 100%;
@@ -311,6 +314,9 @@ nav {
   color: #000;
   font-family: Mission, "Mission Gothic Thin";
   font-size: 1em;
+}
+.time-interval > input:focus {
+  background: #fff;
 }
 
 #find-a-route-button {
@@ -419,11 +425,14 @@ nav {
   width: 100%;
   margin: 10px 0;
   padding: 5px 10px;
-  border-radius: 20px;
+  border-radius: 10px;
   background: #ddd;
   color: #000;
   font-family: Mission, "Mission Gothic Thin";
   font-size: 1.2em;
+}
+.login-menu input:focus {
+  background: #fff;
 }
 
 #login-button {
@@ -727,7 +736,7 @@ table {
 }
 table td, table th {
   border-bottom: 1px solid #ddd;
-  padding: 8px;
+  padding: 5px;
 }
 table tr:nth-child(even) {
   background-color: #f2f2f2;
@@ -760,7 +769,6 @@ table th {
   flex-direction: row;
   justify-content: center;
   margin: 10px;
-  height: 30px;
 }
 .filtering-menu input[type=checkbox],
 .filtering-menu input[type=radio] {
@@ -854,6 +862,21 @@ table th {
 .show-card {
   opacity: 1;
   display: flex;
+}
+
+.table-edit-input {
+  background: #eee;
+  border-radius: 10px;
+  border: 1px solid #bbb;
+  padding: 3px 10px;
+  width: 100%;
+}
+.table-edit-input:focus {
+  background: #fff;
+}
+
+.table-edit-button:hover {
+  color: #29b8ed;
 }
 
 /*# sourceMappingURL=styles.css.map */

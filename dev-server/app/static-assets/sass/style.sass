@@ -42,7 +42,7 @@ table
   margin: 10px
   td, th  
     border-bottom: 1px solid #ddd
-    padding: 8px
+    padding: 5px
   tr:nth-child(even)
     background-color: #f2f2f2
   tr
@@ -69,7 +69,6 @@ table
   flex-direction: row
   justify-content: center
   margin: 10px
-  height: 30px
   input[type="checkbox"],
   input[type="radio"]
     display: none
@@ -147,3 +146,15 @@ table
 .show-card
   opacity: 1
   display: flex
+
+.table-edit-input
+  background: #eee
+  border-radius: 10px
+  border: 1px solid #bbb
+  padding: 3px 10px
+  width: 100%
+  &:focus
+    background: #fff
+
+.table-edit-button:hover
+  color: $main-color
