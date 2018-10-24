@@ -16,8 +16,10 @@
 			<div class="closing-button" onclick="closeFindMenu()"><i class="material-icons close-pic">close</i></div>
 			<div class="find-a-route-content">
 				<h2>Find a route</h2>
-				<input class="find-a-route-inputs" type="text" placeholder="From">
-				<input class="find-a-route-inputs" type="text" placeholder="To">
+				<input onfocus="autoComplete()" class="find-a-route-inputs" type="text" placeholder="From" id="stopA" list="stopsA">
+				<datalist id="stopsA"></datalist>
+				<input onfocus="autoComplete()" class="find-a-route-inputs" type="text" placeholder="To" id="stopB" list="stopsB">
+				<datalist id="stopsB"></datalist>
 				<div class="time-interval">
 					<input type="time" name="from_time" value="06:00"/>
 					<input type="time" name="till_time" value="23:30"/>

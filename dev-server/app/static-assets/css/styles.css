@@ -222,6 +222,10 @@ nav {
   width: 0px;
   font-weight: bold;
 }
+.find-txt:focus {
+  width: 200px;
+  padding: 0 10px;
+}
 
 .mobile-find-field-closing {
   position: absolute;

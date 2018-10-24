@@ -173,24 +173,37 @@ function removeTableItem(item){
 	item.parentElement.remove('');
 }
 
-window.onload = readJSON();
-
-function readJSON() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/rest/data', true);
-    xhr.responseType = 'blob';
-    xhr.onload = function(e) { 
-      if (this.status == 200) {
-          var file = new File([this.response], 'temp');
-          var fileReader = new FileReader();
-          fileReader.addEventListener('load', function(){
-			const data = JSON.parse(fileReader.result),
-				  stops = data.stops;
-			for (stop in stops)
-				console.log(stops[stop].name);
-          });
-          fileReader.readAsText(file);
-      } 
-    }
-	xhr.send();
+function autoComplete() {
+	try {
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', '/rest/data', true);
+		xhr.responseType = 'blob';
+		xhr.onload = function(e) { 
+		if (this.status == 200) {
+			var file = new File([this.response], 'temp');
+			var fileReader = new FileReader();
+			fileReader.addEventListener('load', function(){
+				const data = JSON.parse(fileReader.result),
+					stops = data.stops;
+				for (stop in stops){
+					const datalist = document.querySelector('#stopsA');
+					const option = document.createElement('option');
+					option.setAttribute('value',stops[stop].name);
+					datalist.appendChild(option);
+				}
+				for (stop in stops){
+					const datalist = document.querySelector('#stopsB');
+					const option = document.createElement('option');
+					option.setAttribute('value',stops[stop].name);
+					datalist.appendChild(option);
+				}
+			});
+			fileReader.readAsText(file);
+		} 
+		}
+		xhr.send();
+	}
+	catch (error) {
+		console.log("A fucking error again: " + error);
+	}
 }
