@@ -48,14 +48,24 @@ function activateBurgerImg(){
 	burgerImg.classList.add('active');
 }
 
+function closeFoundRoutes(){
+	const foundRoutes = document.getElementsByClassName('found-route-menu')[0];
+	foundRoutes.style.display = 'none';
+}
+
 function openFoundRoutes(){
 	const foundRoutes = document.getElementsByClassName('found-route-menu')[0];
 	foundRoutes.style.display = 'block';
 }
 
-function closeFoundRoutes(){
-	const foundRoutes = document.getElementsByClassName('found-route-menu')[0];
-	foundRoutes.style.display = 'none';
+function showCard(){
+	var card = document.getElementsByClassName("card")[0];
+	card.classList.add("show-card");
+	card.scrollIntoView({block: "start", behavior: "smooth"});
+}
+
+function closeCard(cardCloseButton){
+	cardCloseButton.parentElement.classList.remove('show-card');
 }
 
 function toggleBurgerMenu(){
@@ -100,12 +110,6 @@ function toggleLoginMenu(){
 function closeFindMenu(){
 	var findMenu = document.getElementsByClassName("find-a-route-menu")[0];
 	findMenu.classList.toggle("find-a-route-wrapped");
-}
-
-function showCard(){
-	var transportCard = document.getElementsByClassName("card")[0];
-	transportCard.classList.toggle("show-card");
-	transportCard.scrollIntoView({block: "start", behavior: "smooth"});
 }
 
 function editFavorites(){
@@ -206,16 +210,16 @@ function removeTableItem(item){
 	item.parentElement.remove('');
 }
 
-function autoComplete() {
+function stopsAutoComplete(){
 	try {
 		if(!document.querySelector('#stopsA').childElementCount){
-			var xhr = new XMLHttpRequest();
+			const xhr = new XMLHttpRequest();
 			xhr.open('GET', '/rest/data', true);
 			xhr.responseType = 'blob';
 			xhr.onload = function(e) { 
 			if (this.status == 200) {
-				var file = new File([this.response], 'temp');
-				var fileReader = new FileReader();
+				const file = new File([this.response], 'temp');
+				const fileReader = new FileReader();
 				fileReader.addEventListener('load', function(){
 					const data = JSON.parse(fileReader.result),
 						stops = data.stops;
@@ -241,4 +245,107 @@ function autoComplete() {
 	catch (error) {
 		console.log("A fucking error again: " + error);
 	}
+}
+
+function globalAutoComplete(){
+	try {
+		if(!document.querySelector('#global-search-items').childElementCount){
+			const xhr = new XMLHttpRequest();
+			xhr.open('GET', '/rest/data', true);
+			xhr.responseType = 'blob';
+			xhr.onload = function(e) { 
+			if (this.status == 200) {
+				const file = new File([this.response], 'temp');
+				const fileReader = new FileReader();
+				fileReader.addEventListener('load', function(){
+					const data = JSON.parse(fileReader.result),
+						stops = data.stops;
+						routes = data.routes;
+						transports = data.transport;
+					for (stop in stops){
+						const datalist = document.querySelector('#global-search-items');
+						const option = document.createElement('option');
+						option.setAttribute('value',stops[stop].name);
+						datalist.appendChild(option);
+					}
+					for (route in routes){
+						const datalist = document.querySelector('#global-search-items');
+						const option = document.createElement('option');
+						option.setAttribute('value',routes[route].name);
+						datalist.appendChild(option);
+					}
+					for (transport in transports){
+						const datalist = document.querySelector('#global-search-items');
+						const option = document.createElement('option');
+						option.setAttribute('value',transports[transport].number);
+						datalist.appendChild(option);
+					}
+				});
+				fileReader.readAsText(file);
+			} 
+			}
+			xhr.send();
+		}
+	}
+	catch (error) {
+		console.log("A fucking error again: " + error);
+	}
+}
+
+function signIn(){
+
+	try {
+		const xhr = new XMLHttpRequest();
+		xhr.open('GET', '/rest/data', true);
+		xhr.responseType = 'blob';
+		xhr.onload = function(e) {
+			if (this.status == 200) {
+				const file = new File([this.response], 'temp');
+				const fileReader = new FileReader();
+				fileReader.addEventListener('load', function(){
+					const data = JSON.parse(fileReader.result),
+					loginData = getLoginData();
+					userData = data.users;
+					for (user in userData){
+						if ((userData[user].name == loginData[0])&&(userData[user].pass == loginData[1])){
+							authorizationComplete(userData[user].name);
+							console.log('Authorization complete');
+							return true;
+						}
+					}
+					authorizationFailed();
+					console.log('Authorization failed');
+				});
+				fileReader.readAsText(file);
+			} 
+		}
+		xhr.send();
+	}
+	catch (error) {
+		console.log("A fucking error again: " + error);
+	}
+	
+	function getLoginData(){
+		const login = document.querySelector('#login-field').value,
+		pass = document.querySelector('#password-field').value;
+		
+		return [login,pass];
+	}
+
+	function authorizationComplete(username){
+		document.querySelector('.login-menu').lastElementChild.remove();
+		document.querySelector('.login-menu').lastElementChild.remove();
+		document.querySelector('.login-menu').lastElementChild.remove();
+		document.querySelector('.login-menu h3').innerText = "Welcome on site, " + username + "!";
+	}
+
+	function authorizationFailed(){
+		document.querySelector('#login-field').classList.add('login-failed');
+		document.querySelector('#password-field').classList.add('login-failed');
+	}
+}
+
+function loginValidationReset(){
+	document.querySelector('#login-field').classList.remove('login-failed');
+	document.querySelector('#password-field').classList.remove('login-failed');
 }

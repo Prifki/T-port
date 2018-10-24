@@ -16,9 +16,9 @@
 			<div class="closing-button" onclick="closeFindMenu()"><i class="material-icons close-pic">close</i></div>
 			<div class="find-a-route-content">
 				<h2>Find a route</h2>
-				<input onfocus="autoComplete()" class="find-a-route-inputs" type="text" placeholder="From" id="stopA" list="stopsA">
+				<input onfocus="stopsAutoComplete()" class="find-a-route-inputs" type="text" placeholder="From" id="stopA" list="stopsA">
 				<datalist id="stopsA"></datalist>
-				<input onfocus="autoComplete()" class="find-a-route-inputs" type="text" placeholder="To" id="stopB" list="stopsB">
+				<input onfocus="stopsAutoComplete()" class="find-a-route-inputs" type="text" placeholder="To" id="stopB" list="stopsB">
 				<datalist id="stopsB"></datalist>
 				<div class="time-interval">
 					<input type="time" name="from_time" value="06:00"/>
@@ -32,11 +32,11 @@
 				<h2>Your route</h2>
 				<div class="closing-button" onclick="closeFoundRoutes()"><i class="material-icons close-pic">close</i></div>
 				<ul class="bar">
-					<li>13:00<a href="#"><i class="fa fa-map-marker-alt"></i>Angular str</a></li>
+					<li>13:00<a href="#"><i class="material-icons">place</i>Angular str</a></li>
 					<li><a href="#"><i class="material-icons">directions_bus</i>AB01</a></li>
-					<li>13:45<a href="#"><i class="fa fa-map-marker-alt"></i>Git str</a></li>
+					<li>13:45<a href="#"><i class="material-icons">place</i>Git str</a></li>
 					<li><a href="#"><i class="material-icons">tram</i>TM10</a></li>
-					<li>14:00<a href="#"><i class="fa fa-map-marker-alt"></i>React str</a></li>
+					<li>14:00<a href="#"><i class="material-icons">place</i>React str</a></li>
 				</ul>
 			</div>
 		</div>

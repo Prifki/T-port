@@ -1,0 +1,51 @@
+<div class="select-wrapper">
+	<span class="autocomplete-select"></span>
+</div>
+<script src="/static-assets/js/bundle.min.js"></script>
+<script>
+	var autocomplete = new SelectPure(".autocomplete-select", {
+	options: [
+		{
+			label: "All Numbers",
+			value: "all",
+		},
+		{
+			label: "01",
+			value: "mal",
+		},
+		{
+			label: "02",
+			value: "bol",
+		},
+		{
+			label: "03",
+			value: "ne",
+		},
+		{
+			label: "04",
+			value: "sr",
+		},
+		{
+			label: "05",
+			value: "lig",
+		},
+		{
+			label: "06",
+			value: "lit",
+		},
+		{
+			label: "07",
+			value: "na",
+		},
+		{
+			label: "08",
+			value: "ch",
+		},
+		],
+			value: ["all"],
+			multiple: true,
+			autocomplete: true,
+			icon: "fa fa-times",
+			onChange: value => { console.log(value); },
+		});
+</script>
