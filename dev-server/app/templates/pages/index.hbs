@@ -24,7 +24,20 @@
 					<input type="time" name="from_time" value="06:00"/>
 					<input type="time" name="till_time" value="23:30"/>
 				</div>
-				<a id="find-a-route-button" href="#">Find</a>
+				<a id="find-a-route-button" onclick="openFoundRoutes()">Find</a>
+			</div>
+		</div>
+		<div class="found-route-menu">
+			<div class="found-route-content-wrapper">
+				<h2>Your route</h2>
+				<div class="closing-button" onclick="closeFoundRoutes()"><i class="material-icons close-pic">close</i></div>
+				<ul class="bar">
+					<li>13:00<a href="#"><i class="fa fa-map-marker-alt"></i>Angular str</a></li>
+					<li><a href="#"><i class="material-icons">directions_bus</i>AB01</a></li>
+					<li>13:45<a href="#"><i class="fa fa-map-marker-alt"></i>Git str</a></li>
+					<li><a href="#"><i class="material-icons">tram</i>TM10</a></li>
+					<li>14:00<a href="#"><i class="fa fa-map-marker-alt"></i>React str</a></li>
+				</ul>
 			</div>
 		</div>
 	

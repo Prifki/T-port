@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin,cyrillic);
 @import url("https://fonts.googleapis.com/css?family=Roboto+Slab");
 @import url("https://fonts.googleapis.com/css?family=Ubuntu+Mono:700");
@@ -241,6 +242,91 @@ nav {
   height: 100%;
 }
 
+.found-route-menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  transition: all 0.4s ease;
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  border: 1px solid #29b8ed;
+}
+.found-route-menu h2 {
+  text-align: center;
+  font-family: Mission, "Mission Gothic Light";
+  font-size: 1.5em;
+  margin: 10px;
+}
+.found-route-menu ul {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  font-size: 1.3em;
+}
+.found-route-menu li {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.found-route-menu li a {
+  text-align: left;
+  padding: 5px 10px;
+  margin: 10px;
+  width: 150px;
+  background: #e1e1e1;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.found-route-menu li a:hover {
+  background: #d5d5d5;
+}
+
+@media (max-width: 500px) {
+  .found-route-menu {
+    left: 0;
+    width: 95%;
+  }
+}
+.found-route-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bar {
+  list-style: none;
+}
+.bar li {
+  position: relative;
+}
+.bar li:before {
+  content: "●";
+  margin-right: 10px;
+  font-size: 20px;
+}
+.bar li:after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: "";
+  border-left: 2px solid black;
+  margin-left: 5px;
+  height: 100%;
+}
+.bar li:first-of-type:after {
+  top: 50%;
+}
+.bar li:last-of-type:after {
+  top: -50%;
+}
+
 .find-a-route-menu {
   position: absolute;
   top: 0;
@@ -400,8 +486,8 @@ nav {
     width: 95%;
   }
 }
-.fa-map-marker {
-  margin: 0 10px 0 5px;
+.fa-map-marker-alt {
+  margin-right: 5px;
 }
 
 .login-menu {

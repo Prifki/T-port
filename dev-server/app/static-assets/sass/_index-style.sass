@@ -5,6 +5,77 @@
 #map
   height: 100%
 
+.found-route-menu
+  position: absolute
+  top: 0
+  right: 0
+  z-index: 3
+  transition: all 0.4s ease
+  background: #eee
+  padding: 10px
+  margin: 10px
+  border-radius: 10px
+  border: 1px solid $main-color
+  h2
+    text-align: center
+    font-family: Mission, "Mission Gothic Light"
+    font-size: 1.5em
+    margin: 10px
+  ul
+    display: flex
+    flex-direction: column
+    width: fit-content
+    font-size: 1.3em
+  li
+    width: 100%
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: space-between
+    a
+      text-align: left
+      padding: 5px 10px
+      margin: 10px
+      width: 150px
+      background: #e1e1e1
+      border-radius: 10px
+      display: flex
+      flex-direction: row
+      align-items: center
+      &:hover
+        background: darken(#eee,10%)
+
+@media (max-width: 500px)
+  .found-route-menu
+    left: 0
+    width: 95%
+
+.found-route-content-wrapper
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.bar 
+  list-style: none
+  li 
+    position: relative
+    &:before
+      content: '\25CF'
+      margin-right: 10px
+      font-size: 20px
+    &:after 
+      position: absolute
+      left: 0
+      top: 0
+      content: ''
+      border-left: 2px solid black
+      margin-left: 5px
+      height: 100%
+    &:first-of-type:after
+      top: 50%
+    &:last-of-type:after
+      top: -50%
+
 .find-a-route-menu
   position: absolute
   top: 0
@@ -138,8 +209,8 @@
     left: 0
     width: 95%
 
-.fa-map-marker
-  margin: 0 10px 0 5px
+.fa-map-marker-alt
+  margin-right: 5px
 
 .login-menu
   opacity: 0

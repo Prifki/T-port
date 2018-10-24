@@ -48,6 +48,16 @@ function activateBurgerImg(){
 	burgerImg.classList.add('active');
 }
 
+function openFoundRoutes(){
+	const foundRoutes = document.getElementsByClassName('found-route-menu')[0];
+	foundRoutes.style.display = 'block';
+}
+
+function closeFoundRoutes(){
+	const foundRoutes = document.getElementsByClassName('found-route-menu')[0];
+	foundRoutes.style.display = 'none';
+}
+
 function toggleBurgerMenu(){
 	floatingMenu = document.getElementsByClassName("floating-menu")[0];
 	floatingMenu.classList.toggle("show-menu");
