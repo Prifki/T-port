@@ -1,67 +1,90 @@
-function burgerMenuToggle(){
-	mobileFindField = document.getElementsByClassName("mobile-find-field")[0],
-	floatingMenu = document.getElementsByClassName("floating-menu")[0],
-	ham = document.getElementsByClassName("ham")[0],
-	loginMenu = document.getElementsByClassName("login-menu")[0],
-	favoritesMenu = document.getElementsByClassName("favorites-menu")[0];
-	
+function closeLoginMenu(){
+	const loginMenu = document.getElementsByClassName('login-menu')[0];
+	loginMenu.classList.remove('show-additional-menu');
+}
+
+function openLoginMenu(){
+	const loginMenu = document.getElementsByClassName('login-menu')[0];
+	loginMenu.classList.add('show-additional-menu');
+}
+
+function closeFavorites(){
+	const favorites = document.getElementsByClassName('favorites-menu')[0];
+	favorites.classList.remove('show-additional-menu');
+}
+
+function openFavorites(){
+	const favorites = document.getElementsByClassName('favorites-menu')[0];
+	favorites.classList.add('show-additional-menu');
+}
+
+function closeMobileSearch(){
+	const mobileSearch = document.getElementsByClassName('mobile-find-field')[0];
+	mobileSearch.classList.remove('show-mobile-search');
+}
+
+function openMobileSearch(){
+	const mobileSearch = document.getElementsByClassName('mobile-find-field')[0];
+	mobileSearch.classList.add('show-mobile-search');
+}
+
+function closeBurgerMenu(){
+	const burgerMenu = document.getElementsByClassName('floating-menu')[0];
+	burgerMenu.classList.remove('show-menu');
+}
+
+function openBurgerMenu(){
+	const burgerMenu = document.getElementsByClassName('floating-menu')[0];
+	burgerMenu.classList.add('show-menu');
+}
+
+function deactivateBurgerImg(){
+	const burgerImg = document.getElementsByClassName('ham')[0];
+	burgerImg.classList.remove('active');
+}
+
+function activateBurgerImg(){
+	const burgerImg = document.getElementsByClassName('ham')[0];
+	burgerImg.classList.add('active');
+}
+
+function toggleBurgerMenu(){
+	floatingMenu = document.getElementsByClassName("floating-menu")[0];
 	floatingMenu.classList.toggle("show-menu");
-	ifOnThenOff(loginMenu,"show-additional-menu");
-	ifOnThenOff(favoritesMenu,"show-additional-menu");
-	ifOnThenOff(mobileFindField,"show-mobile-search");
+
+	closeLoginMenu();
+	closeFavorites();
+	closeMobileSearch();
 }
 
-function mobileSearch(){
-	mobileFindField = document.getElementsByClassName("mobile-find-field")[0],
-	floatingMenu = document.getElementsByClassName("floating-menu")[0],
-	ham = document.getElementsByClassName("ham")[0],
-	loginMenu = document.getElementsByClassName("login-menu")[0],
-	favoritesMenu = document.getElementsByClassName("favorites-menu")[0];
+function toggleMobileSearch(){
+	mobileSearch = document.getElementsByClassName("mobile-find-field")[0];
+	mobileSearch.classList.toggle("show-mobile-search");
 
-	mobileFindField.classList.toggle("show-mobile-search");
-	ifOnThenOff(floatingMenu,"show-menu");
-	ifOnThenOff(loginMenu,"show-additional-menu");
-	ifOnThenOff(favoritesMenu,"show-additional-menu");
-	ifOnThenOff(ham,"active");
+	closeLoginMenu();
+	closeFavorites();
+	closeBurgerMenu();
+	deactivateBurgerImg();
 }
 
-function showFavorites(){
-	mobileFindField = document.getElementsByClassName("mobile-find-field")[0],
-	floatingMenu = document.getElementsByClassName("floating-menu")[0],
-	ham = document.getElementsByClassName("ham")[0],
-	loginMenu = document.getElementsByClassName("login-menu")[0],
-	favoritesMenu = document.getElementsByClassName("favorites-menu")[0];
+function toggleFavorites(){
+	favorites = document.getElementsByClassName("favorites-menu")[0];
+	favorites.classList.toggle("show-additional-menu");
 
-	favoritesMenu.classList.toggle("show-additional-menu");
-	ifOnThenOff(loginMenu,"show-additional-menu");
-	ifOnThenOff(floatingMenu,"show-menu");
-	ifOnThenOff(ham,"active");
-	ifOnThenOff(mobileFindField,"show-mobile-search");
+	closeLoginMenu();
+	closeMobileSearch();
+	closeBurgerMenu();
+	deactivateBurgerImg();
 }
 
+function toggleLoginMenu(){
+	login = document.getElementsByClassName("login-menu")[0];
+	login.classList.toggle("show-additional-menu");
 
-function showLoginMenu(){
-	mobileFindField = document.getElementsByClassName("mobile-find-field")[0],
-	floatingMenu = document.getElementsByClassName("floating-menu")[0],
-	ham = document.getElementsByClassName("ham")[0],
-	loginMenu = document.getElementsByClassName("login-menu")[0],
-	favoritesMenu = document.getElementsByClassName("favorites-menu")[0];
-
-	loginMenu.classList.toggle("show-additional-menu");
-	ifOnThenOff(favoritesMenu,"show-additional-menu");
-	ifOnThenOff(floatingMenu,"show-menu");
-	ifOnThenOff(ham,"active");
-	ifOnThenOff(mobileFindField,"show-mobile-search");
-}
-
-function ifOnThenOff(obj,cla){
-	if(obj.classList.toggle(cla))
-		obj.classList.toggle(cla);
-}
-
-function ifOffThenOn(obj,cla){
-	if(!obj.classList.toggle(cla))
-		obj.classList.toggle(cla);
+	closeFavorites();
+	closeMobileSearch();
+	closeBurgerMenu();
+	deactivateBurgerImg();
 }
 
 function closeFindMenu(){
@@ -175,33 +198,35 @@ function removeTableItem(item){
 
 function autoComplete() {
 	try {
-		var xhr = new XMLHttpRequest();
-		xhr.open('GET', '/rest/data', true);
-		xhr.responseType = 'blob';
-		xhr.onload = function(e) { 
-		if (this.status == 200) {
-			var file = new File([this.response], 'temp');
-			var fileReader = new FileReader();
-			fileReader.addEventListener('load', function(){
-				const data = JSON.parse(fileReader.result),
-					stops = data.stops;
-				for (stop in stops){
-					const datalist = document.querySelector('#stopsA');
-					const option = document.createElement('option');
-					option.setAttribute('value',stops[stop].name);
-					datalist.appendChild(option);
-				}
-				for (stop in stops){
-					const datalist = document.querySelector('#stopsB');
-					const option = document.createElement('option');
-					option.setAttribute('value',stops[stop].name);
-					datalist.appendChild(option);
-				}
-			});
-			fileReader.readAsText(file);
-		} 
+		if(!document.querySelector('#stopsA').childElementCount){
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', '/rest/data', true);
+			xhr.responseType = 'blob';
+			xhr.onload = function(e) { 
+			if (this.status == 200) {
+				var file = new File([this.response], 'temp');
+				var fileReader = new FileReader();
+				fileReader.addEventListener('load', function(){
+					const data = JSON.parse(fileReader.result),
+						stops = data.stops;
+					for (stop in stops){
+						const datalist = document.querySelector('#stopsA');
+						const option = document.createElement('option');
+						option.setAttribute('value',stops[stop].name);
+						datalist.appendChild(option);
+					}
+					for (stop in stops){
+						const datalist = document.querySelector('#stopsB');
+						const option = document.createElement('option');
+						option.setAttribute('value',stops[stop].name);
+						datalist.appendChild(option);
+					}
+				});
+				fileReader.readAsText(file);
+			} 
+			}
+			xhr.send();
 		}
-		xhr.send();
 	}
 	catch (error) {
 		console.log("A fucking error again: " + error);
