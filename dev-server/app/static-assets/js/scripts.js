@@ -93,9 +93,9 @@ function removeFromFavorites(button){
 	button.parentElement.remove('');
 }
 
-function editTable(){
+function editTable(tableButton){
 	try{
-		const tbody = document.getElementsByTagName('tbody')[0];
+		const tbody = tableButton.parentElement.lastElementChild.lastElementChild;
 
 		if (tbody.firstChild.lastChild.innerText != "Remove"){
 			const Rows = Array.from(tbody.rows);
@@ -107,7 +107,8 @@ function editTable(){
 				const i = document.createElement('i'),
 				td = document.createElement('td');
 				td.appendChild(i);
-				i.setAttribute('class','material-icons table-edit-button');
+				i.setAttribute('class','material-icons');
+				td.setAttribute('class','table-editor-buttons');
 				i.innerText='edit';
 				Rows[row].appendChild(td);
 			}
@@ -118,7 +119,9 @@ function editTable(){
 				const i = document.createElement('i'),
 				td = document.createElement('td');
 				td.appendChild(i);
-				i.setAttribute('class','fa fa-minus table-edit-button');
+				i.setAttribute('class','fa fa-minus');
+				td.setAttribute('class','table-editor-buttons');
+				td.setAttribute('onclick','removeTableItem(this)');
 				Rows[row].appendChild(td);
 			}
 
@@ -130,9 +133,10 @@ function editTable(){
 				td.appendChild(editInput);
 				tbody.lastChild.appendChild(td);
 			}
-			addPlusButton(tbody);
+			
 			const td = document.createElement('td');
 			tbody.lastChild.appendChild(td);
+			addPlusButton(tbody);
 		}
 	}
 	catch (error) {
@@ -142,7 +146,7 @@ function editTable(){
 	function addPlusButton(tbody){
 		const td = document.createElement('td'),
 		i = document.createElement('i');
-		i.setAttribute('class','material-icons table-edit-button');
+		i.setAttribute('class','material-icons table-editor-buttons');
 		i.innerText='add_circle_outline';
 		td.appendChild(i);
 		tbody.lastChild.appendChild(td);
@@ -165,18 +169,28 @@ function editTable(){
 	}
 }
 
+function removeTableItem(item){
+	item.parentElement.remove('');
+}
 
-/*function closeAll(){
-	mobileFindField = document.getElementsByClassName("mobile-find-field")[0],
-	floatingMenu = document.getElementsByClassName("floating-menu")[0],
-	ham = document.getElementsByClassName("ham")[0],
-	loginMenu = document.getElementsByClassName("login-menu")[0],
-	favoritesMenu = document.getElementsByClassName("favorites-menu")[0];
+window.onload = readJSON();
 
-	menusToClose=[mobileFindField,floatingMenu,ham,loginMenu,favoritesMenu];
-	classToClose = ["show-mobile-search","show-menu","active","show-additional-menu","show-additional-menu"];
-
-	for (i=0; i<menusToClose.length; i++) {
-		ifOnThenOff(menusToClose[i], classToClose[i])
-	}
-}*/
+function readJSON() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/rest/data', true);
+    xhr.responseType = 'blob';
+    xhr.onload = function(e) { 
+      if (this.status == 200) {
+          var file = new File([this.response], 'temp');
+          var fileReader = new FileReader();
+          fileReader.addEventListener('load', function(){
+			const data = JSON.parse(fileReader.result),
+				  stops = data.stops;
+			for (stop in stops)
+				console.log(stops[stop].name);
+          });
+          fileReader.readAsText(file);
+      } 
+    }
+	xhr.send();
+}

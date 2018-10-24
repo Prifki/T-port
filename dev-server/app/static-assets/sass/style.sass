@@ -36,13 +36,18 @@ main
     font-family: $logo-font
     font-size: 2.2em
 
-table
-  border-collapse: collapse
+.table-wrapper
   width: 90%
   margin: 10px
+
+table
+  border-collapse: collapse
+  width: 100%
   td, th  
     border-bottom: 1px solid #ddd
     padding: 5px
+    text-align: left
+    vertical-align: middle
   tr:nth-child(even)
     background-color: #f2f2f2
   tr
@@ -156,5 +161,21 @@ table
   &:focus
     background: #fff
 
-.table-edit-button:hover
+.table-editor-buttons:hover
   color: $main-color
+
+.table-open-editor-tools-button
+  position: absolute
+  top: -25px
+  right: -5px
+  z-index: 2
+  background: $main-color
+  border-radius: 40px
+  padding: 5px
+  color: #fff
+  border: 1px solid #fff
+  &:hover
+    border: 1px solid $main-color
+    color: $main-color
+    background: #fff
+    cursor: pointer

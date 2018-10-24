@@ -387,6 +387,7 @@ nav {
 }
 .delete-button:hover {
   color: #29b8ed;
+  cursor: pointer;
 }
 
 @media (max-width: 470px) {
@@ -729,14 +730,20 @@ main {
   font-size: 2.2em;
 }
 
-table {
-  border-collapse: collapse;
+.table-wrapper {
   width: 90%;
   margin: 10px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
 }
 table td, table th {
   border-bottom: 1px solid #ddd;
   padding: 5px;
+  text-align: left;
+  vertical-align: middle;
 }
 table tr:nth-child(even) {
   background-color: #f2f2f2;
@@ -875,8 +882,26 @@ table th {
   background: #fff;
 }
 
-.table-edit-button:hover {
+.table-editor-buttons:hover {
   color: #29b8ed;
+}
+
+.table-open-editor-tools-button {
+  position: absolute;
+  top: -25px;
+  right: -5px;
+  z-index: 2;
+  background: #29b8ed;
+  border-radius: 40px;
+  padding: 5px;
+  color: #fff;
+  border: 1px solid #fff;
+}
+.table-open-editor-tools-button:hover {
+  border: 1px solid #29b8ed;
+  color: #29b8ed;
+  background: #fff;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=styles.css.map */

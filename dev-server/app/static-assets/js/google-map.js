@@ -1,7 +1,7 @@
 function initMap() {
 	var spb = {lat: 59.926789, lng: 30.233772};
 	var map = new google.maps.Map(
-		document.getElementById('map'), {zoom: 10, center: spb, styles: [
+		document.getElementById('map'), {zoom: 11, center: spb, styles: [
 	{
 		"elementType": "geometry",
 		"stylers": [
@@ -330,5 +330,4 @@ function initMap() {
 	}
     ],disableDefaultUI: true
 });
-	var marker = new google.maps.Marker({position: spb, map: map});
 }
