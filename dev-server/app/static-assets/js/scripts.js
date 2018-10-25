@@ -351,3 +351,58 @@ function loginValidationReset(){
 	document.querySelector('#login-field').classList.remove('login-failed');
 	document.querySelector('#password-field').classList.remove('login-failed');
 }
+
+function generateTransportTable(){
+	try {
+		const xhr = new XMLHttpRequest();
+		xhr.open('GET', '/rest/data', true);
+		xhr.responseType = 'blob';
+		xhr.onload = function(e) {
+			if (this.status == 200) {
+				const file = new File([this.response], 'temp');
+				const fileReader = new FileReader();
+				fileReader.addEventListener('load', function(){
+					const data = JSON.parse(fileReader.result),
+					transports = data.transport;
+					for (transport in transports){
+						let type;
+						switch(transports[transport].type) {
+							case 'AB':
+								type = 'directions_bus'
+							 	break;
+							case 'TM':
+								type = 'tram'
+							 	break;
+							case 'TL':
+								type = 'train'
+								break;
+						  }
+						generateRow(type,transports[transport].number,transports[transport].route,transports[transport].seats);
+					}
+
+				});
+				fileReader.readAsText(file);
+			} 
+		}
+		xhr.send();
+	}
+	catch (error) {
+		console.log("A fucking error again: " + error);
+	}
+	function generateRow(type,number,route,seats){
+		const tr = document.createElement('tr');
+		tr.innerHTML = '<td><i class="material-icons">' + type +
+		'</i></td><td onclick="showCard()">'+ number + '</td><td>' + route +
+		'</td><td>' + seats + '</td>';
+		document.querySelector('#transport-table').lastChild.append(tr);
+	}
+}
+
+function pageHandler(){
+	switch(window.location.pathname){
+		case "/nested/transport":
+			generateTransportTable();
+			break;
+	}
+}
+pageHandler();
