@@ -737,6 +737,7 @@ textarea {
   border: 1px solid #ddd;
   color: #000;
   cursor: pointer;
+  margin-bottom: 10px;
   display: flex;
   font-size: 16px;
   font-weight: 500;
@@ -987,6 +988,14 @@ table th:hover {
   position: absolute;
   top: 0;
   right: 0;
+  margin: 5px;
+  z-index: 2;
+}
+
+.bookmark-button {
+  position: absolute;
+  top: -6px;
+  right: 40px;
   margin: 5px;
   z-index: 2;
 }

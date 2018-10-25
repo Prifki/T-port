@@ -308,7 +308,7 @@ function signIn(){
 					userData = data.users;
 					for (user in userData){
 						if ((userData[user].name == loginData[0])&&(userData[user].pass == loginData[1])){
-							authorizationComplete(userData[user].name);
+							authorizationComplete(userData[user].name,userData[user].type);
 							console.log('Authorization complete');
 							return true;
 						}
@@ -332,11 +332,13 @@ function signIn(){
 		return [login,pass];
 	}
 
-	function authorizationComplete(username){
-		document.querySelector('.login-menu').lastElementChild.remove();
-		document.querySelector('.login-menu').lastElementChild.remove();
-		document.querySelector('.login-menu').lastElementChild.remove();
-		document.querySelector('.login-menu h3').innerText = "Welcome on site, " + username + "!";
+	function authorizationComplete(userName,userType){
+		document.querySelector('#login-button').remove();
+		document.querySelector('#login-field').remove();
+		document.querySelector('#password-field').remove();
+		document.querySelector('.login-menu h3').innerText = "Welcome on site, " + userName + "!";
+		document.cookie = userType;
+		console.log('cookie: ' + document.cookie);
 	}
 
 	function authorizationFailed(){
