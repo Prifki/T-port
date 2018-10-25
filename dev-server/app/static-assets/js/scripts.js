@@ -431,6 +431,43 @@ function generateStopsTable(){
 	}
 }
 
+
+function generateRoutesTable(){
+	try {
+		const xhr = new XMLHttpRequest();
+		xhr.open('GET', '/rest/data', true);
+		xhr.responseType = 'blob';
+		xhr.onload = function(e) {
+			if (this.status == 200) {
+				const file = new File([this.response], 'temp');
+				const fileReader = new FileReader();
+				fileReader.addEventListener('load', function(){
+					const data = JSON.parse(fileReader.result),
+					routes = data.routes,
+					stops = data.stops;
+					for (route in routes){
+						for (stop in stops){
+							generateRow(routes[route].name,routes[route].stops[0],routes[route].stops[routes[route].stops.length-1]);
+							break;
+						}
+					}
+				});
+				fileReader.readAsText(file);
+			} 
+		}
+		xhr.send();
+	}
+	catch (error) {
+		console.log("A fucking error again: " + error);
+	}
+	function generateRow(name,from,to){
+		const tr = document.createElement('tr');
+		tr.innerHTML = '<td onclick="showCard()">' + name +
+		'</td><td>'+ from + '</td><td>' + to + '</td>';
+		document.querySelector('#routes-table').lastChild.append(tr);
+	}
+}
+
 function pageHandler(){
 	switch(window.location.pathname){
 		case "/nested/transport":
@@ -438,6 +475,9 @@ function pageHandler(){
 			break;
 		case "/nested/stops":
 			generateStopsTable();
+			break;
+		case "/nested/routes":
+			generateRoutesTable();
 			break;
 	}
 }
