@@ -5,9 +5,8 @@
 			<h2>Transport</h2>
 			<div class="filters">
 				<div class="filtering-menu">
-					<label class="filtering-label">Type:</label>
 					<input type="checkbox" name="bus" id="bus" class="filter-by-type"/>
-					<label for="bus" class="filtering-item"><i class="material-icons">directions_bus</i> Bus</label>
+					<label for="bus" class="filtering-item filtering-label"><i class="material-icons">directions_bus</i> Bus</label>
 
 					<input type="checkbox" name="train" id="train" class="filter-by-type"/>
 					<label for="train" class="filtering-item"><i class="material-icons">train</i> Trolley</label>
@@ -48,7 +47,7 @@
 				<h3>Transport name</h3>
 				<div class="table-wrapper">
 					<div class="table-open-editor-tools-button" onclick="editTable(this)"><i class="material-icons">settings</i></div>
-					<table>
+					<table id="transport-card">
 						<tr>
 							<th>Stop</th>
 							<th>Time</th>

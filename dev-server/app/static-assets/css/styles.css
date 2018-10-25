@@ -275,7 +275,7 @@ nav {
   text-align: left;
   padding: 5px 10px;
   margin: 10px;
-  width: 150px;
+  min-width: 150px;
   background: #e1e1e1;
   border-radius: 10px;
   display: flex;
@@ -937,8 +937,6 @@ table th:hover {
 
 .filtering-label {
   border-radius: 40px 0 0 40px;
-  background: #29b8ed;
-  font-weight: 700;
 }
 
 .last-filtering-label {

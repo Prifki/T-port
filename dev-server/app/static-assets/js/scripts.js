@@ -58,16 +58,6 @@ function openFoundRoutes(){
 	foundRoutes.style.display = 'block';
 }
 
-function showCard(){
-	var card = document.getElementsByClassName("card")[0];
-	card.classList.add("show-card");
-	card.scrollIntoView({block: "start", behavior: "smooth"});
-}
-
-function closeCard(cardCloseButton){
-	cardCloseButton.parentElement.classList.remove('show-card');
-}
-
 function toggleBurgerMenu(){
 	floatingMenu = document.getElementsByClassName("floating-menu")[0];
 	floatingMenu.classList.toggle("show-menu");
@@ -392,7 +382,7 @@ function generateTransportTable(){
 	function generateRow(type,number,route,seats){
 		const tr = document.createElement('tr');
 		tr.innerHTML = '<td><i class="material-icons">' + type +
-		'</i></td><td onclick="showCard()">'+ number + '</td><td>' + route +
+		'</i></td><td onclick="generateTransportCard(this)">'+ number + '</td><td>' + route +
 		'</td><td>' + seats + '</td>';
 		document.querySelector('#transport-table').lastChild.append(tr);
 	}
@@ -481,4 +471,72 @@ function pageHandler(){
 			break;
 	}
 }
-pageHandler();
+
+function generateTransportCard(generationRowData){
+	showCard();
+	const name = generationRowData.innerText;
+	let type;
+	switch(generationRowData.previousSibling.innerText) {
+		case 'directions_bus':
+			type = 'Bus ';
+			break;
+		case 'tram':
+			type = 'Tram ';
+			break;
+		case 'train':
+			type = 'Trolley bus ';
+			break;
+	  }
+	document.querySelector('.card h3').innerText = type + name;
+
+	try {
+		const xhr = new XMLHttpRequest();
+		xhr.open('GET', '/rest/data', true);
+		xhr.responseType = 'blob';
+		xhr.onload = function(e) {
+			if (this.status == 200) {
+				const file = new File([this.response], 'temp');
+				const fileReader = new FileReader();
+				fileReader.addEventListener('load', function(){
+					const data = JSON.parse(fileReader.result),
+					routes = data.routes,
+					stops = data.stops,
+					route = generationRowData.nextSibling.innerText;
+					/*Object.keys(routes.route);
+					/*for (route in routes){
+						for (stop in stops){
+							generateTransportCardTableRow(routes[route].stops[stop], stops[stop].timetable[routes[route].name]);
+							break;
+						}
+					}
+					for (let i=0; i<10;i++)
+						generateTransportCardTableRow(i, '{{time}}');
+					*/
+				});
+				fileReader.readAsText(file);
+			} 
+		}
+		xhr.send();
+	}
+	catch (error) {
+		console.log("A fucking error again: " + error);
+	}
+
+	function generateTransportCardTableRow(stop,time){
+		const tr = document.createElement('tr');
+		tr.innerHTML = '<td>' + stop + '</td><td>'+ time + '</td>';
+		document.querySelector('#transport-card').lastChild.append(tr);
+	}
+}
+
+function showCard(){
+	var card = document.getElementsByClassName("card")[0];
+	card.classList.add("show-card");
+	card.scrollIntoView({block: "start", behavior: "smooth"});
+}
+
+function closeCard(cardCloseButton){
+	cardCloseButton.parentElement.classList.remove('show-card');
+}
+
+window.onload = pageHandler();
