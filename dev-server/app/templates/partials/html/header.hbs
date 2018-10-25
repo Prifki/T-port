@@ -35,7 +35,7 @@
 				</div>
 			</div>
 			<div class="find-box">
-				<input type="text" class="find-txt" placeholder="Search..." list="global-search-items" onfocus="globalAutoComplete()"/>
+				<input type="text" class="find-txt" placeholder="Search..." list="global-search-items" onkeydown="globalAutoComplete()"/>
 				<datalist id="global-search-items">
 				</datalist>
 				<span class="find-btn">
@@ -52,7 +52,7 @@
 			</nav>
 		</div>
 		<div class="mobile-find-field">
-			<input type="text" placeholder="Search…" list="global-search-items" onfocus="globalAutoComplete()">
+			<input type="text" placeholder="Search…" list="global-search-items" onkeydown="globalAutoComplete()">
 			<datalist id="global-search-items">
 			</datalist>
 			<div class="mobile-find-field-closing"><i class="material-icons close-pic" onclick="closeMobileSearch()">close</i></div>

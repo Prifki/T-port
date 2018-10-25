@@ -55,6 +55,7 @@ function closeFoundRoutes(){
 
 function openFoundRoutes(){
 	const foundRoutes = document.getElementsByClassName('found-route-menu')[0];
+	generateRoute();
 	foundRoutes.style.display = 'block';
 }
 
@@ -201,123 +202,72 @@ function removeTableItem(item){
 }
 
 function stopsAutoComplete(){
-	try {
+	requestJSON(generateOptions);
+	function generateOptions(data){
 		if(!document.querySelector('#stopsA').childElementCount){
-			const xhr = new XMLHttpRequest();
-			xhr.open('GET', '/rest/data', true);
-			xhr.responseType = 'blob';
-			xhr.onload = function(e) { 
-			if (this.status == 200) {
-				const file = new File([this.response], 'temp');
-				const fileReader = new FileReader();
-				fileReader.addEventListener('load', function(){
-					const data = JSON.parse(fileReader.result),
-						stops = data.stops;
-					for (stop in stops){
-						const datalist = document.querySelector('#stopsA');
-						const option = document.createElement('option');
-						option.setAttribute('value',stops[stop].name);
-						datalist.appendChild(option);
-					}
-					for (stop in stops){
-						const datalist = document.querySelector('#stopsB');
-						const option = document.createElement('option');
-						option.setAttribute('value',stops[stop].name);
-						datalist.appendChild(option);
-					}
-				});
-				fileReader.readAsText(file);
-			} 
+			stops = data.stops;
+			for (stop in stops){
+				const datalist = document.querySelector('#stopsA');
+				const option = document.createElement('option');
+				option.setAttribute('value',stops[stop].name);
+				datalist.appendChild(option);
 			}
-			xhr.send();
+			for (stop in stops){
+				const datalist = document.querySelector('#stopsB');
+				const option = document.createElement('option');
+				option.setAttribute('value',stops[stop].name);
+				datalist.appendChild(option);
+			}
 		}
-	}
-	catch (error) {
-		console.log("A fucking error again: " + error);
 	}
 }
 
 function globalAutoComplete(){
-	try {
+	requestJSON(generateOptions);
+	function generateOptions(data){
 		if(!document.querySelector('#global-search-items').childElementCount){
-			const xhr = new XMLHttpRequest();
-			xhr.open('GET', '/rest/data', true);
-			xhr.responseType = 'blob';
-			xhr.onload = function(e) { 
-			if (this.status == 200) {
-				const file = new File([this.response], 'temp');
-				const fileReader = new FileReader();
-				fileReader.addEventListener('load', function(){
-					const data = JSON.parse(fileReader.result),
-						stops = data.stops;
-						routes = data.routes;
-						transports = data.transport;
-					for (stop in stops){
-						const datalist = document.querySelector('#global-search-items');
-						const option = document.createElement('option');
-						option.setAttribute('value',stops[stop].name);
-						datalist.appendChild(option);
-					}
-					for (route in routes){
-						const datalist = document.querySelector('#global-search-items');
-						const option = document.createElement('option');
-						option.setAttribute('value',routes[route].name);
-						datalist.appendChild(option);
-					}
-					for (transport in transports){
-						const datalist = document.querySelector('#global-search-items');
-						const option = document.createElement('option');
-						option.setAttribute('value',transports[transport].number);
-						datalist.appendChild(option);
-					}
-				});
-				fileReader.readAsText(file);
-			} 
+			const stops = data.stops, routes = data.routes, transports = data.transport;
+			for (stop in stops){
+				const datalist = document.querySelector('#global-search-items');
+				const option = document.createElement('option');
+				option.setAttribute('value',stops[stop].name);
+				datalist.appendChild(option);
 			}
-			xhr.send();
+			for (route in routes){
+				const datalist = document.querySelector('#global-search-items');
+				const option = document.createElement('option');
+				option.setAttribute('value',routes[route].name);
+				datalist.appendChild(option);
+			}
+			for (transport in transports){
+				const datalist = document.querySelector('#global-search-items');
+				const option = document.createElement('option');
+				option.setAttribute('value',transports[transport].number);
+				datalist.appendChild(option);
+			}
 		}
-	}
-	catch (error) {
-		console.log("A fucking error again: " + error);
 	}
 }
 
 function signIn(){
-
-	try {
-		const xhr = new XMLHttpRequest();
-		xhr.open('GET', '/rest/data', true);
-		xhr.responseType = 'blob';
-		xhr.onload = function(e) {
-			if (this.status == 200) {
-				const file = new File([this.response], 'temp');
-				const fileReader = new FileReader();
-				fileReader.addEventListener('load', function(){
-					const data = JSON.parse(fileReader.result),
-					loginData = getLoginData();
-					userData = data.users;
-					for (user in userData){
-						if ((userData[user].name == loginData[0])&&(userData[user].pass == loginData[1])){
-							authorizationComplete(userData[user].name,userData[user].type);
-							console.log('Authorization complete');
-							return true;
-						}
-					}
-					authorizationFailed();
-					console.log('Authorization failed');
-				});
-				fileReader.readAsText(file);
-			} 
+	requestJSON(checker);
+	function checker(data){
+		const loginData = getLoginData(),
+			  userData = data.users;
+		for (user in userData){
+			if ((userData[user].name == loginData[0])&&(userData[user].pass == loginData[1])){
+				authorizationComplete(userData[user].name,userData[user].type);
+				console.log('Authorization complete');
+				return true;
+			}
 		}
-		xhr.send();
+		authorizationFailed();
+		console.log('Authorization failed');		
 	}
-	catch (error) {
-		console.log("A fucking error again: " + error);
-	}
-	
+
 	function getLoginData(){
 		const login = document.querySelector('#login-field').value,
-		pass = document.querySelector('#password-field').value;
+			  pass = document.querySelector('#password-field').value;
 		
 		return [login,pass];
 	}
@@ -343,41 +293,24 @@ function loginValidationReset(){
 }
 
 function generateTransportTable(){
-	try {
-		const xhr = new XMLHttpRequest();
-		xhr.open('GET', '/rest/data', true);
-		xhr.responseType = 'blob';
-		xhr.onload = function(e) {
-			if (this.status == 200) {
-				const file = new File([this.response], 'temp');
-				const fileReader = new FileReader();
-				fileReader.addEventListener('load', function(){
-					const data = JSON.parse(fileReader.result),
-					transports = data.transport;
-					for (transport in transports){
-						let type;
-						switch(transports[transport].type) {
-							case 'AB':
-								type = 'directions_bus'
-							 	break;
-							case 'TM':
-								type = 'tram'
-							 	break;
-							case 'TL':
-								type = 'train'
-								break;
-						  }
-						generateRow(type,transports[transport].number,transports[transport].route,transports[transport].seats);
-					}
-
-				});
-				fileReader.readAsText(file);
-			} 
+	requestJSON(generateTable);
+	function generateTable(data){
+		const transports = data.transport;
+		for (transport in transports){
+			let type;
+			switch(transports[transport].type) {
+				case 'AB':
+					type = 'directions_bus'
+					 break;
+				case 'TM':
+					type = 'tram'
+					 break;
+				case 'TL':
+					type = 'train'
+					break;
+			  }
+			generateRow(type,transports[transport].number,transports[transport].route,transports[transport].seats);
 		}
-		xhr.send();
-	}
-	catch (error) {
-		console.log("A fucking error again: " + error);
 	}
 	function generateRow(type,number,route,seats){
 		const tr = document.createElement('tr');
@@ -389,29 +322,15 @@ function generateTransportTable(){
 }
 
 function generateStopsTable(){
-	try {
-		const xhr = new XMLHttpRequest();
-		xhr.open('GET', '/rest/data', true);
-		xhr.responseType = 'blob';
-		xhr.onload = function(e) {
-			if (this.status == 200) {
-				const file = new File([this.response], 'temp');
-				const fileReader = new FileReader();
-				fileReader.addEventListener('load', function(){
-					const data = JSON.parse(fileReader.result),
-					stops = data.stops;
-					for (stop in stops){
-						generateRow(stops[stop].name,stops[stop].number,Object.keys(stops[stop].timetable));
-					}
-				});
-				fileReader.readAsText(file);
-			} 
+	requestJSON(generateTable);
+
+	function generateTable(data){
+		const stops = data.stops;
+		for (stop in stops){
+			generateRow(stops[stop].name,stops[stop].number,Object.keys(stops[stop].timetable));
 		}
-		xhr.send();
 	}
-	catch (error) {
-		console.log("A fucking error again: " + error);
-	}
+
 	function generateRow(name,number,route){
 		const tr = document.createElement('tr');
 		tr.innerHTML = '<td onclick="showCard()">' + name +
@@ -423,33 +342,19 @@ function generateStopsTable(){
 
 
 function generateRoutesTable(){
-	try {
-		const xhr = new XMLHttpRequest();
-		xhr.open('GET', '/rest/data', true);
-		xhr.responseType = 'blob';
-		xhr.onload = function(e) {
-			if (this.status == 200) {
-				const file = new File([this.response], 'temp');
-				const fileReader = new FileReader();
-				fileReader.addEventListener('load', function(){
-					const data = JSON.parse(fileReader.result),
-					routes = data.routes,
-					stops = data.stops;
-					for (route in routes){
-						for (stop in stops){
-							generateRow(routes[route].name,routes[route].stops[0],routes[route].stops[routes[route].stops.length-1]);
-							break;
-						}
-					}
-				});
-				fileReader.readAsText(file);
-			} 
+	requestJSON(generateTable);
+
+	function generateTable(data){
+		const routes = data.routes,
+		stops = data.stops;
+		for (route in routes){
+			for (stop in stops){
+				generateRow(routes[route].name,routes[route].stops[0],routes[route].stops[routes[route].stops.length-1]);
+				break;
+			}
 		}
-		xhr.send();
 	}
-	catch (error) {
-		console.log("A fucking error again: " + error);
-	}
+					
 	function generateRow(name,from,to){
 		const tr = document.createElement('tr');
 		tr.innerHTML = '<td onclick="showCard()">' + name +
@@ -472,6 +377,12 @@ function pageHandler(){
 	}
 }
 
+function generateRoute(){
+	const stopA = document.querySelector('#stopA').value,
+	stopB = document.querySelector('#stopB').value;
+	console.log(stopA + '\t'+ stopB);
+}
+
 function generateTransportCard(generationRowData){
 	showCard();
 	const name = generationRowData.innerText;
@@ -488,45 +399,6 @@ function generateTransportCard(generationRowData){
 			break;
 	  }
 	document.querySelector('.card h3').innerText = type + name;
-
-	try {
-		const xhr = new XMLHttpRequest();
-		xhr.open('GET', '/rest/data', true);
-		xhr.responseType = 'blob';
-		xhr.onload = function(e) {
-			if (this.status == 200) {
-				const file = new File([this.response], 'temp');
-				const fileReader = new FileReader();
-				fileReader.addEventListener('load', function(){
-					const data = JSON.parse(fileReader.result),
-					routes = data.routes,
-					stops = data.stops,
-					route = generationRowData.nextSibling.innerText;
-					/*Object.keys(routes.route);
-					/*for (route in routes){
-						for (stop in stops){
-							generateTransportCardTableRow(routes[route].stops[stop], stops[stop].timetable[routes[route].name]);
-							break;
-						}
-					}
-					for (let i=0; i<10;i++)
-						generateTransportCardTableRow(i, '{{time}}');
-					*/
-				});
-				fileReader.readAsText(file);
-			} 
-		}
-		xhr.send();
-	}
-	catch (error) {
-		console.log("A fucking error again: " + error);
-	}
-
-	function generateTransportCardTableRow(stop,time){
-		const tr = document.createElement('tr');
-		tr.innerHTML = '<td>' + stop + '</td><td>'+ time + '</td>';
-		document.querySelector('#transport-card').lastChild.append(tr);
-	}
 }
 
 function showCard(){
@@ -539,4 +411,22 @@ function closeCard(cardCloseButton){
 	cardCloseButton.parentElement.classList.remove('show-card');
 }
 
-window.onload = pageHandler();
+function requestJSON(func){
+		const xhr = new XMLHttpRequest();
+		xhr.open('GET', '/rest/data', true);
+		xhr.responseType = 'blob';
+		xhr.onload = function() {
+			if (this.status == 200) {
+				const file = new File([this.response], 'temp');
+				const fileReader = new FileReader();
+				fileReader.addEventListener('load', function(){
+					const data = JSON.parse(fileReader.result);
+					func(data);
+				});
+				fileReader.readAsText(file);
+			} 
+		}
+		xhr.send();
+}
+
+window.onload = pageHandler()
