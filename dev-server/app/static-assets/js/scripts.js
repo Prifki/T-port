@@ -398,10 +398,46 @@ function generateTransportTable(){
 	}
 }
 
+function generateStopsTable(){
+	try {
+		const xhr = new XMLHttpRequest();
+		xhr.open('GET', '/rest/data', true);
+		xhr.responseType = 'blob';
+		xhr.onload = function(e) {
+			if (this.status == 200) {
+				const file = new File([this.response], 'temp');
+				const fileReader = new FileReader();
+				fileReader.addEventListener('load', function(){
+					const data = JSON.parse(fileReader.result),
+					stops = data.stops;
+					for (stop in stops){
+						generateRow(stops[stop].name,stops[stop].number,Object.keys(stops[stop].timetable));
+					}
+				});
+				fileReader.readAsText(file);
+			} 
+		}
+		xhr.send();
+	}
+	catch (error) {
+		console.log("A fucking error again: " + error);
+	}
+	function generateRow(name,number,route){
+		const tr = document.createElement('tr');
+		tr.innerHTML = '<td onclick="showCard()">' + name +
+		'</td><td onclick="showCard()">'+ number + '</td><td>' + route +
+		'</td>';
+		document.querySelector('#stops-table').lastChild.append(tr);
+	}
+}
+
 function pageHandler(){
 	switch(window.location.pathname){
 		case "/nested/transport":
 			generateTransportTable();
+			break;
+		case "/nested/stops":
+			generateStopsTable();
 			break;
 	}
 }
