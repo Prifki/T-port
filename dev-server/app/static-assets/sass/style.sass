@@ -61,14 +61,9 @@ table
     text-align: left
     background-color: $main-color
     color: #fff
+    vertical-align: middle
     &:hover
       background: darken($main-color,5%)
-
-.filters
-  display: flex
-  flex-direction: column
-  justify-content: center
-  align-items: center
 
 .filtering-menu
   display: flex
@@ -168,8 +163,11 @@ table
   &:focus
     background: #fff
 
-.table-editor-buttons:hover
-  color: $main-color
+.table-editor-buttons
+  padding: 0px 10px
+  text-align: center
+  &:hover
+    color: $main-color
 
 .table-open-editor-tools-button
   position: absolute

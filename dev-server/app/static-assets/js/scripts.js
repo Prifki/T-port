@@ -205,7 +205,7 @@ function stopsAutoComplete(){
 	requestJSON(generateOptions);
 	function generateOptions(data){
 		if(!document.querySelector('#stopsA').childElementCount){
-			stops = data.stops;
+			const stops = data.stops;
 			for (stop in stops){
 				const datalist = document.querySelector('#stopsA');
 				const option = document.createElement('option');
@@ -221,6 +221,34 @@ function stopsAutoComplete(){
 		}
 	}
 }
+
+
+function generateRoute(){
+	const stopA = document.querySelector('#stopA').value,
+	stopB = document.querySelector('#stopB').value;
+	requestJSON(inputValidation);
+	function inputValidation(data){
+		const stops = data.stops;
+		let stopList = [], aValid = 0, bValid = 0;
+		for (stop in stops){
+			stopList.push(stops[stop].name);
+		}
+		for (stop in stopList){
+			if (stopA==stopList[stop])
+				aValid = 1;
+			if (stopB==stopList[stop])
+				bValid = 1;
+		}
+		if (aValid && bValid){
+			createStops();
+		}
+	}
+	function createStops(){
+		document.querySelector('.found-route-content-wrapper').lastElementChild.firstElementChild.lastElementChild.lastChild.textContent = stopA;
+		lastStop = document.querySelector('.found-route-content-wrapper').lastElementChild.lastElementChild.lastElementChild.lastChild.textContent = stopB;
+	}
+}
+
 
 function globalAutoComplete(){
 	requestJSON(generateOptions);
@@ -309,7 +337,7 @@ function generateTransportTable(){
 					type = 'train'
 					break;
 			  }
-			generateRow(type,transports[transport].number,transports[transport].route,transports[transport].seats);
+			generateRow(type, transports[transport].number, transports[transport].route, transports[transport].seats);
 		}
 	}
 	function generateRow(type,number,route,seats){
@@ -327,7 +355,7 @@ function generateStopsTable(){
 	function generateTable(data){
 		const stops = data.stops;
 		for (stop in stops){
-			generateRow(stops[stop].name,stops[stop].number,Object.keys(stops[stop].timetable));
+			generateRow(stops[stop].name, stops[stop].number, stops[stop].routes);
 		}
 	}
 
@@ -349,7 +377,7 @@ function generateRoutesTable(){
 		stops = data.stops;
 		for (route in routes){
 			for (stop in stops){
-				generateRow(routes[route].name,routes[route].stops[0],routes[route].stops[routes[route].stops.length-1]);
+				generateRow(routes[route].name, routes[route].stops[0], routes[route].stops[routes[route].stops.length-1]);
 				break;
 			}
 		}
@@ -377,15 +405,9 @@ function pageHandler(){
 	}
 }
 
-function generateRoute(){
-	const stopA = document.querySelector('#stopA').value,
-	stopB = document.querySelector('#stopB').value;
-	console.log(stopA + '\t'+ stopB);
-}
-
 function generateTransportCard(generationRowData){
-	showCard();
-	const name = generationRowData.innerText;
+	requestJSON(handleData);
+	const number = generationRowData.innerText;
 	let type;
 	switch(generationRowData.previousSibling.innerText) {
 		case 'directions_bus':
@@ -395,10 +417,40 @@ function generateTransportCard(generationRowData){
 			type = 'Tram ';
 			break;
 		case 'train':
-			type = 'Trolley bus ';
+			type = 'Trolleybus ';
 			break;
 	  }
-	document.querySelector('.card h3').innerText = type + name;
+	document.querySelector('.card h3').innerText = type + number;
+
+	function handleData(data){
+		const transports = data.transport,
+			  routes = data.routes;
+		let schedule, routeNum, stops;
+		for (transport in transports){
+			if(Object.entries(transports[transport])[1][1]==number){
+				schedule = transports[transport].time;
+				routeNum = transports[transport].route;
+				for (route in routes){
+					if(Object.entries(routes[route])[0][1]==routeNum){
+						stops = routes[route].stops
+					}
+				}
+			}
+		}
+		generateTable(stops, schedule);
+	}
+
+	function generateTable(stops,schedule){
+		const wrapper = document.querySelector('#transport-card--wrapper');
+		wrapper.lastElementChild.remove('');
+		wrapper.innerHTML='<div class="table-open-editor-tools-button" onclick="editTable(this)"><i class="material-icons">settings</i></div><table id="transport-card"><tr><th>Stop</th><th>Time</th></tr></table>';
+		for (let i = 0; i < stops.length; i++){
+			const tr = document.createElement('tr');
+			tr.innerHTML = '<td>' + stops[i] + '</td><td>'+ schedule[i] + '</td>';
+			document.querySelector('#transport-card').lastChild.append(tr);
+		}
+	}
+	showCard();
 }
 
 function showCard(){
@@ -429,4 +481,4 @@ function requestJSON(func){
 		xhr.send();
 }
 
-window.onload = pageHandler()
+document.querySelector('body').onload = pageHandler()
