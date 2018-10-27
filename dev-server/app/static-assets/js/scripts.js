@@ -393,7 +393,7 @@ function generateRoutesTable(){
 	function generateRow(name,from,to){
 		for (let i = 0; i < name.length; i++){
 			const tr = document.createElement('tr');
-			tr.innerHTML = '<td onclick="showCard()">' + name[i] +
+			tr.innerHTML = '<td onclick="generateRouteCard(this)">' + name[i] +
 			'</td><td>'+ from[i] + '</td><td>' + to[i] + '</td>';
 			document.querySelector('#routes-table').lastChild.append(tr);
 		}
@@ -504,6 +504,39 @@ function generateStopCard(generationRowData){
 		const tr = document.createElement('tr');
 		tr.innerHTML = '<td>' + route + '</td><td>'+ times + '</td>';
 		document.querySelector('#stop-card').lastChild.append(tr);
+	}
+	showCard();
+}
+
+function generateRouteCard(generationRowData){
+	requestJSON(handleData);
+	const name = generationRowData.innerText,
+	wrapper = document.querySelector('#route-card--wrapper');
+	document.querySelector('.card h3').innerText = 'Route ' + name;
+	wrapper.lastElementChild.remove('');
+	wrapper.innerHTML='<div class="table-open-editor-tools-button" onclick="editTable(this)"><i class="material-icons">settings</i></div><table id="route-card"><tr><th>Stop</th><th>Time</th></tr></table>';
+	function handleData(data){
+		const ROUTES = data.routes, TRANSPORTS = data.transport;
+		let stops = [];
+		for (ROUTE in ROUTES){
+			if (name == ROUTES[ROUTE].name)
+				stops = ROUTES[ROUTE].stops;
+		}
+		for (let i = 0; i < stops.length; i++) {
+			let times = [];
+			for (TRANSPORT in TRANSPORTS){
+					if (name == TRANSPORTS[TRANSPORT].route){
+						times.push(TRANSPORTS[TRANSPORT].time[i]);
+					}
+			}
+			generateRow(stops[i],times);
+		}
+	}
+
+	function generateRow(stop, time){
+		const tr = document.createElement('tr');
+		tr.innerHTML = '<td>' + stop + '</td><td>'+ time + '</td>';
+		document.querySelector('#route-card').lastChild.append(tr);
 	}
 	showCard();
 }
