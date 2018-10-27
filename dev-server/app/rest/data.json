@@ -136,7 +136,7 @@
             "name": "JQuery str",
             "lat": "",
             "long": "",
-            "routes": ["AB03","AB06","TL07","TL09","TL12","TL14","TM04","TM09"]
+            "routes": ["AB03","TL07","TL09","TL12","TL14","TM04","TM09"]
         },
         {
             "number": 13,
@@ -192,7 +192,7 @@
             "name": "Ionic str",
             "lat": "",
             "long": "",
-            "routes": ["AB06","TL12","TM20"]
+            "routes": ["AB06","TL12","TL20"]
         },
         {
             "number": 21,

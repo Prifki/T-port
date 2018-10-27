@@ -361,8 +361,8 @@ function generateStopsTable(){
 
 	function generateRow(name,number,route){
 		const tr = document.createElement('tr');
-		tr.innerHTML = '<td onclick="showCard()">' + name +
-		'</td><td onclick="showCard()">'+ number + '</td><td>' + route +
+		tr.innerHTML = '<td onclick="generateStopCard(this)">' + name +
+		'</td><td>'+ number + '</td><td>' + route +
 		'</td>';
 		document.querySelector('#stops-table').lastChild.append(tr);
 	}
@@ -449,6 +449,45 @@ function generateTransportCard(generationRowData){
 			tr.innerHTML = '<td>' + stops[i] + '</td><td>'+ schedule[i] + '</td>';
 			document.querySelector('#transport-card').lastChild.append(tr);
 		}
+	}
+	showCard();
+}
+
+function generateStopCard(generationRowData){
+	requestJSON(handleData);
+	const name = generationRowData.innerText,
+	wrapper = document.querySelector('#stop-card--wrapper');
+	document.querySelector('.card h3').innerText = 'Stop ' + name;
+	wrapper.lastElementChild.remove('');
+	wrapper.innerHTML='<div class="table-open-editor-tools-button" onclick="editTable(this)"><i class="material-icons">settings</i></div><table id="stop-card"><tr><th>Route</th><th>Time</th></tr></table>';
+	function handleData(data){
+		const stopNumber = generationRowData.nextSibling.innerText,
+		routesList = generationRowData.nextSibling.nextSibling.innerText.split(','),
+		ROUTES = data.routes,
+		TRANSPORTS = data.transport;
+		for (route in routesList){
+			for (ROUTE in ROUTES){
+				if (ROUTES[ROUTE].name == routesList[route]){
+					let times = [];
+					for (stop in ROUTES[ROUTE].stops){
+						if (stopNumber == ROUTES[ROUTE].stops[stop]){
+							for (TRANSPORT in TRANSPORTS){
+								if (TRANSPORTS[TRANSPORT].route == routesList[route]){
+									times.push(TRANSPORTS[TRANSPORT].time[stop]);
+								}
+							}
+						}
+					}
+					generateTable(routesList[route],times);
+				}
+			}
+		}
+	}
+
+	function generateTable(route,times){
+		const tr = document.createElement('tr');
+		tr.innerHTML = '<td>' + route + '</td><td>'+ times + '</td>';
+		document.querySelector('#stop-card').lastChild.append(tr);
 	}
 	showCard();
 }
