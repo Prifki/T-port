@@ -375,19 +375,28 @@ function generateRoutesTable(){
 	function generateTable(data){
 		const routes = data.routes,
 		stops = data.stops;
+		let name = [], from = [], to = [];
 		for (route in routes){
 			for (stop in stops){
-				generateRow(routes[route].name, routes[route].stops[0], routes[route].stops[routes[route].stops.length-1]);
-				break;
+				if (parseInt(routes[route].stops[0]) == parseInt(stops[stop].number)){
+					from.push(stops[stop].name);
+				}
+				if (routes[route].stops[routes[route].stops.length-1] == parseInt(stops[stop].number)){
+					to.push(stops[stop].name);
+				}
 			}
+			name.push(routes[route].name);
 		}
+		generateRow(name,from,to);
 	}
 					
 	function generateRow(name,from,to){
-		const tr = document.createElement('tr');
-		tr.innerHTML = '<td onclick="showCard()">' + name +
-		'</td><td>'+ from + '</td><td>' + to + '</td>';
-		document.querySelector('#routes-table').lastChild.append(tr);
+		for (let i = 0; i < name.length; i++){
+			const tr = document.createElement('tr');
+			tr.innerHTML = '<td onclick="showCard()">' + name[i] +
+			'</td><td>'+ from[i] + '</td><td>' + to[i] + '</td>';
+			document.querySelector('#routes-table').lastChild.append(tr);
+		}
 	}
 }
 
@@ -423,21 +432,28 @@ function generateTransportCard(generationRowData){
 	document.querySelector('.card h3').innerText = type + number;
 
 	function handleData(data){
-		const transports = data.transport,
-			  routes = data.routes;
-		let schedule, routeNum, stops;
-		for (transport in transports){
-			if(Object.entries(transports[transport])[1][1]==number){
-				schedule = transports[transport].time;
-				routeNum = transports[transport].route;
-				for (route in routes){
-					if(Object.entries(routes[route])[0][1]==routeNum){
-						stops = routes[route].stops
+		const TRANSPORTS = data.transport,
+			  ROUTES = data.routes,
+			  STOPS = data.stops;
+		let schedule, routeNum, stops, stopNames = [];
+		for (transport in TRANSPORTS){
+			if(Object.entries(TRANSPORTS[transport])[1][1]==number){
+				schedule = TRANSPORTS[transport].time;
+				routeNum = TRANSPORTS[transport].route;
+				for (route in ROUTES){
+					if (Object.entries(ROUTES[route])[0][1]==routeNum){
+						stops = ROUTES[route].stops;
 					}
 				}
 			}
 		}
-		generateTable(stops, schedule);
+		for (stop in stops){
+			for (STOP in STOPS){
+				if (stops[stop] == STOPS[STOP].number)
+					stopNames.push(STOPS[STOP].name);
+			}
+		}
+		generateTable(stopNames, schedule);
 	}
 
 	function generateTable(stops,schedule){
