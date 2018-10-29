@@ -72,8 +72,7 @@
     var vertex;
     while (vertex = frontier.shift()) {
       // Explore unvisited neighbors
-      var neighbors = map[vertex]
-        .filter(n => !visited.includes(n.vertex));
+      var neighbors = map[vertex].filter(n => !visited.includes(n.vertex));
   
       // Add neighbors to the frontier
       frontier.push(...neighbors.map(n => n.vertex));
@@ -95,12 +94,10 @@
   
     //console.log(table);
   
-    console.log('The shortest ways:');
-    console.log(tableToString(table));
+    console.log('The shortest ways:\n'+tableToString(table));
   
     var route = tracePath(table, start, end);
-    console.log('\nShortest path is:');
-    console.log(route);
+    console.log('\nShortest path is:\n'+route);
     return(route);
   };
 

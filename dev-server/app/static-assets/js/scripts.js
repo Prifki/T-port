@@ -137,6 +137,7 @@ function editTable(tableButton){
 				td.appendChild(i);
 				i.setAttribute('class','material-icons');
 				td.setAttribute('class','table-editor-buttons');
+				td.setAttribute('onclick','editTableItem(this)');
 				i.innerText='edit';
 				Rows[row].appendChild(td);
 			}
@@ -175,6 +176,7 @@ function editTable(tableButton){
 		const td = document.createElement('td'),
 		i = document.createElement('i');
 		i.setAttribute('class','material-icons table-editor-buttons');
+		td.setAttribute('onclick','addTableItem(this)');
 		i.innerText='add_circle_outline';
 		td.appendChild(i);
 		tbody.lastChild.appendChild(td);
@@ -199,6 +201,52 @@ function editTable(tableButton){
 
 function removeTableItem(item){
 	item.parentElement.remove('');
+}
+
+function editTableItem(item){;
+	const tr = item.parentElement;
+	if (tr.lastChild.previousElementSibling.innerText == 'edit') {
+		for (let i=0; i<tr.children.length-2; i++){
+			tr.children[i].innerHTML = '<input class="table-edit-input" type="text" value="'+tr.children[i].innerText+'">';
+		}
+		item.innerHTML = '<i class="material-icons">check_circle_outline</i>';
+	}
+	else {		
+		for (let i=0; i<tr.children.length-2; i++){
+			tr.children[i].innerHTML = '<td>'+tr.children[i].firstChild.value+'</td>';
+		}
+		item.innerHTML = '<i class="material-icons">edit</i>';
+	}
+}
+
+function addTableItem(item){
+	const tr = item.parentElement;
+	let newItem = document.createElement('tr');
+		for (let i=0; i<tr.children.length-2; i++){
+			const td = document.createElement('td');
+			console.log(tr.children[i].firstChild.value);
+			td.innerText = tr.children[i].firstChild.value;
+			newItem.appendChild(td);
+		}
+		{const i = document.createElement('i'),
+				td = document.createElement('td');
+		td.appendChild(i);
+		i.setAttribute('class','material-icons');
+		td.setAttribute('class','table-editor-buttons');
+		td.setAttribute('onclick','editTableItem(this)');
+		i.innerText='edit';
+		newItem.appendChild(td);
+		}
+		{
+			const i = document.createElement('i'),
+				td = document.createElement('td');
+				td.appendChild(i);
+				i.setAttribute('class','fa fa-minus');
+				td.setAttribute('class','table-editor-buttons');
+				td.setAttribute('onclick','removeTableItem(this)');
+				newItem.appendChild(td);
+		}
+		tr.parentElement.insertBefore(newItem,tr.parentElement.lastElementChild);
 }
 
 function stopsAutoComplete(){
@@ -255,6 +303,7 @@ function generateRoute(){
 		function generateMenu(){
 			let route = dijkstra(stopA, stopB);
 			document.querySelector('#route-list').innerHTML = '';
+			document.querySelector('#route-list').previousElementSibling.remove();
 			//console.log (route);
 			for (stop in stops){
 				for (each in route){

@@ -286,6 +286,9 @@ nav {
 .found-route-menu li a:hover {
   background: #d5d5d5;
 }
+.found-route-menu p {
+  font-size: 1.3em;
+}
 
 @media (max-width: 500px) {
   .found-route-menu {
