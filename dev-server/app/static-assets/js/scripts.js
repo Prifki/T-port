@@ -516,11 +516,18 @@ function generateRouteCard(generationRowData){
 	wrapper.lastElementChild.remove('');
 	wrapper.innerHTML='<div class="table-open-editor-tools-button" onclick="editTable(this)"><i class="material-icons">settings</i></div><table id="route-card"><tr><th>Stop</th><th>Time</th></tr></table>';
 	function handleData(data){
-		const ROUTES = data.routes, TRANSPORTS = data.transport;
+		const ROUTES = data.routes, TRANSPORTS = data.transport, STOPS = data.stops;
 		let stops = [];
 		for (ROUTE in ROUTES){
 			if (name == ROUTES[ROUTE].name)
 				stops = ROUTES[ROUTE].stops;
+		}
+		for (STOP in STOPS){
+			for (stop in stops){
+				if (stops[stop] == STOPS[STOP].number){
+					stops[stop] = STOPS[STOP].name;
+				}
+			}
 		}
 		for (let i = 0; i < stops.length; i++) {
 			let times = [];
