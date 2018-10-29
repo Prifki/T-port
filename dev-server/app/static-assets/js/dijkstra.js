@@ -94,10 +94,10 @@
   
     //console.log(table);
   
-    console.log('The shortest ways:\n'+tableToString(table));
+    //console.log('The shortest ways:\n'+tableToString(table));
   
     var route = tracePath(table, start, end);
-    console.log('\nShortest path is:\n'+route);
+   // console.log('\nShortest path is:\n'+route);
     return(route);
   };
 

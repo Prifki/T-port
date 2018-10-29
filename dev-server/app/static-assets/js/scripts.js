@@ -465,7 +465,7 @@ function generateRoutesTable(){
 	function generateRow(name,from,to){
 		for (let i = 0; i < name.length; i++){
 			const tr = document.createElement('tr');
-			tr.innerHTML = '<td onclick="generateRouteCard(this)">' + name[i] +
+			tr.innerHTML = '<td onclick="generateRouteCard(this)" class="stop-names-td">' + name[i] +
 			'</td><td>'+ from[i] + '</td><td>' + to[i] + '</td>';
 			document.querySelector('#routes-table').lastChild.append(tr);
 		}
@@ -545,7 +545,7 @@ function generateStopCard(generationRowData){
 	requestJSON(handleData);
 	const name = generationRowData.innerText,
 	wrapper = document.querySelector('#stop-card--wrapper');
-	document.querySelector('.card h3').innerText = 'Stop ' + name;
+	document.querySelector('.card h3').innerText = name;
 	wrapper.lastElementChild.remove('');
 	wrapper.innerHTML='<div class="table-open-editor-tools-button" onclick="editTable(this)"><i class="material-icons">settings</i></div><table id="stop-card"><tr><th>Route</th><th>Time</th></tr></table>';
 	function handleData(data){
