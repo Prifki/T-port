@@ -224,28 +224,51 @@ function stopsAutoComplete(){
 
 
 function generateRoute(){
-	const stopA = document.querySelector('#stopA').value,
+	let stopA = document.querySelector('#stopA').value,
 	stopB = document.querySelector('#stopB').value;
 	requestJSON(inputValidation);
 	function inputValidation(data){
 		const stops = data.stops;
-		let stopList = [], aValid = 0, bValid = 0;
+		let aValid = false, bValid = false;
 		for (stop in stops){
-			stopList.push(stops[stop].name);
-		}
-		for (stop in stopList){
-			if (stopA==stopList[stop])
-				aValid = 1;
-			if (stopB==stopList[stop])
-				bValid = 1;
+			if (stopA==stops[stop].name)
+				aValid = true;
+			if (stopB==stops[stop].name)
+				bValid = true;
 		}
 		if (aValid && bValid){
-			createStops();
+			getStopLetter();
 		}
-	}
-	function createStops(){
-		document.querySelector('.found-route-content-wrapper').lastElementChild.firstElementChild.lastElementChild.lastChild.textContent = stopA;
-		lastStop = document.querySelector('.found-route-content-wrapper').lastElementChild.lastElementChild.lastElementChild.lastChild.textContent = stopB;
+
+		function getStopLetter(){
+			for (stop in stops){
+				if (stopA == stops[stop].name){
+					stopA = stops[stop].letter;
+				}
+				if (stopB == stops[stop].name){
+					stopB = stops[stop].letter;
+				}
+			}
+			generateMenu();
+		}
+
+		function generateMenu(){
+			let route = dijkstra(stopA, stopB);
+			document.querySelector('#route-list').innerHTML = '';
+			//console.log (route);
+			for (stop in stops){
+				for (each in route){
+					if (route[each][0]==stops[stop].letter){
+						route[each][0] = stops[stop].name;
+					}
+				}
+			}
+			for (each in route){
+				const li = document.createElement('li');
+				li.innerHTML = route[each][1]+'min <a href="#"><i class="material-icons">place</i>'+route[each][0]+'</a>';
+				document.querySelector('#route-list').appendChild(li);
+			}
+		}
 	}
 }
 

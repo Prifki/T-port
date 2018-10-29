@@ -1,11 +1,3 @@
-var graph = [
-    'AT30','AR25','BT15','BA15','BQ25','CB15','CT20','DC20','DH60','ED15','EH35','EI50',
-    'FE15','FI20','FD25','GH10','HF25','HJ45','HI20','IG15','IJ5','IK15',
-    'IL25','IM25','JO45','JK5','JN10','KI15','KN10','KL5','LK5','LN15','LO10','ML10','MO10',
-    'NS10','NT20','NR10','OR30','OP10','PN15','PR15','PQ15','QP20','QL35',
-    'QA25','RB15','RE40','RS15','RQ15','SF15','SJ15','TC20','TE25',
-    'TF30','TR30'
-];
 
   var parseEdge = (edge) => {
     var [left, right, ...cost] = edge;
@@ -43,19 +35,35 @@ var graph = [
   var tracePath = (table, start, end) => {
     var path = [];
     var next = end;
+    var times = [];
     while (true) {
+      times.unshift(table[next]['cost']);
       path.unshift(next);
       if (next === start) { break; }
       next = table[next].vertex;
     }
-  
-    return path;
+    var route = [];
+    for (stop in path){
+        route.push([path[stop],times[stop]]);
+        //route[path[stop]] = times[stop];
+    }
+    //console.log(route);
+    //return path;
+    return route;
   };
-  
-  var run = (graph, start, end) => {
+
+  var dijkstra = (start, end) => {
+    var graph = [
+        'AT30','AR25','BT15','BA15','BQ25','CB15','CT20','DC20','DH60','ED15','EH35','EI50',
+        'FE15','FI20','FD25','GH10','HF25','HJ45','HI20','IG15','IJ5','IK15',
+        'IL25','IM25','JO45','JK5','JN10','KI15','KN10','KL5','LK5','LN15','LO10','ML10','MO10',
+        'NS10','NT20','NR10','OR30','OP10','PN15','PR15','PQ15','QP20','QL35',
+        'QA25','RB15','RE40','RS15','RQ15','SF15','SJ15','TC20','TE25',
+        'TF30','TR30'
+    ];
     var map = graphToMap(graph);
   
-     console.log(map);
+    // console.log(map);
   
     var visited = [];
     var frontier = [start];
@@ -90,10 +98,9 @@ var graph = [
     console.log('The shortest ways:');
     console.log(tableToString(table));
   
-    var path = tracePath(table, start, end);
+    var route = tracePath(table, start, end);
     console.log('\nShortest path is:');
-    console.log(path.join(','));
-
-
+    console.log(route);
+    return(route);
   };
-  run(graph, 'C', 'M');
+

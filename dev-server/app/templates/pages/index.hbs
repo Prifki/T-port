@@ -1,6 +1,7 @@
 {{> html/start title="T-Port" settings=settings }}
 <div class="index-page-container">
 {{> html/header }}
+	<script type="text/javascript" src="/static-assets/js/dijkstra.js" async></script>
 	<main class="index-main">
 		<div class="google-map">
 			<!-- Google Maps -->
@@ -31,12 +32,7 @@
 			<div class="found-route-content-wrapper">
 				<h2>Your route</h2>
 				<div class="closing-button" onclick="closeFoundRoutes()"><i class="material-icons close-pic">close</i></div>
-				<ul class="bar">
-					<li>Time<a href="#"><i class="material-icons">place</i>Nevskiy pr</a></li>
-					<li><a href="#"><i class="material-icons">directions_bus</i>Some bus</a></li>
-					<li>Time<a href="#"><i class="material-icons">place</i>Some stop</a></li>
-					<li><a href="#"><i class="material-icons">tram</i>Some tram</a></li>
-					<li>Time<a href="#"><i class="material-icons">place</i>Bolshoy pr VO</a></li>
+				<ul class="bar" id="route-list">
 				</ul>
 			</div>
 		</div>
