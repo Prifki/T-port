@@ -13,17 +13,8 @@
 					</tr>
 				</table>
 			</div>
-					<div class="google-map-on-card">
-						<!-- Google Maps -->
-						<div id="map"></div>
-						<script type="text/javascript" src="/static-assets/js/google-map.js" async></script>
-						<script async defer
-						src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZFGV9mhO59Iuq-gVjzw5CSdXQm4Ibuvc&callback=initMap">
-						</script>
-						<!-- /Google Maps -->
-					</div>
 			<div class="card">
-				<div class="bookmark-button" onclick="" wfd-id="102"><i class="far fa-bookmark"></i></div>
+				<div class="bookmark-button" onclick="addToFavorites(this)" wfd-id="102"><i class="far fa-bookmark"></i></div>
 				<div class="closing-button" onclick="closeCard(this)"><i class="material-icons close-pic">close</i></div>
 				<h3>Route name</h3>
 				<div class="table-wrapper" id="route-card--wrapper">
@@ -35,6 +26,15 @@
 						</tr>
 					</table>
 				</div>
+					<div class="google-map-on-card">
+						<!-- Google Maps -->
+						<div id="map"></div>
+						<script type="text/javascript" src="/static-assets/js/google-map.js" async></script>
+						<script async defer
+						src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZFGV9mhO59Iuq-gVjzw5CSdXQm4Ibuvc&callback=initMap">
+						</script>
+						<!-- /Google Maps -->
+					</div>
 			</div>
 		</div>
 {{> html/footer }}

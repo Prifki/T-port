@@ -474,6 +474,11 @@ nav {
   background: #d5d5d5;
 }
 
+.fixed-favorites {
+  position: fixed;
+  top: 120px;
+}
+
 .delete-button {
   display: none;
 }
@@ -966,6 +971,9 @@ table th:hover {
   right: 40px;
   margin: 5px;
   z-index: 2;
+}
+.bookmark-button:hover {
+  color: #29b8ed;
 }
 
 .edit-button {
