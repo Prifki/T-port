@@ -207,7 +207,7 @@ function removeTableItem(item){
 
 function editTableItem(item){;
 	const tr = item.parentElement;
-	if (tr.lastChild.previousElementSibling.innerText == 'edit') {
+	if (tr.lastChild.previousElementSibling.innerText.slice(0,-1) == 'edit') {
 		for (let i=0; i<tr.children.length-2; i++){
 			tr.children[i].innerHTML = '<input class="table-edit-input" type="text" value="'+tr.children[i].innerText+'">';
 		}
