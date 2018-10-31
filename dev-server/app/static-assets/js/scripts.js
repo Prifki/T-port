@@ -558,6 +558,7 @@ function generateRouteCard(generationRowData){
 	requestJSON(handleData);
 	const name = generationRowData.innerText.substr(0,4),
 	wrapper = document.querySelector('#route-card--wrapper');
+	let locations = [];
 	document.querySelector('.card h3').innerText = 'Route ' + name;
 	wrapper.lastElementChild.remove('');
 	wrapper.innerHTML='<div class="table-open-editor-tools-button" onclick="editTable(this)"><i class="material-icons">settings</i></div><table id="route-card"><tr><th>Stop</th><th>Time</th></tr></table>';
@@ -572,6 +573,7 @@ function generateRouteCard(generationRowData){
 			for (stop in stops){
 				if (stops[stop] == STOPS[STOP].number){
 					stops[stop] = STOPS[STOP].name;
+					locations[stop] = (STOPS[STOP].lat+','+STOPS[STOP].long);
 				}
 			}
 		}
@@ -584,6 +586,7 @@ function generateRouteCard(generationRowData){
 			}
 			generateRow(stops[i],times.join(', '));
 		}
+		initMap(locations);
 	}
 
 	function generateRow(stop, time){

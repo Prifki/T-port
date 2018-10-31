@@ -1,45 +1,18 @@
-function createOptimalRoute(directionsService, directionsDisplay){
+function createRoute(directionsService, directionsDisplay, locations){
 	try{
-		let stopA = document.querySelector('#stopA').value,
-		stopB = document.querySelector('#stopB').value;
-		requestJSON(prepareRoute);
-		function prepareRoute(data){
-			const stops = data.stops;
-			for (stop in stops){
-				if (stopA == stops[stop].name){
-					stopA = stops[stop].letter;
-				}
-				if (stopB == stops[stop].name){
-					stopB = stops[stop].letter;
-				}
-			}
-			let route = dijkstra(stopA, stopB);
-			console.log(typeof(route));
-			var route_clone = [];
-			for (let key in route) {
-				route_clone[key] = route[key];
-			  }
-			generateRoute(route_clone);
-			for (each in route){
-				route[each] = route[each][0];
-			}
-			for (stop in stops){
-				for (each in route){
-					if (route[each] === stops[stop].letter){
-						route[each] = stops[stop].lat+','+stops[stop].long;
-					}
-				}
-			}
-			const start = route.shift();
-			const end = route.pop();
-			for (each in route){
-					route[each] = {'location': route[each], 'stopover': true}
-			}
-			calculateAndDisplayRoute(directionsService, directionsDisplay,route,start,end);
-		}
+		const start = locations.shift();
+        const end = locations.pop();
+        let route = [];
+        for (each in locations){
+            route[each] = {'location': locations[each], 'stopover': true}
+        }
+		console.log(route);
+		console.log(start);
+		console.log(end);
+        calculateAndDisplayRoute(directionsService, directionsDisplay, route, start, end);
 	}
 	catch(err) {
-		console.log('An error in createOptimalRoute(): ' + err);
+		console.log('An error in createRoute(): ' + err);
 	}
 }
 
@@ -68,7 +41,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, route, s
 
 
 
-function initMap() {
+function initMap(locations) {
 	var spb = {lat: 59.932802, lng: 30.332459};
 	var directionsService = new google.maps.DirectionsService;
 	var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -403,12 +376,9 @@ function initMap() {
     ],disableDefaultUI: true
 });
 
-	directionsDisplay.setMap(map);
-
-	if (window.location.pathname === "/")
-	document.getElementById('find-a-route-button').addEventListener('click', function() {
-		createOptimalRoute(directionsService, directionsDisplay);
-	});
+    directionsDisplay.setMap(map);
+    if(locations)
+        createRoute(directionsService, directionsDisplay, locations);
 }
 
 
