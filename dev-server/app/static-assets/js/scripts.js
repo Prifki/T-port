@@ -523,9 +523,15 @@ function generateStopCard(generationRowData){
 	wrapper.innerHTML='<div class="table-open-editor-tools-button" onclick="editTable(this)"><i class="material-icons">settings</i></div><table id="stop-card"><tr><th>Route</th><th>Time</th></tr></table>';
 	function handleData(data){
 		const stopNumber = generationRowData.nextSibling.innerText,
-		routesList = generationRowData.nextSibling.nextSibling.innerText.split(','),
+		routesList = generationRowData.nextSibling.nextSibling.innerText.split(', '),
 		ROUTES = data.routes,
-		TRANSPORTS = data.transport;
+		TRANSPORTS = data.transport, STOPS = data.stops;
+		for (STOP in STOPS){
+			if (name.slice(0,-1) == STOPS[STOP].name){
+				const location = {lat: parseFloat(STOPS[STOP].lat), lng: parseFloat(STOPS[STOP].long)};
+				initMap(location);
+			}
+		}
 		for (route in routesList){
 			for (ROUTE in ROUTES){
 				if (ROUTES[ROUTE].name == routesList[route]){
@@ -533,7 +539,7 @@ function generateStopCard(generationRowData){
 					for (stop in ROUTES[ROUTE].stops){
 						if (stopNumber == ROUTES[ROUTE].stops[stop]){
 							for (TRANSPORT in TRANSPORTS){
-								if (TRANSPORTS[TRANSPORT].route == routesList[route]){
+								if (TRANSPORTS[TRANSPORT].route === routesList[route]){
 									times.push(TRANSPORTS[TRANSPORT].time[stop]);
 								}
 							}

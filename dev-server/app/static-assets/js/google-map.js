@@ -432,6 +432,20 @@ function initMap(locations) {
 		if(locations)
 			createRouteMap(directionsService, directionsDisplay, locations);
 	}
+	if (window.location.pathname === "/nested/stops"){
+			console.log(locations);
+		  var image = {
+			url: '/static-assets/images/location.png',
+			scaledSize: new google.maps.Size(29, 38)
+		  };
+		  var marker = new google.maps.Marker({
+			map: map,
+			icon: image,
+			position: locations,
+			animation: google.maps.Animation.DROP,
+			title: 'T-'
+		  });
+	}
   }
   catch(err){
 	  console.log('Google map doesn`t like the shit like that: '+err);
