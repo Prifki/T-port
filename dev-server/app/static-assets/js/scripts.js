@@ -522,7 +522,7 @@ function generateStopCard(generationRowData){
 	wrapper.lastElementChild.remove('');
 	wrapper.innerHTML='<div class="table-open-editor-tools-button" onclick="editTable(this)"><i class="material-icons">settings</i></div><table id="stop-card"><tr><th>Route</th><th>Time</th></tr></table>';
 	function handleData(data){
-		const stopNumber = generationRowData.nextSibling.innerText,
+		const stopNumber = parseInt(generationRowData.nextSibling.innerText),
 		routesList = generationRowData.nextSibling.nextSibling.innerText.split(', '),
 		ROUTES = data.routes,
 		TRANSPORTS = data.transport, STOPS = data.stops;
