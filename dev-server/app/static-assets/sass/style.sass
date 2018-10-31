@@ -54,7 +54,7 @@ table
   tr
     background-color: #f8f8f8
   td:hover
-    background-color: #ddd
+    color: $main-color
   th
     padding-top: 12px
     padding-bottom: 12px
@@ -91,6 +91,7 @@ table
   font-size: 1.3em
   transition: all 0.2s
   display: flex
+  align-items: center
 
 .filtering-label
   border-radius: 40px 0 0 40px
@@ -135,10 +136,14 @@ table
 
 .bookmark-button
   position: absolute
-  top: -6px
+  top: -8px
   right: 40px
   margin: 5px
   z-index: 2
+  &:hover
+    color: $main-color
+  i
+    font-size: 1.8em
 
 .edit-button
   position: absolute
@@ -153,6 +158,9 @@ table
 .show-card
   opacity: 1
   display: flex
+
+.table-edit-td:hover
+  color: #000
 
 .table-edit-input
   background: #eee
@@ -184,6 +192,11 @@ table
     color: $main-color
     background: #fff
     cursor: pointer
+
+@media (max-width: 450px)
+  .table-open-editor-tools-button
+    top: -14px
+
 
 .pagination-wrapper
   display: flex

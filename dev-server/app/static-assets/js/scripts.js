@@ -11,6 +11,7 @@ function openLoginMenu(){
 function closeFavorites(){
 	const favorites = document.getElementsByClassName('favorites-menu')[0];
 	favorites.classList.remove('show-additional-menu');
+	favorites.classList.remove('fixed-favorites');
 }
 
 function openFavorites(){
@@ -157,15 +158,16 @@ function editTable(tableButton){
 			for (let i=0; i<tbody.firstChild.children.length-2; i++){
 				const td = document.createElement('td'),
 				editInput = document.createElement('input');
+				td.setAttribute('class', 'table-edit-td');
 				editInput.setAttribute('class', 'table-edit-input');
 				editInput.setAttribute('type', 'text');
 				td.appendChild(editInput);
 				tbody.lastChild.appendChild(td);
 			}
 			
+			addPlusButton(tbody);
 			const td = document.createElement('td');
 			tbody.lastChild.appendChild(td);
-			addPlusButton(tbody);
 		}
 	}
 	catch (error) {
@@ -271,52 +273,24 @@ function stopsAutoComplete(){
 }
 
 
-function generateRoute(){
-	let stopA = document.querySelector('#stopA').value,
-	stopB = document.querySelector('#stopB').value;
-	requestJSON(inputValidation);
-	function inputValidation(data){
+function generateRoute(route){
+	document.querySelector('.nothing-found-text').style = 'display: none';
+	document.querySelector('#route-list').innerHTML = '';
+	console.log(route);
+	requestJSON(handleStopsInfo);
+	function handleStopsInfo(data){
 		const stops = data.stops;
-		let aValid = false, bValid = false;
 		for (stop in stops){
-			if (stopA==stops[stop].name)
-				aValid = true;
-			if (stopB==stops[stop].name)
-				bValid = true;
-		}
-		if (aValid && bValid){
-			getStopLetter();
-		}
-
-		function getStopLetter(){
-			for (stop in stops){
-				if (stopA == stops[stop].name){
-					stopA = stops[stop].letter;
-				}
-				if (stopB == stops[stop].name){
-					stopB = stops[stop].letter;
-				}
-			}
-			generateMenu();
-		}
-
-		function generateMenu(){
-			let route = dijkstra(stopA, stopB);
-			document.querySelector('#route-list').innerHTML = '';
-			document.querySelector('#route-list').previousElementSibling.remove();
-			//console.log (route);
-			for (stop in stops){
-				for (each in route){
-					if (route[each][0]==stops[stop].letter){
-						route[each][0] = stops[stop].name;
-					}
-				}
-			}
 			for (each in route){
-				const li = document.createElement('li');
-				li.innerHTML = route[each][1]+'min <a href="#"><i class="material-icons">place</i>'+route[each][0]+'</a>';
-				document.querySelector('#route-list').appendChild(li);
+				if (route[each][0]==stops[stop].letter){
+					route[each][0] = stops[stop].name;
+				}
 			}
+		}
+		for (each in route){
+			const li = document.createElement('li');
+			li.innerHTML = route[each][1]+'min <a href="#"><i class="material-icons">place</i>'+route[each][0]+'</a>';
+			document.querySelector('#route-list').appendChild(li);
 		}
 	}
 }
@@ -427,7 +401,7 @@ function generateStopsTable(){
 	function generateTable(data){
 		const stops = data.stops;
 		for (stop in stops){
-			generateRow(stops[stop].name, stops[stop].number, stops[stop].routes);
+			generateRow(stops[stop].name, stops[stop].number, stops[stop].routes.join(', '));
 		}
 	}
 
@@ -488,16 +462,16 @@ function pageHandler(){
 
 function generateTransportCard(generationRowData){
 	requestJSON(handleData);
-	const number = generationRowData.innerText;
+	const number = generationRowData.innerText.substr(0,6);
 	let type;
-	switch(generationRowData.previousSibling.innerText) {
-		case 'directions_bus':
+	switch(generationRowData.previousSibling.innerText.substr(0,4)) {
+		case 'dire':
 			type = 'Bus ';
 			break;
 		case 'tram':
 			type = 'Tram ';
 			break;
-		case 'train':
+		case 'trai':
 			type = 'Trolleybus ';
 			break;
 	  }
@@ -566,7 +540,7 @@ function generateStopCard(generationRowData){
 							}
 						}
 					}
-					generateTable(routesList[route],times);
+					generateTable(routesList[route],times.join(', '));
 				}
 			}
 		}
@@ -582,7 +556,7 @@ function generateStopCard(generationRowData){
 
 function generateRouteCard(generationRowData){
 	requestJSON(handleData);
-	const name = generationRowData.innerText,
+	const name = generationRowData.innerText.substr(0,4),
 	wrapper = document.querySelector('#route-card--wrapper');
 	document.querySelector('.card h3').innerText = 'Route ' + name;
 	wrapper.lastElementChild.remove('');
@@ -608,7 +582,7 @@ function generateRouteCard(generationRowData){
 						times.push(TRANSPORTS[TRANSPORT].time[i]);
 					}
 			}
-			generateRow(stops[i],times);
+			generateRow(stops[i],times.join(', '));
 		}
 	}
 
@@ -623,11 +597,37 @@ function generateRouteCard(generationRowData){
 function showCard(){
 	var card = document.getElementsByClassName("card")[0];
 	card.classList.add("show-card");
-	card.scrollIntoView({block: "start", behavior: "smooth"});
+	card.scrollIntoView({block: "end", behavior: "smooth"});
 }
 
 function closeCard(cardCloseButton){
 	cardCloseButton.parentElement.classList.remove('show-card');
+}
+
+function addToFavorites(card){
+	const text = card.nextElementSibling.nextElementSibling.innerText,
+	list = document.querySelector('#favorites-list');
+	const li = document.createElement('li');
+
+	if(~text.indexOf("Bus")){ 
+		li.innerHTML = '<a href="#"><i class="material-icons">directions_bus</i> '+text.substring(4)+'</a><div class="delete-button" onclick="removeFromFavorites(this)"><i class="fa fa-minus"></i></div>';
+	}
+	else if (~text.indexOf("Tram")){
+		li.innerHTML = '<a href="#"><i class="material-icons">tram</i> '+text.substring(5)+'</a><div class="delete-button" onclick="removeFromFavorites(this)"><i class="fa fa-minus"></i></div>';
+	}
+	else if (~text.indexOf("Trolleybus")){
+		li.innerHTML = '<a href="#"><i class="material-icons">train</i> '+text.substring(11)+'</a><div class="delete-button" onclick="removeFromFavorites(this)"><i class="fa fa-minus"></i></div>';
+	}
+	else if (~text.indexOf("Route")){
+		li.innerHTML = '<a href="#"><i class="fas fa-route"></i> '+text.substring(6)+'</a><div class="delete-button" onclick="removeFromFavorites(this)"><i class="fa fa-minus"></i></div>';
+	}
+	else {
+		li.innerHTML = '<a href="#"><i class="material-icons">place</i> '+text+'</a><div class="delete-button" onclick="removeFromFavorites(this)"><i class="fa fa-minus"></i></div>';
+	}
+	list.appendChild(li);
+	card.lastChild.innerText = 'bookmark';
+	openFavorites();
+	document.querySelector('.favorites-menu').classList.add('fixed-favorites');
 }
 
 function requestJSON(func){

@@ -21,18 +21,15 @@
 				<datalist id="stopsA"></datalist>
 				<input onkeydown="stopsAutoComplete()" class="find-a-route-inputs" type="text" placeholder="To" id="stopB" list="stopsB">
 				<datalist id="stopsB"></datalist>
-				<div class="time-interval">
-					<input type="time" name="from_time" value="06:00"/>
-					<input type="time" name="till_time" value="23:30"/>
-				</div>
-				<a id="find-a-route-button" onclick="openFoundRoutes()">Find</a>
+				<input type="time" class="find-a-route-inputs" name="from_time" value="06:00"/>
+				<a class="button" id="find-a-route-button" onclick="openFoundRoutes()">Find</a>
 			</div>
 		</div>
 		<div class="found-route-menu">
 			<div class="found-route-content-wrapper">
 				<h2>Your route</h2>
 				<div class="closing-button" onclick="closeFoundRoutes()"><i class="material-icons close-pic">close</i></div>
-				<p>Nothing has been found</p>
+				<p class="nothing-found-text">Nothing has been found</p>
 				<ul class="bar" id="route-list">
 				</ul>
 			</div>

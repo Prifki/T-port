@@ -59,7 +59,7 @@ nav {
   margin: 0 10px;
 }
 .nav-item:hover {
-  text-decoration: underline;
+  color: #29b8ed;
 }
 
 .header-buttons {
@@ -392,26 +392,7 @@ nav {
   background: #fff;
 }
 
-.time-interval {
-  width: 100%;
-  margin: 10px 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.time-interval > input {
-  border-radius: 10px;
-  padding: 5px 10px;
-  background: #ddd;
-  color: #000;
-  font-family: Mission, "Mission Gothic Thin";
-  font-size: 1em;
-}
-.time-interval > input:focus {
-  background: #fff;
-}
-
-#find-a-route-button {
+.button {
   font-size: 1.3em;
   border: 1px solid #29b8ed;
   background: #ceeffb;
@@ -421,7 +402,7 @@ nav {
   width: 60%;
   text-align: center;
 }
-#find-a-route-button:hover {
+.button:hover {
   background: #87d7f5;
 }
 
@@ -472,6 +453,11 @@ nav {
 }
 .favorites-menu a:hover {
   background: #d5d5d5;
+}
+
+.fixed-favorites {
+  position: fixed;
+  top: 120px;
 }
 
 .delete-button {
@@ -546,20 +532,6 @@ nav {
     transform: translate3d(4px, 0, 0);
   }
 }
-#login-button {
-  font-size: 1.3em;
-  border: 1px solid #29b8ed;
-  background: #ceeffb;
-  border-radius: 20px;
-  padding: 5px;
-  margin-top: 5px;
-  width: 60%;
-  text-align: center;
-}
-#login-button:hover {
-  background: #87d7f5;
-}
-
 .show-additional-menu {
   opacity: 1;
   z-index: 5;
@@ -630,7 +602,7 @@ body {
 
 @media (max-width: 450px) {
   body, .material-icons, .far, .fa {
-    font-size: 4vw;
+    font-size: 3.5vw;
   }
 }
 .index-page-container {
@@ -865,7 +837,7 @@ table tr {
   background-color: #f8f8f8;
 }
 table td:hover {
-  background-color: #ddd;
+  color: #29b8ed;
 }
 table th {
   padding-top: 12px;
@@ -911,6 +883,7 @@ table th:hover {
   font-size: 1.3em;
   transition: all 0.2s;
   display: flex;
+  align-items: center;
 }
 
 .filtering-label {
@@ -962,10 +935,16 @@ table th:hover {
 
 .bookmark-button {
   position: absolute;
-  top: -6px;
+  top: -8px;
   right: 40px;
   margin: 5px;
   z-index: 2;
+}
+.bookmark-button:hover {
+  color: #29b8ed;
+}
+.bookmark-button i {
+  font-size: 1.8em;
 }
 
 .edit-button {
@@ -983,6 +962,10 @@ table th:hover {
 .show-card {
   opacity: 1;
   display: flex;
+}
+
+.table-edit-td:hover {
+  color: #000;
 }
 
 .table-edit-input {
@@ -1022,6 +1005,11 @@ table th:hover {
   cursor: pointer;
 }
 
+@media (max-width: 450px) {
+  .table-open-editor-tools-button {
+    top: -14px;
+  }
+}
 .pagination-wrapper {
   display: flex;
   justify-content: center;

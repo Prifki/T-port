@@ -14,6 +14,12 @@ function createOptimalRoute(directionsService, directionsDisplay){
 				}
 			}
 			let route = dijkstra(stopA, stopB);
+			console.log(typeof(route));
+			var route_clone = [];
+			for (let key in route) {
+				route_clone[key] = route[key];
+			  }
+			generateRoute(route_clone);
 			for (each in route){
 				route[each] = route[each][0];
 			}
