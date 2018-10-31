@@ -1,3 +1,22 @@
+function createRouteMap(directionsService, directionsDisplay, locations){
+	try{
+		const start = locations.shift();
+        const end = locations.pop();
+        let route = [];
+        for (each in locations){
+            route[each] = {'location': locations[each], 'stopover': true}
+        }
+		console.log(route);
+		console.log(start);
+		console.log(end);
+        calculateAndDisplayRoute(directionsService, directionsDisplay, route, start, end);
+	}
+	catch(err) {
+		console.log('An error in createRoute(): ' + err);
+	}
+}
+
+
 function createOptimalRoute(directionsService, directionsDisplay){
 	try{
 		let stopA = document.querySelector('#stopA').value,
@@ -14,7 +33,6 @@ function createOptimalRoute(directionsService, directionsDisplay){
 				}
 			}
 			let route = dijkstra(stopA, stopB);
-			console.log(typeof(route));
 			var route_clone = [];
 			for (let key in route) {
 				route_clone[key] = route[key];
@@ -57,7 +75,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, route, s
 			if (status === 'OK') {
 				directionsDisplay.setDirections(response);
 			} else {
-				window.alert('Directions request failed due to ' + status);
+				console.log('Directions request failed due to ' + status);
 			}
 		});
 	}
@@ -68,7 +86,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, route, s
 
 
 
-function initMap() {
+function initMap(locations) {
+  try{
 	var spb = {lat: 59.932802, lng: 30.332459};
 	var directionsService = new google.maps.DirectionsService;
 	var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -409,6 +428,14 @@ function initMap() {
 	document.getElementById('find-a-route-button').addEventListener('click', function() {
 		createOptimalRoute(directionsService, directionsDisplay);
 	});
+	if (window.location.pathname === "/nested/routes"){
+		if(locations)
+			createRouteMap(directionsService, directionsDisplay, locations);
+	}
+  }
+  catch(err){
+	  console.log('Google map doesn`t like the shit like that: '+err);
+  }
 }
 
 

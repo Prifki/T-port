@@ -276,7 +276,6 @@ function stopsAutoComplete(){
 function generateRoute(route){
 	document.querySelector('.nothing-found-text').style = 'display: none';
 	document.querySelector('#route-list').innerHTML = '';
-	console.log(route);
 	requestJSON(handleStopsInfo);
 	function handleStopsInfo(data){
 		const stops = data.stops;
