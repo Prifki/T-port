@@ -58,10 +58,14 @@ function openFoundRoutes(){
 	const foundRoutes = document.getElementsByClassName('found-route-menu')[0];
 	generateRoute();
 	foundRoutes.style.display = 'block';
+	closeLoginMenu();
+	closeFavorites();
+	if(window.innerWidth < 470)
+	  closeFindMenu();
 }
 
 function toggleBurgerMenu(){
-	floatingMenu = document.getElementsByClassName("floating-menu")[0];
+	const floatingMenu = document.getElementsByClassName("floating-menu")[0];
 	floatingMenu.classList.toggle("show-menu");
 
 	closeLoginMenu();
@@ -70,7 +74,7 @@ function toggleBurgerMenu(){
 }
 
 function toggleMobileSearch(){
-	mobileSearch = document.getElementsByClassName("mobile-find-field")[0];
+	const mobileSearch = document.getElementsByClassName("mobile-find-field")[0];
 	mobileSearch.classList.toggle("show-mobile-search");
 
 	closeLoginMenu();
@@ -80,40 +84,52 @@ function toggleMobileSearch(){
 }
 
 function toggleFavorites(){
-	favorites = document.getElementsByClassName("favorites-menu")[0];
+	const favorites = document.getElementsByClassName("favorites-menu")[0];
 	favorites.classList.toggle("show-additional-menu");
 
 	closeLoginMenu();
 	closeMobileSearch();
 	closeBurgerMenu();
 	deactivateBurgerImg();
+	closeFoundRoutes();
+	if(window.innerWidth < 470)
+	  closeFindMenu();
 }
 
 function toggleLoginMenu(){
-	login = document.getElementsByClassName("login-menu")[0];
+	const login = document.getElementsByClassName("login-menu")[0];
 	login.classList.toggle("show-additional-menu");
 
 	closeFavorites();
 	closeMobileSearch();
 	closeBurgerMenu();
 	deactivateBurgerImg();
+	closeFoundRoutes();
+	if(window.innerWidth < 470)
+	  closeFindMenu();
 }
 
 function closeFindMenu(){
-	var findMenu = document.getElementsByClassName("find-a-route-menu")[0];
-	findMenu.classList.toggle("find-a-route-wrapped");
+	const findMenu = document.getElementsByClassName("find-a-route-menu")[0];
+	findMenu.classList.add("find-a-route-wrapped");
+}
+
+function openFindMenu(){
+	const findMenu = document.getElementsByClassName("find-a-route-menu")[0];
+	findMenu.classList.remove("find-a-route-wrapped");
+	closeFoundRoutes();
 }
 
 function editFavorites(){
 	deleteButtons = document.getElementsByClassName("delete-button");
 	if(document.getElementsByClassName('edit-button')[0].firstChild.textContent=='more_vert'){
 		for (i=0; i < deleteButtons.length; i++)
-			deleteButtons[i].style.display = 'block';
+			deleteButtons[i].style.visibility = 'visible';
 		document.getElementsByClassName('edit-button')[0].firstChild.textContent='more_horiz';
 	}
 	else {
 		for (i=0; i < deleteButtons.length; i++)
-			deleteButtons[i].style.display = 'none';
+			deleteButtons[i].style.visibility = 'hidden';
 		document.getElementsByClassName('edit-button')[0].firstChild.textContent='more_vert';
 	}
 }
@@ -158,7 +174,6 @@ function editTable(tableButton){
 			for (let i=0; i<tbody.firstChild.children.length-2; i++){
 				const td = document.createElement('td'),
 				editInput = document.createElement('input');
-				td.setAttribute('class', 'table-edit-td');
 				editInput.setAttribute('class', 'table-edit-input');
 				editInput.setAttribute('type', 'text');
 				td.appendChild(editInput);
@@ -388,7 +403,7 @@ function generateTransportTable(){
 	function generateRow(type,number,route,seats){
 		const tr = document.createElement('tr');
 		tr.innerHTML = '<td><i class="material-icons">' + type +
-		'</i></td><td onclick="generateTransportCard(this)">'+ number + '</td><td>' + route +
+		'</i></td><td><a onclick="generateTransportCard(this)">'+ number + '</a></td><td>' + route +
 		'</td><td>' + seats + '</td>';
 		document.querySelector('#transport-table').lastChild.append(tr);
 	}
@@ -406,8 +421,8 @@ function generateStopsTable(){
 
 	function generateRow(name,number,route){
 		const tr = document.createElement('tr');
-		tr.innerHTML = '<td onclick="generateStopCard(this)">' + name +
-		'</td><td>'+ number + '</td><td>' + route +
+		tr.innerHTML = '<td><a onclick="generateStopCard(this)">' + name +
+		'</a></td><td>'+ number + '</td><td>' + route +
 		'</td>';
 		document.querySelector('#stops-table').lastChild.append(tr);
 	}
@@ -463,7 +478,7 @@ function generateTransportCard(generationRowData){
 	requestJSON(handleData);
 	const number = generationRowData.innerText.substr(0,6);
 	let type;
-	switch(generationRowData.previousSibling.innerText.substr(0,4)) {
+	switch(generationRowData.parentElement.previousSibling.innerText.substr(0,4)) {
 		case 'dire':
 			type = 'Bus ';
 			break;
@@ -522,12 +537,12 @@ function generateStopCard(generationRowData){
 	wrapper.lastElementChild.remove('');
 	wrapper.innerHTML='<div class="table-open-editor-tools-button" onclick="editTable(this)"><i class="material-icons">settings</i></div><table id="stop-card"><tr><th>Route</th><th>Time</th></tr></table>';
 	function handleData(data){
-		const stopNumber = parseInt(generationRowData.nextSibling.innerText),
-		routesList = generationRowData.nextSibling.nextSibling.innerText.split(', '),
+		const stopNumber = parseInt(generationRowData.parentElement.nextSibling.innerText),
+		routesList = generationRowData.parentElement.nextSibling.nextSibling.innerText.split(', '),
 		ROUTES = data.routes,
 		TRANSPORTS = data.transport, STOPS = data.stops;
 		for (STOP in STOPS){
-			if (name.slice(0,-1) == STOPS[STOP].name){
+			if (name == STOPS[STOP].name){
 				const location = {lat: parseFloat(STOPS[STOP].lat), lng: parseFloat(STOPS[STOP].long)};
 				initMap(location);
 			}

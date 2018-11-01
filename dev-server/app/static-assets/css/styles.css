@@ -290,12 +290,6 @@ nav {
   font-size: 1.3em;
 }
 
-@media (max-width: 500px) {
-  .found-route-menu {
-    left: 0;
-    width: 95%;
-  }
-}
 .found-route-content-wrapper {
   display: flex;
   flex-direction: column;
@@ -461,7 +455,7 @@ nav {
 }
 
 .delete-button {
-  display: none;
+  visibility: hidden;
 }
 .delete-button:hover {
   color: #29b8ed;
@@ -828,16 +822,16 @@ table td, table th {
   padding: 5px;
   text-align: left;
   vertical-align: middle;
+}
+table td > a:hover, table td i:hover, table th > a:hover, table th i:hover {
   cursor: pointer;
+  color: #29b8ed;
 }
 table tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 table tr {
   background-color: #f8f8f8;
-}
-table td:hover {
-  color: #29b8ed;
 }
 table th {
   padding-top: 12px;
@@ -879,6 +873,8 @@ table th:hover {
 }
 
 .filtering-label, .filtering-menu .filtering-item {
+  color: #fff;
+  font-weight: 600;
   padding: 5px 10px;
   font-size: 1.3em;
   transition: all 0.2s;
@@ -942,6 +938,7 @@ table th:hover {
 }
 .bookmark-button:hover {
   color: #29b8ed;
+  cursor: pointer;
 }
 .bookmark-button i {
   font-size: 1.8em;
@@ -962,10 +959,6 @@ table th:hover {
 .show-card {
   opacity: 1;
   display: flex;
-}
-
-.table-edit-td:hover {
-  color: #000;
 }
 
 .table-edit-input {
