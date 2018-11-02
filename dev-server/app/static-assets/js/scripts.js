@@ -309,32 +309,54 @@ function generateRoute(route){
 	}
 }
 
+function closeSearchResults(){
+	document.querySelector('.global-search-results').style.display = 'none';
+}
 
-function globalAutoComplete(){
+function globalAutoComplete(substr){
+	closeSearchResults();
 	requestJSON(generateOptions);
 	function generateOptions(data){
-		if(!document.querySelector('#global-search-items').childElementCount){
 			const stops = data.stops, routes = data.routes, transports = data.transport;
+			const list = document.querySelector('.global-search-items');
+			list.innerHTML = '';
 			for (stop in stops){
-				const datalist = document.querySelector('#global-search-items');
-				const option = document.createElement('option');
-				option.setAttribute('value',stops[stop].name);
-				datalist.appendChild(option);
+				if(ifSubstr(stops[stop].name, substr)){
+					createItem(stops[stop].name);
+				}
 			}
 			for (route in routes){
-				const datalist = document.querySelector('#global-search-items');
-				const option = document.createElement('option');
-				option.setAttribute('value',routes[route].name);
-				datalist.appendChild(option);
+				if(ifSubstr(routes[route].name, substr)){
+					createItem(routes[route].name);
+				}
 			}
 			for (transport in transports){
-				const datalist = document.querySelector('#global-search-items');
-				const option = document.createElement('option');
-				option.setAttribute('value',transports[transport].number);
-				datalist.appendChild(option);
+				if(ifSubstr(transports[transport].number, substr)){
+					createItem(transports[transport].number);
+				}
+			}
+			if(list.childElementCount)
+				document.querySelector('.global-search-results').style.display = 'flex';
+
+		function createItem(value){
+			const li = document.createElement('li');
+			li.setAttribute('onclick','chooseFromFound(this)');
+			li.innerText = value;
+			list.appendChild(li);
+		}
+
+		function ifSubstr(str, substr){
+			if (~str.indexOf(substr)) {
+				return true;
 			}
 		}
 	}
+}
+
+function chooseFromFound(item){
+	document.querySelector('.find-txt').focus();
+	document.querySelector('.find-txt').value = item.innerText;
+	closeSearchResults();
 }
 
 function signIn(){
@@ -453,8 +475,8 @@ function generateRoutesTable(){
 	function generateRow(name,from,to){
 		for (let i = 0; i < name.length; i++){
 			const tr = document.createElement('tr');
-			tr.innerHTML = '<td onclick="generateRouteCard(this)" class="stop-names-td">' + name[i] +
-			'</td><td>'+ from[i] + '</td><td>' + to[i] + '</td>';
+			tr.innerHTML = '<td onclick="generateRouteCard(this)" class="stop-names-td"><a>' + name[i] +
+			'</a></td><td>'+ from[i] + '</td><td>' + to[i] + '</td>';
 			document.querySelector('#routes-table').lastChild.append(tr);
 		}
 	}

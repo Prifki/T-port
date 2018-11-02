@@ -6,9 +6,6 @@
   height: 48px
   padding: 3px
   border: 1px solid #ccc
-  &:hover > .find-txt
-    width: 200px
-    padding: 0 10px
   &:hover > .find-btn 
     background: #ddd
 
@@ -38,10 +35,48 @@
   line-height: 40px
   width: 0px
   font-weight: bold
-  &:focus
+  &:hover, &:focus
     width: 200px
     padding: 0 10px
     
 .mobile-find-field-closing
   position: absolute
   right: 16px
+
+
+.global-search-results
+  display: none
+  position: absolute
+  top: 52px
+  flex-direction: column
+  right: 0
+  max-height: 149px
+  overflow: overlay
+  width: 250px
+  font-size: 1.1em
+  line-height: 1.5em
+  background: #fff
+  border: 1px solid $main-color
+  border-radius: 10px
+  li
+    width: 100%
+    display: flex
+    padding: 5px
+    border-bottom: 1px solid #ccc
+    &:hover
+      background: #eee
+      cursor: pointer
+    &:first-child
+      border-radius: 10px 10px 0 0
+      
+::-webkit-scrollbar
+    width: 12px
+::-webkit-scrollbar-track
+    -webkit-border-radius: 10px
+    border-radius: 10px
+::-webkit-scrollbar-thumb
+    -webkit-border-radius: 10px
+    border-radius: 10px
+    background: $main-color
+::-webkit-scrollbar-thumb:window-inactive 
+	background: lighten($main-color,10%)
