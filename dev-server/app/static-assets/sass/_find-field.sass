@@ -8,6 +8,9 @@
   border: 1px solid #ccc
   &:hover > .find-btn 
     background: #ddd
+  &:hover > .find-txt
+    width: 200px
+    padding: 0 10px
 
 .find-btn 
   float: right
@@ -35,15 +38,10 @@
   line-height: 40px
   width: 0px
   font-weight: bold
-  &:hover, &:focus
+  &:focus
     width: 200px
     padding: 0 10px
     
-.mobile-find-field-closing
-  position: absolute
-  right: 16px
-
-
 .global-search-results
   display: none
   position: absolute
@@ -69,14 +67,3 @@
     &:first-child
       border-radius: 10px 10px 0 0
       
-::-webkit-scrollbar
-    width: 12px
-::-webkit-scrollbar-track
-    -webkit-border-radius: 10px
-    border-radius: 10px
-::-webkit-scrollbar-thumb
-    -webkit-border-radius: 10px
-    border-radius: 10px
-    background: $main-color
-::-webkit-scrollbar-thumb:window-inactive 
-	background: lighten($main-color,10%)

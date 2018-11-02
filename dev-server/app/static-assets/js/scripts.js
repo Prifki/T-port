@@ -315,7 +315,8 @@ function closeSearchResults(){
 
 function globalAutoComplete(substr){
 	closeSearchResults();
-	requestJSON(generateOptions);
+	(substr) ? requestJSON(generateOptions) : closeSearchResults();
+	//requestJSON(generateOptions);
 	function generateOptions(data){
 			const stops = data.stops, routes = data.routes, transports = data.transport;
 			const list = document.querySelector('.global-search-items');
@@ -358,6 +359,61 @@ function chooseFromFound(item){
 	document.querySelector('.find-txt').value = item.innerText;
 	closeSearchResults();
 }
+
+function mobileAutoComplete(substr){
+	(substr) ? requestJSON(generateOptions) : closeMobileSearchResults();
+	//requestJSON(generateOptions);
+	function generateOptions(data){
+			const stops = data.stops, routes = data.routes, transports = data.transport;
+			const list = document.querySelector('.mobile-search-items');
+			list.innerHTML = '';
+			for (stop in stops){
+				if(ifSubstr(stops[stop].name, substr)){
+					createItem(stops[stop].name);
+				}
+			}
+			for (route in routes){
+				if(ifSubstr(routes[route].name, substr)){
+					createItem(routes[route].name);
+				}
+			}
+			for (transport in transports){
+				if(ifSubstr(transports[transport].number, substr)){
+					createItem(transports[transport].number);
+				}
+			}
+			if(list.childElementCount){
+				document.querySelector('.mobile-search-results').style.display = 'flex';
+				document.querySelector('.mobile-find-field').style.padding = '20px 20px 0 20px';
+			}
+
+		function createItem(value){
+			const li = document.createElement('li');
+			li.setAttribute('onclick','chooseFromMobileFound(this)');
+			li.innerText = value;
+			list.appendChild(li);
+		}
+
+		function ifSubstr(str, substr){
+			if (~str.indexOf(substr)) {
+				return true;
+			}
+		}
+	}
+
+	function closeMobileSearchResults(){
+		document.querySelector('.mobile-search-results').style.display = 'none';
+		document.querySelector('.mobile-find-field').style.padding = '20px';
+	}
+}
+
+function chooseFromMobileFound(item){
+	document.querySelector('#mobile-find-input').focus();
+	document.querySelector('#mobile-find-input').value = item.innerText;
+	document.querySelector('.mobile-search-results').style.display = 'none';
+	document.querySelector('.mobile-find-field').style.padding = '20px';
+}
+
 
 function signIn(){
 	requestJSON(checker);

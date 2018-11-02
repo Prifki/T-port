@@ -53,8 +53,12 @@
 			</nav>
 		</div>
 		<div class="mobile-find-field">
-			<input type="text" placeholder="Search…" list="global-search-items" onkeyup="globalAutoComplete()">
-			<datalist id="global-search-items">
-			</datalist>
-			<div class="mobile-find-field-closing"><i class="material-icons close-pic" onclick="closeMobileSearch()">close</i></div>
+			<div class="mobile-find-field-wrapper">
+				<input type="text" placeholder="Search…" list="mobile-search-items" onkeyup="mobileAutoComplete(this.value)" id="mobile-find-input">
+				<div class="mobile-find-field-closing"><i class="material-icons close-pic" onclick="closeMobileSearch()">close</i></div>
+			</div>
+			<div class="mobile-search-results">
+				<ul class="mobile-search-items">
+				</ul>
+			</div>
 		</div>
