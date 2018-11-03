@@ -12,9 +12,10 @@ class App extends Component {
       <>
         <Header />
         <TransportsContainer />
-        {/*<RoutesContainer />
+        {/*<FindRouteContainer />
+        <RoutesContainer />
         <StopsContainer />
-        <FindRouteContainer />*/}
+        */}
         <Footer />
       </>
     );

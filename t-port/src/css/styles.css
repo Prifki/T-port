@@ -814,44 +814,26 @@ footer {
   color: #29b8ed;
 }
 
-.fixed-favorites {
-  position: fixed;
-  top: 120px;
-}
-
-.found-route-menu {
-  display: none;
+.menu--found-route {
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 3;
-  transition: all 0.4s ease;
-  background: #eee;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 10px;
-  border: 1px solid #29b8ed;
+  z-index: 5;
 }
-.found-route-menu h2 {
-  text-align: center;
-  font-family: Mission, "Mission Gothic Light";
-  font-size: 1.5em;
-  margin: 10px;
-}
-.found-route-menu ul {
+.menu--found-route ul {
   display: flex;
   flex-direction: column;
   width: fit-content;
   font-size: 1.3em;
 }
-.found-route-menu li {
+.menu--found-route li {
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
-.found-route-menu li a {
+.menu--found-route li a {
   text-align: left;
   padding: 5px 10px;
   margin: 10px;
@@ -863,14 +845,14 @@ footer {
   flex-direction: row;
   align-items: center;
 }
-.found-route-menu li a:hover {
+.menu--found-route li a:hover {
   background: #d5d5d5;
 }
-.found-route-menu p {
+.menu--found-route p {
   font-size: 1.3em;
 }
 
-.found-route-content-wrapper {
+.menu--found-route-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -901,6 +883,11 @@ footer {
 }
 .bar li:last-of-type:after {
   top: -50%;
+}
+
+.fixed-favorites {
+  position: fixed;
+  top: 120px;
 }
 
 .show-additional-menu {

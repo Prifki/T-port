@@ -245,30 +245,13 @@
 
 
 
-//to consider
+// Found Route Menu  
 
-.fixed-favorites
-  position: fixed
-  top: 120px
-
-    
-.found-route-menu
-  display: none
+.menu--found-route
   position: absolute
   top: 0
   right: 0
-  z-index: 3
-  transition: all 0.4s ease
-  background: #eee
-  padding: 10px
-  margin: 10px
-  border-radius: 10px
-  border: 1px solid $main-color
-  h2
-    text-align: center
-    font-family: Mission, "Mission Gothic Light"
-    font-size: 1.5em
-    margin: 10px
+  z-index: 5
   ul
     display: flex
     flex-direction: column
@@ -294,9 +277,9 @@
       &:hover
         background: darken(#eee,10%)
   p
-    font-size: 1.3em
+    font-size: 1.3em 
 
-.found-route-content-wrapper
+.menu--found-route-content
   display: flex
   flex-direction: column
   align-items: center
@@ -321,6 +304,11 @@
       top: 50%
     &:last-of-type:after
       top: -50%
+//to consider
+
+.fixed-favorites
+  position: fixed
+  top: 120px
 
 .show-additional-menu
   opacity: 1
