@@ -390,7 +390,7 @@ table th:hover {
 }
 
 @media (max-width: 450px) {
-  .table-open-editor-tools-button {
+  .table__editor-tools-button {
     top: -14px;
   }
 }
@@ -708,6 +708,7 @@ footer {
 .burger-navigation-bar {
   position: absolute;
   left: 0;
+  display: none;
   z-index: 8;
   transition: top 0.4s ease;
   top: 0;
@@ -728,16 +729,11 @@ footer {
     flex-direction: column;
   }
 }
-.fixed-favorites {
-  position: fixed;
-  top: 120px;
-}
-
-.mobile-find-field {
+.mobile-global-search {
   position: absolute;
-  top: 62px;
-  left: -102%;
-  display: none;
+  top: 0;
+  left: 0;
+  display: flex;
   background: #f2f2f2;
   width: 100%;
   justify-content: center;
@@ -746,24 +742,24 @@ footer {
   transition: left 0.4s ease;
   border-bottom: 1px solid #29b8ed;
 }
-.mobile-find-field input {
+.mobile-global-search input {
   color: #000;
   font-size: 1.4rem;
   border-bottom: 1px solid #000;
   background-color: transparent;
 }
 
-.mobile-find-field-closing {
-  position: absolute;
-  right: 16px;
-}
-
-.mobile-find-field-wrapper {
+.mobile-global-search__field-wrapper {
   display: flex;
   justify-content: center;
 }
 
-.mobile-search-results {
+.mobile-global-search__button--close {
+  position: absolute;
+  right: 16px;
+}
+
+.mobile-global-search-results {
   margin: 10px;
   display: none;
   flex-direction: column;
@@ -771,19 +767,24 @@ footer {
   max-height: 160px;
   overflow: overlay;
 }
-.mobile-search-results li {
+.mobile-global-search-results li {
   padding: 10px;
   display: flex;
   flex-direction: row;
   border-bottom: 1px solid #ccc;
 }
-.mobile-search-results li:hover {
+.mobile-global-search-results li:hover {
   background: #ccc;
   cursor: pointer;
 }
 
 .show-mobile-search {
   left: 0;
+}
+
+.fixed-favorites {
+  position: fixed;
+  top: 120px;
 }
 
 @media (max-width: 585px) {
@@ -1084,6 +1085,14 @@ main {
     border-radius: 0;
   }
 }
+.icon--closing {
+  font-size: 24px;
+}
+.icon--closing:hover {
+  color: #29b8ed;
+  cursor: pointer;
+}
+
 ::-webkit-scrollbar {
   width: 12px;
 }

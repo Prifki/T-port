@@ -4,7 +4,7 @@ class CloseButton extends Component {
   render() {
     return (
         <div className="card__button--closing">
-            <i className="material-icons">close</i>
+            <i className="material-icons icon--closing">close</i>
         </div>
     );
   }
