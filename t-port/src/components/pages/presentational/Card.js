@@ -9,7 +9,7 @@ class Card extends Component {
         <div className="card">
             <BookmarkButton />
             <CloseButton />
-            <h3 className="card__title">Transport name</h3>
+            <h3 className="card__title">Card Title</h3>
             <Table />
         </div>
     );
