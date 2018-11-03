@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import TransportTable from './TransportTable';
+import Table from './Table';
+import BookmarkButton from './BookmarkButton';
+import CloseButton from './CloseButton';
 
 class Card extends Component {
   render() {
     return (
         <div className="card">
-            <div className="card__button--bookmark">
-                <i className="material-icons">bookmark_border</i>
-            </div>
-            <div className="card__button--closing">
-                <i className="material-icons">close</i>
-            </div>
+            <BookmarkButton />
+            <CloseButton />
             <h3 className="card__title">Transport name</h3>
-            <TransportTable />
+            <Table />
         </div>
     );
   }

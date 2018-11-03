@@ -566,6 +566,163 @@ footer {
   text-align: right;
 }
 
+.menu {
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid #29b8ed;
+}
+
+.menu__title {
+  text-align: center;
+  font-family: Mission, "Mission Gothic Light";
+  font-size: 1.5em;
+  margin: 10px;
+}
+
+.menu__button--closing {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 5px;
+  z-index: 2;
+}
+.menu__button--closing:hover {
+  color: #29b8ed;
+  cursor: pointer;
+}
+
+.menu__input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background: #ddd;
+  color: #000;
+  font-family: Mission, "Mission Gothic Thin";
+  font-size: 1.2em;
+}
+.menu__input:focus {
+  background: #fff;
+  border: none;
+}
+
+.menu__button--submit {
+  font-size: 1.3em;
+  border: 1px solid #29b8ed;
+  background: #ceeffb;
+  border-radius: 20px;
+  padding: 5px;
+  margin-top: 5px;
+  width: 60%;
+  text-align: center;
+}
+.menu__button--submit:hover {
+  background: #87d7f5;
+}
+
+.menu--login {
+  position: absolute;
+  transition: opacity 0.4s ease;
+  top: 0;
+  right: 0;
+  z-index: 5;
+}
+
+.menu--login--failed-animation {
+  background: #fbd2ce;
+  border: 1px solid #ff9085;
+  animation-name: shake;
+  animation-duration: 0.8s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+.menu--favorites {
+  transition: opacity 0.4s ease;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 5;
+}
+
+.menu--favorites-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1.3em;
+}
+.menu--favorites-list li {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.menu--favorites-list li .material-icons {
+  margin-right: 5px;
+}
+.menu--favorites-list a {
+  text-align: left;
+  padding: 5px 10px;
+  margin: 10px;
+  width: 100%;
+  background: #e1e1e1;
+  border-radius: 10px;
+}
+.menu--favorites-list a:hover {
+  background: #d5d5d5;
+}
+
+.menu__button--edit-favorites {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 5px;
+  z-index: 2;
+}
+.menu__button--edit-favorites:hover {
+  color: #29b8ed;
+  cursor: pointer;
+}
+
+.menu__button--remove-favorites:hover {
+  color: #29b8ed;
+  cursor: pointer;
+}
+
+@media (max-width: 470px) {
+  .menu--favorites, .menu--login {
+    left: 0;
+    width: 95%;
+  }
+}
+.fixed-favorites {
+  position: fixed;
+  top: 120px;
+}
+
+.floating-menu {
+  display: none;
+}
+
 .close-pic {
   cursor: pointer;
 }
@@ -832,146 +989,6 @@ footer {
   background: #fff;
 }
 
-.button {
-  font-size: 1.3em;
-  border: 1px solid #29b8ed;
-  background: #ceeffb;
-  border-radius: 20px;
-  padding: 5px;
-  margin-top: 5px;
-  width: 60%;
-  text-align: center;
-}
-.button:hover {
-  background: #87d7f5;
-}
-
-.favorites-menu {
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: -1;
-  background: #eee;
-  padding: 10px 25px;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
-  border: 1px solid #29b8ed;
-}
-.favorites-menu h3 {
-  text-align: center;
-  font-family: Mission, "Mission Gothic Light";
-  font-size: 1.5em;
-  margin: 10px;
-}
-.favorites-menu ul {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  font-size: 1.3em;
-}
-.favorites-menu li {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-.favorites-menu li .material-icons {
-  margin-right: 5px;
-}
-.favorites-menu a {
-  text-align: left;
-  padding: 5px 10px;
-  margin: 10px;
-  width: 100%;
-  background: #e1e1e1;
-  border-radius: 10px;
-}
-.favorites-menu a:hover {
-  background: #d5d5d5;
-}
-
-.fixed-favorites {
-  position: fixed;
-  top: 120px;
-}
-
-.delete-button {
-  visibility: hidden;
-}
-.delete-button:hover {
-  color: #29b8ed;
-  cursor: pointer;
-}
-
-@media (max-width: 470px) {
-  .favorites-menu, .login-menu {
-    left: 0;
-    width: 95%;
-  }
-}
-.login-menu {
-  opacity: 0;
-  position: absolute;
-  transition: opacity 0.4s ease;
-  top: 0;
-  right: 0;
-  z-index: -1;
-  background: #eee;
-  padding: 10px;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 10px;
-  border: 1px solid #29b8ed;
-}
-.login-menu h3 {
-  text-align: center;
-  font-family: Mission, "Mission Gothic Light";
-  font-size: 1.5em;
-  margin: 10px;
-}
-.login-menu input {
-  width: 100%;
-  margin: 10px 0;
-  padding: 5px 10px;
-  border-radius: 10px;
-  background: #ddd;
-  color: #000;
-  font-family: Mission, "Mission Gothic Thin";
-  font-size: 1.2em;
-}
-.login-menu input:focus {
-  background: #fff;
-  border: none;
-}
-.login-menu .login-failed {
-  background: #fbd2ce;
-  border: 1px solid #ff9085;
-  animation-name: shake;
-  animation-duration: 0.8s;
-  animation-timing-function: ease-in-out;
-}
-
-@keyframes shake {
-  10%, 90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-  20%, 80% {
-    transform: translate3d(2px, 0, 0);
-  }
-  30%, 50%, 70% {
-    transform: translate3d(-4px, 0, 0);
-  }
-  40%, 60% {
-    transform: translate3d(4px, 0, 0);
-  }
-}
 .show-additional-menu {
   opacity: 1;
   z-index: 5;

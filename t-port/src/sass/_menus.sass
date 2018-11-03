@@ -1,10 +1,139 @@
+.menu
+  background: #eee
+  padding: 10px
+  margin: 10px
+  display: flex
+  flex-direction: column
+  align-items: center
+  border-radius: 10px
+  border: 1px solid $main-color
 
+.menu__title
+  text-align: center
+  font-family: $menus-font
+  font-size: 1.5em
+  margin: 10px
 
+.menu__button--closing
+  position: absolute
+  top: 0
+  right: 0
+  margin: 5px
+  z-index: 2
+  &:hover
+    color: $main-color
+    cursor: pointer
+
+.menu__input
+  width: 100%
+  margin: 10px 0
+  padding: 5px 10px
+  border-radius: 10px
+  background: #ddd
+  color: #000
+  font-family: $main-font
+  font-size: 1.2em
+  &:focus
+    background: #fff
+    border: none  
+
+.menu__button--submit
+  font-size: 1.3em
+  border: 1px solid $main-color
+  background: lighten($main-color,35%)
+  border-radius: 20px
+  padding: 5px
+  margin-top: 5px
+  width: 60%
+  text-align: center
+  &:hover
+    background: lighten($main-color,20%)
+
+.menu--login
+  //opacity: 0
+  position: absolute
+  transition: opacity 0.4s ease
+  top: 0
+  right: 0
+  z-index: 5
+  //z-index: -1
+
+.menu--login--failed-animation
+    background: #fbd2ce
+    border: 1px solid #ff9085
+    animation-name: shake
+    animation-duration: 0.8s
+    animation-timing-function: ease-in-out
+
+@keyframes shake
+  10%, 90%
+    transform: translate3d(-1px, 0, 0)
+  20%, 80%
+    transform: translate3d(2px, 0, 0)
+  30%, 50%, 70%
+    transform: translate3d(-4px, 0, 0)
+  40%, 60% 
+    transform: translate3d(4px, 0, 0)
+
+.menu--favorites
+  //opacity: 0
+  transition: opacity 0.4s ease
+  position: absolute
+  top: 0
+  right: 0
+  //z-index: -1
+  z-index: 5
+
+.menu--favorites-list
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+  font-size: 1.3em
+  li
+    width: 100%
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: space-between  
+    .material-icons
+      margin-right: 5px
+  a
+    text-align: left
+    padding: 5px 10px
+    margin: 10px
+    width: 100%
+    background: #e1e1e1
+    border-radius: 10px
+    &:hover
+      background: darken(#eee,10%)
+
+.menu__button--edit-favorites
+  position: absolute
+  top: 0
+  left: 0
+  margin: 5px
+  z-index: 2
+  &:hover
+    color: $main-color
+    cursor: pointer
+
+.menu__button--remove-favorites:hover
+  color: $main-color
+  cursor: pointer
+
+@media (max-width: 470px)
+  .menu--favorites, .menu--login
+    left: 0
+    width: 95%
 
 //to consider
 
+.fixed-favorites
+  position: fixed
+  top: 120px
 
-  .floating-menu
+
+.floating-menu
   display: none
 
 .close-pic
@@ -218,124 +347,6 @@
   font-size: 1.2em
   &:focus
     background: #fff
-
-.button
-  font-size: 1.3em
-  border: 1px solid $main-color
-  background: lighten($main-color,35%)
-  border-radius: 20px
-  padding: 5px
-  margin-top: 5px
-  width: 60%
-  text-align: center
-  &:hover
-    background: lighten($main-color,20%)
-
-.favorites-menu
-  opacity: 0
-  transition: opacity 0.4s ease
-  position: absolute
-  top: 0
-  right: 0
-  z-index: -1
-  background: #eee
-  padding: 10px 25px
-  margin: 10px
-  display: flex
-  flex-direction: column
-  border-radius: 10px
-  border: 1px solid $main-color
-  h3
-    text-align: center
-    font-family: $menus-font
-    font-size: 1.5em
-    margin: 10px
-  ul
-    display: flex
-    flex-direction: column
-    align-items: flex-start
-    font-size: 1.3em
-  li
-    width: 100%
-    display: flex
-    flex-direction: row
-    align-items: center
-    justify-content: space-between  
-    .material-icons
-      margin-right: 5px
-  a
-    text-align: left
-    padding: 5px 10px
-    margin: 10px
-    width: 100%
-    background: #e1e1e1
-    border-radius: 10px
-    &:hover
-      background: darken(#eee,10%)
-
-.fixed-favorites
-  position: fixed
-  top: 120px
-
-.delete-button
-  visibility: hidden
-  &:hover
-    color: $main-color
-    cursor: pointer
-
-@media (max-width: 470px)
-  .favorites-menu, .login-menu
-    left: 0
-    width: 95%
-
-.login-menu
-  opacity: 0
-  position: absolute
-  transition: opacity 0.4s ease
-  top: 0
-  right: 0
-  z-index: -1
-  background: #eee
-  padding: 10px
-  margin: 10px
-  display: flex
-  flex-direction: column
-  align-items: center
-  border-radius: 10px
-  border: 1px solid $main-color
-  h3
-    text-align: center
-    font-family: $menus-font
-    font-size: 1.5em
-    margin: 10px
-  input
-    width: 100%
-    margin: 10px 0
-    padding: 5px 10px
-    border-radius: 10px
-    background: #ddd
-    color: #000
-    font-family: $main-font
-    font-size: 1.2em
-    &:focus
-      background: #fff
-      border: none
-  .login-failed
-    background: #fbd2ce
-    border: 1px solid #ff9085
-    animation-name: shake
-    animation-duration: 0.8s
-    animation-timing-function: ease-in-out
-
-@keyframes shake
-  10%, 90%
-    transform: translate3d(-1px, 0, 0)
-  20%, 80%
-    transform: translate3d(2px, 0, 0)
-  30%, 50%, 70%
-    transform: translate3d(-4px, 0, 0)
-  40%, 60% 
-    transform: translate3d(4px, 0, 0)
 
 .show-additional-menu
   opacity: 1
