@@ -778,8 +778,40 @@ footer {
   cursor: pointer;
 }
 
-.show-mobile-search {
+.menu--find-a-route {
+  position: absolute;
+  top: 0;
   left: 0;
+  z-index: 5;
+  transition: all 0.4s ease;
+}
+.menu--find-a-route .menu--find-a-route__button--wrapped {
+  display: none;
+}
+
+.menu--find-a-route-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.find-a-route-wrapped {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.find-a-route-wrapped .find-a-route-content {
+  display: none;
+}
+.find-a-route-wrapped .menu--find-a-route__button--wrapped {
+  display: block;
+  font-size: 1.4em;
+  cursor: pointer;
+}
+.find-a-route-wrapped:hover {
+  color: #29b8ed;
 }
 
 .fixed-favorites {
@@ -787,32 +819,6 @@ footer {
   top: 120px;
 }
 
-@media (max-width: 585px) {
-  .header-buttons > div {
-    margin: 0 5px;
-  }
-
-  header h1 {
-    margin: 0;
-  }
-
-  nav {
-    flex-direction: column;
-  }
-
-  .nav-item {
-    margin: 5px;
-  }
-
-  .mobile-find-field {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .find-box {
-    display: none;
-  }
-}
 .found-route-menu {
   display: none;
   position: absolute;
@@ -895,69 +901,6 @@ footer {
 }
 .bar li:last-of-type:after {
   top: -50%;
-}
-
-.find-a-route-menu {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 3;
-  transition: all 0.4s ease;
-  background: #eee;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 10px;
-  border: 1px solid #29b8ed;
-}
-.find-a-route-menu .route-wrapped-ico {
-  display: none;
-}
-
-.find-a-route-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.find-a-route-content h2 {
-  font-family: Mission, "Mission Gothic Light";
-  font-size: 1.7em;
-  margin: 10px;
-}
-
-.find-a-route-wrapped {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.find-a-route-wrapped .closing-button {
-  display: none;
-}
-.find-a-route-wrapped .find-a-route-content {
-  display: none;
-}
-.find-a-route-wrapped .route-wrapped-ico {
-  display: block;
-  font-size: 1.4em;
-  cursor: pointer;
-}
-.find-a-route-wrapped:hover {
-  color: #29b8ed;
-}
-
-.find-a-route-inputs {
-  width: 100%;
-  margin: 10px 0;
-  padding: 5px 10px;
-  border-radius: 10px;
-  background: #ddd;
-  color: #000;
-  font-family: Mission, "Mission Gothic Thin";
-  font-size: 1.2em;
-}
-.find-a-route-inputs:focus {
-  background: #fff;
 }
 
 .show-additional-menu {

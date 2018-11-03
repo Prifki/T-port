@@ -7,13 +7,15 @@ import LoginMenu from './menus_components/LoginMenu';
 import FavoritesMenu from './menus_components/FavoritesMenu';
 import BurgerNavBar from './menus_components/BurgerNavBar';
 import MobileGlobalSearch from './menus_components/MobileGlobalSearch';
+import FindARouteMenu from './menus_components/FindARouteMenu';
 
 class Main extends Component {
   render() {
     return (
         <main>
             {/*<BurgerNavBar />
-            <MobileGlobalSearch />*/}
+            <MobileGlobalSearch />
+            <FindARouteMenu />*/}
             <div className="substrate">
                 <h2 className="page-name">Transport</h2>
                 <FilterByType />
