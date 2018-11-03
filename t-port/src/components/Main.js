@@ -16,6 +16,7 @@ class Main extends Component {
             {/*<BurgerNavBar />
             <MobileGlobalSearch />
             <FindARouteMenu />*/}
+            <LoginMenu />
             <div className="substrate">
                 <h2 className="page-name">Transport</h2>
                 <FilterByType />
