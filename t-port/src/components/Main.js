@@ -16,7 +16,7 @@ class Main extends Component {
             {/*<BurgerNavBar />
             <MobileGlobalSearch />
             <FindARouteMenu />*/}
-            <LoginMenu />
+            {this.state.loginMenuActive ? <LoginMenu /> : null}
             <div className="substrate">
                 <h2 className="page-name">Transport</h2>
                 <FilterByType />
