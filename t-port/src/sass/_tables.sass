@@ -1,0 +1,64 @@
+.table-wrapper
+  width: 90%
+  margin: 10px
+
+table
+  border-collapse: collapse
+  width: 100%
+  td, th  
+    border-bottom: 1px solid #ddd
+    padding: 5px
+    text-align: left
+    vertical-align: middle
+    &>a:hover, i:hover
+      cursor: pointer
+      color: $main-color
+  tr:nth-child(even)
+    background-color: #f2f2f2
+  tr
+    background-color: #f8f8f8
+  th
+    padding-top: 12px
+    padding-bottom: 12px
+    text-align: left
+    background-color: $main-color
+    color: #fff
+    vertical-align: middle
+    &:hover
+      background: darken($main-color,5%)
+
+
+.table-edit-input
+  background: #eee
+  border-radius: 10px
+  border: 1px solid #bbb
+  padding: 3px 10px
+  width: 100%
+  &:focus
+    background: #fff
+
+.table-editor-buttons
+  padding: 0px 10px
+  text-align: center
+  &:hover
+    color: $main-color
+
+.table__editor-tools-button
+  position: absolute
+  top: -25px
+  right: -5px
+  z-index: 2
+  background: $main-color
+  border-radius: 40px
+  padding: 5px
+  color: #fff
+  border: 1px solid #fff
+  &:hover
+    border: 1px solid $main-color
+    color: $main-color
+    background: #fff
+    cursor: pointer
+
+@media (max-width: 450px)
+  .table-open-editor-tools-button
+    top: -14px

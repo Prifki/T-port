@@ -1,0 +1,342 @@
+
+
+
+//to consider
+
+
+  .floating-menu
+  display: none
+
+.close-pic
+  cursor: pointer
+  &:hover
+    color: $main-color
+
+.floating-menu
+  position: absolute
+  left: 0
+  top: -130px
+  z-index: 8
+  transition: top 0.4s ease
+
+.mobile-find-field
+  position: absolute
+  top: 62px
+  left: -102%
+  display: none
+  background: #f2f2f2
+  width: 100%
+  justify-content: center
+  padding: 20px
+  z-index: 8
+  transition: left 0.4s ease
+  border-bottom: 1px solid $main-color
+  input
+    color: #000
+    font-size: 1.4rem
+    border-bottom: 1px solid #000
+    background-color: transparent
+    
+.mobile-find-field-closing
+  position: absolute
+  right: 16px
+
+.mobile-find-field-wrapper
+  display: flex
+  justify-content: center
+
+.mobile-search-results
+  margin: 10px
+  display: none
+  flex-direction: column
+  font-size: 1.2em
+  max-height: 160px
+  overflow: overlay
+  li
+    padding: 10px
+    display: flex
+    flex-direction: row
+    border-bottom: 1px solid #ccc
+    &:hover
+      background: #ccc
+      cursor: pointer
+
+.show-mobile-search
+  left: 0
+
+.show-menu
+  top: 62px
+
+@media (max-width: 585px)
+  .floating-menu
+    top: -130px
+  .header-buttons > div
+      margin: 0 5px
+  header
+    h1
+      margin: 0
+  nav
+    flex-direction: column
+  .nav-item
+    margin: 5px
+  .mobile-find-field
+    display: flex
+    flex-direction: column
+  .find-box
+    display: none
+
+@media (max-width: 875px)
+  .floating-menu
+    display: flex
+    background: #f2f2f2
+    width: 100%
+    justify-content: center
+    padding: 20px
+  .navigation-bar
+    display: none
+  .header__burger-wrapper
+    display: block
+    
+.found-route-menu
+  display: none
+  position: absolute
+  top: 0
+  right: 0
+  z-index: 3
+  transition: all 0.4s ease
+  background: #eee
+  padding: 10px
+  margin: 10px
+  border-radius: 10px
+  border: 1px solid $main-color
+  h2
+    text-align: center
+    font-family: Mission, "Mission Gothic Light"
+    font-size: 1.5em
+    margin: 10px
+  ul
+    display: flex
+    flex-direction: column
+    width: fit-content
+    font-size: 1.3em
+  li
+    width: 100%
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: space-between
+    a
+      text-align: left
+      padding: 5px 10px
+      margin: 10px
+      min-width: 150px
+      width: 100%
+      background: #e1e1e1
+      border-radius: 10px
+      display: flex
+      flex-direction: row
+      align-items: center
+      &:hover
+        background: darken(#eee,10%)
+  p
+    font-size: 1.3em
+
+.found-route-content-wrapper
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.bar 
+  list-style: none
+  li 
+    position: relative
+    &:before
+      content: '\25CF'
+      margin-right: 10px
+      font-size: 20px
+    &:after 
+      position: absolute
+      left: 0
+      top: 0
+      content: ''
+      border-left: 2px solid black
+      margin-left: 5px
+      height: 100%
+    &:first-of-type:after
+      top: 50%
+    &:last-of-type:after
+      top: -50%
+
+.find-a-route-menu
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 3
+  transition: all 0.4s ease
+  background: #eee
+  padding: 10px
+  margin: 10px
+  border-radius: 10px
+  border: 1px solid $main-color
+  .route-wrapped-ico
+    display: none
+
+.find-a-route-content
+  display: flex
+  flex-direction: column
+  align-items: center
+  h2
+    font-family: $menus-font
+    font-size: 1.7em
+    margin: 10px
+
+.find-a-route-wrapped
+  width: 50px
+  height: 50px
+  display: flex
+  justify-content: center
+  align-items: center
+  .closing-button
+    display: none
+  .find-a-route-content
+    display: none
+  .route-wrapped-ico
+    display: block
+    font-size: 1.4em
+    cursor: pointer
+  &:hover
+    color: $main-color
+
+.find-a-route-inputs
+  width: 100%
+  margin: 10px 0
+  padding: 5px 10px
+  border-radius: 10px
+  background: #ddd
+  color: #000
+  font-family: $main-font
+  font-size: 1.2em
+  &:focus
+    background: #fff
+
+.button
+  font-size: 1.3em
+  border: 1px solid $main-color
+  background: lighten($main-color,35%)
+  border-radius: 20px
+  padding: 5px
+  margin-top: 5px
+  width: 60%
+  text-align: center
+  &:hover
+    background: lighten($main-color,20%)
+
+.favorites-menu
+  opacity: 0
+  transition: opacity 0.4s ease
+  position: absolute
+  top: 0
+  right: 0
+  z-index: -1
+  background: #eee
+  padding: 10px 25px
+  margin: 10px
+  display: flex
+  flex-direction: column
+  border-radius: 10px
+  border: 1px solid $main-color
+  h3
+    text-align: center
+    font-family: $menus-font
+    font-size: 1.5em
+    margin: 10px
+  ul
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+    font-size: 1.3em
+  li
+    width: 100%
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: space-between  
+    .material-icons
+      margin-right: 5px
+  a
+    text-align: left
+    padding: 5px 10px
+    margin: 10px
+    width: 100%
+    background: #e1e1e1
+    border-radius: 10px
+    &:hover
+      background: darken(#eee,10%)
+
+.fixed-favorites
+  position: fixed
+  top: 120px
+
+.delete-button
+  visibility: hidden
+  &:hover
+    color: $main-color
+    cursor: pointer
+
+@media (max-width: 470px)
+  .favorites-menu, .login-menu
+    left: 0
+    width: 95%
+
+.login-menu
+  opacity: 0
+  position: absolute
+  transition: opacity 0.4s ease
+  top: 0
+  right: 0
+  z-index: -1
+  background: #eee
+  padding: 10px
+  margin: 10px
+  display: flex
+  flex-direction: column
+  align-items: center
+  border-radius: 10px
+  border: 1px solid $main-color
+  h3
+    text-align: center
+    font-family: $menus-font
+    font-size: 1.5em
+    margin: 10px
+  input
+    width: 100%
+    margin: 10px 0
+    padding: 5px 10px
+    border-radius: 10px
+    background: #ddd
+    color: #000
+    font-family: $main-font
+    font-size: 1.2em
+    &:focus
+      background: #fff
+      border: none
+  .login-failed
+    background: #fbd2ce
+    border: 1px solid #ff9085
+    animation-name: shake
+    animation-duration: 0.8s
+    animation-timing-function: ease-in-out
+
+@keyframes shake
+  10%, 90%
+    transform: translate3d(-1px, 0, 0)
+  20%, 80%
+    transform: translate3d(2px, 0, 0)
+  30%, 50%, 70%
+    transform: translate3d(-4px, 0, 0)
+  40%, 60% 
+    transform: translate3d(4px, 0, 0)
+
+.show-additional-menu
+  opacity: 1
+  z-index: 5

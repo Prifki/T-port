@@ -1,0 +1,20 @@
+.pagination-wrapper
+  display: flex
+  justify-content: center
+  margin: 10px
+
+.pagination
+  display: flex
+  a
+    color: black
+    font-size: 1.1em
+    padding: 8px 16px
+    text-decoration: none
+    &:hover:not(.active)
+      background-color: #ddd
+      border-radius: 5px
+
+.pagination--active
+    background-color: $main-color
+    color: white
+    border-radius: 5px

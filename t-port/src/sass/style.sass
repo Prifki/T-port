@@ -1,0 +1,57 @@
+@import variables
+@import bases
+@import header-style
+@import burger
+@import global-search
+@import tables
+@import filters
+@import pagination
+@import cards
+@import footer-style
+
+@import menus
+@import bases
+
+//to consider - menus, bases
+
+main
+  width: 100%
+  display: flex
+  flex-direction: column
+  flex-wrap: nowrap
+  align-items: center
+
+.substrate
+  width: 85%
+  height: 100%
+  margin: 5px
+  border-radius: 10px
+  background: #f8f8f8
+  z-index: 3
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.page-name
+  text-align: center
+  margin: 20px
+  font-family: $logo-font
+  font-size: 2.2em
+
+@media (max-width: 585px)
+  .substrate
+    width: 100%
+    margin: 0
+    border-radius: 0
+
+::-webkit-scrollbar
+  width: 12px
+::-webkit-scrollbar-track
+  -webkit-border-radius: 10px
+  border-radius: 10px
+::-webkit-scrollbar-thumb
+  -webkit-border-radius: 10px
+  border-radius: 10px
+  background: $main-color
+::-webkit-scrollbar-thumb:window-inactive 
+  background: lighten($main-color,10%)

@@ -1,0 +1,37 @@
+.filters--by-type
+  display: flex
+  flex-direction: row
+  justify-content: center
+  margin: 10px
+  input[type="checkbox"],
+  input[type="radio"]
+    display: none
+  input[type="checkbox"]+label:hover
+    background: lighten($main-color,5%)
+  input[type="checkbox"]:checked+label
+    background: lighten($main-color,20%)
+  input[type="checkbox"]:checked+label:hover
+    background: lighten($main-color,15%)
+    
+.filters--by-type__item
+    @extend %filtering-item
+    cursor: pointer
+    background: $main-color
+    i
+      font-size: 20px
+
+.filters--by-type__item--first
+  border-radius: 40px 0 0 40px
+  @extend %filtering-item
+  
+.filters--by-type__item--last
+  border-radius: 0 40px 40px 0
+
+%filtering-item
+  color: #fff
+  font-weight: 600
+  padding: 5px 10px
+  font-size: 1.3em
+  transition: all 0.2s
+  display: flex
+  align-items: center

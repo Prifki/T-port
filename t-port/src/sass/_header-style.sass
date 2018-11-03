@@ -1,0 +1,73 @@
+header
+  width: 100%
+  z-index: 10
+  background: $header-color
+  padding: 5px
+  border-bottom: 2px solid $main-color
+  display: flex
+  align-items: center
+  flex-direction: row
+  justify-content: space-between  
+
+.header__main-section
+  display: flex
+  flex-direction: row
+  justify-content: flex-start
+  align-items: center
+
+.header__burger-wrapper
+  display: none
+
+.header__title
+  font-family: $logo-font
+  color: #000
+  font-size: 2.7em
+  text-rendering: optimizeLegibility
+  margin-left: 20px
+
+.navigation-bar
+  display: flex
+  flex-direction: row
+  justify-content: flex-start
+  
+.navigation-bar__item
+  font-family: $menus-font
+  text-transform: uppercase
+  letter-spacing: 0.15em
+  font-size: 1.3em
+  margin: 0 10px
+  &:hover
+    color: $main-color
+
+.header-buttons
+  display: flex
+  flex-direction: row
+  align-items: center
+  div
+    margin: 0 10px
+  div:hover
+    color: $main-color
+    cursor: pointer
+  .material-icons
+    font-size: 32px
+
+@media (max-width: 585px)
+  .header-buttons div
+    margin: 0 5px
+  .header__title
+    margin: 0
+  nav
+    flex-direction: column
+  .navigation-bar__item
+    margin: 5px
+  .mobile-find-field
+    display: flex
+    flex-direction: column
+  .global-search
+    display: none
+
+@media (max-width: 875px)
+  .navigation-bar
+    display: none
+  .header__burger-wrapper
+    display: block

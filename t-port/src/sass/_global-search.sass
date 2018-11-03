@@ -1,0 +1,67 @@
+.global-search
+  position: absolute
+  right: 0
+  background: #fff
+  border-radius: 40px
+  height: 48px
+  padding: 3px
+  border: 1px solid #ccc
+  &:hover > .find-btn 
+    background: #ddd
+  &:hover > .global-search__input
+    width: 200px
+    padding: 0 10px
+
+.global-search__button
+  float: right
+  width: 40px
+  height: 40px
+  border-radius: 50%
+  background: $header-color
+  display: flex
+  justify-content: center
+  align-items: center
+  transition: 0.4s
+  cursor: pointer
+  & > i 
+    font-size: 30px
+    color: #000
+
+.global-search__input
+  border: none
+  background: none
+  outline: none
+  padding: 0
+  color: #000
+  font-size: 16px
+  transition: 0.4s
+  line-height: 40px
+  width: 0px
+  font-weight: bold
+  &:focus
+    width: 200px
+    padding: 0 10px
+    
+.global-search-results
+  display: none
+  position: absolute
+  top: 52px
+  flex-direction: column
+  right: 0
+  max-height: 149px
+  overflow: overlay
+  width: 250px
+  font-size: 1.1em
+  line-height: 1.5em
+  background: #fff
+  border: 1px solid $main-color
+  border-radius: 10px
+  li
+    width: 100%
+    display: flex
+    padding: 5px
+    border-bottom: 1px solid #ccc
+    &:hover
+      background: #eee
+      cursor: pointer
+      

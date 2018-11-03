@@ -1,0 +1,58 @@
+.card
+  width: 90%
+  border-radius: 20px
+  background: #eee
+  padding: 20px
+  flex-direction: column
+  align-items: center
+  margin: 10px
+  transition: opacity 0.4s ease
+  //display: none
+  //opacity: 0
+  opacity: 1 //to_delete
+  display: flex //to_delete
+
+.card__title
+  font-size: 1.5em
+  font-family: $logo-font
+
+.card--shown
+  opacity: 1
+  display: flex
+
+.card__button--bookmark
+  position: absolute
+  top: -8px
+  right: 40px
+  margin: 5px
+  z-index: 2
+  &:hover
+    color: $main-color
+    cursor: pointer
+  i
+    font-size: 1.8em
+
+.card__button--closing
+  position: absolute
+  top: 0
+  right: 0
+  margin: 5px
+  z-index: 2
+
+// To_change
+.google-map-on-card
+  width: 90%
+  min-height: 400px
+  display: grid
+  margin: 10px
+
+.edit-button
+  position: absolute
+  top: 0
+  left: 0
+  margin: 5px
+  z-index: 2
+  &:hover
+    color: $main-color
+    cursor: pointer
+  
