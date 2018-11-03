@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import BurgerButton from './header_components/BurgerButton';
-import NavigationBar from './header_components/NavigationBar';
-import GlobalSearch from './header_components/GlobalSearch';
-import FavoritesButton from './header_components/FavoritesButton';
-import LoginButton from './header_components/LoginButton';
-import MobileGlobalSearchButton from './header_components/MobileGlobalSearchButton';
+import BurgerButton from './presentational/BurgerButton';
+import NavigationBar from './presentational/NavigationBar';
+import GlobalSearch from './presentational/GlobalSearch';
+import FavoritesButton from './presentational/FavoritesButton';
+import LoginButton from './presentational/LoginButton';
+import MobileGlobalSearchButton from './presentational/MobileGlobalSearchButton';
 
 class Header extends Component {
   render() {
