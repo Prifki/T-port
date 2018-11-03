@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import FilterByType from './page_components/FilterByType';
-import Table from './page_components/Table';
-import Pagination from './page_components/Pagination';
-import Card from './page_components/Card';
-import LoginMenu from './menus_components/LoginMenu';
-import FavoritesMenu from './menus_components/FavoritesMenu';
-import BurgerNavBar from './menus_components/BurgerNavBar';
-import MobileGlobalSearch from './menus_components/MobileGlobalSearch';
-import FindARouteMenu from './menus_components/FindARouteMenu';
+import FilterByType from './presentational/FilterByType';
+import Table from './presentational/Table';
+import Pagination from './presentational/Pagination';
+import Card from './presentational/Card';
+import LoginMenu from '../landing/header/presentational/LoginMenu';
+import FavoritesMenu from '../landing/header/presentational/FavoritesMenu';
+import BurgerNavBar from '../landing/header/presentational/BurgerNavBar';
+import MobileGlobalSearch from '../landing/header/presentational/MobileGlobalSearch';
+import FindARouteMenu from '../landing/header/presentational/FindARouteMenu';
 
 class Main extends Component {
   render() {
