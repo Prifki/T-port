@@ -8,7 +8,6 @@ class RoutesContainer extends Component {
         super(props);
         this.state = {
             isCardShowen: false,
-            routes: JSONdata.routes,
             routesTableTitles: <tr>
                                  <th>Route name</th>
                                  <th>From</th>

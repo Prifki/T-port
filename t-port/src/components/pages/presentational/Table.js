@@ -5,7 +5,7 @@ import TableBody from './TableBody';
 
 class Table extends Component {
   render() {
-    const { rows, header } = this.props
+    const { rows, header} = this.props
     return (
         <div className="table-wrapper">
             <TableEditButton />
