@@ -5,12 +5,13 @@ import TableBody from './TableBody';
 
 class Table extends Component {
   render() {
-    const { transport, tableTitles } = this.props
+    const { rows, header } = this.props
     return (
         <div className="table-wrapper">
             <TableEditButton />
             <table id="transport-table">
-                <TableBody transport={transport}/>
+                <TableHeader header = { header } />
+                <TableBody rows={ rows }/>
             </table>
         </div>
     );

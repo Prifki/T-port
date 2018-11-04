@@ -8,15 +8,30 @@ import JSONdata from './../../data/data.json';
 class TransportsContainer extends Component {
   state = {
     transport: JSONdata.transport,
-    tableTitles: ['Type', 'Number', 'Route', 'Seats']
-  }
+    transportTableTitles: <tr>
+                            <th>Type</th>
+                            <th>Nunber</th>
+                            <th>Route</th>
+                            <th>Seats</th>
+                          </tr>
+  };
   render() {
+    const rows = this.state.transport.map((row, index) => {
+      return (
+        <tr key={index}>
+            <td><i className="material-icons">{row.type}</i></td>
+            <td>{row.number}</td>
+            <td>{row.seats}</td>
+            <td>{row.route}</td>
+        </tr>
+      );
+    });
     return (
         <main>
             <div className="substrate">
                 <h2 className="page-name">Transport</h2>
                 <FilterByType />
-                <Table transport={this.state.transport} tableTitles={this.state.tableTitles}/>
+                <Table rows = { rows } header = {this.state.transportTableTitles}/>
                 <Pagination />
                 <Card />
             </div>
