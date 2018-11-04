@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 
-class TableHeader extends Component {
-  render() {
-    return (
-      <tr>
-        <th>Header</th>
-        <th>Header</th>
-        <th>Header</th>
-        <th>Header <i className="material-icons">arrow_drop_up</i></th>
-      </tr>	
-    );
+class TableHeader extends Component { 
+  render(){
+      const tableTitles = this.props
+      console.log(tableTitles);
+      let titles;
+      for (let each in tableTitles){
+        titles+=<td>{tableTitles[each]}</td>
+      }
+      return <tr>{titles}</tr>;
   }
 }
-
 export default TableHeader;
