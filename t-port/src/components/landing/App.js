@@ -11,8 +11,9 @@ class App extends Component {
     return (
       <>
         <Header />
-        <TransportsContainer />
+        <RoutesContainer />
         {/*<FindRouteContainer />
+        <TransportsContainer />
         <RoutesContainer />
         <StopsContainer />
         */}

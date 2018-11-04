@@ -5,12 +5,14 @@ import CloseButton from './CloseButton';
 
 class Card extends Component {
   render() {
+    const { tableHeader } = this.props
+    console.log(this.props)
     return (
         <div className="card">
             <BookmarkButton />
             <CloseButton />
             <h3 className="card__title">Card Title</h3>
-            <Table />
+            <Table header = { tableHeader }/>
         </div>
     );
   }

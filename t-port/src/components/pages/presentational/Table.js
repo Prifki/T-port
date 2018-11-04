@@ -11,7 +11,7 @@ class Table extends Component {
             <TableEditButton />
             <table id="transport-table">
                 <TableHeader header = { header } />
-                <TableBody rows={ rows }/>
+                <TableBody rows = { rows }/>
             </table>
         </div>
     );
