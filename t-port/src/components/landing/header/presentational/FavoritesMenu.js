@@ -7,7 +7,7 @@ class FavoritesMenu extends Component {
     render() {
         return (
             <div className="menu menu--favorites">
-                <CloseButton/>
+                <CloseButton />
                 <EditFavoritesButton/>
                 <h3 className="menu__title">Favorites</h3>
                 <ul className="menu--favorites-list">
