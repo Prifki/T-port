@@ -44,7 +44,6 @@ class TransportsContainer extends Component {
     );
   }
   showCard = (props) => {
-    console.log(props);
     this.setState({
       isCardShowen: true
     })

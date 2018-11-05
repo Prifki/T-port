@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BurgerButton from './presentational/BurgerButton';
-import NavigationBar from './presentational/NavigationBar';
+import NavBar from './presentational/NavBar';
 import GlobalSearch from './presentational/GlobalSearch';
 import FavoritesButton from './presentational/FavoritesButton';
 import LoginButton from './presentational/LoginButton';
@@ -26,7 +26,9 @@ class Header extends Component {
           <BurgerButton onClick={this.toggleBurgerNavBar} isBurgerButtonActive={this.state.isBurgerButtonActive}/>
           <h1 className="header__title"><a href="/">T-port</a></h1>
         </div>
-        <NavigationBar />
+        <div className="navigation-bar">
+          <NavBar />
+        </div>
         <div className="header-buttons">
           <FavoritesButton onClick={this.toggleFavoritesMenu}/>
           <LoginButton onClick={this.toggleLoginMenu}/>
@@ -36,7 +38,7 @@ class Header extends Component {
       </header>
   
       {this.state.isMobileGlobalSearchOpen ? <MobileGlobalSearch /> : null}
-      {this.state.isBurgerNavBarOpen ? <BurgerNavBar /> : null}
+      {this.state.isBurgerNavBarOpen ? <div className="burger-navigation-bar"><NavBar /></div> : null}
       {this.state.isLoginMenuOpen ? <LoginMenu /> : null}
       {this.state.isFavoritesMenuOpen ? <FavoritesMenu /> : null}
       </>
