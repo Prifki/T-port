@@ -5,9 +5,9 @@ class NavBar extends Component {
   render() {
     return (
         <nav>
-            <Link to="/transports"><a href="#" className="navigation-bar__item">transport</a></Link>
-            <Link to="/stops"><a href="#" className="navigation-bar__item">stops</a></Link>
-            <Link to="/routes"><a href="#" className="navigation-bar__item">routes</a></Link>
+            <Link to="/transports" className="navigation-bar__item">transport</Link>
+            <Link to="/stops" className="navigation-bar__item">stops</Link>
+            <Link to="/routes" className="navigation-bar__item">routes</Link>
         </nav>
     );
   }

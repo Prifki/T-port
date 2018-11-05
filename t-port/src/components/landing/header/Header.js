@@ -7,7 +7,6 @@ import LoginButton from './presentational/LoginButton';
 import MobileGlobalSearchButton from './presentational/MobileGlobalSearchButton';
 import LoginMenu from './presentational/LoginMenu';
 import FavoritesMenu from './presentational/FavoritesMenu';
-import BurgerNavBar from './presentational/BurgerNavBar';
 import MobileGlobalSearch from './presentational/MobileGlobalSearch';
 
 class Header extends Component {
