@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FindARouteMenu from './presentational/FindARouteMenu';
 import FoundRouteMenu from './presentational/FoundRouteMenu';
+import GoogleMap from './presentational/GoogleMap';
 
 class FindRouteContainer extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class FindRouteContainer extends Component {
   render() {
     return (
         <main>
+            <div className="index-google-map"><GoogleMap/></div>
             <FindARouteMenu FindARouteMenuOpened={this.state.FindARouteMenuOpened} toggleFindARouteMenu={this.toggleFindARouteMenu}/>
             {this.state.FoundRouteMenuOpened ? <FoundRouteMenu closeFoundRouteMenu={this.closeFoundRouteMenu} /> : null }
         </main>
