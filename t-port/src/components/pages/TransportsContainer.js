@@ -50,7 +50,7 @@ class TransportsContainer extends Component {
     return (
       <tr>
         <th>Type</th>
-        <th>Nunber</th>
+        <th>Number</th>
         <th>Route</th>
         <th>Seats</th>
       </tr>

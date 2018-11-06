@@ -58,11 +58,12 @@
   transition: opacity 0.4s ease
   top: 60px
   right: 0
-  z-index: 3
+  z-index: 8
+  visibility: hidden
   opacity: 0
   
 .menu--login--active
-  z-index: 8
+  visibility: visible
   opacity: 1
 
 .menu--login--failed-animation
@@ -91,12 +92,13 @@
   position: absolute
   top: 60px
   right: 0
-  z-index: 3
   opacity: 0
+  z-index: 8
+  visibility: hidden
 
 .menu--favorites--active
-  z-index: 8
   opacity: 1
+  visibility: visible
 
 .menu--favorites-list
   display: flex
