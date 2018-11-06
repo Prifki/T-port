@@ -350,6 +350,7 @@ table th {
 }
 table th:hover {
   background: #14afe9;
+  cursor: pointer;
 }
 
 .table-edit-input {
