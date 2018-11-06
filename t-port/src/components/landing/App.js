@@ -13,13 +13,13 @@ class App extends Component {
         this.state = {
           isLogged: true,
           isAdmin: true,
-          favorites: [{id: 1, type: 'tram', title: 'Tram TL09'},{id:2, type: 'place', title: 'Nevsky pr.'}]
+          favorites: [{id: 0, type: 'tram', title: 'Tram TL09'},{id:1, type: 'place', title: 'Nevsky pr.'},{id:2, type: 'place', title: 'Gostinka'}]
         }
     }
     render() {
         return (
             <>
-                <Header favorites={this.state.favorites}/>
+                <Header favorites={this.state.favorites} removeFromFavorites={this.removeFromFavorites} />
 
                 <Switch>
                     <Route exact path='/' component={FindRouteContainer}/>
@@ -31,6 +31,14 @@ class App extends Component {
                 <Footer/>
             </>
         );
+    }
+    removeFromFavorites = index => {
+        const { favorites } = this.state;
+        this.setState({
+            favorites: favorites.filter((favorite, i) => { 
+                return i !== index;
+            })
+        });
     }
 }
 

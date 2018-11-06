@@ -34,7 +34,7 @@ class Header extends Component {
           <NavBar />
         </div>
         <div className="header-buttons">
-          <FavoritesButton onClick={this.toggleFavoritesMenu}/>
+          <FavoritesButton onClick={this.toggleFavoritesMenu} />
           <LoginButton onClick={this.toggleLoginMenu}/>
           <MobileGlobalSearchButton onClick={this.toggleMobileGlobalSearch}/>
         </div>
@@ -43,7 +43,7 @@ class Header extends Component {
       <MobileGlobalSearch isMobileGlobalSearchOpen={this.state.isMobileGlobalSearchOpen} toggleMobileGlobalSearch={this.toggleMobileGlobalSearch}/>
       <div className={burgerNavBarClassName}><NavBar /></div>
       <LoginMenu isLoginMenuOpen={this.state.isLoginMenuOpen} toggleLoginMenu={this.toggleLoginMenu}/>
-      <FavoritesMenu isFavoritesMenuOpen={this.state.isFavoritesMenuOpen} toggleFavoritesMenu={this.toggleFavoritesMenu} favorites={this.props.favorites}/>
+      <FavoritesMenu isFavoritesMenuOpen={this.state.isFavoritesMenuOpen} toggleFavoritesMenu={this.toggleFavoritesMenu} favorites={this.props.favorites} removeFromFavorites={this.props.removeFromFavorites} />
       </>
     );
   }

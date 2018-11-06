@@ -9,7 +9,6 @@ class FavoritesMenu extends Component {
         this.state = {
             favoritesEditingMode: false
         };
-        console.log(this.props.favorites);
     }
     render() {
         const items = this.generateItems();
@@ -34,9 +33,11 @@ class FavoritesMenu extends Component {
     }
     generateItems = () => {
         return (
-            this.props.favorites.map( (favoritesData) => <li key={favoritesData.id}><a href="#">
-            <i className="material-icons">{favoritesData.type}</i>{favoritesData.title}</a>
-            {this.state.favoritesEditingMode ? <FavoritesRemoveButton/> : null}</li>)
+            this.props.favorites.map(
+                (favoritesData) => <li key={favoritesData.id}><a href="#">
+                <i className="material-icons">{favoritesData.type}</i>{favoritesData.title}</a>
+                {this.state.favoritesEditingMode ? <FavoritesRemoveButton  onClick={() => this.props.removeFromFavorites(favoritesData.id)}/> : null}</li>
+            )
         );
     }
 }

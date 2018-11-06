@@ -18,7 +18,7 @@ class FoundRouteMenu extends Component {
   }
 
   contentManager = () => {
-    if (this.props.isRouteFound) {
+    if (!this.props.isRouteFound) {
       return (<NothingFoundText />);
     }
     else {
