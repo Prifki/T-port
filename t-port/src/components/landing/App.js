@@ -8,10 +8,18 @@ import RoutesContainer from '../pages/RoutesContainer';
 import TransportsContainer from '../pages/TransportsContainer';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          isLogged: true,
+          isAdmin: true,
+          favorites: [{id: 1, type: 'tram', title: 'Tram TL09'},{id:2, type: 'place', title: 'Nevsky pr.'}]
+        }
+    }
     render() {
         return (
             <>
-                <Header/>
+                <Header favorites={this.state.favorites}/>
 
                 <Switch>
                     <Route exact path='/' component={FindRouteContainer}/>

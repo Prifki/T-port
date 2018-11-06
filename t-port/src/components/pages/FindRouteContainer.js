@@ -7,28 +7,29 @@ class FindRouteContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      FindARouteMenuOpened: true,
-      FoundRouteMenuOpened: true
+      isFindARouteMenuOpened: true,
+      isFoundRouteMenuOpened: true,
+      isRouteFound: false
     }
   }
   render() {
     return (
         <main>
             <div className="index-google-map"><GoogleMap/></div>
-            <FindARouteMenu FindARouteMenuOpened={this.state.FindARouteMenuOpened} toggleFindARouteMenu={this.toggleFindARouteMenu}/>
-            {this.state.FoundRouteMenuOpened ? <FoundRouteMenu closeFoundRouteMenu={this.closeFoundRouteMenu} /> : null }
+            <FindARouteMenu isFindARouteMenuOpened={this.state.isFindARouteMenuOpened} toggleFindARouteMenu={this.toggleFindARouteMenu}/>
+            {this.state.isFoundRouteMenuOpened ? <FoundRouteMenu closeFoundRouteMenu={this.closeFoundRouteMenu} isRouteFound={this.state.isRouteFound}/> : null }
         </main>
     );
   }
   toggleFindARouteMenu = () => {
     this.setState( prevState => {
       return {
-        FindARouteMenuOpened: !prevState.FindARouteMenuOpened
+        isFindARouteMenuOpened: !prevState.isFindARouteMenuOpened
       }
     })
   }
   closeFoundRouteMenu = () => {
-    this.setState( () => {return {closeFoundRouteMenu: false}})
+    this.setState( () => {return {isFoundRouteMenuOpened: false}})
   }
 }
 

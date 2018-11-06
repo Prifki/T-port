@@ -9,8 +9,10 @@ class FavoritesMenu extends Component {
         this.state = {
             favoritesEditingMode: false
         };
+        console.log(this.props.favorites);
     }
     render() {
+        const items = this.generateItems();
         const className = this.props.isFavoritesMenuOpen ? 'menu menu--favorites menu--favorites--active' : 'menu menu--favorites';
         return (
             <div className={className}>
@@ -18,26 +20,7 @@ class FavoritesMenu extends Component {
                 <FavoritesEditButton onClick={this.switchEditingMode} favoritesEditingMode={this.state.favoritesEditingMode}/>
                 <h3 className="menu__title">Favorites</h3>
                 <ul className="menu--favorites-list">
-                    <li><a href="#">
-                        <i className="material-icons">directions_bus</i>
-                        Bus AB01</a>
-                        {this.state.favoritesEditingMode ? <FavoritesRemoveButton/> : null}
-                    </li>
-                    <li><a href="#">
-                        <i className="material-icons">place</i>
-                        Nevsky pr.</a>
-                        {this.state.favoritesEditingMode ? <FavoritesRemoveButton/> : null}
-                    </li>
-                    <li><a href="#">
-                        <i className="material-icons">tram</i>
-                        Tram TL09</a>
-                        {this.state.favoritesEditingMode ? <FavoritesRemoveButton/> : null}
-                    </li>
-                    <li><a href="#">
-                        <i className="material-icons">place</i>
-                        Gorkovskaya</a>
-                        {this.state.favoritesEditingMode ? <FavoritesRemoveButton/> : null}
-                    </li>
+                    {items}
                 </ul>
             </div>
         );
@@ -48,7 +31,14 @@ class FavoritesMenu extends Component {
             favoritesEditingMode: !prevState.favoritesEditingMode
           }
         })
-      }
+    }
+    generateItems = () => {
+        return (
+            this.props.favorites.map( (favoritesData) => <li key={favoritesData.id}><a href="#">
+            <i className="material-icons">{favoritesData.type}</i>{favoritesData.title}</a>
+            {this.state.favoritesEditingMode ? <FavoritesRemoveButton/> : null}</li>)
+        );
+    }
 }
 
 export default FavoritesMenu;
