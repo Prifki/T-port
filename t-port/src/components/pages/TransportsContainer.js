@@ -6,22 +6,36 @@ import Card from './presentational/Card';
 import JSONdata from './../../data/data.json';
 
 class TransportsContainer extends Component {
-  state = {
-    isCardShowen: false,
-    transport: JSONdata.transport,
-    transportTableTitles: <tr>
-                            <th>Type</th>
-                            <th>Nunber</th>
-                            <th>Route</th>
-                            <th>Seats</th>
-                          </tr>,
-    transportCardTableTitles: <tr>
-                                <th>Stop</th>
-                                <th>Time</th>
-                              </tr>
-  };
+  constructor(props){
+    super(props);
+    const transport = JSONdata.transport;
+    this.state = {
+      isCardShowen: false,
+      transportTableRows: this.createTransportTable(transport),
+      transportTableTitles: this.transportTableTitles(),
+      transportCardTableTitles: this.transportCardTableTitles()
+    }
+  }
   render() {
-    const transportTableRows = this.state.transport.map((row, index) => {
+    return (
+        <main>
+            <div className="substrate">
+                <h2 className="page-name">Transport</h2>
+                <FilterByType />
+                <Table rows = { this.state.transportTableRows } header = { this.state.transportTableTitles } />
+                <Pagination />
+                {this.state.isCardShowen ? <Card tableHeader = { this.state.transportCardTableTitles } /> : null}
+            </div>
+        </main>
+    );
+  }
+  showCard = () => {
+    this.setState({
+      isCardShowen: true
+    })
+  }
+  createTransportTable = (transport) => {
+    return transport.map((row, index) => {
       return (
         <tr key={index}>
             <td><i className="material-icons">{row.type}</i></td>
@@ -31,22 +45,24 @@ class TransportsContainer extends Component {
         </tr>
       );
     });
+  }
+  transportTableTitles = () => {
     return (
-        <main>
-            <div className="substrate">
-                <h2 className="page-name">Transport</h2>
-                <FilterByType />
-                <Table rows = { transportTableRows } header = { this.state.transportTableTitles } />
-                <Pagination />
-                {this.state.isCardShowen ? <Card tableHeader = { this.state.transportCardTableTitles } /> : null}
-            </div>
-        </main>
+      <tr>
+        <th>Type</th>
+        <th>Nunber</th>
+        <th>Route</th>
+        <th>Seats</th>
+      </tr>
     );
   }
-  showCard = (props) => {
-    this.setState({
-      isCardShowen: true
-    })
+  transportCardTableTitles = () => {
+    return (
+      <tr>
+        <th>Stop</th>
+        <th>Time</th>
+      </tr>
+    );
   }
 }
 
