@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class RemoveFavoritesButton extends Component {
+class FavoritesRemoveButton extends Component {
   render() {
     return (
         <div className="menu__button--remove-favorites"><i className="material-icons">remove</i></div>
@@ -8,4 +8,4 @@ class RemoveFavoritesButton extends Component {
   }
 }
 
-export default RemoveFavoritesButton;
+export default FavoritesRemoveButton;

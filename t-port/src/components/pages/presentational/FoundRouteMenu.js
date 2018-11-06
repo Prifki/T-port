@@ -9,12 +9,9 @@ class FoundRouteMenu extends Component {
 		<div className="menu menu--found-route">
 			<div className="menu--found-route-content">
 				<h2 className="menu__title">Your route</h2>
-				<CloseButton />
+				<CloseButton onClick={this.props.closeFoundRouteMenu}/>
                 <NothingFoundText />
 				<ul className="bar" id="route-list">
-                    <FoundRouteItem />
-                    <FoundRouteItem />
-                    <FoundRouteItem />
                     <FoundRouteItem />
                     <FoundRouteItem />
                     <FoundRouteItem />

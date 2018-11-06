@@ -6,7 +6,7 @@ class FindARouteMenu extends Component {
     return (
         <div className="menu menu--find-a-route">
             <div className="menu--find-a-route__button--wrapped"><i className="fas fa-route"></i></div>
-            <CloseButton />
+            <CloseButton onClick={this.props.toggleFindARouteMenu}/>
             <div className="menu--find-a-route-content">
                 <h2 className="menu__title">Find a route</h2>
                 <input className="menu__input" type="text" placeholder="From" id="stopA" list="stopsA" />

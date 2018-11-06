@@ -10,14 +10,19 @@ import FavoritesMenu from './presentational/FavoritesMenu';
 import MobileGlobalSearch from './presentational/MobileGlobalSearch';
 
 class Header extends Component {
-  state = {
-    isLoginMenuOpen: false,
-    isFavoritesMenuOpen: false,
-    isBurgerNavBarOpen: false,
-    isMobileGlobalSearchOpen: false,
-    isBurgerButtonActive: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoginMenuOpen: false,
+      isFavoritesMenuOpen: false,
+      isBurgerNavBarOpen: false,
+      isMobileGlobalSearchOpen: false,
+      isBurgerButtonActive: false
+    };
   }
+  
   render() {
+    const burgerNavBarClassName = this.state.isBurgerNavBarOpen ? 'burger-navigation-bar burger-navigation-bar--active' : 'burger-navigation-bar';
     return (
       <>
       <header>
@@ -35,50 +40,56 @@ class Header extends Component {
         </div>
         <GlobalSearch />
       </header>
-  
-      {this.state.isMobileGlobalSearchOpen ? <MobileGlobalSearch /> : null}
-      {this.state.isBurgerNavBarOpen ? <div className="burger-navigation-bar"><NavBar /></div> : null}
-      {this.state.isLoginMenuOpen ? <LoginMenu /> : null}
-      {this.state.isFavoritesMenuOpen ? <FavoritesMenu /> : null}
+      <MobileGlobalSearch isMobileGlobalSearchOpen={this.state.isMobileGlobalSearchOpen} toggleMobileGlobalSearch={this.toggleMobileGlobalSearch}/>
+      <div className={burgerNavBarClassName}><NavBar /></div>
+      <LoginMenu isLoginMenuOpen={this.state.isLoginMenuOpen} toggleLoginMenu={this.toggleLoginMenu}/>
+      <FavoritesMenu isFavoritesMenuOpen={this.state.isFavoritesMenuOpen} toggleFavoritesMenu={this.toggleFavoritesMenu} />
       </>
     );
   }
   toggleMobileGlobalSearch = () => {
-    this.setState({
-      isMobileGlobalSearchOpen: !this.state.isMobileGlobalSearchOpen,
-      isLoginMenuOpen: false,
-      isFavoritesMenuOpen: false,
-      isBurgerNavBarOpen: false,
-      isBurgerButtonActive: false
+    this.setState( prevState => {
+      return {
+        isMobileGlobalSearchOpen: !prevState.isMobileGlobalSearchOpen,
+        isLoginMenuOpen: false,
+        isFavoritesMenuOpen: false,
+        isBurgerNavBarOpen: false,
+        isBurgerButtonActive: false
+      }
     })
   }
   toggleLoginMenu = () => {
-    this.setState({
-      isLoginMenuOpen: !this.state.isLoginMenuOpen,
-      isFavoritesMenuOpen: false,
-      isBurgerNavBarOpen: false,
-      isMobileGlobalSearchOpen: false,
-      isBurgerButtonActive: false
+    this.setState( prevState => {
+      return {
+        isLoginMenuOpen: !prevState.isLoginMenuOpen,
+        isFavoritesMenuOpen: false,
+        isBurgerNavBarOpen: false,
+        isMobileGlobalSearchOpen: false,
+        isBurgerButtonActive: false
+      }
     })
   }
   toggleFavoritesMenu = () => {
-    this.setState({
-      isFavoritesMenuOpen: !this.state.isFavoritesMenuOpen,
-      isLoginMenuOpen: false,
-      isBurgerNavBarOpen: false,
-      isMobileGlobalSearchOpen: false,
-      isBurgerButtonActive: false
+    this.setState( prevState => {
+      return {
+        isFavoritesMenuOpen: !prevState.isFavoritesMenuOpen,
+        isLoginMenuOpen: false,
+        isBurgerNavBarOpen: false,
+        isMobileGlobalSearchOpen: false,
+        isBurgerButtonActive: false
+      }
     })
-  }  
+  }
   toggleBurgerNavBar = () => {
-    this.setState({
-      isBurgerNavBarOpen: !this.state.isBurgerNavBarOpen,
-      isLoginMenuOpen: false,
-      isFavoritesMenuOpen: false,
-      isMobileGlobalSearchOpen: false,
-      isBurgerButtonActive: !this.state.isBurgerButtonActive
-    });
+    this.setState( prevState => {
+      return {
+        isBurgerNavBarOpen: !prevState.isBurgerNavBarOpen,
+        isLoginMenuOpen: false,
+        isFavoritesMenuOpen: false,
+        isMobileGlobalSearchOpen: false,
+        isBurgerButtonActive: !prevState.isBurgerButtonActive
+      }
+    })
   }
 }
-
 export default Header;
