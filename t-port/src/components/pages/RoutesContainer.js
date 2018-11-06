@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Table from './presentational/Table';
 import Card from './presentational/Card';
 import JSONdata from './../../data/data.json';
+import GoogleMap from './presentational/GoogleMap';
 
 class RoutesContainer extends Component {
     constructor(props){
@@ -20,6 +21,7 @@ class RoutesContainer extends Component {
             <div className="substrate">
                 <h2 className="page-name">Routes</h2>
                 <Table rows = { this.state.routesTableRows } header = { this.state.routesTableTitles }/>
+                <div className="google-map--small"><GoogleMap/></div>
                 {this.state.isCardShowen ? <Card tableHeader = { this.state.routesCardTableTitles } /> : null}
             </div>
         </main>

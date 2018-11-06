@@ -14,7 +14,7 @@ class FindARouteMenu extends Component {
                 <input className="menu__input" type="text" placeholder="To" id="stopB" list="stopsB" />
                 <datalist id="stopsB"></datalist>
                 <input type="time" className="menu__input" name="from_time" />
-                <a className="menu__button--submit" id="find-a-route-button">Find</a>
+                <span className="menu__button--submit" id="find-a-route-button">Find</span>
             </div>
         </div>
     );

@@ -34,7 +34,7 @@ class Header extends Component {
           <NavBar />
         </div>
         <div className="header-buttons">
-          <FavoritesButton onClick={this.toggleFavoritesMenu} />
+          {this.props.isLogged ? <FavoritesButton onClick={this.toggleFavoritesMenu} /> : null}
           <LoginButton onClick={this.toggleLoginMenu}/>
           <MobileGlobalSearchButton onClick={this.toggleMobileGlobalSearch}/>
         </div>

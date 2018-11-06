@@ -15,7 +15,7 @@ class FindRouteContainer extends Component {
   render() {
     return (
         <main>
-            <div className="index-google-map"><GoogleMap/></div>
+            <div className="google-map--index"><GoogleMap/></div>
             <FindARouteMenu isFindARouteMenuOpened={this.state.isFindARouteMenuOpened} toggleFindARouteMenu={this.toggleFindARouteMenu}/>
             {this.state.isFoundRouteMenuOpened ? <FoundRouteMenu closeFoundRouteMenu={this.closeFoundRouteMenu} isRouteFound={this.state.isRouteFound}/> : null }
         </main>

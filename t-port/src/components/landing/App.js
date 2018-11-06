@@ -19,7 +19,7 @@ class App extends Component {
     render() {
         return (
             <>
-                <Header favorites={this.state.favorites} removeFromFavorites={this.removeFromFavorites} />
+                <Header isLogged={this.state.isLogged} favorites={this.state.favorites} removeFromFavorites={this.removeFromFavorites} />
 
                 <Switch>
                     <Route exact path='/' component={FindRouteContainer}/>

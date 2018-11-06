@@ -44,7 +44,7 @@ main
   font-family: $logo-font
   font-size: 2.2em
 
-.index-google-map
+.google-map--index
   width: 100%
   height: 100%
   flex: auto
@@ -53,6 +53,14 @@ main
     width: 100%
     height: 100%
     flex: auto
+
+.google-map--small
+  width: 90%
+  display: flex
+  margin: 20px
+  & > div
+    min-height: 320px
+    width: 100%
 
 @media (max-width: 585px)
   .substrate
