@@ -15,6 +15,7 @@ class TransportsContainer extends Component {
       transportTableTitles: this.transportTableTitles(),
       transportCardTableTitles: this.transportCardTableTitles()
     }
+    console.log(this.state.transportTableRows);
   }
   render() {
     return (
