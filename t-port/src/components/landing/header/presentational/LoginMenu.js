@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CloseButton from './CloseButton';
+import SubmitButton from './SubmitButton';
 
 class LoginMenu extends Component {
   render() {
@@ -10,7 +11,7 @@ class LoginMenu extends Component {
             <h3 className="menu__title">Sign in</h3>
             <input className="menu__input" type="text" placeholder="Login" id="login-field" />
             <input className="menu__input" type="password" placeholder="Password" id="password-field" />
-            <span className="menu__button--submit" id="login-button">Sign in</span>
+            <SubmitButton id="login-button" text="Sign in"/>
         </div>
     );
   }

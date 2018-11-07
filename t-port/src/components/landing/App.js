@@ -23,9 +23,9 @@ class App extends Component {
 
                 <Switch>
                     <Route exact path='/' component={FindRouteContainer}/>
-                    <Route path='/transports' component={TransportsContainer}/>
-                    <Route path='/routes' component={RoutesContainer}/>
-                    <Route path='/stops' component={StopsContainer}/>
+                    <Route path='/transports' render={(props) => <TransportsContainer {...props} isAdmin={this.state.isAdmin} />}/>
+                    <Route path='/routes' render={(props) => <RoutesContainer {...props} isAdmin={this.state.isAdmin} />}/>
+                    <Route path='/stops' render={(props) => <StopsContainer {...props} isAdmin={this.state.isAdmin} />}/>
                 </Switch>
 
                 <Footer/>

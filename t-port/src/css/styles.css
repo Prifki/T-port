@@ -364,10 +364,6 @@ table th:hover {
   background: #fff;
 }
 
-.table-editor-buttons {
-  padding: 0px 10px;
-  text-align: center;
-}
 .table-editor-buttons:hover {
   color: #29b8ed;
 }
@@ -813,9 +809,6 @@ footer {
   z-index: 5;
   transition: all 0.4s ease;
 }
-.menu--find-a-route .menu--find-a-route__button--wrapped {
-  display: none;
-}
 
 .menu--find-a-route-content {
   display: flex;
@@ -830,11 +823,7 @@ footer {
   justify-content: center;
   align-items: center;
 }
-.find-a-route-wrapped .find-a-route-content {
-  display: none;
-}
 .find-a-route-wrapped .menu--find-a-route__button--wrapped {
-  display: block;
   font-size: 1.4em;
   cursor: pointer;
 }
@@ -911,16 +900,6 @@ footer {
 }
 .bar li:last-of-type:after {
   top: -50%;
-}
-
-.fixed-favorites {
-  position: fixed;
-  top: 120px;
-}
-
-.show-additional-menu {
-  opacity: 1;
-  z-index: 5;
 }
 
 * {

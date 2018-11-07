@@ -19,7 +19,7 @@ class RoutesContainer extends Component {
         <main>
             <div className="substrate">
                 <h2 className="page-name">Routes</h2>
-                <Table header = {this.state.routesTableTitles} rows = {rows} />
+                <Table header = {this.state.routesTableTitles} rows = {rows} isAdmin={this.props.isAdmin}/>
                 <div className="google-map--small"><GoogleMap/></div>
                 {this.state.isCardShowen ? <Card tableHeader = { this.state.routesCardTableTitles } /> : null}
             </div>

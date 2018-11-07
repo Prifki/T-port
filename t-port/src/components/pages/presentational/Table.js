@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
-import TableEditButton from './TableEditButton';
+import TableEditingModeButton from './TableEditingModeButton';
 
 class Table extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            isEditingMode: false
-        }
-    }
   render() {
     return (
       <div className="table-wrapper">
-      <TableEditButton />
+      { this.props.isAdmin ? <TableEditingModeButton onClick={this.props.toggleEditingMode} /> : null }
         <table>
             {this.props.header}
             <tbody>
@@ -19,7 +13,6 @@ class Table extends Component {
             </tbody>
         </table>
       </div>
-  
     );
   }
 }

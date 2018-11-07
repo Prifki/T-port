@@ -18,7 +18,7 @@ class StopsContainer extends Component {
         <main>
             <div className="substrate">
                 <h2 className="page-name">Stops</h2>
-                <Table header = {this.state.stopsTableTitles} rows = {rows} />
+                <Table header = {this.state.stopsTableTitles} rows = {rows} isAdmin={this.props.isAdmin}/>
                 {this.state.isCardShowen ? <Card tableHeader = { this.state.stopsCardTableTitles } /> : null}
             </div>
         </main>

@@ -235,29 +235,23 @@
   left: 0
   z-index: 5
   transition: all 0.4s ease
-  .menu--find-a-route__button--wrapped
-    display: none
 
 .menu--find-a-route-content
   display: flex
   flex-direction: column
   align-items: center
   
-.find-a-route-wrapped   //TO CONSIDER
+.find-a-route-wrapped
   width: 50px
   height: 50px
   display: flex
   justify-content: center
   align-items: center
-  .find-a-route-content
-    display: none
   .menu--find-a-route__button--wrapped
-    display: block
     font-size: 1.4em
     cursor: pointer
   &:hover
     color: $main-color
-
 
 
 
@@ -320,12 +314,3 @@
       top: 50%
     &:last-of-type:after
       top: -50%
-//to consider
-
-.fixed-favorites
-  position: fixed
-  top: 120px
-
-.show-additional-menu
-  opacity: 1
-  z-index: 5
