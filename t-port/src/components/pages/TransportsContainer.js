@@ -5,64 +5,78 @@ import Pagination from './presentational/Pagination';
 import Card from './presentational/Card';
 import JSONdata from './../../data/data.json';
 
+
+
 class TransportsContainer extends Component {
   constructor(props){
     super(props);
-    const transport = JSONdata.transport;
     this.state = {
+      transport: JSONdata.transport,
       isCardShowen: false,
-      transportTableRows: this.createTransportTable(transport),
-      transportTableTitles: this.transportTableTitles(),
-      transportCardTableTitles: this.transportCardTableTitles()
+      transportTableTitles: this.transportTableTitles()
     }
   }
   render() {
+    const rows = this.generateTransportTableRow();
     return (
         <main>
             <div className="substrate">
                 <h2 className="page-name">Transport</h2>
                 <FilterByType />
-                <Table rows = { this.state.transportTableRows } header = { this.state.transportTableTitles } />
+                <table>
+                  {this.state.transportTableTitles}
+                  <tbody>
+                    {rows}
+                  </tbody>
+                </table>
                 <Pagination />
                 {this.state.isCardShowen ? <Card tableHeader = { this.state.transportCardTableTitles } /> : null}
             </div>
         </main>
     );
   }
+  transportTableTitles = () => {
+    return (
+      <thead>
+        <tr>
+          <th onClick={() => this.sortBy('type')} >Type</th>
+          <th onClick={() => this.sortBy('number')} >Number</th>
+          <th onClick={() => this.sortBy('route')} >Route</th>
+          <th onClick={() => this.sortBy('seats')} >Seats</th>
+        </tr>
+      </thead>
+    );
+  }
+
+  generateTransportTableRow = () => {
+    return this.state.transport.map( (rowData) => 
+      <tr key={rowData.id}>
+        <td><i className="material-icons">{rowData.type}</i></td>
+        <td>{rowData.number}</td>
+        <td>{rowData.route}</td>
+        <td>{rowData.seats}</td>   
+      </tr>
+    )
+  }
+
+  compareBy = (key) => {
+    return function (a, b) {
+      if (a[key] < b[key]) return -1;
+      if (a[key] > b[key]) return 1;
+      return 0;
+    };
+  }
+ 
+  sortBy = (key) => {
+    let arrayCopy = [...this.state.transport];
+    arrayCopy.sort(this.compareBy(key));
+    this.setState({transport: arrayCopy});
+  }
+
   showCard = () => {
     this.setState({
       isCardShowen: true
     })
-  }
-  createTransportTable = (transport) => {
-    return transport.map((row, index) => {
-      return (
-        <tr key={index}>
-            <td><i className="material-icons">{row.type}</i></td>
-            <td onClick={this.showCard}><a>{row.number}</a></td>
-            <td>{row.route}</td>
-            <td>{row.seats}</td>
-        </tr>
-      );
-    });
-  }
-  transportTableTitles = () => {
-    return (
-      <tr>
-        <th>Type</th>
-        <th>Number</th>
-        <th>Route</th>
-        <th>Seats</th>
-      </tr>
-    );
-  }
-  transportCardTableTitles = () => {
-    return (
-      <tr>
-        <th>Stop</th>
-        <th>Time</th>
-      </tr>
-    );
   }
 }
 
