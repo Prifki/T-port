@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Table from './presentational/Table';
 import Card from './presentational/Card';
 import JSONdata from './../../data/data.json';
+import EditingColumnTitles from './presentational/EditingColumnTitles';
+import EditTableButton from './presentational/EditTableButton';
 import GoogleMap from './presentational/GoogleMap';
 
 class RoutesContainer extends Component {
@@ -9,17 +11,18 @@ class RoutesContainer extends Component {
         super(props);
         this.state = {
             isCardShowen: false,
-            routesTableTitles: this.routesTableTitles(),
+            isEditingMode: true,
             tableData: this.handleData(),
         }
     }
   render() {
-    const rows = this.generateRoutesTableRow();
+    const rows = this.generateRoutesTableRow(),
+    routesTableTitles = this.routesTableTitles();
     return (
         <main>
             <div className="substrate">
                 <h2 className="page-name">Routes</h2>
-                <Table header = {this.state.routesTableTitles} rows = {rows} isAdmin={this.props.isAdmin}/>
+                <Table header = {routesTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode}/>
                 <div className="google-map--small"><GoogleMap/></div>
                 {this.state.isCardShowen ? <Card tableHeader = { this.state.routesCardTableTitles } /> : null}
             </div>
@@ -33,6 +36,9 @@ class RoutesContainer extends Component {
           <td>{rowData.name}</td>
           <td>{rowData.from}</td>
           <td>{rowData.to}</td>   
+          {this.state.isEditingMode ? <>
+          <EditTableButton type={'edit'}/>
+          <EditTableButton type={'remove'}/></> : null}  
         </tr>
     )
   }
@@ -62,6 +68,7 @@ class RoutesContainer extends Component {
             <th onClick={() => this.sortBy('name')} >Route name</th>
             <th onClick={() => this.sortBy('from')} >From</th>
             <th onClick={() => this.sortBy('to')} >To</th>
+            {this.state.isEditingMode ? <EditingColumnTitles /> : null}
           </tr>
         </thead>
     );
@@ -79,6 +86,14 @@ class RoutesContainer extends Component {
     let arrayCopy = [...this.state.tableData];
     arrayCopy.sort(this.compareBy(key));
     this.setState({tableData: arrayCopy});
+  }
+
+  toggleEditingMode = () => {
+    this.setState( prevState => {
+      return {
+        isEditingMode: !prevState.isEditingMode
+      }
+    })
   }
 
   showCard = () => {

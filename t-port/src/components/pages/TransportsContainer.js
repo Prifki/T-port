@@ -12,19 +12,19 @@ class TransportsContainer extends Component {
     super(props);
     this.state = {
       transport: JSONdata.transport,
-      isCardShowen: false,
-      transportTableTitles: this.transportTableTitles(),
-      isEditingMode: true
+      isEditingMode: true,
+      isCardShowen: false
     }
   }
   render() {
-    const rows = this.generateTransportTableRow();
+    const rows = this.generateTransportTableRow(),
+    transportTableTitles = this.transportTableTitles();
     return (
         <main>
             <div className="substrate">
                 <h2 className="page-name">Transport</h2>
                 <FilterByType />
-                <Table header = {this.state.transportTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode}/>
+                <Table header = {transportTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode}/>
                 <Pagination />
                 {this.state.isCardShowen ? <Card tableHeader = { this.state.transportCardTableTitles } /> : null}
             </div>
@@ -39,7 +39,7 @@ class TransportsContainer extends Component {
           <th onClick={() => this.sortBy('number')} >Number</th>
           <th onClick={() => this.sortBy('route')} >Route</th>
           <th onClick={() => this.sortBy('seats')} >Seats</th>
-    {/*this.state.isEditingMode ? <EditingColumnTitles /> : null*/}
+          {this.state.isEditingMode ? <EditingColumnTitles /> : null}
         </tr>
       </thead>
     );
@@ -52,11 +52,9 @@ class TransportsContainer extends Component {
         <td>{rowData.number}</td>
         <td>{rowData.route}</td>
         <td>{rowData.seats}</td>
-         {/*this.state.isEditingMode ? <>
-      <EditTableButton type={'edit'}/>
-      <EditTableButton type={'remove'}/>
-      </>
-      : null */}  
+        {this.state.isEditingMode ? <>
+        <EditTableButton type={'edit'}/>
+        <EditTableButton type={'remove'}/></> : null}  
       </tr>
     )
     

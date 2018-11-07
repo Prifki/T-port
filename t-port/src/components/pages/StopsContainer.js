@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Table from './presentational/Table';
 import Card from './presentational/Card';
+import EditingColumnTitles from './presentational/EditingColumnTitles';
+import EditTableButton from './presentational/EditTableButton';
 import JSONdata from './../../data/data.json';
 
 class StopsContainer extends Component {
@@ -9,16 +11,17 @@ class StopsContainer extends Component {
         this.state = {
             stops: JSONdata.stops,
             isCardShowen: false,
-            stopsTableTitles: this.stopsTableTitles()
+            isEditingMode: true
         }
     }
   render() {
-    const rows = this.generateStopTableRow();
+    const rows = this.generateStopTableRow(),
+    stopsTableTitles = this.stopsTableTitles();
     return (
         <main>
             <div className="substrate">
                 <h2 className="page-name">Stops</h2>
-                <Table header = {this.state.stopsTableTitles} rows = {rows} isAdmin={this.props.isAdmin}/>
+                <Table header = {stopsTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode}/>
                 {this.state.isCardShowen ? <Card tableHeader = { this.state.stopsCardTableTitles } /> : null}
             </div>
         </main>
@@ -31,6 +34,7 @@ class StopsContainer extends Component {
         <tr>
           <th onClick={() => this.sortBy('name')}>Name</th>
           <th onClick={() => this.sortBy('routes')}>Routes</th>
+          {this.state.isEditingMode ? <EditingColumnTitles /> : null}
         </tr>
       </thead>
       );
@@ -41,6 +45,9 @@ class StopsContainer extends Component {
       <tr key={rowData.number}>
         <td>{rowData.name}</td>
         <td>{rowData.routes}</td> 
+        {this.state.isEditingMode ? <>
+        <EditTableButton type={'edit'}/>
+        <EditTableButton type={'remove'}/></> : null}  
       </tr>
     )
   }
@@ -57,6 +64,14 @@ class StopsContainer extends Component {
     let arrayCopy = [...this.state.stops];
     arrayCopy.sort(this.compareBy(key));
     this.setState({stops: arrayCopy});
+  }
+  
+  toggleEditingMode = () => {
+    this.setState( prevState => {
+      return {
+        isEditingMode: !prevState.isEditingMode
+      }
+    })
   }
 
   showCard = () => {
