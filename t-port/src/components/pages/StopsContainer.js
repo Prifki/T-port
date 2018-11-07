@@ -29,8 +29,8 @@ class StopsContainer extends Component {
       return (
         <thead>
         <tr>
-          <th>Name</th>
-          <th>Routes</th>
+          <th onClick={() => this.sortBy('name')}>Name</th>
+          <th onClick={() => this.sortBy('routes')}>Routes</th>
         </tr>
       </thead>
       );
@@ -43,6 +43,20 @@ class StopsContainer extends Component {
         <td>{rowData.routes}</td> 
       </tr>
     )
+  }
+
+  compareBy = (key) => {
+    return function (a, b) {
+      if (a[key] < b[key]) return -1;
+      if (a[key] > b[key]) return 1;
+      return 0;
+    };
+  }
+ 
+  sortBy = (key) => {
+    let arrayCopy = [...this.state.stops];
+    arrayCopy.sort(this.compareBy(key));
+    this.setState({stops: arrayCopy});
   }
 
   showCard = () => {
