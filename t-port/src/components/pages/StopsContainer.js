@@ -6,60 +6,51 @@ import JSONdata from './../../data/data.json';
 class StopsContainer extends Component {
     constructor(props){
         super(props);
-        const stops = JSONdata.stops;
         this.state = {
+            stops: JSONdata.stops,
             isCardShowen: false,
-            stopsTableRows: this.createStopsTable(stops),
-            stopsTableTitles: this.stopsTableTitles(),
-            stopsCardTableTitles: this.stopsCardTableTitles()
-        };
+            stopsTableTitles: this.stopsTableTitles()
+        }
     }
   render() {
+    const rows = this.generateStopTableRow();
     return (
         <main>
             <div className="substrate">
                 <h2 className="page-name">Stops</h2>
-                <Table rows = { this.state.stopsTableRows } header = { this.state.stopsTableTitles }/>
+                <Table header = {this.state.stopsTableTitles} rows = {rows} />
                 {this.state.isCardShowen ? <Card tableHeader = { this.state.stopsCardTableTitles } /> : null}
             </div>
         </main>
     );
   }
+  
+  stopsTableTitles = () => {
+      return (
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Routes</th>
+        </tr>
+      </thead>
+      );
+  }
+
+  generateStopTableRow = () => {
+    return this.state.stops.map( (rowData) => 
+      <tr key={rowData.number}>
+        <td>{rowData.name}</td>
+        <td>{rowData.routes}</td> 
+      </tr>
+    )
+  }
+
   showCard = () => {
     this.setState({
       isCardShowen: true
     })
   }
-  stopsTableTitles = () => {
-      return (
-        <tr>
-            <th>Name</th>
-            <th>Routes</th>
-        </tr>
-      );
-  }
-  stopsCardTableTitles = () => {
-      return (
-        <tr>
-            <th>Route</th>
-            <th>Time</th>
-        </tr>
-      );
-  }
-  createStopsTable = (stops) => {
-    let stopsData = [];
-    for (let each in stops){
-        stopsData[each] = {name: stops[each].name, routes: stops[each].routes.join(', ')}
-    }
-    return stopsData.map((row, index) => {
-        return (
-          <tr key={index}>
-              <td onClick={this.showCard}><a>{row.name}</a></td>
-              <td>{row.routes}</td>
-          </tr>
-        );
-    });
-  }
+
 }
 
 export default StopsContainer;

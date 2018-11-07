@@ -5,8 +5,6 @@ import Pagination from './presentational/Pagination';
 import Card from './presentational/Card';
 import JSONdata from './../../data/data.json';
 
-
-
 class TransportsContainer extends Component {
   constructor(props){
     super(props);
@@ -23,12 +21,7 @@ class TransportsContainer extends Component {
             <div className="substrate">
                 <h2 className="page-name">Transport</h2>
                 <FilterByType />
-                <table>
-                  {this.state.transportTableTitles}
-                  <tbody>
-                    {rows}
-                  </tbody>
-                </table>
+                <Table header = {this.state.transportTableTitles} rows = {rows} />
                 <Pagination />
                 {this.state.isCardShowen ? <Card tableHeader = { this.state.transportCardTableTitles } /> : null}
             </div>

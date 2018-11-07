@@ -7,75 +7,84 @@ import GoogleMap from './presentational/GoogleMap';
 class RoutesContainer extends Component {
     constructor(props){
         super(props);
-        const routes = JSONdata.routes, stops = JSONdata.stops;
         this.state = {
-            routesTableRows: this.createRoutesTable(routes, stops),
             isCardShowen: false,
             routesTableTitles: this.routesTableTitles(),
-            routesCardTableTitles: this.routesCardTableTitles()
+            tableData: this.handleData(),
         }
     }
   render() {
+    const rows = this.generateRoutesTableRow();
     return (
         <main>
             <div className="substrate">
                 <h2 className="page-name">Routes</h2>
-                <Table rows = { this.state.routesTableRows } header = { this.state.routesTableTitles }/>
+                <Table header = {this.state.routesTableTitles} rows = {rows} />
                 <div className="google-map--small"><GoogleMap/></div>
                 {this.state.isCardShowen ? <Card tableHeader = { this.state.routesCardTableTitles } /> : null}
             </div>
         </main>
     );
   }
-  showCard = () => {
-    this.setState({
-      isCardShowen: true
-    })
-  }
   
-  createRoutesTable = (routes, stops) => {
+  generateRoutesTableRow = () => {
+    return this.state.tableData.map( (rowData) => 
+        <tr key={rowData.id}>
+          <td>{rowData.name}</td>
+          <td>{rowData.from}</td>
+          <td>{rowData.to}</td>   
+        </tr>
+    )
+  }
+  handleData = () => {
+    const stops = JSONdata.stops, routes = JSONdata.routes;
     let name = [], from = [], to = [], routesData = [];
     for (let route in routes){
         for (let stop in stops){
-            if (parseInt(routes[route].stops[0]) == parseInt(stops[stop].number)){
+            if (parseInt(routes[route].stops[0]) === parseInt(stops[stop].number)){
                 from.push(stops[stop].name);
             }
-            if (routes[route].stops[routes[route].stops.length-1] == parseInt(stops[stop].number)){
+            if (routes[route].stops[routes[route].stops.length-1] === parseInt(stops[stop].number)){
                 to.push(stops[stop].name);
             }
         }
         name.push(routes[route].name);
     }
     for (let each in name){
-        routesData[each] = {name: name[each], from: from[each], to: to[each]}
+        routesData[each] = {id: each, name: name[each], from: from[each], to: to[each]}
     }
-    let routesTableRows = routesData.map((row, index) => {
-        return (
-          <tr key={index}>
-              <td onClick={this.showCard}><a>{row.name}</a></td>
-              <td>{row.from}</td>
-              <td>{row.to}</td>
-          </tr>
-        );
-    });
-    return routesTableRows;
+    return routesData;
   }
   routesTableTitles = () => {
     return (
-        <tr>
-            <th>Route name</th>
-            <th>From</th>
-            <th>To</th>
-        </tr>
+        <thead>
+          <tr>
+            <th onClick={() => this.sortBy('name')} >Route name</th>
+            <th onClick={() => this.sortBy('from')} >From</th>
+            <th onClick={() => this.sortBy('to')} >To</th>
+          </tr>
+        </thead>
     );
   }
-  routesCardTableTitles = () => {
-    return (
-      <tr>
-        <th>Stop</th>
-        <th>Time</th>
-      </tr>
-    );
+
+  compareBy = (key) => {
+    return function (a, b) {
+      if (a[key] < b[key]) return -1;
+      if (a[key] > b[key]) return 1;
+      return 0;
+    };
+  }
+ 
+  sortBy = (key) => {
+    let arrayCopy = [...this.state.tableData];
+    arrayCopy.sort(this.compareBy(key));
+    this.setState({tableData: arrayCopy});
+  }
+
+  showCard = () => {
+    this.setState({
+      isCardShowen: true
+    })
   }
 }
 

@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 import TableEditButton from './TableEditButton';
-import TableHeader from './TableHeader';
-import TableBody from './TableBody';
 
 class Table extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            isEditingMode: false
+        }
+    }
   render() {
-    const { rows, header} = this.props
     return (
-        <div className="table-wrapper">
-            <TableEditButton />
-            <table id="transport-table">
-                <TableHeader header = { header } />
-                <TableBody rows = { rows }/>
-            </table>
-        </div>
+      <div className="table-wrapper">
+      <TableEditButton />
+        <table>
+            {this.props.header}
+            <tbody>
+            {this.props.rows}
+            </tbody>
+        </table>
+      </div>
+  
     );
   }
 }
