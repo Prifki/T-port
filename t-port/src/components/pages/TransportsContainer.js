@@ -19,7 +19,8 @@ class TransportsContainer extends Component {
       isFilteredByBus: false,
       isFilteredByTram: false,
       isFilteredByTroll: false,
-      isMapNeededOnCard: true
+      isMapNeededOnCard: true,
+      isSortedAscending: false
     }
   }
   render() {
@@ -30,7 +31,7 @@ class TransportsContainer extends Component {
         <main>
             <div className="substrate">
                 <h2 className="page-name">Transport</h2>
-                <FilterByType filterByBus={this.filterByBus} filterByTram={this.filterByTram} filterByTroll={this.filterByTroll} isFilteredByBus={this.state.isFilteredByBus} isFilteredByTram={this.state.isFilteredByTram} isFilteredByTroll={this.state.isFilteredByTroll} />
+                <FilterByType filterByType={this.filterByType} isFilteredByBus={this.state.isFilteredByBus} isFilteredByTram={this.state.isFilteredByTram} isFilteredByTroll={this.state.isFilteredByTroll} />
                 <Table header = {transportTableTitles} rows = {rows} isAdmin={this.props.isAdmin} addItem={this.state.addTransportTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode}/>
                 <Pagination />
                 {this.state.isCardShowen ? <Card closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard}/>: null}
@@ -67,11 +68,22 @@ class TransportsContainer extends Component {
   }
 
   compareBy = (key) => {
-    return function (a, b) {
-      if (a[key] < b[key]) return -1;
-      if (a[key] > b[key]) return 1;
-      return 0;
-    };
+    if (this.state.isSortedAscending) {
+      this.setState(prevState => { return {isSortedAscending: !prevState.isSortedAscending}});
+      return function (a, b) {
+        if (a[key] > b[key]) return -1;
+        if (a[key] < b[key]) return 1;
+        return 0;
+      };
+    }
+    if (!this.state.isSortedAscending) {
+      this.setState(prevState => { return {isSortedAscending: !prevState.isSortedAscending}});
+      return function (a, b) {
+        if (a[key] < b[key]) return -1;
+        if (a[key] > b[key]) return 1;
+        return 0;
+      };
+    }
   }
  
   sortBy = (key) => {
@@ -80,16 +92,52 @@ class TransportsContainer extends Component {
     this.setState({transport: arrayCopy});
   }
 
-  filterByType = () => {
+  filterByType = (type) => {
     let arrayCopy = JSONdata.transport;
-    console.log('isFilteredByBus: '+this.state.isFilteredByBus+'\nisFilteredByTroll: '+this.state.isFilteredByTroll+'\nisFilteredByTram: '+this.state.isFilteredByTram);
-        if (this.state.isFilteredByBus)
+        if (type === 'directions_bus') {
+          if (!this.state.isFilteredByBus) {
+            this.setState({
+              transport: arrayCopy.filter(transport => !(transport.type === 'directions_bus')),
+              isFilteredByBus: !this.state.isFilteredByBus
+            });
+          }
+          else
+            this.setState({isFilteredByBus: !this.state.isFilteredByBus});
+        }
+        if (type === 'tram') {
+          if (!this.state.isFilteredByTram) {
+            this.setState({
+              transport: arrayCopy.filter(transport => !(transport.type === 'tram')),
+              isFilteredByTram: !this.state.isFilteredByTram
+            });
+          }
+          else
+            this.setState({isFilteredByTram: !this.state.isFilteredByTram});
+        }
+        if (type === 'train') {
+          if (!this.state.isFilteredByTroll) {
+            this.setState({
+              transport: arrayCopy.filter(transport => !(transport.type === 'train')),
+              isFilteredByTroll: !this.state.isFilteredByTroll
+            });
+          }
+          else
+            this.setState({isFilteredByTroll: !this.state.isFilteredByTroll});
+        }
+        if (this.state.isFilteredByBus) {
           arrayCopy = arrayCopy.filter(transport => !(transport.type === 'directions_bus'));
-        if (this.state.isFilteredByTram)
-          arrayCopy =  arrayCopy.filter(transport => !(transport.type === 'tram'));
-        if (this.state.isFilteredByTroll) 
+          console.log(arrayCopy);
+        }
+        if (this.state.isFilteredByTram) {
+          arrayCopy = arrayCopy.filter(transport => !(transport.type === 'tram'));
+          console.log(arrayCopy);
+        }
+        if (this.state.isFilteredByTroll) {
           arrayCopy = arrayCopy.filter(transport => !(transport.type === 'train'));
-        this.setState({transport: arrayCopy});
+          console.log(arrayCopy);
+        }
+        //this.setState({transport: arrayCopy});
+        console.log('isFilteredByBus: '+this.state.isFilteredByBus+'\nisFilteredByTroll: '+this.state.isFilteredByTroll+'\nisFilteredByTram: '+this.state.isFilteredByTram);
         console.log(arrayCopy);
   }
 
