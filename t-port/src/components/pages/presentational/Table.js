@@ -10,6 +10,7 @@ class Table extends Component {
             {this.props.header}
             <tbody>
             {this.props.rows}
+            {this.props.isEditingMode ? this.props.addItem : null}
             </tbody>
         </table>
       </div>
