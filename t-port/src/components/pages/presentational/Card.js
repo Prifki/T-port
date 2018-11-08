@@ -9,7 +9,7 @@ class Card extends Component {
     return (
         <div className="card">
             <BookmarkButton />
-            <CloseButton />
+            <CloseButton onClick={this.props.closeCard} />
             <h3 className="card__title">{this.props.title}</h3>
             <Table header = {this.props.header} rows = {this.props.rows} isAdmin={this.props.isAdmin} addItem={this.props.addItem} isEditingMode={this.props.isEditingMode} toggleEditingMode={this.props.toggleEditingMode}/>
             {(this.props.isMapNeededOnCard) ? 
