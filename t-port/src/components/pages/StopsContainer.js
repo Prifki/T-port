@@ -11,7 +11,8 @@ class StopsContainer extends Component {
         this.state = {
             stops: JSONdata.stops,
             isCardShowen: false,
-            isEditingMode: true
+            isEditingMode: false,
+            isSortedAscending: false
         }
     }
   render() {
@@ -53,11 +54,22 @@ class StopsContainer extends Component {
   }
 
   compareBy = (key) => {
-    return function (a, b) {
-      if (a[key] < b[key]) return -1;
-      if (a[key] > b[key]) return 1;
-      return 0;
-    };
+    if (this.state.isSortedAscending) {
+      this.setState(prevState => { return {isSortedAscending: !prevState.isSortedAscending}});
+      return function (a, b) {
+        if (a[key] > b[key]) return -1;
+        if (a[key] < b[key]) return 1;
+        return 0;
+      };
+    }
+    if (!this.state.isSortedAscending) {
+      this.setState(prevState => { return {isSortedAscending: !prevState.isSortedAscending}});
+      return function (a, b) {
+        if (a[key] < b[key]) return -1;
+        if (a[key] > b[key]) return 1;
+        return 0;
+      };
+    }
   }
  
   sortBy = (key) => {
