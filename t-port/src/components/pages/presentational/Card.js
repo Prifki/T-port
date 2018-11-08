@@ -5,21 +5,14 @@ import CloseButton from './CloseButton';
 
 class Card extends Component {
   render() {
-    const tNumber = this.find(this.props.match.params.number);
-    console.log(this.props)
-    console.log(tNumber)
     return (
         <div className="card">
             <BookmarkButton />
             <CloseButton />
-            <h3 className="card__title">Card Title</h3>
-            <Table />
+            <h3 className="card__title">{this.props.title}</h3>
+            <Table header = {this.props.header} rows = {this.props.rows} isAdmin={this.props.isAdmin} addItem={this.props.addItem} isEditingMode={this.props.isEditingMode} toggleEditingMode={this.props.toggleEditingMode}/>
         </div>
     );
-  }
-
-  find = (number) => {
-    return this.props.data.find(t => t.number == number);
   }
 }
 

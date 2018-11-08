@@ -5,7 +5,6 @@ import Pagination from './presentational/Pagination';
 import Card from './presentational/Card';
 import EditingColumnTitles from './presentational/EditingColumnTitles';
 import EditTableButton from './presentational/EditTableButton';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import JSONdata from './../../data/data.json';
 
 class TransportsContainer extends Component {
@@ -15,23 +14,26 @@ class TransportsContainer extends Component {
       transport: JSONdata.transport,
       isEditingMode: true,
       isCardShowen: false,
-      addItem: this.createAddItemRow(),
+      addTransportTableItem: this.createAddItemRow(),
+      addCardTableItem: this.createAddCardItemRow(),
       isFilteredByBus: false,
       isFilteredByTram: false,
       isFilteredByTroll: false
     }
   }
   render() {
+    console.log(this.state.isEditingMode);
     const rows = this.generateTransportTableRow(),
-    transportTableTitles = this.transportTableTitles();
+    transportTableTitles = this.transportTableTitles(),
+    cardTableTitles = this.cardTableTitles();
     return (
         <main>
             <div className="substrate">
                 <h2 className="page-name">Transport</h2>
                 <FilterByType filterByBus={this.filterByBus} filterByTram={this.filterByTram} filterByTroll={this.filterByTroll} isFilteredByBus={this.state.isFilteredByBus} isFilteredByTram={this.state.isFilteredByTram} isFilteredByTroll={this.state.isFilteredByTroll} />
-                <Table header = {transportTableTitles} rows = {rows} isAdmin={this.props.isAdmin} addItem={this.state.addItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode}/>
+                <Table header = {transportTableTitles} rows = {rows} isAdmin={this.props.isAdmin} addItem={this.state.addTransportTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode}/>
                 <Pagination />
-                {this.state.isCardShowen ? <Router><Card/></Router>: null}
+                {this.state.isCardShowen ? <Card header = {cardTableTitles} rows = {this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle}/>: null}
             </div>
         </main>
     );
@@ -54,7 +56,7 @@ class TransportsContainer extends Component {
     return this.state.transport.map( (rowData) => 
       <tr key={rowData.id}>
         <td><i className="material-icons">{rowData.type}</i></td>
-        <td onClick={this.showCard}>{rowData.number}</td>
+        <td className="table__link" onClick={() => this.showCard(rowData.number, rowData.type)}>{rowData.number}</td>
         <td>{rowData.route}</td>
         <td>{rowData.seats}</td>
         {this.state.isEditingMode ? <>
@@ -125,10 +127,80 @@ class TransportsContainer extends Component {
     )
   }
 
-  showCard = () => {
-    this.setState({
-      isCardShowen: true
-    })
+  createAddCardItemRow = () => {
+    return(
+      <tr>
+        <td><input type="text" className="table-edit-input" /></td>
+        <td><input type="text" className="table-edit-input" /></td>
+        <td><i className="material-icons table-editor-buttons">add_circle_outline</i></td>
+        <td></td>
+      </tr>
+    )
+  }
+
+  showCard = (number, type) => {
+      switch(type) {
+        case 'directions_bus':
+          this.setState({cardTitle: 'Bus ' + number, isCardShowen: true})
+          break;
+        case 'tram':
+          this.setState({cardTitle: 'Tram ' + number, isCardShowen: true})
+          break;
+        case 'train':
+          this.setState({cardTitle: 'Trolleybus ' + number, isCardShowen: true})
+          break;
+      }
+      const TRANSPORTS = JSONdata.transport,
+      ROUTES = JSONdata.routes,
+      STOPS = JSONdata.stops;
+      let schedule, routeNum, stops, stopNames = [], cardTableData = [];
+      for (let transport in TRANSPORTS){
+        if(Object.entries(TRANSPORTS[transport])[2][1]==number){
+          schedule = TRANSPORTS[transport].time;
+          routeNum = TRANSPORTS[transport].route;
+          for (let route in ROUTES){
+            if (Object.entries(ROUTES[route])[0][1]==routeNum){
+              stops = ROUTES[route].stops;
+            }
+          }
+        }
+      }
+      for (let stop in stops){
+        for (let STOP in STOPS){
+          if (stops[stop] == STOPS[STOP].number)
+            stopNames.push(STOPS[STOP].name);
+        }
+      }
+      for (let each in stopNames){
+        cardTableData.push({id: each, stopName: stopNames[each], time: schedule[each]});
+      }
+      console.log(cardTableData);
+		  this.setState({ 
+        cardTableRows: this.generateTransportCardTableRow(cardTableData)
+      });
+  }
+
+  generateTransportCardTableRow = (arr) => {
+    return arr.map( (rowData) => 
+      <tr key={rowData.id}>
+        <td>{rowData.stopName}</td>
+        <td>{rowData.time}</td>
+        {this.state.isEditingMode ? <>
+        <EditTableButton type={'edit'}/>
+        <EditTableButton type={'remove'}/></> : null}   
+      </tr>
+    )
+  }
+  cardTableTitles = () => {
+    return (
+      <thead>
+        <tr>
+          <th onClick={() => this.sortBy('stop')} >Stop</th>
+          <th onClick={() => this.sortBy('time')} >Time</th>
+          {this.state.isEditingMode ? <EditingColumnTitles /> : null}
+        </tr>
+      </thead>
+    );
   }
 }
 
