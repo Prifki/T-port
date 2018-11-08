@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Pagination extends Component {
-  render() {
+function Pagination(props) {
     return (
         <div className="pagination-wrapper">
             <div className="pagination">
@@ -10,7 +9,6 @@ class Pagination extends Component {
             </div>
         </div>
     );
-  }
 }
 
 export default Pagination;

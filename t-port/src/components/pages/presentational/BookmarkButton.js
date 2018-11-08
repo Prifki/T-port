@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class BookmarkButton extends Component {
-  render() {
+function BookmarkButton(props) {
     return (
-        <div className="card__button--bookmark">
+        <div className="card__button--bookmark" onClick={props.onClick}>
             <i className="material-icons">bookmark_border</i>
         </div>
     );
-  }
 }
 
 export default BookmarkButton;

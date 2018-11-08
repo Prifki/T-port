@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class FavoritesButton extends Component {
-  render() {
+function FavoritesButton (props) {
     return (
-        <div className="header-buttons__button--favorites" onClick={this.props.onClick}>
+        <div className="header-buttons__button--favorites" onClick={props.onClick}>
             <i className="material-icons">star_border</i>
         </div>
     );
-  }
 }
 
 export default FavoritesButton;

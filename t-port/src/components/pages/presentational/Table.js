@@ -1,21 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import TableEditingModeButton from './TableEditingModeButton';
 
-class Table extends Component {
-  render() {
+function Table(props) {
     return (
       <div className="table-wrapper">
-      { this.props.isAdmin ? <TableEditingModeButton onClick={this.props.toggleEditingMode} /> : null }
+      { props.isAdmin ? <TableEditingModeButton onClick={props.toggleEditingMode} /> : null }
         <table>
-            {this.props.header}
+            {props.header}
             <tbody>
-            {this.props.rows}
-            {this.props.isEditingMode ? this.props.addItem : null}
+            {props.rows}
+            {props.isEditingMode ? props.addItem : null}
             </tbody>
         </table>
       </div>
     );
-  }
 }
 
 export default Table;

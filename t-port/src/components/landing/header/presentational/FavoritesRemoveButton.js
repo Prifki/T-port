@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class FavoritesRemoveButton extends Component {
-  render() {
+function FavoritesRemoveButton (props) {
     return (
-        <div className="menu__button--remove-favorites" onClick={this.props.onClick}><i className="material-icons">remove</i></div>
+        <div className="menu__button--remove-favorites" onClick={props.onClick}><i className="material-icons">remove</i></div>
     );
-  }
 }
 
 export default FavoritesRemoveButton;

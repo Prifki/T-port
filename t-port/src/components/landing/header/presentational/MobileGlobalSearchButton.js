@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class MobileGlobalSearchButton extends Component {
-  render() {
+function MobileGlobalSearchButton (props) {
     return (
-        <div className="header-buttons__button--find-pic" onClick={this.props.onClick}>
+        <div className="header-buttons__button--find-pic" onClick={props.onClick}>
             <i className="material-icons">search</i>
         </div>
     );
-  }
 }
 
 export default MobileGlobalSearchButton;

@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class MobileGlobalSearchClosingButton extends Component {
-  render() {
+function MobileGlobalSearchClosingButton (props) {
     return (
-        <div className="mobile-global-search__button--close" onClick={this.props.onClick}>
+        <div className="mobile-global-search__button--close" onClick={props.onClick}>
             <i className="material-icons icon--closing">close</i>
         </div>
     );
-  }
 }
 
 export default MobileGlobalSearchClosingButton;

@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class SubmitButton extends Component {
-  render() {
+function SubmitButton(props) {
     return (
-      <span className="menu__button--submit" onClick={this.props.onClick}>{this.props.text}</span>
+      <span className="menu__button--submit" onClick={props.onClick}>{props.text}</span>
     );
-  }
 }
 
 export default SubmitButton;

@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class EditingColumnTitles extends Component {
-  render() {
+function EditingColumnTitles() {
     return (
         <>
         <th>Edit</th>
         <th>Remove</th>
         </>
     )
-  }
 }
 
 export default EditingColumnTitles;

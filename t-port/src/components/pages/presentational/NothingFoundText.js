@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class NothingFoundText extends Component {
-  render() {
+function NothingFoundText() {
     return (
         <p>Nothing has been found</p>
     );
-  }
 }
 
 export default NothingFoundText;

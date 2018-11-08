@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class LoginButton extends Component {
-  render() {
+function LoginButton (props) {
     return (
-        <div className="header-buttons__button--login" onClick={this.props.onClick}>
+        <div className="header-buttons__button--login" onClick={props.onClick}>
             <i className="material-icons">lock_open</i>
         </div>
     );
-  }
 }
 
 export default LoginButton;

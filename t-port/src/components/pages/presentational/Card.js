@@ -1,23 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Table from './Table';
 import BookmarkButton from './BookmarkButton';
 import CloseButton from './CloseButton';
 import GoogleMap from './GoogleMap';
 
-class Card extends Component {
-  render() {
+function Card(props) {
     return (
         <div className="card">
             <BookmarkButton />
-            <CloseButton onClick={this.props.closeCard} />
-            <h3 className="card__title">{this.props.title}</h3>
-            <Table header = {this.props.header} rows = {this.props.rows} isAdmin={this.props.isAdmin} addItem={this.props.addItem} isEditingMode={this.props.isEditingMode} toggleEditingMode={this.props.toggleEditingMode}/>
-            {(this.props.isMapNeededOnCard) ? 
+            <CloseButton onClick={props.closeCard} />
+            <h3 className="card__title">{props.title}</h3>
+            <Table header = {props.header} rows = {props.rows} isAdmin={props.isAdmin} addItem={props.addItem} isEditingMode={props.isEditingMode} toggleEditingMode={props.toggleEditingMode}/>
+            {(props.isMapNeededOnCard) ? 
             <div className="google-map--small"><GoogleMap/></div>
             : null}
         </div>
     );
-  }
 }
 
 export default Card;

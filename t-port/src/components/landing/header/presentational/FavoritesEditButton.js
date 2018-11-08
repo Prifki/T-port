@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class FavoritesEditButton extends Component {
-  render() {
-    const dotsView = this.props.favoritesEditingMode ? 'more_horiz' : 'more_vert';
+function FavoritesEditButton (props) {
+    const dotsView = props.favoritesEditingMode ? 'more_horiz' : 'more_vert';
     return (
-      <div className="menu__button--edit-favorites" onClick={this.props.onClick}>
+      <div className="menu__button--edit-favorites" onClick={props.onClick}>
         <i className="material-icons">{dotsView}</i>
       </div>
     );
-  }
 }
 
 export default FavoritesEditButton;

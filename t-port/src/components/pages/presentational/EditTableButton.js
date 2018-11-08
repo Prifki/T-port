@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class EditTableButton extends Component {
-  render() {
+function EditTableButton(props) {
     return (
-        <td className="table-editor-buttons"><i className="material-icons">{this.props.type}</i></td>
+        <td className="table-editor-buttons"><i className="material-icons">{props.type}</i></td>
     )
-  }
 }
 
 export default EditTableButton;
