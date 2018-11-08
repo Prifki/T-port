@@ -575,11 +575,11 @@ function generateTransportCard(generationRowData){
 			  STOPS = data.stops;
 		let schedule, routeNum, stops, stopNames = [];
 		for (transport in TRANSPORTS){
-			if(Object.entries(TRANSPORTS[transport])[1][1]==number){
+			if(Object.entries(TRANSPORTS[transport])[1][1]===number){
 				schedule = TRANSPORTS[transport].time;
 				routeNum = TRANSPORTS[transport].route;
 				for (route in ROUTES){
-					if (Object.entries(ROUTES[route])[0][1]==routeNum){
+					if (Object.entries(ROUTES[route])[0][1]===routeNum){
 						stops = ROUTES[route].stops;
 					}
 				}
@@ -587,7 +587,7 @@ function generateTransportCard(generationRowData){
 		}
 		for (stop in stops){
 			for (STOP in STOPS){
-				if (stops[stop] == STOPS[STOP].number)
+				if (stops[stop] === STOPS[STOP].number)
 					stopNames.push(STOPS[STOP].name);
 			}
 		}
@@ -627,10 +627,10 @@ function generateStopCard(generationRowData){
 		}
 		for (route in routesList){
 			for (ROUTE in ROUTES){
-				if (ROUTES[ROUTE].name == routesList[route]){
+				if (ROUTES[ROUTE].name === routesList[route]){
 					let times = [];
 					for (stop in ROUTES[ROUTE].stops){
-						if (stopNumber == ROUTES[ROUTE].stops[stop]){
+						if (stopNumber === ROUTES[ROUTE].stops[stop]){
 							for (TRANSPORT in TRANSPORTS){
 								if (TRANSPORTS[TRANSPORT].route === routesList[route]){
 									times.push(TRANSPORTS[TRANSPORT].time[stop]);

@@ -12,17 +12,17 @@ class TransportsContainer extends Component {
     super(props);
     this.state = {
       transport: JSONdata.transport,
-      isEditingMode: true,
+      isEditingMode: false,
       isCardShowen: false,
       addTransportTableItem: this.createAddItemRow(),
       addCardTableItem: this.createAddCardItemRow(),
       isFilteredByBus: false,
       isFilteredByTram: false,
-      isFilteredByTroll: false
+      isFilteredByTroll: false,
+      isMapNeededOnCard: true
     }
   }
   render() {
-    console.log(this.state.isEditingMode);
     const rows = this.generateTransportTableRow(),
     transportTableTitles = this.transportTableTitles(),
     cardTableTitles = this.cardTableTitles();
@@ -33,7 +33,7 @@ class TransportsContainer extends Component {
                 <FilterByType filterByBus={this.filterByBus} filterByTram={this.filterByTram} filterByTroll={this.filterByTroll} isFilteredByBus={this.state.isFilteredByBus} isFilteredByTram={this.state.isFilteredByTram} isFilteredByTroll={this.state.isFilteredByTroll} />
                 <Table header = {transportTableTitles} rows = {rows} isAdmin={this.props.isAdmin} addItem={this.state.addTransportTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode}/>
                 <Pagination />
-                {this.state.isCardShowen ? <Card header = {cardTableTitles} rows = {this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle}/>: null}
+                {this.state.isCardShowen ? <Card header={cardTableTitles} rows={this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard}/>: null}
             </div>
         </main>
     );
@@ -155,11 +155,11 @@ class TransportsContainer extends Component {
       STOPS = JSONdata.stops;
       let schedule, routeNum, stops, stopNames = [], cardTableData = [];
       for (let transport in TRANSPORTS){
-        if(Object.entries(TRANSPORTS[transport])[2][1]==number){
+        if(Object.entries(TRANSPORTS[transport])[2][1]===number){
           schedule = TRANSPORTS[transport].time;
           routeNum = TRANSPORTS[transport].route;
           for (let route in ROUTES){
-            if (Object.entries(ROUTES[route])[0][1]==routeNum){
+            if (Object.entries(ROUTES[route])[0][1]===routeNum){
               stops = ROUTES[route].stops;
             }
           }
@@ -167,7 +167,7 @@ class TransportsContainer extends Component {
       }
       for (let stop in stops){
         for (let STOP in STOPS){
-          if (stops[stop] == STOPS[STOP].number)
+          if (stops[stop] === STOPS[STOP].number)
             stopNames.push(STOPS[STOP].name);
         }
       }
@@ -195,8 +195,8 @@ class TransportsContainer extends Component {
     return (
       <thead>
         <tr>
-          <th onClick={() => this.sortBy('stop')} >Stop</th>
-          <th onClick={() => this.sortBy('time')} >Time</th>
+          <th>Stop</th>
+          <th>Time</th>
           {this.state.isEditingMode ? <EditingColumnTitles /> : null}
         </tr>
       </thead>
