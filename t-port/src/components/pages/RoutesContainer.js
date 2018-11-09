@@ -19,7 +19,7 @@ class RoutesContainer extends Component {
             addCardTableItem: this.createAddCardItemRow(),
             isSortedAscending: false,
             isMapNeededOnCard: false,
-            markers: [0,0]
+            markers: null
         }
     }
   render() {
@@ -31,7 +31,7 @@ class RoutesContainer extends Component {
             <div className="substrate">
                 <h2 className="page-name">Routes</h2>
                 <Table header = {routesTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode} addItem={this.state.addRoutesTableItem} />
-                <div className="google-map--small"><GoogleMap markers={this.state.markers}/></div>
+                <div className="google-map--small"><GoogleMap markers={this.state.markers} /></div>
                 {this.state.isCardShown ? <Card closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} /> : null}
             </div>
         </main>
@@ -141,12 +141,12 @@ class RoutesContainer extends Component {
       const ROUTES = JSONdata.routes, TRANSPORTS = JSONdata.transport, STOPS = JSONdata.stops;
       let stops = [];
       for (let ROUTE in ROUTES){
-        if (name == ROUTES[ROUTE].name)
+        if (name === ROUTES[ROUTE].name)
           stops = ROUTES[ROUTE].stops;
       }
       for (let STOP in STOPS){
         for (let stop in stops){
-          if (stops[stop] == STOPS[STOP].number){
+          if (stops[stop] === STOPS[STOP].number){
             stops[stop] = STOPS[STOP].name;
             locations[stop] = ({lat: STOPS[STOP].lat, long: STOPS[STOP].long, name: STOPS[STOP].name});
           }
@@ -155,7 +155,7 @@ class RoutesContainer extends Component {
       for (let i = 0; i < stops.length; i++) {
         let times = [];
         for (let TRANSPORT in TRANSPORTS){
-            if (name == TRANSPORTS[TRANSPORT].route){
+            if (name === TRANSPORTS[TRANSPORT].route){
               times.push(TRANSPORTS[TRANSPORT].time[i]);
             }
         }

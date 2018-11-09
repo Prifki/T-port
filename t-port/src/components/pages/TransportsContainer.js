@@ -19,7 +19,7 @@ class TransportsContainer extends Component {
       isFilteredByBus: false,
       isFilteredByTram: false,
       isFilteredByTroll: false,
-      isMapNeededOnCard: true,
+      isMapNeededOnCard: false,
       isSortedAscending: false
     }
   }

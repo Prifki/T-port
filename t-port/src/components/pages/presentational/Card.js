@@ -12,7 +12,7 @@ function Card(props) {
             <h3 className="card__title">{props.title}</h3>
             <Table header = {props.header} rows = {props.rows} isAdmin={props.isAdmin} addItem={props.addItem} isEditingMode={props.isEditingMode} toggleEditingMode={props.toggleEditingMode}/>
             {(props.isMapNeededOnCard) ? 
-            <div className="google-map--small"><GoogleMap/></div>
+            <div className="google-map--small"><GoogleMap markers={props.markers}/></div>
             : null}
         </div>
     );

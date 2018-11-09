@@ -6,8 +6,7 @@ export class MapContainer extends Component {
   render() {
     return (
       <Map google={this.props.google} zoom={11} initialCenter={{lat: 59.932802, lng: 30.332459}} disableDefaultUI={true} styles={this.setMapStyles()}>
-        {this.props.markers}
-        {/*<Marker title={'The marker`s title will appear as a tooltip.'} name={'SOMA'} position={{lat: 59.932802, lng: 30.332459}} />*/}
+        {this.props.markers ? this.props.markers : null}
       </Map>
     );
   }

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+
 import Table from './presentational/Table';
 import Card from './presentational/Card';
 import EditingColumnTitles from './presentational/EditingColumnTitles';
@@ -15,7 +17,8 @@ class StopsContainer extends Component {
             isSortedAscending: false,
             addStopsTableItem: this.createAddItemRow(),
             addCardTableItem: this.createAddCardItemRow(),
-            isMapNeededOnCard: true
+            isMapNeededOnCard: true,
+            markers: null
         }
     }
   render() {
@@ -27,7 +30,7 @@ class StopsContainer extends Component {
             <div className="substrate">
                 <h2 className="page-name">Stops</h2>
                 <Table header = {stopsTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode} addItem={this.state.addStopsTableItem} />
-                {this.state.isCardShown ? <Card closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} /> : null}
+                {this.state.isCardShown ? <Card markers={this.state.markers} closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} /> : null}
             </div>
         </main>
     );
@@ -114,15 +117,12 @@ class StopsContainer extends Component {
 
   showCard = (stopName,routesList) => {
     const ROUTES = JSONdata.routes, TRANSPORTS = JSONdata.transport, STOPS = JSONdata.stops;
-		/*for (STOP in STOPS){
-			if (name == STOPS[STOP].name){
-				const location = {lat: parseFloat(STOPS[STOP].lat), lng: parseFloat(STOPS[STOP].long)};
-			}
-    }*/
-    let cardTitle = stopName;
+    let cardTitle = stopName, location;
     for (let STOP in STOPS){
-      if (stopName === STOPS[STOP].name)
+      if (stopName === STOPS[STOP].name){
+				location = {name: stopName, lat: parseFloat(STOPS[STOP].lat), long: parseFloat(STOPS[STOP].long)};
         stopName = STOPS[STOP].number;
+      }
     }
     let cardData = [];
       for (let route in routesList){
@@ -148,7 +148,8 @@ class StopsContainer extends Component {
       this.setState({
         isCardShown: true,
         cardTableRows: this.generateStopCardTableRow(cardData),
-        cardTitle: cardTitle
+        cardTitle: cardTitle,
+        markers: this.generateMarkers(location)
       })
   }
 
@@ -181,7 +182,10 @@ class StopsContainer extends Component {
       isCardShown: false
     });
   }
-
+  generateMarkers = (loc) => {
+    console.log(loc);
+    return <Marker title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />
+  }
 }
 
 export default StopsContainer;
