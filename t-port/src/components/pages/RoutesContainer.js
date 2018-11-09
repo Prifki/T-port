@@ -10,22 +10,26 @@ class RoutesContainer extends Component {
     constructor(props){
         super(props);
         this.state = {
-            isCardShowen: false,
+            isCardShown: false,
             isEditingMode: false,
             tableData: this.handleData(),
-            isSortedAscending: false
+            addRoutesTableItem: this.createAddItemRow(),
+            addCardTableItem: this.createAddCardItemRow(),
+            isSortedAscending: false,
+            isMapNeededOnCard: false
         }
     }
   render() {
     const rows = this.generateRoutesTableRow(),
-    routesTableTitles = this.routesTableTitles();
+    routesTableTitles = this.routesTableTitles(),
+    cardTableTitles = this.cardTableTitles();
     return (
         <main>
             <div className="substrate">
                 <h2 className="page-name">Routes</h2>
-                <Table header = {routesTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode}/>
+                <Table header = {routesTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode} addItem={this.state.addRoutesTableItem} />
                 <div className="google-map--small"><GoogleMap/></div>
-                {this.state.isCardShowen ? <Card tableHeader = { this.state.routesCardTableTitles } /> : null}
+                {this.state.isCardShown ? <Card closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} /> : null}
             </div>
         </main>
     );
@@ -34,7 +38,7 @@ class RoutesContainer extends Component {
   generateRoutesTableRow = () => {
     return this.state.tableData.map( (rowData) => 
         <tr key={rowData.id}>
-          <td>{rowData.name}</td>
+          <td className="table__link" onClick={() => this.showCard(rowData.name)}>{rowData.name}</td>
           <td>{rowData.from}</td>
           <td>{rowData.to}</td>   
           {this.state.isEditingMode ? <>
@@ -108,11 +112,90 @@ class RoutesContainer extends Component {
     })
   }
 
-  showCard = () => {
+  createAddItemRow = () => {
+    return(
+      <tr>
+        <td><input type="text" className="table-edit-input" /></td>
+        <td><input type="text" className="table-edit-input" /></td>
+        <td><i className="material-icons table-editor-buttons">add_circle_outline</i></td>
+        <td></td>
+      </tr>
+    )
+  }
+  createAddCardItemRow = () => {
+    return(
+      <tr>
+        <td><input type="text" className="table-edit-input" /></td>
+        <td><input type="text" className="table-edit-input" /></td>
+        <td><i className="material-icons table-editor-buttons">add_circle_outline</i></td>
+        <td></td>
+      </tr>
+    )
+  }
+  showCard = (name) => {
+    let locations = [];
+    let cardData = [];
+      const ROUTES = JSONdata.routes, TRANSPORTS = JSONdata.transport, STOPS = JSONdata.stops;
+      let stops = [];
+      for (let ROUTE in ROUTES){
+        if (name == ROUTES[ROUTE].name)
+          stops = ROUTES[ROUTE].stops;
+      }
+      for (let STOP in STOPS){
+        for (let stop in stops){
+          if (stops[stop] == STOPS[STOP].number){
+            stops[stop] = STOPS[STOP].name;
+            locations[stop] = (STOPS[STOP].lat+','+STOPS[STOP].long);
+          }
+        }
+      }
+      for (let i = 0; i < stops.length; i++) {
+        let times = [];
+        for (let TRANSPORT in TRANSPORTS){
+            if (name == TRANSPORTS[TRANSPORT].route){
+              times.push(TRANSPORTS[TRANSPORT].time[i]);
+            }
+        }
+        cardData.push({id: i, stops: stops[i], times: times});
+      }
     this.setState({
-      isCardShowen: true
+      isCardShown: true,
+      cardTableRows: this.generateRoutesCardTableRow(cardData),
+      cardTitle: 'Route '+name
     })
   }
+  
+  generateRoutesCardTableRow = (arr) => {
+    return arr.map( (rowData) => 
+      <tr key={rowData.id}>
+        <td>{rowData.stops}</td>
+        <td>{rowData.times.join(', ')}</td>
+        {this.state.isEditingMode ? <>
+        <EditTableButton type={'edit'}/>
+        <EditTableButton type={'remove'}/></> : null}   
+      </tr>
+    )
+  }
+
+  cardTableTitles = () => {
+    return (
+      <thead>
+        <tr>
+          <th>Stop</th>
+          <th>Time</th>
+          {this.state.isEditingMode ? <EditingColumnTitles /> : null}
+        </tr>
+      </thead>
+    );
+  }
+
+  closeCard = () => {
+    this.setState({ 
+      isCardShown: false
+    });
+  }
+
+
 }
 
 export default RoutesContainer;

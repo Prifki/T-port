@@ -140,7 +140,7 @@
             "name": "Gostinka",
             "lat": "59.934380",
             "long": "30.334925",
-            "routes": ["AB01","TL09","TM03","TL16"]
+            "routes": ["AB01","TL09","TM03","TM16"]
         }, 
 		{
             "number": 15,

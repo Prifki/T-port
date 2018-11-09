@@ -13,7 +13,7 @@ class TransportsContainer extends Component {
     this.state = {
       transport: JSONdata.transport,
       isEditingMode: false,
-      isCardShowen: false,
+      isCardShown: false,
       addTransportTableItem: this.createAddItemRow(),
       addCardTableItem: this.createAddCardItemRow(),
       isFilteredByBus: false,
@@ -34,7 +34,7 @@ class TransportsContainer extends Component {
                 <FilterByType filterByType={this.filterByType} isFilteredByBus={this.state.isFilteredByBus} isFilteredByTram={this.state.isFilteredByTram} isFilteredByTroll={this.state.isFilteredByTroll} />
                 <Table header = {transportTableTitles} rows = {rows} isAdmin={this.props.isAdmin} addItem={this.state.addTransportTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode}/>
                 <Pagination />
-                {this.state.isCardShowen ? <Card closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard}/>: null}
+                {this.state.isCardShown ? <Card closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard}/>: null}
             </div>
         </main>
     );
@@ -141,19 +141,6 @@ class TransportsContainer extends Component {
         console.log(arrayCopy);
   }
 
-  filterByBus = () => {
-    this.setState(prevState => { return {isFilteredByBus: !prevState.isFilteredByBus}});
-    this.filterByType();
-  }
-  filterByTram = () => {
-    this.setState(prevState => { return {isFilteredByTram: !prevState.isFilteredByTram}});
-    this.filterByType();
-  }
-  filterByTroll = () => {
-    this.setState(prevState => { return {isFilteredByTroll: !prevState.isFilteredByTroll}});
-    this.filterByType();
-  }
-
   toggleEditingMode = () => {
     this.setState( prevState => {
       return {
@@ -187,15 +174,16 @@ class TransportsContainer extends Component {
   }
 
   showCard = (number, type) => {
+      let cardTitle;
       switch(type) {
         case 'directions_bus':
-          this.setState({cardTitle: 'Bus ' + number, isCardShowen: true})
+          cardTitle = 'Bus ' + number;
           break;
         case 'tram':
-          this.setState({cardTitle: 'Tram ' + number, isCardShowen: true})
+          cardTitle = 'Tram ' + number;
           break;
         case 'train':
-          this.setState({cardTitle: 'Trolleybus ' + number, isCardShowen: true})
+          cardTitle = 'Trolleybus ' + number;
           break;
       }
       const TRANSPORTS = JSONdata.transport,
@@ -224,13 +212,15 @@ class TransportsContainer extends Component {
       }
       console.log(cardTableData);
 		  this.setState({ 
-        cardTableRows: this.generateTransportCardTableRow(cardTableData)
+        cardTableRows: this.generateTransportCardTableRow(cardTableData),
+        isCardShown: true,
+        cardTitle: cardTitle
       });
   }
 
   closeCard = () => {
     this.setState({ 
-      isCardShowen: false
+      isCardShown: false
     });
   }
 
