@@ -19,7 +19,7 @@ class FavoritesMenu extends Component {
                 <FavoritesEditButton onClick={this.switchEditingMode} favoritesEditingMode={this.state.favoritesEditingMode}/>
                 <h3 className="menu__title">Favorites</h3>
                 <ul className="menu--favorites-list">
-                    {items}
+                   {items}
                 </ul>
             </div>
         );
@@ -33,10 +33,11 @@ class FavoritesMenu extends Component {
     }
     generateItems = () => {
         return (
-            this.props.favorites.map(
-                (favoritesData) => <li key={favoritesData.id}><a href="#">
-                <i className="material-icons">{favoritesData.type}</i>{favoritesData.title}</a>
-                {this.state.favoritesEditingMode ? <FavoritesRemoveButton  onClick={() => this.props.removeFromFavorites(favoritesData.id)}/> : null}</li>
+            this.props.favorites.map((favoritesData, index) => 
+                <li key={index}><a href="#">
+                    <i className="material-icons">{favoritesData.type}</i>{favoritesData.title}</a>
+                    {this.state.favoritesEditingMode ? <FavoritesRemoveButton  onClick={() => this.props.removeFromFavorites(index)}/> : null}
+                </li>
             )
         );
     }

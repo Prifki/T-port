@@ -13,7 +13,7 @@ class App extends Component {
         this.state = {
           isLogged: true,
           isAdmin: true,
-          favorites: [{id: 0, type: 'tram', title: 'Tram TL09'},{id:1, type: 'place', title: 'Nevsky pr.'},{id:2, type: 'place', title: 'Gostinka'}]
+          favorites: [{type: 'tram', title: 'Tram TL09'},{type: 'place', title: 'Nevsky pr.'},{type: 'place', title: 'Gostinka'}]
         }
     }
     render() {
@@ -33,11 +33,12 @@ class App extends Component {
         );
     }
     removeFromFavorites = index => {
-        const { favorites } = this.state;
+        console.log(index);
+        const newFavorites = this.state.favorites.filter((favorite, i) => { 
+            return i !== index;
+        });
         this.setState({
-            favorites: favorites.filter((favorite, i) => { 
-                return i !== index;
-            })
+            favorites: newFavorites
         });
     }
 }
