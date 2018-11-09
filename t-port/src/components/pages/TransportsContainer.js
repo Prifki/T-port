@@ -210,7 +210,6 @@ class TransportsContainer extends Component {
       for (let each in stopNames){
         cardTableData.push({id: each, stopName: stopNames[each], time: schedule[each]});
       }
-      console.log(cardTableData);
 		  this.setState({ 
         cardTableRows: this.generateTransportCardTableRow(cardTableData),
         isCardShown: true,

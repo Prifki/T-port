@@ -1,21 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Table from './Table';
 import BookmarkButton from './BookmarkButton';
 import CloseButton from './CloseButton';
 import GoogleMap from './GoogleMap';
 
-function Card(props) {
+class Card extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+        isInFavorites: false
+    }
+  }
+  /*componentDidUpdate(){
+    this.setState({isInFavorites: false})
+  }
+  componentWillReceiveProps(){
+      console.log(this.props.favorites);
+      for (let each in this.props.favorites){
+          if (this.props.title === this.props.favorites[each].title)
+            if (!this.props.isInFavorites)
+                this.setState({isInFavorites: true})
+      }
+  }*/
+  render() {
+    const type = this.state.isInFavorites ? 'bookmark' : 'bookmark_border';
     return (
         <div className="card">
-            <BookmarkButton onClick={() => props.addToFavorites(props.title)} />
-            <CloseButton onClick={props.closeCard} />
-            <h3 className="card__title">{props.title}</h3>
-            <Table header = {props.header} rows = {props.rows} isAdmin={props.isAdmin} addItem={props.addItem} isEditingMode={props.isEditingMode} toggleEditingMode={props.toggleEditingMode}/>
-            {(props.isMapNeededOnCard) ? 
-            <div className="google-map--small"><GoogleMap markers={props.markers}/></div>
+            <BookmarkButton onClick={() => this.props.addToFavorites(this.props.title)} type={type} />
+            <CloseButton onClick={this.props.closeCard} />
+            <h3 className="card__title">{this.props.title}</h3>
+            <Table header = {this.props.header} rows = {this.props.rows} isAdmin={this.props.isAdmin} addItem={this.props.addItem} isEditingMode={this.props.isEditingMode} toggleEditingMode={this.props.toggleEditingMode}/>
+            {this.props.isMapNeededOnCard ? 
+            <div className="google-map--small"><GoogleMap markers={this.props.markers}/></div>
             : null}
         </div>
     );
+  }
 }
 
 export default Card;
