@@ -92,53 +92,31 @@ class TransportsContainer extends Component {
     this.setState({transport: arrayCopy});
   }
 
+
   filterByType = (type) => {
-    let arrayCopy = JSONdata.transport;
-        if (type === 'directions_bus') {
-          if (!this.state.isFilteredByBus) {
-            this.setState({
-              transport: arrayCopy.filter(transport => !(transport.type === 'directions_bus')),
-              isFilteredByBus: !this.state.isFilteredByBus
-            });
-          }
-          else
-            this.setState({isFilteredByBus: !this.state.isFilteredByBus});
-        }
-        if (type === 'tram') {
-          if (!this.state.isFilteredByTram) {
-            this.setState({
-              transport: arrayCopy.filter(transport => !(transport.type === 'tram')),
-              isFilteredByTram: !this.state.isFilteredByTram
-            });
-          }
-          else
-            this.setState({isFilteredByTram: !this.state.isFilteredByTram});
-        }
-        if (type === 'train') {
-          if (!this.state.isFilteredByTroll) {
-            this.setState({
-              transport: arrayCopy.filter(transport => !(transport.type === 'train')),
-              isFilteredByTroll: !this.state.isFilteredByTroll
-            });
-          }
-          else
-            this.setState({isFilteredByTroll: !this.state.isFilteredByTroll});
-        }
-        if (this.state.isFilteredByBus) {
-          arrayCopy = arrayCopy.filter(transport => !(transport.type === 'directions_bus'));
-          console.log(arrayCopy);
-        }
-        if (this.state.isFilteredByTram) {
-          arrayCopy = arrayCopy.filter(transport => !(transport.type === 'tram'));
-          console.log(arrayCopy);
-        }
-        if (this.state.isFilteredByTroll) {
-          arrayCopy = arrayCopy.filter(transport => !(transport.type === 'train'));
-          console.log(arrayCopy);
-        }
-        //this.setState({transport: arrayCopy});
-        console.log('isFilteredByBus: '+this.state.isFilteredByBus+'\nisFilteredByTroll: '+this.state.isFilteredByTroll+'\nisFilteredByTram: '+this.state.isFilteredByTram);
-        console.log(arrayCopy);
+    let arrayCopy = JSONdata.transport,
+    tempBus = this.state.isFilteredByBus,
+    tempTram = this.state.isFilteredByTram,
+    tempTroll = this.state.isFilteredByTroll;
+      if (type === 'directions_bus')
+        tempBus = !tempBus;
+      if (type === 'tram')
+        tempTram = !tempTram;
+      if (type === 'train')
+        tempTroll = !tempTroll;
+      if (tempBus)
+        arrayCopy = arrayCopy.filter(transport => !(transport.type === 'directions_bus'));
+      if (tempTram)
+        arrayCopy = arrayCopy.filter(transport => !(transport.type === 'tram'));
+      if (tempTroll)
+        arrayCopy = arrayCopy.filter(transport => !(transport.type === 'train'));
+      console.log(arrayCopy);
+      this.setState({
+        transport: arrayCopy,
+        isFilteredByBus: tempBus,
+        isFilteredByTram: tempTram,
+        isFilteredByTroll: tempTroll
+      });
   }
 
   toggleEditingMode = () => {
