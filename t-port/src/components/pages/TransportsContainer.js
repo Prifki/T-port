@@ -31,22 +31,39 @@ class TransportsContainer extends Component {
         <main>
             <div className="substrate">
                 <h2 className="page-name">Transport</h2>
+
+                {/* FILTERING*/}
                 <FilterByType filterByType={this.filterByType} isFilteredByBus={this.state.isFilteredByBus} isFilteredByTram={this.state.isFilteredByTram} isFilteredByTroll={this.state.isFilteredByTroll} />
+                
+                <div className="filter-wrapper">
+                  <input type="text" className="filter__input" placeholder="Filter by route" onChange={this.filterByRoute} />
+                </div>
+
+                {/* TABLE */}
                 <Table header = {transportTableTitles} rows = {rows} isAdmin={this.props.isAdmin} addItem={this.state.addTransportTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode}/>
+
                 <Pagination />
+
+                {/* CARD */}
                 {this.state.isCardShown ? <Card addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard}/>: null}
             </div>
         </main>
     );
   }
+
+  filterByRoute = (e) => {
+    let filteredArray = JSONdata.transport.filter(transport => ~transport.route.indexOf(e.target.value));
+    this.setState({transport: filteredArray});
+  }
+
   transportTableTitles = () => {
     return (
       <thead>
         <tr>
-          <th onClick={() => this.sortBy('type')} >Type</th>
-          <th onClick={() => this.sortBy('number')} >Number</th>
-          <th onClick={() => this.sortBy('route')} >Route</th>
-          <th onClick={() => this.sortBy('seats')} >Seats</th>
+          <th>Type</th>
+          <th>Number</th>
+          <th>Route</th>
+          <th onClick={() => this.sortBy('seats')} className="table__column-title" >Seats</th>
           {this.state.isEditingMode ? <EditingColumnTitles /> : null}
         </tr>
       </thead>

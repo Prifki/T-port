@@ -330,10 +330,6 @@ table td, table th {
   text-align: left;
   vertical-align: middle;
 }
-table td > a:hover, table td i:hover, table th > a:hover, table th i:hover {
-  cursor: pointer;
-  color: #29b8ed;
-}
 table tr:nth-child(even) {
   background-color: #f2f2f2;
 }
@@ -348,7 +344,8 @@ table th {
   color: #fff;
   vertical-align: middle;
 }
-table th:hover {
+
+.table__column-title:hover {
   background: #14afe9;
   cursor: pointer;
 }
@@ -440,6 +437,28 @@ table th:hover {
   transition: all 0.2s;
   display: flex;
   align-items: center;
+}
+
+.filter-wrapper {
+  max-width: 250px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.filter__input {
+  width: 100%;
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+.filter__input:hover {
+  cursor: pointer;
+}
+.filter__input:focus {
+  border-color: #29b8ed;
+  cursor: text;
 }
 
 .pagination-wrapper {

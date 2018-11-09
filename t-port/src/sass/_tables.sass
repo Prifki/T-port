@@ -10,9 +10,6 @@ table
     padding: 5px
     text-align: left
     vertical-align: middle
-    &>a:hover, i:hover
-      cursor: pointer
-      color: $main-color
   tr:nth-child(even)
     background-color: #f2f2f2
   tr
@@ -24,9 +21,10 @@ table
     background-color: $main-color
     color: #fff
     vertical-align: middle
-    &:hover
-      background: darken($main-color,5%)
-      cursor: pointer
+
+.table__column-title:hover
+  background: darken($main-color,5%)
+  cursor: pointer
 
 
 .table-edit-input
