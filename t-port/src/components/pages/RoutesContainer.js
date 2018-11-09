@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+
 import Table from './presentational/Table';
 import Card from './presentational/Card';
 import JSONdata from './../../data/data.json';
@@ -16,7 +18,8 @@ class RoutesContainer extends Component {
             addRoutesTableItem: this.createAddItemRow(),
             addCardTableItem: this.createAddCardItemRow(),
             isSortedAscending: false,
-            isMapNeededOnCard: false
+            isMapNeededOnCard: false,
+            markers: [0,0]
         }
     }
   render() {
@@ -28,7 +31,7 @@ class RoutesContainer extends Component {
             <div className="substrate">
                 <h2 className="page-name">Routes</h2>
                 <Table header = {routesTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode} addItem={this.state.addRoutesTableItem} />
-                <div className="google-map--small"><GoogleMap/></div>
+                <div className="google-map--small"><GoogleMap markers={this.state.markers}/></div>
                 {this.state.isCardShown ? <Card closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} /> : null}
             </div>
         </main>
@@ -145,7 +148,7 @@ class RoutesContainer extends Component {
         for (let stop in stops){
           if (stops[stop] == STOPS[STOP].number){
             stops[stop] = STOPS[STOP].name;
-            locations[stop] = (STOPS[STOP].lat+','+STOPS[STOP].long);
+            locations[stop] = ({lat: STOPS[STOP].lat, long: STOPS[STOP].long, name: STOPS[STOP].name});
           }
         }
       }
@@ -161,7 +164,8 @@ class RoutesContainer extends Component {
     this.setState({
       isCardShown: true,
       cardTableRows: this.generateRoutesCardTableRow(cardData),
-      cardTitle: 'Route '+name
+      cardTitle: 'Route ' + name,
+      markers: this.generateMarkers(locations)
     })
   }
   
@@ -195,7 +199,12 @@ class RoutesContainer extends Component {
     });
   }
 
-
+  generateMarkers = (locations) => {
+    console.log(locations);
+    return locations.map((loc, index) => 
+    <Marker key={index} title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />
+    )
+  }
 }
 
 export default RoutesContainer;
