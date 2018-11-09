@@ -7,7 +7,7 @@ import GoogleMap from './GoogleMap';
 function Card(props) {
     return (
         <div className="card">
-            <BookmarkButton />
+            <BookmarkButton onClick={() => props.addToFavorites(props.title)} />
             <CloseButton onClick={props.closeCard} />
             <h3 className="card__title">{props.title}</h3>
             <Table header = {props.header} rows = {props.rows} isAdmin={props.isAdmin} addItem={props.addItem} isEditingMode={props.isEditingMode} toggleEditingMode={props.toggleEditingMode}/>

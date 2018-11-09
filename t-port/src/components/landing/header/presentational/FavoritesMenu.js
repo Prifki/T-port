@@ -19,7 +19,7 @@ class FavoritesMenu extends Component {
                 <FavoritesEditButton onClick={this.switchEditingMode} favoritesEditingMode={this.state.favoritesEditingMode}/>
                 <h3 className="menu__title">Favorites</h3>
                 <ul className="menu--favorites-list">
-                   {items}
+                    {this.props.favorites.length ? items : <p>Nothing's here</p>}
                 </ul>
             </div>
         );
