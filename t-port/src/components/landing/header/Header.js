@@ -63,18 +63,33 @@ class Header extends Component {
       let foundEntities = [];
       for (let stop in JSONdata.stops){
         if (~JSONdata.stops[stop].name.indexOf(e.target.value))
-          foundEntities.push(JSONdata.stops[stop].name);
+          foundEntities.push({name: JSONdata.stops[stop].name, type: ''});
       }
       for (let route in JSONdata.routes){
         if (~JSONdata.routes[route].name.indexOf(e.target.value))
-          foundEntities.push(JSONdata.routes[route].name);
+          foundEntities.push({name: JSONdata.routes[route].name, type: 'Route '});
       }
       for (let trans in JSONdata.transport){
-        if (~JSONdata.transport[trans].number.indexOf(e.target.value))
-          foundEntities.push(JSONdata.transport[trans].number);
+        if (~JSONdata.transport[trans].number.indexOf(e.target.value)){
+          let type;
+          switch(JSONdata.transport[trans].type) {
+            case 'directions_bus':
+              type = 'Bus ';
+              break;
+            case 'tram':
+              type = 'Tram ';
+              break;
+            case 'train':
+              type = 'Trolleybus ';
+              break;
+            default:
+              break;
+          }
+          foundEntities.push({name: JSONdata.transport[trans].number, type: type});
+        }
       }
       foundEntities = foundEntities.map( (item, index) => 
-      <li key={index} onClick={() => this.chooseFromAutoComplete(item)}>{item}</li>
+      <li key={index} onClick={() => this.props.openModalCard(item.type+item.name)}>{item.name}</li>
       )
       if (foundEntities.length) {
         this.setState({
@@ -87,10 +102,6 @@ class Header extends Component {
     }
     else
       this.setState({isGlobalAutoCompleteShown: false});
-  }
-
-  chooseFromAutoComplete = (item) => {
-    console.log(item);
   }
 
   hideGlobalAutoComplete = () => {

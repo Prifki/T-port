@@ -22,7 +22,6 @@ class StopsContainer extends Component {
         }
     }
   render() {
-    console.log(this.props.favorites);
     const rows = this.generateStopTableRow(),
     stopsTableTitles = this.stopsTableTitles(),
     cardTableTitles = this.cardTableTitles();
@@ -216,7 +215,6 @@ class StopsContainer extends Component {
     });
   }
   generateMarkers = (loc) => {
-    console.log(loc);
     return <Marker title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />
   }
 }

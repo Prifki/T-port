@@ -135,7 +135,6 @@ class TransportsContainer extends Component {
         arrayCopy = arrayCopy.filter(transport => !(transport.type === 'tram'));
       if (tempTroll)
         arrayCopy = arrayCopy.filter(transport => !(transport.type === 'train'));
-      console.log(arrayCopy);
       this.setState({
         transport: arrayCopy,
         isFilteredByBus: tempBus,

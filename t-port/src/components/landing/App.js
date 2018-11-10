@@ -29,7 +29,7 @@ class App extends Component {
     render() {
         return (
             <>
-                <Header isLogged={this.state.isLogged} favorites={this.state.favorites} removeFromFavorites={this.removeFromFavorites} openModalCard={this.openModalCard} />
+                <Header isLogged={this.state.isLogged} favorites={this.state.favorites} removeFromFavorites={this.removeFromFavorites} openModalCard={this.openModalCard} openModalCard={this.openModalCard} />
 
                 {this.state.isModalCardOpen ? <CardModal closeModalCard={this.closeModalCard} title={this.state.modalCardTitle} header={this.state.modalCardTableTitles} rows={this.state.modalCardTableRows} modalCardMarkers={this.state.modalCardMarkers} isMapNeededOnModalCard={this.state.isMapNeededOnModalCard} /> : null}
 
@@ -70,9 +70,9 @@ class App extends Component {
                 modalCardTableTitles = generateTransportModalCardTableTitles();
                 break;
             case 'Rou':
-                const temp = generateRouteModalCardTableRow();
-                modalCardTableRows = temp[0];
-                modalCardMarkers = generateRouteMarkers(temp[1]);
+                const tempRoute = generateRouteModalCardTableRow();
+                modalCardTableRows = tempRoute[0];
+                modalCardMarkers = generateRouteMarkers(tempRoute[1]);
                 modalCardTableTitles = generateRouteModalCardTableTitles();
                 isMapNeededOnModalCard = true;
                 break;
@@ -99,7 +99,7 @@ class App extends Component {
         }
         function generateStopMarker(loc) {
             return <Marker title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />
-          }
+        }
         function generateTransportModalCardTableRow() {
             const number = title.split(' ')[1],
             TRANSPORTS = JSONdata.transport,
@@ -147,7 +147,7 @@ class App extends Component {
               }
               for (let STOP in STOPS){
                 for (let stop in stops){
-                  if (stops[stop] === STOPS[STOP].name){
+                  if (stops[stop] === STOPS[STOP].number){
                     stops[stop] = STOPS[STOP].name;
                     locations[stop] = ({lat: STOPS[STOP].lat, long: STOPS[STOP].long, name: STOPS[STOP].name});
                   }
@@ -178,7 +178,7 @@ class App extends Component {
             let location, routesList=[], stopName = title;
             for (let STOP in STOPS){
               if (stopName === STOPS[STOP].name){
-                location = {name: stopName, lat: parseFloat(STOPS[STOP].lat), long: parseFloat(STOPS[STOP].long)};
+                location = {name: title, lat: parseFloat(STOPS[STOP].lat), long: parseFloat(STOPS[STOP].long)};
                 stopName = STOPS[STOP].number;
                 routesList = (STOPS[STOP].routes);
               }
@@ -201,7 +201,6 @@ class App extends Component {
                   }
                 }
               }
-            console.log(location);
             return [cardData.map( (rowData, index) => 
                     <tr key={index}>
                     <td>{rowData.route}</td>
