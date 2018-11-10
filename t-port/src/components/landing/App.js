@@ -17,7 +17,6 @@ class App extends Component {
         }
     }
     render() {
-        console.log(this.state.favorites);
         return (
             <>
                 <Header isLogged={this.state.isLogged} favorites={this.state.favorites} removeFromFavorites={this.removeFromFavorites} />

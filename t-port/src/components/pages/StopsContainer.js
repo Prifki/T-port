@@ -40,8 +40,8 @@ class StopsContainer extends Component {
       return (
         <thead>
         <tr>
-          <th onClick={() => this.sortBy('name')}>Name</th>
-          <th onClick={() => this.sortBy('routes')}>Routes</th>
+          <th onClick={() => this.sortBy('name')} className="table__column-title" >Name</th>
+          <th>Routes</th>
           {this.state.isEditingMode ? <EditingColumnTitles /> : null}
         </tr>
       </thead>

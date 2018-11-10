@@ -172,6 +172,8 @@
   nav
     display: flex
     flex-direction: column
+  .mobile-global-search
+    display: none
 
 
 
@@ -184,6 +186,7 @@
   left: -102%
   visibility: hidden
   display: flex
+  flex-direction: column
   background: #f2f2f2
   width: 100%
   justify-content: center
@@ -200,10 +203,12 @@
 .mobile-global-search--active
   left: 0
   visibility: visible
-
+  
 .mobile-global-search__field-wrapper
   display: flex
-  justify-content: center    
+  justify-content: center
+  align-items: center
+  width: 100%
 
 .mobile-global-search__button--close
   position: absolute
@@ -211,7 +216,6 @@
 
 .mobile-global-search-results
   margin: 10px
-  display: none
   flex-direction: column
   font-size: 1.2em
   max-height: 160px
@@ -225,7 +229,9 @@
       background: #ccc
       cursor: pointer
 
-
+@media (min-width: 585px)
+  .mobile-global-search
+    display: none
 
 // Find A Route Menu
 

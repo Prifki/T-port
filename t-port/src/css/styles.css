@@ -290,7 +290,6 @@ header {
 }
 
 .global-search-results {
-  display: none;
   position: absolute;
   top: 52px;
   flex-direction: column;
@@ -770,6 +769,10 @@ footer {
     display: flex;
     flex-direction: column;
   }
+
+  .mobile-global-search {
+    display: none;
+  }
 }
 .mobile-global-search {
   position: absolute;
@@ -777,6 +780,7 @@ footer {
   left: -102%;
   visibility: hidden;
   display: flex;
+  flex-direction: column;
   background: #f2f2f2;
   width: 100%;
   justify-content: center;
@@ -800,6 +804,8 @@ footer {
 .mobile-global-search__field-wrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .mobile-global-search__button--close {
@@ -809,7 +815,6 @@ footer {
 
 .mobile-global-search-results {
   margin: 10px;
-  display: none;
   flex-direction: column;
   font-size: 1.2em;
   max-height: 160px;
@@ -826,6 +831,11 @@ footer {
   cursor: pointer;
 }
 
+@media (min-width: 585px) {
+  .mobile-global-search {
+    display: none;
+  }
+}
 .menu--find-a-route {
   position: absolute;
   top: 0;

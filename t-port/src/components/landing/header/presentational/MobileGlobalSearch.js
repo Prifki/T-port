@@ -8,10 +8,10 @@ class MobileGlobalSearch extends Component {
     return (
 		<div className = {className} >
 			<div className="mobile-global-search__field-wrapper">
-				<input type="text" placeholder="Search…" list="mobile-search-items" id="mobile-find-input" />
+				<input type="text" placeholder="Search…" list="mobile-search-items" id="mobile-find-input" onChange={this.props.globalAutoComplete} onFocus={this.props.globalAutoComplete} />
+        <MobileGlobalSearchClosingButton onClick={this.props.toggleMobileGlobalSearch} />
 			</div>
-            <MobileGlobalSearchClosingButton onClick={this.props.toggleMobileGlobalSearch} />
-            <MobileGlobalSearchResults />
+            {this.props.isGlobalAutoCompleteShown ? <MobileGlobalSearchResults globalAutoCompleteItems={this.props.globalAutoCompleteItems} /> : null}
 		</div>
     );
   }

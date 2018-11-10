@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Route, Switch, Redirect} from "react-router-dom";
+
 import BurgerButton from './presentational/BurgerButton';
 import NavBar from './presentational/NavBar';
 import GlobalSearch from './presentational/GlobalSearch';
@@ -8,6 +10,7 @@ import MobileGlobalSearchButton from './presentational/MobileGlobalSearchButton'
 import LoginMenu from './presentational/LoginMenu';
 import FavoritesMenu from './presentational/FavoritesMenu';
 import MobileGlobalSearch from './presentational/MobileGlobalSearch';
+import JSONdata from './../../../data/data.json';
 
 class Header extends Component {
   constructor(props) {
@@ -17,7 +20,9 @@ class Header extends Component {
       isFavoritesMenuOpen: false,
       isBurgerNavBarOpen: false,
       isMobileGlobalSearchOpen: false,
-      isBurgerButtonActive: false
+      isBurgerButtonActive: false,
+      isGlobalAutoCompleteShown: false,
+      globalAutoCompleteItems: []
     };
   }
   
@@ -38,15 +43,56 @@ class Header extends Component {
           <LoginButton onClick={this.toggleLoginMenu}/>
           <MobileGlobalSearchButton onClick={this.toggleMobileGlobalSearch}/>
         </div>
-        <GlobalSearch />
+        <GlobalSearch isGlobalAutoCompleteShown={this.state.isGlobalAutoCompleteShown} globalAutoComplete={this.globalAutoComplete} globalAutoCompleteItems={this.state.globalAutoCompleteItems} hideGlobalAutoComplete={this.hideGlobalAutoComplete} chooseFromAutoComplete={this.chooseFromAutoComplete}/>
       </header>
-      <MobileGlobalSearch isMobileGlobalSearchOpen={this.state.isMobileGlobalSearchOpen} toggleMobileGlobalSearch={this.toggleMobileGlobalSearch}/>
+      <MobileGlobalSearch isGlobalAutoCompleteShown={this.state.isGlobalAutoCompleteShown} isMobileGlobalSearchOpen={this.state.isMobileGlobalSearchOpen} toggleMobileGlobalSearch={this.toggleMobileGlobalSearch} globalAutoComplete={this.globalAutoComplete} globalAutoCompleteItems={this.state.globalAutoCompleteItems} chooseFromAutoComplete={this.chooseFromAutoComplete}/>
       <div className={burgerNavBarClassName}><NavBar /></div>
       <LoginMenu isLoginMenuOpen={this.state.isLoginMenuOpen} toggleLoginMenu={this.toggleLoginMenu}/>
       <FavoritesMenu isFavoritesMenuOpen={this.state.isFavoritesMenuOpen} toggleFavoritesMenu={this.toggleFavoritesMenu} favorites={this.props.favorites} removeFromFavorites={this.props.removeFromFavorites} />
       </>
     );
   }
+
+  globalAutoComplete = (e) => {
+    if (e.target.value) {
+      console.log(typeof (e.target.value))
+      let foundEntities = [];
+      for (let stop in JSONdata.stops){
+        if (~JSONdata.stops[stop].name.indexOf(e.target.value))
+          foundEntities.push(JSONdata.stops[stop].name);
+      }
+      for (let route in JSONdata.routes){
+        if (~JSONdata.routes[route].name.indexOf(e.target.value))
+          foundEntities.push(JSONdata.routes[route].name);
+      }
+      for (let trans in JSONdata.transport){
+        if (~JSONdata.transport[trans].number.indexOf(e.target.value))
+          foundEntities.push(JSONdata.transport[trans].number);
+      }
+      foundEntities = foundEntities.map( (item, index) => 
+      <li key={index} onClick={() => this.chooseFromAutoComplete(item)}>{item}</li>
+      )
+      if (foundEntities.length) {
+        this.setState({
+          globalAutoCompleteItems: foundEntities,
+          isGlobalAutoCompleteShown: true
+        });
+      }
+      else
+        this.setState({isGlobalAutoCompleteShown: false});
+    }
+    else
+      this.setState({isGlobalAutoCompleteShown: false});
+  }
+
+  chooseFromAutoComplete = (item) => {
+    console.log(item);
+  }
+
+  hideGlobalAutoComplete = () => {
+    this.setState({isGlobalAutoCompleteShown: false});
+  }
+
   toggleMobileGlobalSearch = () => {
     this.setState( prevState => {
       return {
