@@ -362,6 +362,7 @@ table th {
 
 .table-editor-buttons:hover {
   color: #29b8ed;
+  cursor: pointer;
 }
 
 .table__editor-tools-button {
@@ -676,6 +677,7 @@ footer {
 }
 .menu--favorites {
   transition: opacity 0.4s ease;
+  min-width: 180px;
   position: absolute;
   top: 60px;
   right: 0;

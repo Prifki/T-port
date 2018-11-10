@@ -71,15 +71,16 @@ class TransportsContainer extends Component {
   }
 
   generateTransportTableRow = () => {
-    return this.state.transport.map( (rowData) => 
-      <tr key={rowData.id}>
+    return this.state.transport.map( (rowData, index) => 
+      <tr key={index}>
         <td><i className="material-icons">{rowData.type}</i></td>
         <td className="table__link" onClick={() => this.showCard(rowData.number, rowData.type)}>{rowData.number}</td>
         <td>{rowData.route}</td>
         <td>{rowData.seats}</td>
         {this.state.isEditingMode ? <>
-        <EditTableButton type={'edit'}/>
-        <EditTableButton type={'remove'}/></> : null}  
+          <EditTableButton type={'edit'}/>
+          <EditTableButton type={'remove'} onClick={() => this.removeTableItem(index)}/>
+        </> : null}
       </tr>
     )
   }
@@ -102,7 +103,15 @@ class TransportsContainer extends Component {
       };
     }
   }
- 
+
+  removeTableItem = (index) => {
+    console.log('ds');
+    const newTransportData = this.state.transport.filter((trans, i) => { 
+      return i !== index;
+    });
+    this.setState({transport: newTransportData});
+  }
+
   sortBy = (key) => {
     let arrayCopy = [...this.state.transport];
     arrayCopy.sort(this.compareBy(key));
@@ -219,16 +228,24 @@ class TransportsContainer extends Component {
   }
 
   generateTransportCardTableRow = (arr) => {
-    return arr.map( (rowData) => 
-      <tr key={rowData.id}>
+    return arr.map( (rowData, index) => 
+      <tr key={index}>
         <td>{rowData.stopName}</td>
         <td>{rowData.time}</td>
         {this.state.isEditingMode ? <>
         <EditTableButton type={'edit'}/>
-        <EditTableButton type={'remove'}/></> : null}   
+        <EditTableButton type={'remove'} onClick={() => this.removeCardTableItem(index)}/></> : null}   
       </tr>
     )
   }
+
+  removeCardTableItem = (index) => {
+    const newTransportData = this.state.cardTableRows.filter((stop, i) => { 
+      return i !== index;
+    });
+    this.setState({cardTableRows: newTransportData});
+  }
+
   cardTableTitles = () => {
     return (
       <thead>
