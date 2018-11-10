@@ -221,7 +221,6 @@ class RoutesContainer extends Component {
   }
 
   generateMarkers = (locations) => {
-    console.log(locations);
     return locations.map((loc, index) => 
     <Marker key={index} title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />
     )

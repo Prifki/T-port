@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Route, Switch} from "react-router-dom";
+import {Marker} from 'google-maps-react';
 
 import JSONdata from './../../data/data.json';
 import Header from './header/Header';
@@ -20,7 +21,9 @@ class App extends Component {
           isModalCardOpen: false,
           modalCardTitle: null,
           modalCardTableTitles: null,
-          modalCardTableRows: null
+          modalCardTableRows: null,
+          modalCardMarkers: null,
+          isMapNeededOnModalCard: false
         }
     }
     render() {
@@ -28,7 +31,7 @@ class App extends Component {
             <>
                 <Header isLogged={this.state.isLogged} favorites={this.state.favorites} removeFromFavorites={this.removeFromFavorites} openModalCard={this.openModalCard} />
 
-                {this.state.isModalCardOpen ? <CardModal closeModalCard={this.closeModalCard} title={this.state.modalCardTitle} header={this.state.modalCardTableTitles} rows={this.state.modalCardTableRows}  /> : null}
+                {this.state.isModalCardOpen ? <CardModal closeModalCard={this.closeModalCard} title={this.state.modalCardTitle} header={this.state.modalCardTableTitles} rows={this.state.modalCardTableRows} modalCardMarkers={this.state.modalCardMarkers} isMapNeededOnModalCard={this.state.isMapNeededOnModalCard} /> : null}
 
                 <Switch>
                     <Route exact path='/' component={FindRouteContainer}/>
@@ -52,22 +55,30 @@ class App extends Component {
 
     openModalCard = (title) => {
         let modalCardTitle = title,
-        modalCardTableRows, modalCardTableTitles;
+        modalCardTableRows, modalCardTableTitles, isMapNeededOnModalCard, modalCardMarkers;
         switch (title.substr(0,3)) {
             case 'Bus':
                 modalCardTableRows = generateTransportModalCardTableRow();
                 modalCardTableTitles = generateTransportModalCardTableTitles();
+                isMapNeededOnModalCard = false;
                 break;
             case 'Tra':
                 modalCardTableRows = generateTransportModalCardTableRow();
                 modalCardTableTitles = generateTransportModalCardTableTitles();
+                isMapNeededOnModalCard = false;
                 break;
             case 'Tro':
                 modalCardTableRows = generateTransportModalCardTableRow();
                 modalCardTableTitles = generateTransportModalCardTableTitles();
+                isMapNeededOnModalCard = false;
                 break;
             case 'Rou':
-                modalCardTableRows = generateRouteModalCard();
+                const temp = generateRouteModalCardTableRow();
+                modalCardTableRows = temp[0];
+                modalCardMarkers = generateMarkers(temp[1]);
+                console.log(modalCardMarkers);
+                modalCardTableTitles = generateRouteModalCardTableTitles();
+                isMapNeededOnModalCard = true;
                 break;
             default:
                 modalCardTableRows = generateStopModalCard();
@@ -77,8 +88,15 @@ class App extends Component {
             isModalCardOpen: true,
             modalCardTitle: modalCardTitle,
             modalCardTableRows: modalCardTableRows,
-            modalCardTableTitles: modalCardTableTitles
+            modalCardTableTitles: modalCardTableTitles,
+            isMapNeededOnModalCard: isMapNeededOnModalCard,
+            modalCardMarkers: modalCardMarkers
         });
+
+        function generateMarkers(locations) {
+            return locations.map((loc, index) => 
+            <Marker key={index} title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />)
+        }
 
         function generateTransportModalCardTableRow() {
             const number = title.split(' ')[1],
@@ -118,8 +136,39 @@ class App extends Component {
             return (<thead><tr><th>Stop</th><th>Time</th></tr></thead>)
         }
 
-        function generateRouteModalCard() {
-            console.log(title);
+        function generateRouteModalCardTableRow() {
+            const name = title.split(' ')[1], ROUTES = JSONdata.routes, TRANSPORTS = JSONdata.transport, STOPS = JSONdata.stops;
+            let locations = [], cardData = [], stops = [];
+              for (let ROUTE in ROUTES){
+                if (name === ROUTES[ROUTE].name)
+                  stops = ROUTES[ROUTE].stops;
+              }
+              for (let STOP in STOPS){
+                for (let stop in stops){
+                  if (stops[stop] === STOPS[STOP].name){
+                    stops[stop] = STOPS[STOP].name;
+                    locations[stop] = ({lat: STOPS[STOP].lat, long: STOPS[STOP].long, name: STOPS[STOP].name});
+                  }
+                }
+              }
+              for (let i = 0; i < stops.length; i++) {
+                let times = [];
+                for (let TRANSPORT in TRANSPORTS){
+                    if (name === TRANSPORTS[TRANSPORT].route){
+                      times.push(TRANSPORTS[TRANSPORT].time[i]);
+                    }
+                }
+                cardData.push({stops: stops[i], times: times});
+              }
+              return [cardData.map( (rowData, index) => 
+              <tr key={index}>
+                <td>{rowData.stops}</td>
+                <td>{rowData.times.join(', ')}</td>   
+              </tr>),locations];
+        }
+
+        function generateRouteModalCardTableTitles() {
+            return (<thead><tr><th>Stop</th><th>Time</th></tr></thead>);
         }
 
         function generateStopModalCard() {
