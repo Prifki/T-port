@@ -45,10 +45,15 @@ class Header extends Component {
         </div>
         <GlobalSearch isGlobalAutoCompleteShown={this.state.isGlobalAutoCompleteShown} globalAutoComplete={this.globalAutoComplete} globalAutoCompleteItems={this.state.globalAutoCompleteItems} hideGlobalAutoComplete={this.hideGlobalAutoComplete} chooseFromAutoComplete={this.chooseFromAutoComplete}/>
       </header>
+
       <MobileGlobalSearch isGlobalAutoCompleteShown={this.state.isGlobalAutoCompleteShown} isMobileGlobalSearchOpen={this.state.isMobileGlobalSearchOpen} toggleMobileGlobalSearch={this.toggleMobileGlobalSearch} globalAutoComplete={this.globalAutoComplete} globalAutoCompleteItems={this.state.globalAutoCompleteItems} chooseFromAutoComplete={this.chooseFromAutoComplete}/>
-      <div className={burgerNavBarClassName}><NavBar /></div>
+      <div className={burgerNavBarClassName}>
+      
+      <NavBar /></div>
+
       <LoginMenu isLoginMenuOpen={this.state.isLoginMenuOpen} toggleLoginMenu={this.toggleLoginMenu}/>
-      <FavoritesMenu isFavoritesMenuOpen={this.state.isFavoritesMenuOpen} toggleFavoritesMenu={this.toggleFavoritesMenu} favorites={this.props.favorites} removeFromFavorites={this.props.removeFromFavorites} />
+
+      <FavoritesMenu openModalCard={this.props.openModalCard} isFavoritesMenuOpen={this.state.isFavoritesMenuOpen} toggleFavoritesMenu={this.toggleFavoritesMenu} favorites={this.props.favorites} removeFromFavorites={this.props.removeFromFavorites} />
       </>
     );
   }

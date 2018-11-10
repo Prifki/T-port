@@ -497,8 +497,15 @@ table th {
   align-items: center;
   margin: 10px;
   transition: opacity 0.4s ease;
-  opacity: 1;
   display: flex;
+}
+
+.card--modal {
+  position: fixed;
+  z-index: 3;
+  margin: auto;
+  top: 67px;
+  left: 5%;
 }
 
 .card__title {
@@ -708,7 +715,8 @@ footer {
 .menu--favorites-list li .material-icons {
   margin-right: 5px;
 }
-.menu--favorites-list div {
+
+.menu--favorites-list__item {
   text-align: left;
   padding: 5px 10px;
   margin: 10px;
@@ -716,7 +724,7 @@ footer {
   background: #e1e1e1;
   border-radius: 10px;
 }
-.menu--favorites-list div:hover {
+.menu--favorites-list__item:hover {
   background: #d5d5d5;
   cursor: pointer;
 }
