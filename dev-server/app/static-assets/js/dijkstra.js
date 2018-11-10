@@ -103,7 +103,7 @@
     }
     catch (err){
       const route = [['not found','0'],['not found','0'],['not found','0']];
-      console.log('Dijkstra doesn`l like smth: '+err);
+      console.log('Dijkstra doesn`t like smth: '+err);
       return(route);
     }
       

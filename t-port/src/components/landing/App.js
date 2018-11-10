@@ -29,7 +29,7 @@ class App extends Component {
     render() {
         return (
             <>
-                <Header isLogged={this.state.isLogged} favorites={this.state.favorites} removeFromFavorites={this.removeFromFavorites} openModalCard={this.openModalCard} openModalCard={this.openModalCard} />
+                <Header isLogged={this.state.isLogged} favorites={this.state.favorites} removeFromFavorites={this.removeFromFavorites} openModalCard={this.openModalCard} />
 
                 {this.state.isModalCardOpen ? <CardModal closeModalCard={this.closeModalCard} title={this.state.modalCardTitle} header={this.state.modalCardTableTitles} rows={this.state.modalCardTableRows} modalCardMarkers={this.state.modalCardMarkers} isMapNeededOnModalCard={this.state.isMapNeededOnModalCard} /> : null}
 
