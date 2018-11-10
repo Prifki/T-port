@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {Marker} from 'google-maps-react';
 
 import Table from './presentational/Table';
 import Card from './presentational/Card';
@@ -31,23 +31,35 @@ class RoutesContainer extends Component {
         <main>
             <div className="substrate">
                 <h2 className="page-name">Routes</h2>
+
                 <Table header = {routesTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode} addItem={this.state.addRoutesTableItem} />
-                <div className="google-map--small"><GoogleMap markers={this.state.markers} /></div>
-                {this.state.isCardShown ? <Card closeCard={this.closeCard} header={this.state.cardTableTitles} rows={this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} /> : null}
+                <div className="google-map--small">
+                
+                <GoogleMap markers={this.state.markers} /></div>
+
+
+                {this.state.isCardShown ? <Card addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} closeCard={this.closeCard} header={this.state.cardTableTitles} rows={this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} /> : null}
             </div>
         </main>
     );
   }
   
+  removeTableItem = (index) => {
+    const newRouteData = this.state.tableData.filter((route, i) => { 
+      return i !== index;
+    });
+    this.setState({tableData: newRouteData});
+  }
+
   generateRoutesTableRow = () => {
-    return this.state.tableData.map( (rowData) => 
-        <tr key={rowData.id}>
+    return this.state.tableData.map( (rowData, index) => 
+        <tr key={index}>
           <td className="table__link" onClick={() => this.showCard(rowData.name)}>{rowData.name}</td>
           <td>{rowData.from}</td>
           <td>{rowData.to}</td>   
           {this.state.isEditingMode ? <>
           <EditTableButton type={'edit'}/>
-          <EditTableButton type={'remove'}/></> : null}  
+          <EditTableButton type={'remove'} onClick={() => this.removeTableItem(index)} /></> : null}  
         </tr>
     )
   }
@@ -172,15 +184,22 @@ class RoutesContainer extends Component {
   }
   
   generateRoutesCardTableRow = (arr) => {
-    return arr.map( (rowData) => 
-      <tr key={rowData.id}>
+    return arr.map( (rowData, index) => 
+      <tr key={index}>
         <td>{rowData.stops}</td>
         <td>{rowData.times.join(', ')}</td>
         {this.state.isEditingMode ? <>
         <EditTableButton type={'edit'}/>
-        <EditTableButton type={'remove'}/></> : null}   
+        <EditTableButton type={'remove'} onClick={() => this.removeCardTableItem(index)} /></> : null}   
       </tr>
     )
+  }
+
+  removeCardTableItem = (index) => {
+    const newRouteData = this.state.cardTableRows.filter((stop, i) => { 
+      return i !== index;
+    });
+    this.setState({cardTableRows: newRouteData});
   }
 
   cardTableTitles = () => {

@@ -24,8 +24,8 @@ class App extends Component {
                 <Switch>
                     <Route exact path='/' component={FindRouteContainer}/>
                     <Route path='/transports' render={(props) => <TransportsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} />}/>
-                    <Route path='/routes' render={(props) => <RoutesContainer {...props} isAdmin={this.state.isAdmin} />}/>
-                    <Route path='/stops' render={(props) => <StopsContainer {...props} isAdmin={this.state.isAdmin} />}/>
+                    <Route path='/routes' render={(props) => <RoutesContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} />}/>
+                    <Route path='/stops' render={(props) => <StopsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} />}/>
                 </Switch>
 
                 <Footer/>
@@ -51,6 +51,9 @@ class App extends Component {
                 break;
             case 'Tro':
                 type = 'train';
+                break;
+            case 'Rou':
+                type = 'departure_board'
                 break;
             default:
                 type = 'place';

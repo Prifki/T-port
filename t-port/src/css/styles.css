@@ -470,13 +470,14 @@ table th {
 .pagination {
   display: flex;
 }
-.pagination a {
+.pagination div {
   color: black;
   font-size: 1.1em;
   padding: 8px 16px;
   text-decoration: none;
+  cursor: pointer;
 }
-.pagination a:hover:not(.active) {
+.pagination div:hover:not(.active) {
   background-color: #ddd;
   border-radius: 5px;
 }
@@ -707,7 +708,7 @@ footer {
 .menu--favorites-list li .material-icons {
   margin-right: 5px;
 }
-.menu--favorites-list a {
+.menu--favorites-list div {
   text-align: left;
   padding: 5px 10px;
   margin: 10px;
@@ -715,8 +716,9 @@ footer {
   background: #e1e1e1;
   border-radius: 10px;
 }
-.menu--favorites-list a:hover {
+.menu--favorites-list div:hover {
   background: #d5d5d5;
+  cursor: pointer;
 }
 
 .menu__button--edit-favorites {
@@ -886,7 +888,7 @@ footer {
   align-items: center;
   justify-content: space-between;
 }
-.menu--found-route li a {
+.menu--found-route li div {
   text-align: left;
   padding: 5px 10px;
   margin: 10px;
@@ -898,8 +900,9 @@ footer {
   flex-direction: row;
   align-items: center;
 }
-.menu--found-route li a:hover {
+.menu--found-route li div:hover {
   background: #d5d5d5;
+  cursor: pointer;
 }
 .menu--found-route p {
   font-size: 1.3em;

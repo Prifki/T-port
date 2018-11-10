@@ -55,7 +55,6 @@ class Header extends Component {
 
   globalAutoComplete = (e) => {
     if (e.target.value) {
-      console.log(typeof (e.target.value))
       let foundEntities = [];
       for (let stop in JSONdata.stops){
         if (~JSONdata.stops[stop].name.indexOf(e.target.value))

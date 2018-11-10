@@ -52,7 +52,7 @@ class TransportsContainer extends Component {
   }
 
   filterByRoute = (e) => {
-    let filteredArray = JSONdata.transport.filter(transport => ~transport.route.indexOf(e.target.value));
+    let filteredArray = JSONdata.transport.filter(transport => ~transport.route.indexOf(e.target.value.toUpperCase()));
     this.setState({transport: filteredArray});
   }
 
@@ -105,7 +105,6 @@ class TransportsContainer extends Component {
   }
 
   removeTableItem = (index) => {
-    console.log('ds');
     const newTransportData = this.state.transport.filter((trans, i) => { 
       return i !== index;
     });
@@ -188,6 +187,8 @@ class TransportsContainer extends Component {
           break;
         case 'train':
           cardTitle = 'Trolleybus ' + number;
+          break;
+        default:
           break;
       }
       const TRANSPORTS = JSONdata.transport,

@@ -34,8 +34,8 @@ class FavoritesMenu extends Component {
     generateItems = () => {
         return (
             this.props.favorites.map((favoritesData, index) => 
-                <li key={index}><a href="#">
-                    <i className="material-icons">{favoritesData.type}</i>{favoritesData.title}</a>
+                <li key={index}><div>
+                    <i className="material-icons">{favoritesData.type}</i>{favoritesData.title}</div>
                     {this.state.favoritesEditingMode ? <FavoritesRemoveButton  onClick={() => this.props.removeFromFavorites(index)}/> : null}
                 </li>
             )

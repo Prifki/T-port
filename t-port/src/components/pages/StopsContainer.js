@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {Marker} from 'google-maps-react';
 
 import Table from './presentational/Table';
 import Card from './presentational/Card';
@@ -22,6 +22,7 @@ class StopsContainer extends Component {
         }
     }
   render() {
+    console.log(this.props.favorites);
     const rows = this.generateStopTableRow(),
     stopsTableTitles = this.stopsTableTitles(),
     cardTableTitles = this.cardTableTitles();
@@ -29,13 +30,38 @@ class StopsContainer extends Component {
         <main>
             <div className="substrate">
                 <h2 className="page-name">Stops</h2>
+
+                <div className="filter-wrapper">
+                  <input type="text" className="filter__input" placeholder="Filter by route" onChange={this.filterByRoute} />
+                </div>
+
                 <Table header = {stopsTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode} addItem={this.state.addStopsTableItem} />
-                {this.state.isCardShown ? <Card markers={this.state.markers} closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} /> : null}
+
+                {this.state.isCardShown ? <Card addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} markers={this.state.markers} closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} /> : null}
             </div>
         </main>
     );
   }
-  
+
+  removeTableItem = (index) => {
+    const newRouteData = this.state.stops.filter((route, i) => { 
+      return i !== index;
+    });
+    this.setState({stops: newRouteData});
+  }
+
+  filterByRoute = (e) => {
+    let filteredArray = [];
+    for (let stop in JSONdata.stops) {
+      for (let route in JSONdata.stops[stop].routes)
+        if (~JSONdata.stops[stop].routes[route].indexOf(e.target.value.toUpperCase())){
+          filteredArray.push(JSONdata.stops[stop]);
+          break;
+        }
+    }
+    this.setState({stops: filteredArray});
+  }
+
   stopsTableTitles = () => {
       return (
         <thead>
@@ -49,13 +75,13 @@ class StopsContainer extends Component {
   }
 
   generateStopTableRow = () => {
-    return this.state.stops.map( (rowData) => 
-      <tr key={rowData.number}>
+    return this.state.stops.map( (rowData, index) => 
+      <tr key={index}>
         <td className="table__link" onClick={() => this.showCard(rowData.name, rowData.routes)}>{rowData.name}</td>
         <td>{rowData.routes.join(', ')}</td> 
         {this.state.isEditingMode ? <>
         <EditTableButton type={'edit'}/>
-        <EditTableButton type={'remove'}/></> : null}  
+        <EditTableButton type={'remove'} onClick={() => this.removeTableItem(index)} /></> : null}  
       </tr>
     )
   }
@@ -154,15 +180,22 @@ class StopsContainer extends Component {
   }
 
   generateStopCardTableRow = (arr) => {
-    return arr.map( (rowData) => 
-      <tr key={rowData.id}>
+    return arr.map( (rowData, index) => 
+      <tr key={index}>
         <td>{rowData.route}</td>
         <td>{rowData.times.join(', ')}</td>
         {this.state.isEditingMode ? <>
         <EditTableButton type={'edit'}/>
-        <EditTableButton type={'remove'}/></> : null}   
+        <EditTableButton type={'remove'} onClick={() => this.removeCardTableItem(index)} /></> : null}   
       </tr>
     )
+  }
+
+  removeCardTableItem = (index) => {
+    const newStopData = this.state.cardTableRows.filter((stop, i) => { 
+      return i !== index;
+    });
+    this.setState({cardTableRows: newStopData});
   }
 
   cardTableTitles = () => {
