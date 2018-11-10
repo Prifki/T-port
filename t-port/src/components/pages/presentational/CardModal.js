@@ -11,7 +11,6 @@ class CardModal extends Component {
     }
   }
   render() {
-    console.log(this.props.modalCardMarkers);
     return (
         <div className="card card--modal">
             <BookmarkButton onClick={() => this.props.addToFavorites(this.props.title)}/>

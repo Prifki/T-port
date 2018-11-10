@@ -55,33 +55,33 @@ class App extends Component {
 
     openModalCard = (title) => {
         let modalCardTitle = title,
-        modalCardTableRows, modalCardTableTitles, isMapNeededOnModalCard, modalCardMarkers;
+        modalCardTableRows, modalCardTableTitles, isMapNeededOnModalCard = false, modalCardMarkers=null;
         switch (title.substr(0,3)) {
             case 'Bus':
                 modalCardTableRows = generateTransportModalCardTableRow();
                 modalCardTableTitles = generateTransportModalCardTableTitles();
-                isMapNeededOnModalCard = false;
                 break;
             case 'Tra':
                 modalCardTableRows = generateTransportModalCardTableRow();
                 modalCardTableTitles = generateTransportModalCardTableTitles();
-                isMapNeededOnModalCard = false;
                 break;
             case 'Tro':
                 modalCardTableRows = generateTransportModalCardTableRow();
                 modalCardTableTitles = generateTransportModalCardTableTitles();
-                isMapNeededOnModalCard = false;
                 break;
             case 'Rou':
                 const temp = generateRouteModalCardTableRow();
                 modalCardTableRows = temp[0];
-                modalCardMarkers = generateMarkers(temp[1]);
-                console.log(modalCardMarkers);
+                modalCardMarkers = generateRouteMarkers(temp[1]);
                 modalCardTableTitles = generateRouteModalCardTableTitles();
                 isMapNeededOnModalCard = true;
                 break;
             default:
-                modalCardTableRows = generateStopModalCard();
+                const tempStop = generateStopModalCardTableRow();
+                modalCardTableRows = tempStop[0];
+                modalCardMarkers = generateStopMarker(tempStop[1]);
+                modalCardTableTitles = generateStopModalCardTableTitles();
+                isMapNeededOnModalCard = true;
                 break;
           }
         this.setState({
@@ -93,11 +93,13 @@ class App extends Component {
             modalCardMarkers: modalCardMarkers
         });
 
-        function generateMarkers(locations) {
+        function generateRouteMarkers(locations) {
             return locations.map((loc, index) => 
             <Marker key={index} title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />)
         }
-
+        function generateStopMarker(loc) {
+            return <Marker title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />
+          }
         function generateTransportModalCardTableRow() {
             const number = title.split(' ')[1],
             TRANSPORTS = JSONdata.transport,
@@ -171,8 +173,44 @@ class App extends Component {
             return (<thead><tr><th>Stop</th><th>Time</th></tr></thead>);
         }
 
-        function generateStopModalCard() {
-            console.log(title);
+        function generateStopModalCardTableRow() {
+            const ROUTES = JSONdata.routes, TRANSPORTS = JSONdata.transport, STOPS = JSONdata.stops;
+            let location, routesList=[], stopName = title;
+            for (let STOP in STOPS){
+              if (stopName === STOPS[STOP].name){
+                location = {name: stopName, lat: parseFloat(STOPS[STOP].lat), long: parseFloat(STOPS[STOP].long)};
+                stopName = STOPS[STOP].number;
+                routesList = (STOPS[STOP].routes);
+              }
+            }
+            let cardData = [];
+              for (let route in routesList){
+                for (let ROUTE in ROUTES){
+                  if (ROUTES[ROUTE].name === routesList[route]){
+                    let times = [];
+                    for (let stop in ROUTES[ROUTE].stops){
+                      if (stopName === ROUTES[ROUTE].stops[stop]){
+                        for (let TRANSPORT in TRANSPORTS){
+                          if (TRANSPORTS[TRANSPORT].route === routesList[route]){
+                            times.push(TRANSPORTS[TRANSPORT].time[stop]);
+                          }
+                        }
+                      }
+                    }
+                    cardData.push({route: routesList[route], times: times});
+                  }
+                }
+              }
+            console.log(location);
+            return [cardData.map( (rowData, index) => 
+                    <tr key={index}>
+                    <td>{rowData.route}</td>
+                    <td>{rowData.times.join(', ')}</td> 
+                    </tr>),location];
+        }
+
+        function generateStopModalCardTableTitles() {
+            return (<thead><tr><th>Route</th><th>Time</th></tr></thead>);
         }
     }
 
