@@ -62,15 +62,15 @@ class Header extends Component {
     if (e.target.value) {
       let foundEntities = [];
       for (let stop in JSONdata.stops){
-        if (~JSONdata.stops[stop].name.indexOf(e.target.value))
+        if (~JSONdata.stops[stop].name.toUpperCase().indexOf(e.target.value.toUpperCase()))
           foundEntities.push({name: JSONdata.stops[stop].name, type: ''});
       }
       for (let route in JSONdata.routes){
-        if (~JSONdata.routes[route].name.indexOf(e.target.value))
+        if (~JSONdata.routes[route].name.toUpperCase().indexOf(e.target.value.toUpperCase()))
           foundEntities.push({name: JSONdata.routes[route].name, type: 'Route '});
       }
       for (let trans in JSONdata.transport){
-        if (~JSONdata.transport[trans].number.indexOf(e.target.value)){
+        if (~JSONdata.transport[trans].number.toUpperCase().indexOf(e.target.value.toUpperCase())){
           let type;
           switch(JSONdata.transport[trans].type) {
             case 'directions_bus':
