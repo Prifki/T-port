@@ -477,7 +477,7 @@ table th {
   text-decoration: none;
   cursor: pointer;
 }
-.pagination div:hover:not(.active) {
+.pagination div:hover:not(.pagination--active) {
   background-color: #ddd;
   border-radius: 5px;
 }
