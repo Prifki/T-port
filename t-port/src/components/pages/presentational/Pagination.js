@@ -4,8 +4,7 @@ function Pagination(props) {
     return (
         <div className="pagination-wrapper">
             <div className="pagination">
-                <div className="pagination--active">1</div>
-                <div href="#">2</div>
+                {props.pagination}
             </div>
         </div>
     );

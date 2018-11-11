@@ -26,13 +26,15 @@ class TransportsContainer extends Component {
       addItemSeatsValue: '',
       editTableRouteItem: '',
       editTableSeatsItem: '',
-      editTableNumberItem: ''
+      editTableNumberItem: '',
+      currentPage: 1
     }
   }
   render() {
     const rows = this.generateTransportTableRow(),
     transportTableTitles = this.transportTableTitles(),
-    cardTableTitles = this.cardTableTitles();
+    cardTableTitles = this.cardTableTitles(),
+    pagination = this.generatePagination();
     return (
         <main>
             <div className="substrate">
@@ -48,13 +50,31 @@ class TransportsContainer extends Component {
                 {/* TABLE */}
                 <Table addItemTypeValue={this.state.addItemTypeValue} addItemNumberValue={this.state.addItemNumberValue} addItemRouteValue={this.state.addItemRouteValue} addItemSeatsValue={this.state.addItemSeatsValue} header = {transportTableTitles} rows = {rows} isAdmin={this.props.isAdmin} addItem={this.state.addTransportTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} addTableItem={this.addTableItem} />
 
-                <Pagination />
+                <Pagination pagination={pagination} />
 
                 {/* CARD */}
                 {this.state.isCardShown ? <Card isLogged={this.props.isLogged} addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard}/>: null}
             </div>
         </main>
     );
+  }
+
+  generatePagination = () => {
+    const data = this.state.transport; 
+    let pagination=[], current = this.state.currentPage;
+    for (let i = 1; i <= Math.ceil(data.length / 10); i++) {
+      if (i === current)
+        pagination.push([i, 'pagination--active']);
+      else
+        pagination.push([i, ''])
+    }
+    return pagination.map((page,index)=>
+      <div key={index} className={page[1]} onClick={() => this.changePage(index+1)}>{index+1}</div>
+    );
+  }
+
+  changePage = (page) => {
+    this.setState({currentPage: page});
   }
 
   filterByRoute = (e) => {
@@ -88,7 +108,8 @@ class TransportsContainer extends Component {
           <EditTableButton type={'remove'} onClick={() => this.removeTableItem(index)}/>
         </> : null}
       </tr>
-    )
+    ).filter((rowData, index) => { 
+      return (index >= (this.state.currentPage-1)*10 && index < (this.state.currentPage)*10)});
   }
 
   compareBy = (key) => {
