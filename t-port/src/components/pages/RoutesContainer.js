@@ -24,7 +24,10 @@ class RoutesContainer extends Component {
             cardTableTitles: null,
             addItemNameValue: '',
             addItemFromValue: '',
-            addItemToValue: ''
+            addItemToValue: '',
+            editTableNameItem: '',
+            editTableFromItem: '',
+            editTableToItem: ''
         }
     }
   render() {
@@ -52,7 +55,7 @@ class RoutesContainer extends Component {
     });
     this.setState({tableData: newRouteData});
   }
-
+  
   generateRoutesTableRow = () => {
     return this.state.tableData.map( (rowData, index) => 
         <tr key={index}>
@@ -60,11 +63,34 @@ class RoutesContainer extends Component {
           <td>{rowData.from}</td>
           <td>{rowData.to}</td>   
           {this.state.isEditingMode ? <>
-          <EditTableButton type={'edit'}/>
+          <EditTableButton type={rowData.isEditing} onClick={() => this.editTableItem(index)} />
           <EditTableButton type={'remove'} onClick={() => this.removeTableItem(index)} /></> : null}  
         </tr>
     )
   }
+
+  editTableItem = (index) => {
+    if (this.state.tableData[index].isEditing === 'edit') {
+      const newData = this.state.tableData;
+      newData[index] = {name: <input type="text" className="table-edit-input" placeholder="Name" name="name" value={this.props.editTableNameItem} onChange={this.updateEditItemNameValue} />, from: <input type="text" className="table-edit-input" placeholder="From" name="from" value={this.props.editTableFromItem} onChange={this.updateEditItemFromValue} />, to: <input type="text" className="table-edit-input" placeholder="To" name="to" value={this.props.editTableToItem} onChange={this.updateEditItemToValue} />, isEditing: "done"}
+      this.setState({tableData: newData});
+    }
+    else {
+      const newData = this.state.tableData;
+      newData[index] = {name: this.state.editTableNameItem, from: this.state.editTableFromItem, to: this.state.editTableToItem, isEditing: "edit"}
+      this.setState({tableData: newData});
+    }
+  }
+  updateEditItemNameValue = (e) => {
+    this.setState({editTableNameItem: e.target.value});
+  }
+  updateEditItemFromValue = (e) => {
+    this.setState({editTableFromItem: e.target.value});
+  }
+  updateEditItemToValue = (e) => {
+    this.setState({editTableToItem: e.target.value});
+  }
+
   handleData = () => {
     const stops = JSONdata.stops, routes = JSONdata.routes;
     let name = [], from = [], to = [], routesData = [];
@@ -80,7 +106,7 @@ class RoutesContainer extends Component {
         name.push(routes[route].name);
     }
     for (let each in name){
-        routesData[each] = {id: each, name: name[each], from: from[each], to: to[each]}
+        routesData[each] = {id: each, name: name[each], from: from[each], to: to[each], isEditing: "edit"};
     }
     return routesData;
   }
@@ -144,7 +170,7 @@ class RoutesContainer extends Component {
 
   addTableItem = () => {
     let routeArrayCopy = this.state.tableData;
-    routeArrayCopy.push({name: this.state.addItemNameValue, from: this.state.addItemFromValue, to: this.state.addItemToValue});
+    routeArrayCopy.push({name: this.state.addItemNameValue, from: this.state.addItemFromValue, to: this.state.addItemToValue, isEditing: 'edit'});
     this.setState({tableData: routeArrayCopy});
   }
 

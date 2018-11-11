@@ -2,31 +2,38 @@
     "routes": [
         {
         "name": "AB01",
-        "stops": [1,18,17,16,14,19,10,11,12,15] 
+        "stops": [1,18,17,16,14,19,10,11,12,15],
+        "isEditing": "edit"
 		},
         {
         "name": "AB02",
-        "stops": [2,20,18,19,6,9,13,15,16,17] 
+        "stops": [2,20,18,19,6,9,13,15,16,17],
+        "isEditing": "edit"
 		},
         {
         "name": "TL09",
-        "stops": [9,10,14,20,3,2,17,12] 
+        "stops": [9,10,14,20,3,2,17,12],
+        "isEditing": "edit"
 		},
         {
         "name": "TL13",
-        "stops": [13,12,11,9,7,8,6,5,4,3] 
+        "stops": [13,12,11,9,7,8,6,5,4,3],
+        "isEditing": "edit"
 		},
         {
         "name": "TM03",
-        "stops": [3,20,5,8,9,12,14,18,2,1] 
+        "stops": [3,20,5,8,9,12,14,18,2,1],
+        "isEditing": "edit"
 		},
         {
         "name": "TM16",
-        "stops": [16,18,5,9,11,14] 
+        "stops": [16,18,5,9,11,14],
+        "isEditing": "edit"
 		},
         {
         "name": "TM17",
-        "stops": [17,1,20,6,4,8,10,15,18] 
+        "stops": [17,1,20,6,4,8,10,15,18],
+        "isEditing": "edit"
 		}
     ],
     "stops": [
@@ -36,7 +43,8 @@
             "name": "14-line VO",
             "lat": "59.936340",
             "long": "30.272969",
-            "routes": ["AB01","TM03","TM17"]
+            "routes": ["AB01","TM03","TM17"],
+            "isEditing": "edit"
         },
 		{
             "number": 2,
@@ -44,7 +52,8 @@
             "name": "Tuchkov bridge",
             "lat": "59.948005",
             "long": "30.284362",
-            "routes": ["AB02","TL09","TM03"]
+            "routes": ["AB02","TL09","TM03"],
+            "isEditing": "edit"
         },
 		{
             "number": 3,
@@ -52,7 +61,8 @@
             "name": "Lev Tolstoy's sqr",
             "lat": "59.965794",
             "long": "30.312010",
-            "routes": ["TL09","TL13","TM03"]
+            "routes": ["TL09","TL13","TM03"],
+            "isEditing": "edit"
         },
 		{
             "number": 4,
@@ -60,7 +70,8 @@
             "name": "Sampsonievskiy grd",
             "lat": "59.968482",
             "long": "30.341856",
-            "routes": ["TL13","TM17"]
+            "routes": ["TL13","TM17"],
+            "isEditing": "edit"
         },
 		{
             "number": 5,
@@ -68,7 +79,8 @@
             "name": "Lenina sqr",
             "lat": "59.958904",
             "long": "30.353333",
-            "routes": ["TL13","TM03","TM16"]
+            "routes": ["TL13","TM03","TM16"],
+            "isEditing": "edit"
         },
 		{
             "number": 6,
@@ -76,7 +88,8 @@
             "name": "Kutuzova emb",
             "lat": "59.949779",
             "long": "30.348401",
-            "routes": ["AB02","TL13","TM17"]
+            "routes": ["AB02","TL13","TM17"],
+            "isEditing": "edit"
         },
 		{
             "number": 7,
@@ -84,7 +97,8 @@
             "name": "Chernyshevskogo pr",
             "lat": "59.944708",
             "long": "30.359375",
-            "routes": ["TL13"]
+            "routes": ["TL13"],
+            "isEditing": "edit"
         },
 		{
             "number": 8,
@@ -92,7 +106,8 @@
             "name": "Smolniy",
             "lat": "59.948611",
             "long": "30.390303",
-            "routes": ["TL13","TL03","TL17"]
+            "routes": ["TL13","TL03","TL17"],
+            "isEditing": "edit"
         },
 		{
             "number": 9,
@@ -100,7 +115,8 @@
             "name": "Nekrasova str",
             "lat": "59.938756",
             "long": "30.360504",
-            "routes": ["AB02","TL09","TL13","TM03","TM16"]
+            "routes": ["AB02","TL09","TL13","TM03","TM16"],
+            "isEditing": "edit"
         },
 		{
             "number": 10,
@@ -108,7 +124,8 @@
             "name": "Liteiny pr",
             "lat": "59.938993",
             "long": "30.348173",
-            "routes": ["AB01","TL09","TM17"]
+            "routes": ["AB01","TL09","TM17"],
+            "isEditing": "edit"
         },
 		{
             "number": 11,
@@ -116,7 +133,8 @@
             "name": "Nevsky",
             "lat": "59.932937",
             "long": "30.346935",
-            "routes": ["AB01","TL13","TM16"]
+            "routes": ["AB01","TL13","TM16"],
+            "isEditing": "edit"
         },
 		{
             "number": 12,
@@ -124,7 +142,8 @@
             "name": "Vladimirskaya sqr",
             "lat": "59.928372",
             "long": "30.347462",
-            "routes": ["AB01","TL09","TL13","TM03"]
+            "routes": ["AB01","TL09","TL13","TM03"],
+            "isEditing": "edit"
         },
 		{
             "number": 13,
@@ -132,7 +151,8 @@
             "name": "Ligovskiy pr",
             "lat": "59.921165",
             "long": "30.354195",
-            "routes": ["AB02","TL13"]
+            "routes": ["AB02","TL13"],
+            "isEditing": "edit"
         },
 		{
             "number": 14,
@@ -140,7 +160,8 @@
             "name": "Gostinka",
             "lat": "59.934380",
             "long": "30.334925",
-            "routes": ["AB01","TL09","TM03","TM16"]
+            "routes": ["AB01","TL09","TM03","TM16"],
+            "isEditing": "edit"
         }, 
 		{
             "number": 15,
@@ -148,7 +169,8 @@
             "name": "Zvenigorodskaya",
             "lat": "59.922887",
             "long": "30.335702",
-            "routes": ["AB01","AB02","TM17"]
+            "routes": ["AB01","AB02","TM17"],
+            "isEditing": "edit"
         },
 		{
             "number": 16,
@@ -156,7 +178,8 @@
             "name": "Spasskaya",
             "lat": "59.926711",
             "long": "30.317569",
-            "routes": ["AB01","AB02","TM16"]
+            "routes": ["AB01","AB02","TM16"],
+            "isEditing": "edit"
         },
 		{
             "number": 17,
@@ -164,7 +187,8 @@
             "name": "Mariinsky thtr",
             "lat": "59.925833",
             "long": "30.297064",
-            "routes": ["AB01","TL09","TM17"]
+            "routes": ["AB01","TL09","TM17"],
+            "isEditing": "edit"
         },
 		{
             "number": 18,
@@ -172,7 +196,8 @@
             "name": "Isaakiy",
             "lat": "59.934611",
             "long": "30.305412",
-            "routes": ["AB01","AB02","TM03","TM16","TM17"]
+            "routes": ["AB01","AB02","TM03","TM16","TM17"],
+            "isEditing": "edit"
         },
 		{
             "number": 19,
@@ -180,7 +205,8 @@
             "name": "Russian museum",
             "lat": "59.937855",
             "long": "30.331977",
-            "routes": ["AB01","AB02"]
+            "routes": ["AB01","AB02"],
+            "isEditing": "edit"
         },
 		{
             "number": 20,
@@ -188,7 +214,8 @@
             "name": "Gorkovskaya",
             "lat": "59.956618",
             "long": "30.319381",
-            "routes": ["AB02","TL09","TM03","TM17"]
+            "routes": ["AB02","TL09","TM03","TM17"],
+            "isEditing": "edit"
         }
     ],
     "transport": [

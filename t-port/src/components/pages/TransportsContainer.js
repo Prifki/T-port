@@ -84,7 +84,7 @@ class TransportsContainer extends Component {
         <td>{rowData.route}</td>
         <td>{rowData.seats}</td>
         {this.state.isEditingMode ? <>
-          <EditTableButton type={rowData.isEditing} onClick={() => this.editTableItem(index)}/>
+          <EditTableButton type={rowData.isEditing} onClick={() => this.editTableItem(index)} />
           <EditTableButton type={'remove'} onClick={() => this.removeTableItem(index)}/>
         </> : null}
       </tr>
@@ -193,7 +193,7 @@ class TransportsContainer extends Component {
 
   addTableItem = () => {
     let transportArrayCopy = this.state.transport;
-    transportArrayCopy.push({id: transportArrayCopy.length, type: this.state.addItemTypeValue, number: this.state.addItemNumberValue, seats: this.state.addItemSeatsValue, route: this.state.addItemRouteValue, time: ["00:00","00:00","00:00"]});
+    transportArrayCopy.push({id: transportArrayCopy.length, type: this.state.addItemTypeValue, number: this.state.addItemNumberValue, seats: this.state.addItemSeatsValue, route: this.state.addItemRouteValue, time: ["00:00","00:00","00:00"], isEditing: 'edit'});
     this.setState({transport: transportArrayCopy});
   }
 

@@ -20,7 +20,8 @@ class StopsContainer extends Component {
             markers: null,
             cardTitle: null,
             addItemNameValue: '',
-            addItemRoutesValue: ''
+            addItemRoutesValue: '',
+            editTableNameItem: ''
         }
     }
   render() {
@@ -81,10 +82,26 @@ class StopsContainer extends Component {
         <td className="table__link" onClick={() => this.showCard(rowData.name, rowData.routes)}>{rowData.name}</td>
         <td>{rowData.routes.join(', ')}</td> 
         {this.state.isEditingMode ? <>
-        <EditTableButton type={'edit'}/>
+        <EditTableButton type={rowData.isEditing} onClick={() => this.editTableItem(index)} />
         <EditTableButton type={'remove'} onClick={() => this.removeTableItem(index)} /></> : null}  
       </tr>
     )
+  }
+
+  editTableItem = (index) => {
+    if (this.state.stops[index].isEditing === 'edit') {
+      const newData = this.state.stops;
+      newData[index] = {number: this.state.stops[index].number, letter: this.state.stops[index].letter, name: <input type="text" className="table-edit-input" placeholder="Name" name="name" value={this.props.editTableNameItem} onChange={this.updateEditItemNameValue} />, lat: "59.95", long: "30.284", routes: this.state.stops[index].routes, isEditing: "done"}
+      this.setState({stops: newData});
+    }
+    else {
+      const newData = this.state.stops;
+      newData[index] = {number: this.state.stops[index].nunber, letter: this.state.stops[index].letter, name: this.state.editTableNameItem, lat: "59.95", long: "30.284", routes: this.state.stops[index].routes, isEditing: "edit"}
+      this.setState({stops: newData});
+    }
+  }
+  updateEditItemNameValue = (e) => {
+    this.setState({editTableNameItem: e.target.value});
   }
 
   compareBy = (key) => {
@@ -133,7 +150,7 @@ class StopsContainer extends Component {
 
   addTableItem = () => {
     let stopsArrayCopy = this.state.stops;
-    stopsArrayCopy.push({number: stopsArrayCopy.length, name: this.state.addItemNameValue, routes: [this.state.addItemRoutesValue], lat: "59.9500", long: "30.359400", letter: "X"});
+    stopsArrayCopy.push({number: stopsArrayCopy.length, name: this.state.addItemNameValue, routes: [this.state.addItemRoutesValue], lat: "59.9500", long: "30.359400", letter: "X", isEditing: 'edit'});
     this.setState({stops: stopsArrayCopy});
   }
 
