@@ -23,7 +23,7 @@ class FoundRouteMenu extends Component {
     else {
       return (<ul className="bar" id="route-list">
         {this.props.foundRoute.map( (item, index) => 
-          <li key={index} >{item[1]+'min'}<div><i className="material-icons">place</i>{item[0]}</div></li>
+          <li key={index} ><div className="menu--found-route-content__time">{item[1]} </div><div className="menu--found-route-content__entity">{item[0]}</div></li>
         )}
       </ul>);
     }

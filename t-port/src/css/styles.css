@@ -901,7 +901,7 @@ footer {
   align-items: center;
   justify-content: space-between;
 }
-.menu--found-route li div {
+.menu--found-route li .menu--found-route-content__entity {
   text-align: left;
   padding: 5px 10px;
   margin: 10px;
@@ -913,12 +913,16 @@ footer {
   flex-direction: row;
   align-items: center;
 }
-.menu--found-route li div:hover {
+.menu--found-route li .menu--found-route-content__entity:hover {
   background: #d5d5d5;
   cursor: pointer;
 }
 .menu--found-route p {
   font-size: 1.3em;
+}
+
+.menu--found-route-content__time {
+  min-width: 50px;
 }
 
 .menu--found-route-content {

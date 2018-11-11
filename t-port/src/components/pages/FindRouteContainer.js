@@ -174,11 +174,56 @@ class FindRouteContainer extends Component {
     }
     var route = [];
     for (let stop in path){
-        route.push([path[stop],times[stop]]);
+        route.push([path[stop],times[stop]+'min']);
         //route[path[stop]] = times[stop];
     }
     //return path;
+    var changes = this.searchForChanges(path.join(''));
+    route = this.streetMagic(route, changes);
+    console.log(changes);
+    console.log(route);
     return route;
+  }
+
+  streetMagic = (route, changes) => {
+    let newPath = [];
+    for (let i = 0; newPath.length < route.length+changes.length-1; i++) {
+        newPath.push(route[i]);
+        newPath.push(changes[i]);
+    }
+    newPath.push(route[route.length-1]);
+    for (let j = 0; j < newPath.length; j++) 
+      for (let i = 1; i < newPath.length-3; i+=2) {
+        if (newPath[i][0] === newPath[i+2][0]) {
+          newPath.splice(i+1,2);
+        }
+      }
+    return newPath;
+  }
+
+  searchForChanges = (path) => {
+    let routes = [];
+    const pathes = [{route: 'AB01', path: 'ARQPNSJKLO'},{route: 'AB02', path: 'BTRSFIMOPQ'},{route: 'TM03', path: 'CTEHILNRBA'},{route: 'TL09', path: 'IJNTCBQL'},{route: 'TL13', path: 'MLKIGHFEDC'},{route: 'TM16', path: 'PREIKN'},{route: 'TM17', path: 'QATFDHJOR'}];
+    for (let i = 0; i < path.length-1; i++) {
+      for (let each in pathes) {
+        if (~pathes[each].path.indexOf(path.substr(i,2))) {
+          //console.log(pathes[each].route+'  '+path.substr(i,2));
+          routes.push([pathes[each].route, '']);
+        }
+      }
+    }
+    for (let each in routes) {
+      if (~routes[each][0].indexOf('TM')) {
+        routes[each][1] = <i className="material-icons">tram</i>;
+      }
+      if (~routes[each][0].indexOf('TL')) {
+        routes[each][1] = <i className="material-icons">train</i>;
+      }
+      if (~routes[each][0].indexOf('AB')) {
+        routes[each][1] = <i className="material-icons">directions_bus</i>;
+      }
+    }
+    return routes;
   }
 
   dijkstra = (start, end) => {
@@ -218,9 +263,9 @@ class FindRouteContainer extends Component {
       
           visited.push(vertex);
         }
-        //console.log('The shortest ways:\n'+tableToString(table));
+        //console.log('The shortest ways:\n'+this.tableToString(table));
         var route = this.tracePath(table, start, end);
-      // console.log('\nShortest path is:\n'+route);
+        //console.log('\nShortest path is:\n'+route);
         return(route);
     }
     catch (err){
