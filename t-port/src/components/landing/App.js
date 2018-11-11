@@ -15,8 +15,8 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          isLogged: false,
-          isAdmin: false,
+          isLogged: true,
+          isAdmin: true,
           favorites: [],
           isModalCardOpen: false,
           modalCardTitle: null,
