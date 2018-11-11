@@ -17,7 +17,7 @@ class App extends Component {
         this.state = {
           isLogged: true,
           isAdmin: true,
-          favorites: [],
+          favorites: [{title: "Route TL13", type: "departure_board"},{title: "Route AB01", type: "departure_board"},{title: "Smolniy", type: "place"},{"title": "Bus B012US", "type": "directions_bus"}],
           isModalCardOpen: false,
           modalCardTitle: null,
           modalCardTableTitles: null,
