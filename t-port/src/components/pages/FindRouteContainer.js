@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Marker} from 'google-maps-react';
+
 import JSONdata from './../../data/data.json';
 import FindARouteMenu from './presentational/FindARouteMenu';
 import FindARouteMenuWrapped from './presentational/FindARouteMenuWrapped';
@@ -16,13 +18,14 @@ class FindRouteContainer extends Component {
       stopBAutoCompleteItems: null,
       stopA: null,
       stopB: null,
-      foundRoute: null
+      foundRoute: null,
+      markers: null
     }
   }
   render() {
     return (
         <main>
-            <div className="google-map--index"><GoogleMap/></div>
+            <div className="google-map--index"><GoogleMap markers = {this.state.markers} /></div>
 
             {this.state.isFindARouteMenuOpened ? <FindARouteMenu stopBAutoComplete={this.stopBAutoComplete} stopAAutoComplete={this.stopAAutoComplete} isFindARouteMenuOpened={this.state.isFindARouteMenuOpened} toggleFindARouteMenu={this.toggleFindARouteMenu} findARoute={this.findARoute} stopAAutoCompleteItems={this.state.stopAAutoCompleteItems} stopBAutoCompleteItems={this.state.stopBAutoCompleteItems} /> : <FindARouteMenuWrapped toggleFindARouteMenu={this.toggleFindARouteMenu} stopA={this.state.stopA} stopB={this.state.stopB} />}
 
@@ -45,24 +48,31 @@ class FindRouteContainer extends Component {
       }
     }
     if (validA && validB) {
-      let foundRoute = this.dijkstra(stopA, stopB);
+      let foundRoute = this.dijkstra(stopA, stopB), locations = [];
       for (let each in JSONdata.stops){
         for (let route in foundRoute) {
-          if (foundRoute[route][0] === JSONdata.stops[each].letter)
+          if (foundRoute[route][0] === JSONdata.stops[each].letter){
             foundRoute[route][0] = JSONdata.stops[each].name;
+            locations.push({lat: JSONdata.stops[each].lat, long: JSONdata.stops[each].long, name: JSONdata.stops[each].name});
+          }
         }
       }
+      locations = locations.map((loc, index) => 
+        <Marker key={index} title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />);
+      console.log(locations);
       this.setState({
         isFoundRouteMenuOpened: true,
         isRouteFound: true,
-        foundRoute: foundRoute
+        foundRoute: foundRoute,
+        markers: locations
       })
     }
     else {
       this.setState({
         isFoundRouteMenuOpened: true,
         isRouteFound: false,
-        foundRoute: null
+        foundRoute: null,
+        markers: null
       })
     }
   }
