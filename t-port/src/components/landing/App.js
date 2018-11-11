@@ -24,8 +24,8 @@ class App extends Component {
           modalCardTableRows: null,
           modalCardMarkers: null,
           isMapNeededOnModalCard: false,
-          userNameFieldValue: null,
-          passwordFieldValue: null,
+          userNameFieldValue: '',
+          passwordFieldValue: '',
           loginFieldsClassName: 'menu__input'
         }
     }
@@ -38,9 +38,9 @@ class App extends Component {
 
                 <Switch>
                     <Route exact path='/' component={FindRouteContainer}/>
-                    <Route path='/transports' render={(props) => <TransportsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} />}/>
-                    <Route path='/routes' render={(props) => <RoutesContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} />}/>
-                    <Route path='/stops' render={(props) => <StopsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} />}/>
+                    <Route path='/transports' render={(props) => <TransportsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} />}/>
+                    <Route path='/routes' render={(props) => <RoutesContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} />}/>
+                    <Route path='/stops' render={(props) => <StopsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} />}/>
                 </Switch>
 
                 <Footer/>
@@ -61,7 +61,6 @@ class App extends Component {
     }
 
     authorizate = () => {
-        console.log(this.state.userNameFieldValue+'  '+this.state.passwordFieldValue);
         const users = JSONdata.users;
         let isLogged = false;
         for (let user in users) {

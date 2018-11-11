@@ -26,7 +26,7 @@ class Card extends Component {
     const type = this.state.isInFavorites ? 'bookmark' : 'bookmark_border';
     return (
         <div className="card">
-            <BookmarkButton onClick={() => this.props.addToFavorites(this.props.title)} type={type} />
+            {this.props.isLogged ? <BookmarkButton onClick={() => this.props.addToFavorites(this.props.title)} type={type} /> : null}
             <CloseButton onClick={this.props.closeCard} />
             <h3 className="card__title">{this.props.title}</h3>
             <Table header = {this.props.header} rows = {this.props.rows} isAdmin={this.props.isAdmin} addItem={this.props.addItem} isEditingMode={this.props.isEditingMode} toggleEditingMode={this.props.toggleEditingMode}/>
