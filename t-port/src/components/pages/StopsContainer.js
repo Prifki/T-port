@@ -96,7 +96,7 @@ class StopsContainer extends Component {
     }
     else {
       const newData = this.state.stops;
-      newData[index] = {number: this.state.stops[index].nunber, letter: this.state.stops[index].letter, name: this.state.editTableNameItem, lat: "59.95", long: "30.284", routes: this.state.stops[index].routes, isEditing: "edit"}
+      newData[index] = {number: this.state.stops[index].number, letter: this.state.stops[index].letter, name: this.state.editTableNameItem, lat: "59.95", long: "30.284", routes: this.state.stops[index].routes, isEditing: "edit"}
       this.setState({stops: newData});
     }
   }
@@ -225,7 +225,10 @@ class StopsContainer extends Component {
     });
   }
   generateMarkers = (loc) => {
-    return <Marker title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />
+    try{
+      return <Marker title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />
+    }
+    catch (err) {console.log('Without markers for today :(');}
   }
 }
 
