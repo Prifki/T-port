@@ -79,7 +79,7 @@ class TransportsContainer extends Component {
 
   filterByRoute = (e) => {
     let filteredArray = JSONdata.transport.filter(transport => ~transport.route.indexOf(e.target.value.toUpperCase()));
-    this.setState({transport: filteredArray});
+    this.setState({transport: filteredArray, currentPage: 1});
   }
 
   transportTableTitles = () => {
@@ -187,7 +187,8 @@ class TransportsContainer extends Component {
         transport: arrayCopy,
         isFilteredByBus: tempBus,
         isFilteredByTram: tempTram,
-        isFilteredByTroll: tempTroll
+        isFilteredByTroll: tempTroll,
+        currentPage: 1
       });
   }
 
@@ -215,7 +216,7 @@ class TransportsContainer extends Component {
   addTableItem = () => {
     let transportArrayCopy = this.state.transport;
     transportArrayCopy.push({id: transportArrayCopy.length, type: this.state.addItemTypeValue, number: this.state.addItemNumberValue, seats: this.state.addItemSeatsValue, route: this.state.addItemRouteValue, time: ["00:00","00:00","00:00"], isEditing: 'edit'});
-    this.setState({transport: transportArrayCopy});
+    this.setState({transport: transportArrayCopy, currentPage: Math.ceil(transportArrayCopy.length / 10)});
   }
 
   updateAddItemTypeValue = (e) => {
