@@ -16,9 +16,11 @@ class StopsContainer extends Component {
             isEditingMode: false,
             isSortedAscending: false,
             addStopsTableItem: this.createAddItemRow(),
-            addCardTableItem: this.createAddCardItemRow(),
             isMapNeededOnCard: true,
-            markers: null
+            markers: null,
+            cardTitle: null,
+            addItemNameValue: '',
+            addItemRoutesValue: ''
         }
     }
   render() {
@@ -34,9 +36,9 @@ class StopsContainer extends Component {
                   <input type="text" className="filter__input" placeholder="Filter by route" onChange={this.filterByRoute} />
                 </div>
 
-                <Table header = {stopsTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode} addItem={this.state.addStopsTableItem} />
+                <Table addItemNameValue={this.state.addItemNameValue} addItemRoutesValue={this.state.addItemRoutesValue} header = {stopsTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode} addItem={this.state.addStopsTableItem} isEditingMode={this.state.isEditingMode} />
 
-                {this.state.isCardShown ? <Card isLogged={this.props.isLogged} addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} markers={this.state.markers} closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} /> : null}
+                {this.state.isCardShown ? <Card isLogged={this.props.isLogged} addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} markers={this.state.markers} closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} /> : null}
             </div>
         </main>
     );
@@ -121,23 +123,25 @@ class StopsContainer extends Component {
   createAddItemRow = () => {
     return(
       <tr>
-        <td><input type="text" className="table-edit-input" /></td>
-        <td><input type="text" className="table-edit-input" /></td>
-        <td><i className="material-icons table-editor-buttons">add_circle_outline</i></td>
+        <td><input type="text" className="table-edit-input" placeholder="Name" name="name" value={this.props.addItemNameValue} onChange={this.updateAddItemNameValue} /></td>
+        <td><input type="text" className="table-edit-input" placeholder="Routes" name="routes" value={this.props.addItemRoutesValue} onChange={this.updateAddItemRoutesValue} /></td>
+        <td onClick={this.addTableItem}><i className="material-icons table-editor-buttons">add_circle_outline</i></td>
         <td></td>
       </tr>
     )
   }
 
-  createAddCardItemRow = () => {
-    return(
-      <tr>
-        <td><input type="text" className="table-edit-input" /></td>
-        <td><input type="text" className="table-edit-input" /></td>
-        <td><i className="material-icons table-editor-buttons">add_circle_outline</i></td>
-        <td></td>
-      </tr>
-    )
+  addTableItem = () => {
+    let stopsArrayCopy = this.state.stops;
+    stopsArrayCopy.push({number: stopsArrayCopy.length, name: this.state.addItemNameValue, routes: [this.state.addItemRoutesValue], lat: "59.9500", long: "30.359400", letter: "X"});
+    this.setState({stops: stopsArrayCopy});
+  }
+
+  updateAddItemNameValue = (e) => {
+    this.setState({addItemNameValue: e.target.value});
+  }
+  updateAddItemRoutesValue = (e) => {
+    this.setState({addItemRoutesValue: e.target.value});
   }
 
   showCard = (stopName,routesList) => {
@@ -183,18 +187,8 @@ class StopsContainer extends Component {
       <tr key={index}>
         <td>{rowData.route}</td>
         <td>{rowData.times.join(', ')}</td>
-        {this.state.isEditingMode ? <>
-        <EditTableButton type={'edit'}/>
-        <EditTableButton type={'remove'} onClick={() => this.removeCardTableItem(index)} /></> : null}   
       </tr>
     )
-  }
-
-  removeCardTableItem = (index) => {
-    const newStopData = this.state.cardTableRows.filter((stop, i) => { 
-      return i !== index;
-    });
-    this.setState({cardTableRows: newStopData});
   }
 
   cardTableTitles = () => {
@@ -203,7 +197,6 @@ class StopsContainer extends Component {
         <tr>
           <th>Route</th>
           <th>Time</th>
-          {this.state.isEditingMode ? <EditingColumnTitles /> : null}
         </tr>
       </thead>
     );

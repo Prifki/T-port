@@ -15,7 +15,6 @@ class TransportsContainer extends Component {
       isEditingMode: false,
       isCardShown: false,
       addTransportTableItem: this.createAddItemRow(),
-      addCardTableItem: this.createAddCardItemRow(),
       isFilteredByBus: false,
       isFilteredByTram: false,
       isFilteredByTroll: false,
@@ -24,9 +23,7 @@ class TransportsContainer extends Component {
       addItemTypeValue: '',
       addItemNumberValue: '',
       addItemRouteValue: '',
-      addItemSeatsValue: '',
-      addItemCardStopValue: '',
-      addItemCardTimeValue: ''
+      addItemSeatsValue: ''
     }
   }
   render() {
@@ -51,7 +48,7 @@ class TransportsContainer extends Component {
                 <Pagination />
 
                 {/* CARD */}
-                {this.state.isCardShown ? <Card isLogged={this.props.isLogged} addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard}/>: null}
+                {this.state.isCardShown ? <Card isLogged={this.props.isLogged} addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard}/>: null}
             </div>
         </main>
     );
@@ -173,7 +170,6 @@ class TransportsContainer extends Component {
   addTableItem = () => {
     let transportArrayCopy = this.state.transport;
     transportArrayCopy.push({id: transportArrayCopy.length, type: this.state.addItemTypeValue, number: this.state.addItemNumberValue, seats: this.state.addItemSeatsValue, route: this.state.addItemRouteValue, time: ["00:00","00:00","00:00"]});
-    console.log(transportArrayCopy);
     this.setState({transport: transportArrayCopy});
   }
 
@@ -188,17 +184,6 @@ class TransportsContainer extends Component {
   }
   updateAddItemSeatsValue = (e) => {
     this.setState({addItemSeatsValue: e.target.value});
-  }
-
-  createAddCardItemRow = () => {
-    return(
-      <tr>
-        <td><input type="text" className="table-edit-input" /></td>
-        <td><input type="text" className="table-edit-input" /></td>
-        <td><i className="material-icons table-editor-buttons">add_circle_outline</i></td>
-        <td></td>
-      </tr>
-    )
   }
 
   showCard = (number, type) => {
@@ -257,19 +242,9 @@ class TransportsContainer extends Component {
     return arr.map( (rowData, index) => 
       <tr key={index}>
         <td>{rowData.stopName}</td>
-        <td>{rowData.time}</td>
-        {this.state.isEditingMode ? <>
-        <EditTableButton type={'edit'}/>
-        <EditTableButton type={'remove'} onClick={() => this.removeCardTableItem(index)}/></> : null}   
+        <td>{rowData.time}</td> 
       </tr>
     )
-  }
-
-  removeCardTableItem = (index) => {
-    const newTransportData = this.state.cardTableRows.filter((stop, i) => { 
-      return i !== index;
-    });
-    this.setState({cardTableRows: newTransportData});
   }
 
   cardTableTitles = () => {
@@ -278,7 +253,6 @@ class TransportsContainer extends Component {
         <tr>
           <th>Stop</th>
           <th>Time</th>
-          {this.state.isEditingMode ? <EditingColumnTitles /> : null}
         </tr>
       </thead>
     );
