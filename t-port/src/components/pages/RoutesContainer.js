@@ -19,6 +19,7 @@ class RoutesContainer extends Component {
             isSortedAscending: false,
             isMapNeededOnCard: false,
             markers: null,
+            polyline: null,
             cardTableRows: null,
             cardTableTitles: null,
             addItemNameValue: '',
@@ -37,7 +38,7 @@ class RoutesContainer extends Component {
                 <Table addItemNameValue={this.state.addItemNameValue} addItemFromValue={this.state.addItemFromValue} addItemToValue={this.state.addItemToValue} header = {routesTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode} addItem={this.state.addRoutesTableItem} isEditingMode={this.state.isEditingMode}/>
                 <div className="google-map--small">
                 
-                <GoogleMap markers={this.state.markers} /></div>
+                <GoogleMap markers={this.state.markers} polyline={this.state.polyline} /></div>
 
                 {this.state.isCardShown ? <Card isLogged={this.props.isLogged} addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} closeCard={this.closeCard} header={this.state.cardTableTitles} rows={this.state.cardTableRows} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} /> : null}
             </div>
@@ -158,8 +159,7 @@ class RoutesContainer extends Component {
   }
 
   showCard = (name) => {
-    let locations = [];
-    let cardData = [];
+    let locations = [], cardData = [], polyline = [];
       const ROUTES = JSONdata.routes, TRANSPORTS = JSONdata.transport, STOPS = JSONdata.stops;
       let stops = [];
       for (let ROUTE in ROUTES){
@@ -171,6 +171,7 @@ class RoutesContainer extends Component {
           if (stops[stop] === STOPS[STOP].number){
             stops[stop] = STOPS[STOP].name;
             locations.push({lat: STOPS[STOP].lat, long: STOPS[STOP].long, name: STOPS[STOP].name});
+            polyline.push({lat: parseFloat(STOPS[STOP].lat), lng: parseFloat(STOPS[STOP].long)});
           }
         }
       }
@@ -188,7 +189,8 @@ class RoutesContainer extends Component {
       cardTableRows: this.generateRoutesCardTableRow(cardData),
       cardTableTitles: this.cardTableTitles(),
       cardTitle: 'Route ' + name,
-      markers: this.generateMarkers(locations)
+      markers: this.generateMarkers(locations),
+      polyline: polyline
     })
   }
   
@@ -220,9 +222,10 @@ class RoutesContainer extends Component {
 
   generateMarkers = (locations) => {
     return locations.map((loc, index) => 
-    <Marker key={index} title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />
+      <Marker key={index} title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />
     )
   }
+
 }
 
 export default RoutesContainer;

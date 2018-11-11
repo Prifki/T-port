@@ -120,7 +120,6 @@ class TransportsContainer extends Component {
     this.setState({transport: arrayCopy});
   }
 
-
   filterByType = (type) => {
     let arrayCopy = JSONdata.transport,
     tempBus = this.state.isFilteredByBus,

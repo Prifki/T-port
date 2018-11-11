@@ -19,13 +19,14 @@ class FindRouteContainer extends Component {
       stopA: null,
       stopB: null,
       foundRoute: null,
-      markers: null
+      markers: null,
+      polyline: null
     }
   }
   render() {
     return (
         <main>
-            <div className="google-map--index"><GoogleMap markers = {this.state.markers} /></div>
+            <div className="google-map--index"><GoogleMap markers = {this.state.markers} polyline={this.state.polyline} /></div>
 
             {this.state.isFindARouteMenuOpened ? <FindARouteMenu stopBAutoComplete={this.stopBAutoComplete} stopAAutoComplete={this.stopAAutoComplete} isFindARouteMenuOpened={this.state.isFindARouteMenuOpened} toggleFindARouteMenu={this.toggleFindARouteMenu} findARoute={this.findARoute} stopAAutoCompleteItems={this.state.stopAAutoCompleteItems} stopBAutoCompleteItems={this.state.stopBAutoCompleteItems} /> : <FindARouteMenuWrapped toggleFindARouteMenu={this.toggleFindARouteMenu} stopA={this.state.stopA} stopB={this.state.stopB} />}
 
@@ -48,12 +49,13 @@ class FindRouteContainer extends Component {
       }
     }
     if (validA && validB) {
-      let foundRoute = this.dijkstra(stopA, stopB), locations = [];
+      let foundRoute = this.dijkstra(stopA, stopB), locations = [], polyline = [];
       for (let each in JSONdata.stops){
         for (let route in foundRoute) {
           if (foundRoute[route][0] === JSONdata.stops[each].letter){
             foundRoute[route][0] = JSONdata.stops[each].name;
             locations.push({lat: JSONdata.stops[each].lat, long: JSONdata.stops[each].long, name: JSONdata.stops[each].name});
+            polyline.push({lat: parseFloat(JSONdata.stops[each].lat), lng: parseFloat(JSONdata.stops[each].long)});
           }
         }
       }
@@ -63,7 +65,8 @@ class FindRouteContainer extends Component {
         isFoundRouteMenuOpened: true,
         isRouteFound: true,
         foundRoute: foundRoute,
-        markers: locations
+        markers: locations,
+        polyline: polyline
       })
     }
     else {
@@ -71,7 +74,8 @@ class FindRouteContainer extends Component {
         isFoundRouteMenuOpened: true,
         isRouteFound: false,
         foundRoute: null,
-        markers: null
+        markers: null,
+        polyline: null
       })
     }
   }
