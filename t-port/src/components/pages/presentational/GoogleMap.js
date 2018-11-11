@@ -4,7 +4,6 @@ import {Map, GoogleApiWrapper, Polyline} from 'google-maps-react';
 export class MapContainer extends Component {
 
   render() {
-    console.log(this.props.polyline);
     return (
       <Map google={this.props.google} zoom={11} initialCenter={{lat: 59.932802, lng: 30.332459}} disableDefaultUI={true} styles={this.setMapStyles()}>
         {this.props.markers ? this.props.markers : null}

@@ -18,7 +18,7 @@ class CardModal extends Component {
             <h3 className="card__title">{this.props.title}</h3>
             <Table header = {this.props.header} rows = {this.props.rows} isAdmin={this.props.isAdmin} addItem={this.props.addItem} isEditingMode={this.props.isEditingMode} toggleEditingMode={this.props.toggleEditingMode}/>
             {this.props.isMapNeededOnModalCard ? 
-            <div className="google-map--small"><GoogleMap markers={this.props.modalCardMarkers}/></div>
+            <div className="google-map--small"><GoogleMap markers={this.props.modalCardMarkers} polyline={this.props.polyline} /></div>
             : null}
         </div>
     );

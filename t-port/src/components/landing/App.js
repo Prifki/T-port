@@ -23,6 +23,7 @@ class App extends Component {
           modalCardTableTitles: null,
           modalCardTableRows: null,
           modalCardMarkers: null,
+          polyline: null,
           isMapNeededOnModalCard: false,
           userNameFieldValue: '',
           passwordFieldValue: '',
@@ -34,7 +35,7 @@ class App extends Component {
             <>
                 <Header updateUserNameFieldValue={this.updateUserNameFieldValue} updatePasswordFieldValue={this.updatePasswordFieldValue} userNameFieldValue={this.state.userNameFieldValue} passwordFieldValue={this.state.passwordFieldValue} isLogged={this.state.isLogged} favorites={this.state.favorites} removeFromFavorites={this.removeFromFavorites} openModalCard={this.openModalCard} authorizate={this.authorizate} loginFieldsClassName={this.state.loginFieldsClassName} resetLoginInputClass={this.resetLoginInputClass} quit={this.quit} />
 
-                {this.state.isModalCardOpen ? <CardModal closeModalCard={this.closeModalCard} title={this.state.modalCardTitle} header={this.state.modalCardTableTitles} rows={this.state.modalCardTableRows} modalCardMarkers={this.state.modalCardMarkers} isMapNeededOnModalCard={this.state.isMapNeededOnModalCard} /> : null}
+                {this.state.isModalCardOpen ? <CardModal closeModalCard={this.closeModalCard} title={this.state.modalCardTitle} header={this.state.modalCardTableTitles} rows={this.state.modalCardTableRows} modalCardMarkers={this.state.modalCardMarkers} polyline={this.state.polyline} isMapNeededOnModalCard={this.state.isMapNeededOnModalCard} /> : null}
 
                 <Switch>
                     <Route exact path='/' component={FindRouteContainer}/>
@@ -101,7 +102,7 @@ class App extends Component {
 
     openModalCard = (title) => {
         let modalCardTitle = title,
-        modalCardTableRows, modalCardTableTitles, isMapNeededOnModalCard = false, modalCardMarkers=null;
+        modalCardTableRows, modalCardTableTitles, isMapNeededOnModalCard = false, modalCardMarkers=null, polyline=null;
         switch (title.substr(0,3)) {
             case 'Bus':
                 modalCardTableRows = generateTransportModalCardTableRow();
@@ -118,6 +119,7 @@ class App extends Component {
             case 'Rou':
                 const tempRoute = generateRouteModalCardTableRow();
                 modalCardTableRows = tempRoute[0];
+                polyline = generatePolyline(tempRoute[1]);
                 modalCardMarkers = generateRouteMarkers(tempRoute[1]);
                 modalCardTableTitles = generateRouteModalCardTableTitles();
                 isMapNeededOnModalCard = true;
@@ -136,13 +138,23 @@ class App extends Component {
             modalCardTableRows: modalCardTableRows,
             modalCardTableTitles: modalCardTableTitles,
             isMapNeededOnModalCard: isMapNeededOnModalCard,
-            modalCardMarkers: modalCardMarkers
+            modalCardMarkers: modalCardMarkers,
+            polyline: polyline
         });
 
         function generateRouteMarkers(locations) {
             return locations.map((loc, index) => 
             <Marker key={index} title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />)
         }
+
+        function generatePolyline(locations) {
+            let polyline = [];
+            for (let each in locations) {
+                polyline.push({lat: parseFloat(locations[each].lat), lng: parseFloat(locations[each].long)});
+            }
+            return polyline;
+        }
+
         function generateStopMarker(loc) {
             return <Marker title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />
         }
