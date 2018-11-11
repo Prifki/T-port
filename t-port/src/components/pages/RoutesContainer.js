@@ -16,12 +16,14 @@ class RoutesContainer extends Component {
             isEditingMode: false,
             tableData: this.handleData(),
             addRoutesTableItem: this.createAddItemRow(),
-            addCardTableItem: this.createAddCardItemRow(),
             isSortedAscending: false,
             isMapNeededOnCard: false,
             markers: null,
             cardTableRows: null,
-            cardTableTitles: null
+            cardTableTitles: null,
+            addItemNameValue: '',
+            addItemFromValue: '',
+            addItemToValue: ''
         }
     }
   render() {
@@ -32,12 +34,12 @@ class RoutesContainer extends Component {
             <div className="substrate">
                 <h2 className="page-name">Routes</h2>
 
-                <Table header = {routesTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode} addItem={this.state.addRoutesTableItem} />
+                <Table addItemNameValue={this.state.addItemNameValue} addItemFromValue={this.state.addItemFromValue} addItemToValue={this.state.addItemToValue} header = {routesTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode} addItem={this.state.addRoutesTableItem} isEditingMode={this.state.isEditingMode}/>
                 <div className="google-map--small">
                 
                 <GoogleMap markers={this.state.markers} /></div>
 
-                {this.state.isCardShown ? <Card isLogged={this.props.isLogged} addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} closeCard={this.closeCard} header={this.state.cardTableTitles} rows={this.state.cardTableRows} isAdmin={this.props.isAdmin} addItem={this.state.addCardTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} /> : null}
+                {this.state.isCardShown ? <Card isLogged={this.props.isLogged} addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} closeCard={this.closeCard} header={this.state.cardTableTitles} rows={this.state.cardTableRows} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} /> : null}
             </div>
         </main>
     );
@@ -130,23 +132,31 @@ class RoutesContainer extends Component {
   createAddItemRow = () => {
     return(
       <tr>
-        <td><input type="text" className="table-edit-input" /></td>
-        <td><input type="text" className="table-edit-input" /></td>
-        <td><i className="material-icons table-editor-buttons">add_circle_outline</i></td>
+        <td><input type="text" className="table-edit-input" placeholder="Name" name="name" value={this.props.addItemNameValue} onChange={this.updateAddItemNameValue} /></td>
+        <td><input type="text" className="table-edit-input" placeholder="From" name="from" value={this.props.addItemFromValue} onChange={this.updateAddItemFromValue} /></td>
+        <td><input type="text" className="table-edit-input" placeholder="To" name="to" value={this.props.addItemToValue} onChange={this.updateAddItemToValue} /></td>
+        <td onClick={this.addTableItem}><i className="material-icons table-editor-buttons">add_circle_outline</i></td>
         <td></td>
       </tr>
     )
   }
-  createAddCardItemRow = () => {
-    return(
-      <tr>
-        <td><input type="text" className="table-edit-input" /></td>
-        <td><input type="text" className="table-edit-input" /></td>
-        <td><i className="material-icons table-editor-buttons">add_circle_outline</i></td>
-        <td></td>
-      </tr>
-    )
+
+  addTableItem = () => {
+    let routeArrayCopy = this.state.tableData;
+    routeArrayCopy.push({name: this.state.addItemNameValue, from: this.state.addItemFromValue, to: this.state.addItemToValue});
+    this.setState({tableData: routeArrayCopy});
   }
+
+  updateAddItemNameValue = (e) => {
+    this.setState({addItemNameValue: e.target.value});
+  }
+  updateAddItemFromValue = (e) => {
+    this.setState({addItemFromValue: e.target.value});
+  }
+  updateAddItemToValue = (e) => {
+    this.setState({addItemToValue: e.target.value});
+  }
+
   showCard = (name) => {
     let locations = [];
     let cardData = [];
@@ -186,19 +196,9 @@ class RoutesContainer extends Component {
     return arr.map( (rowData, index) => 
       <tr key={index}>
         <td>{rowData.stops}</td>
-        <td>{rowData.times.join(', ')}</td>
-        {this.state.isEditingMode ? <>
-        <EditTableButton type={'edit'}/>
-        <EditTableButton type={'remove'} onClick={() => this.removeCardTableItem(index)} /></> : null}   
+        <td>{rowData.times.join(', ')}</td>  
       </tr>
     )
-  }
-
-  removeCardTableItem = (index) => {
-    const newRouteData = this.state.cardTableRows.filter((stop, i) => { 
-      return i !== index;
-    });
-    this.setState({cardTableRows: newRouteData});
   }
 
   cardTableTitles = () => {
@@ -207,7 +207,6 @@ class RoutesContainer extends Component {
         <tr>
           <th>Stop</th>
           <th>Time</th>
-          {this.state.isEditingMode ? <EditingColumnTitles /> : null}
         </tr>
       </thead>
     );
