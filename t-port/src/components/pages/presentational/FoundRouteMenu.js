@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CloseButton from './CloseButton';
 import NothingFoundText from './NothingFoundText';
-import FoundRouteItem from './FoundRouteItem';
 
 class FoundRouteMenu extends Component {
   render() {
@@ -23,9 +22,9 @@ class FoundRouteMenu extends Component {
     }
     else {
       return (<ul className="bar" id="route-list">
-        <FoundRouteItem />
-        <FoundRouteItem />
-        <FoundRouteItem />
+        {this.props.foundRoute.map( (item, index) => 
+          <li key={index} >{item[1]+'min'}<div><i className="material-icons">place</i>{item[0]}</div></li>
+        )}
       </ul>);
     }
   }

@@ -15,7 +15,8 @@ class FindRouteContainer extends Component {
       stopAAutoCompleteItems: null,
       stopBAutoCompleteItems: null,
       stopA: null,
-      stopB: null
+      stopB: null,
+      foundRoute: null
     }
   }
   render() {
@@ -26,22 +27,44 @@ class FindRouteContainer extends Component {
             {this.state.isFindARouteMenuOpened ? <FindARouteMenu stopBAutoComplete={this.stopBAutoComplete} stopAAutoComplete={this.stopAAutoComplete} isFindARouteMenuOpened={this.state.isFindARouteMenuOpened} toggleFindARouteMenu={this.toggleFindARouteMenu} findARoute={this.findARoute} stopAAutoCompleteItems={this.state.stopAAutoCompleteItems} stopBAutoCompleteItems={this.state.stopBAutoCompleteItems} /> : <FindARouteMenuWrapped toggleFindARouteMenu={this.toggleFindARouteMenu} stopA={this.state.stopA} stopB={this.state.stopB} />}
 
 
-            {this.state.isFoundRouteMenuOpened ? <FoundRouteMenu closeFoundRouteMenu={this.closeFoundRouteMenu} isRouteFound={this.state.isRouteFound}/> : null }
+            {this.state.isFoundRouteMenuOpened ? <FoundRouteMenu foundRoute={this.state.foundRoute} closeFoundRouteMenu={this.closeFoundRouteMenu} isRouteFound={this.state.isRouteFound}/> : null }
         </main>
     );
   }
 
   findARoute = () => {
-    let stopA, stopB;
+    let stopA, stopB, validA = false, validB = false;
     for (let stop in JSONdata.stops) {
-      if (this.state.stopA === JSONdata.stops[stop].name)
+      if (this.state.stopA === JSONdata.stops[stop].name) {
         stopA = JSONdata.stops[stop].letter;
-      if (this.state.stopB === JSONdata.stops[stop].name)
+        validA = true;
+      }
+      if (this.state.stopB === JSONdata.stops[stop].name) {
         stopB = JSONdata.stops[stop].letter;
+        validB = true;
+      }
     }
-
-    console.log(this.dijkstra(stopA, stopB));
-    this.setState( () => {return {isFoundRouteMenuOpened: true}})
+    if (validA && validB) {
+      let foundRoute = this.dijkstra(stopA, stopB);
+      for (let each in JSONdata.stops){
+        for (let route in foundRoute) {
+          if (foundRoute[route][0] === JSONdata.stops[each].letter)
+            foundRoute[route][0] = JSONdata.stops[each].name;
+        }
+      }
+      this.setState({
+        isFoundRouteMenuOpened: true,
+        isRouteFound: true,
+        foundRoute: foundRoute
+      })
+    }
+    else {
+      this.setState({
+        isFoundRouteMenuOpened: true,
+        isRouteFound: false,
+        foundRoute: null
+      })
+    }
   }
 
   stopAAutoComplete = (e) => {
