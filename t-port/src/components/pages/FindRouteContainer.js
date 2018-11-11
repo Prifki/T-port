@@ -50,8 +50,8 @@ class FindRouteContainer extends Component {
     }
     if (validA && validB) {
       let foundRoute = this.dijkstra(stopA, stopB), locations = [], polyline = [];
-      for (let each in JSONdata.stops){
-        for (let route in foundRoute) {
+      for (let route in foundRoute){
+        for (let each in JSONdata.stops) {
           if (foundRoute[route][0] === JSONdata.stops[each].letter){
             foundRoute[route][0] = JSONdata.stops[each].name;
             locations.push({lat: JSONdata.stops[each].lat, long: JSONdata.stops[each].long, name: JSONdata.stops[each].name});
@@ -191,8 +191,6 @@ class FindRouteContainer extends Component {
             'QA25','RB15','RE40','RS15','RQ15','SF15','SJ15','TC20','TE25', 'TF30','TR30'
         ];
         var map = this.graphToMap(graph);
-      
-        // console.log(map);
       
         var visited = [];
         var frontier = [start];
