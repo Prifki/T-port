@@ -23,7 +23,10 @@ class TransportsContainer extends Component {
       addItemTypeValue: '',
       addItemNumberValue: '',
       addItemRouteValue: '',
-      addItemSeatsValue: ''
+      addItemSeatsValue: '',
+      editTableRouteItem: '',
+      editTableSeatsItem: '',
+      editTableNumberItem: ''
     }
   }
   render() {
@@ -81,7 +84,7 @@ class TransportsContainer extends Component {
         <td>{rowData.route}</td>
         <td>{rowData.seats}</td>
         {this.state.isEditingMode ? <>
-          <EditTableButton type={'edit'} />
+          <EditTableButton type={rowData.isEditing} onClick={() => this.editTableItem(index)}/>
           <EditTableButton type={'remove'} onClick={() => this.removeTableItem(index)}/>
         </> : null}
       </tr>
@@ -112,6 +115,28 @@ class TransportsContainer extends Component {
       return i !== index;
     });
     this.setState({transport: newTransportData});
+  }
+
+  editTableItem = (index) => {
+    if (this.state.transport[index].isEditing === 'edit') {
+      const newTransportData = this.state.transport;
+      newTransportData[index] = {id: this.state.transport[index].id, type: this.state.transport[index].type, number: <input type="text" className="table-edit-input" placeholder="Number" name="number" value={this.props.editTableNumberItem} onChange={this.updateEditItemNumberValue} />, seats: <input type="text" className="table-edit-input" placeholder="Seats" name="seats" value={this.props.editTableSeatsItem} onChange={this.updateEditItemSeatsValue} />, route: <input type="text" className="table-edit-input" placeholder="Route" name="route" value={this.props.editTableRouteItem} onChange={this.updateEditItemRouteValue} />, time: ["00:00","00:00","00:00"], isEditing: "done"}
+      this.setState({transport: newTransportData});
+    }
+    else {
+      const newTransportData = this.state.transport;
+      newTransportData[index] = {id: this.state.transport[index].id, type: this.state.transport[index].type, number: this.state.editTableNumberItem, seats: this.state.editTableSeatsItem, route: this.state.editTableRouteItem, time: ["00:00","00:00","00:00"], isEditing: "edit"}
+      this.setState({transport: newTransportData});
+    }
+  }
+  updateEditItemNumberValue = (e) => {
+    this.setState({editTableNumberItem: e.target.value});
+  }
+  updateEditItemRouteValue = (e) => {
+    this.setState({editTableRouteItem: e.target.value});
+  }
+  updateEditItemSeatsValue = (e) => {
+    this.setState({editTableSeatsItem: e.target.value});
   }
 
   sortBy = (key) => {
