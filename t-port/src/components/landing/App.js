@@ -15,21 +15,24 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          isLogged: true,
-          isAdmin: true,
-          favorites: [{title: "Bus B012US", type: "directions_bus"}],
+          isLogged: false,
+          isAdmin: false,
+          favorites: [],
           isModalCardOpen: false,
           modalCardTitle: null,
           modalCardTableTitles: null,
           modalCardTableRows: null,
           modalCardMarkers: null,
-          isMapNeededOnModalCard: false
+          isMapNeededOnModalCard: false,
+          userNameFieldValue: null,
+          passwordFieldValue: null,
+          loginFieldsClassName: 'menu__input'
         }
     }
     render() {
         return (
             <>
-                <Header isLogged={this.state.isLogged} favorites={this.state.favorites} removeFromFavorites={this.removeFromFavorites} openModalCard={this.openModalCard} />
+                <Header updateUserNameFieldValue={this.updateUserNameFieldValue} updatePasswordFieldValue={this.updatePasswordFieldValue} userNameFieldValue={this.state.userNameFieldValue} passwordFieldValue={this.state.passwordFieldValue} isLogged={this.state.isLogged} favorites={this.state.favorites} removeFromFavorites={this.removeFromFavorites} openModalCard={this.openModalCard} authorizate={this.authorizate} loginFieldsClassName={this.state.loginFieldsClassName} resetLoginInputClass={this.resetLoginInputClass} quit={this.quit} />
 
                 {this.state.isModalCardOpen ? <CardModal closeModalCard={this.closeModalCard} title={this.state.modalCardTitle} header={this.state.modalCardTableTitles} rows={this.state.modalCardTableRows} modalCardMarkers={this.state.modalCardMarkers} isMapNeededOnModalCard={this.state.isMapNeededOnModalCard} /> : null}
 
@@ -44,6 +47,50 @@ class App extends Component {
             </>
         );
     }
+
+    updateUserNameFieldValue = (e) => {
+        this.setState({userNameFieldValue: e.target.value});
+    }
+
+    updatePasswordFieldValue = (e) => {
+        this.setState({passwordFieldValue: e.target.value});
+    }
+
+    resetLoginInputClass = () => {
+        this.setState({loginFieldsClassName: 'menu__input'});
+    }
+
+    authorizate = () => {
+        console.log(this.state.userNameFieldValue+'  '+this.state.passwordFieldValue);
+        const users = JSONdata.users;
+        let isLogged = false;
+        for (let user in users) {
+            if (this.state.userNameFieldValue === users[user].name
+                && this.state.passwordFieldValue === users[user].pass) {
+                this.setState({
+                    isLogged: true,
+                    isAdmin: users[user].isAdmin,
+                    favorites: users[user].favorites
+                });
+                isLogged = true;
+                break;
+            }
+        }
+        if (!isLogged)
+            this.setState({loginFieldsClassName: 'menu__input menu--login--failed-animation'});
+    }
+
+    quit = () => {
+        this.setState({
+          isLogged: false,
+          isAdmin: false,
+          favorites: [],
+          userNameFieldValue: '',
+          passwordFieldValue: '',
+          loginFieldsClassName: 'menu__input'
+        });
+      }
+
     removeFromFavorites = index => {
         const newFavorites = this.state.favorites.filter((favorite, i) => { 
             return i !== index;

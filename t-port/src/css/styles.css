@@ -669,6 +669,11 @@ footer {
   animation-timing-function: ease-in-out;
 }
 
+.menu--login__welcome-text {
+  margin: 20px;
+  font-size: 1.2em;
+}
+
 @keyframes shake {
   10%, 90% {
     transform: translate3d(-1px, 0, 0);

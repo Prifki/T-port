@@ -6,6 +6,7 @@ import NavBar from './presentational/NavBar';
 import GlobalSearch from './presentational/GlobalSearch';
 import FavoritesButton from './presentational/FavoritesButton';
 import LoginButton from './presentational/LoginButton';
+import QuitButton from './presentational/QuitButton';
 import MobileGlobalSearchButton from './presentational/MobileGlobalSearchButton';
 import LoginMenu from './presentational/LoginMenu';
 import FavoritesMenu from './presentational/FavoritesMenu';
@@ -40,7 +41,11 @@ class Header extends Component {
         </div>
         <div className="header-buttons">
           {this.props.isLogged ? <FavoritesButton onClick={this.toggleFavoritesMenu} /> : null}
-          <LoginButton onClick={this.toggleLoginMenu}/>
+
+          {this.props.isLogged ?
+            <QuitButton onClick={this.props.quit} /> : 
+            <LoginButton onClick={this.toggleLoginMenu} />}
+
           <MobileGlobalSearchButton onClick={this.toggleMobileGlobalSearch}/>
         </div>
         <GlobalSearch isGlobalAutoCompleteShown={this.state.isGlobalAutoCompleteShown} globalAutoComplete={this.globalAutoComplete} globalAutoCompleteItems={this.state.globalAutoCompleteItems} hideGlobalAutoComplete={this.hideGlobalAutoComplete} chooseFromAutoComplete={this.chooseFromAutoComplete}/>
@@ -51,7 +56,7 @@ class Header extends Component {
       
       <NavBar /></div>
 
-      <LoginMenu isLoginMenuOpen={this.state.isLoginMenuOpen} toggleLoginMenu={this.toggleLoginMenu}/>
+      <LoginMenu isLogged={this.props.isLogged} userNameFieldValue={this.props.userNameFieldValue} passwordFieldValue={this.props.passwordFieldValue} isLoginMenuOpen={this.state.isLoginMenuOpen} toggleLoginMenu={this.toggleLoginMenu} authorizate={this.props.authorizate} updatePasswordFieldValue={this.props.updatePasswordFieldValue} updateUserNameFieldValue={this.props.updateUserNameFieldValue} loginFieldsClassName={this.props.loginFieldsClassName} resetLoginInputClass={this.props.resetLoginInputClass} />
 
       <FavoritesMenu openModalCard={this.props.openModalCard} isFavoritesMenuOpen={this.state.isFavoritesMenuOpen} toggleFavoritesMenu={this.toggleFavoritesMenu} favorites={this.props.favorites} removeFromFavorites={this.props.removeFromFavorites} />
       </>
@@ -128,8 +133,9 @@ class Header extends Component {
         isMobileGlobalSearchOpen: false,
         isBurgerButtonActive: false
       }
-    })
+    });
   }
+
   toggleFavoritesMenu = () => {
     this.setState( prevState => {
       return {

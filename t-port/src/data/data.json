@@ -365,22 +365,14 @@
         {
             "name": "admin",
             "pass": "admin",
-            "type": "admin",
-            "favorites": {
-                "routes": ["AB01","TL09"],
-                "stops": [12,18],
-                "transports": ["T173RM","T032RM"]
-            }
+            "isAdmin": true,
+            "favorites": [{"title": "Bus B012US", "type": "directions_bus"}]
         },
         {
             "name": "user",
             "pass": "user",
-            "type": "user",
-            "favorites": {
-                "routes": ["AB01","TL09"],
-                "stops": [12,18],
-                "transports": ["T173RM","T032RM"]
-            }
+            "isAdmin": false,
+            "favorites": [{"title": "Bus B012US", "type": "directions_bus"}]
         }
     ]
 }

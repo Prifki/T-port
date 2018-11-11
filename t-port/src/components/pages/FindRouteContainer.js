@@ -59,7 +59,6 @@ class FindRouteContainer extends Component {
       }
       locations = locations.map((loc, index) => 
         <Marker key={index} title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />);
-      console.log(locations);
       this.setState({
         isFoundRouteMenuOpened: true,
         isRouteFound: true,
@@ -185,8 +184,7 @@ class FindRouteContainer extends Component {
             'FE15','FI20','FD25','GH10','HF25','HJ45','HI20','IG15','IJ5','IK15',
             'IL25','IM25','JO45','JK5','JN10','KI15','KN10','KL5','LK5','LN15','LO10','ML10','MO10',
             'NS10','NT20','NR10','OR30','OP10','PN15','PR15','PQ15','QP20','QL35',
-            'QA25','RB15','RE40','RS15','RQ15','SF15','SJ15','TC20','TE25',
-            'TF30','TR30'
+            'QA25','RB15','RE40','RS15','RQ15','SF15','SJ15','TC20','TE25', 'TF30','TR30'
         ];
         var map = this.graphToMap(graph);
       
@@ -209,7 +207,7 @@ class FindRouteContainer extends Component {
           for (let { vertex: to, cost } of neighbors) {
             var currCostToNeighbor = table[to] && table[to].cost;
             var newCostToNeighbor = costToVertex + cost;
-            if (currCostToNeighbor == undefined ||
+            if (currCostToNeighbor === undefined ||
                 newCostToNeighbor < currCostToNeighbor) {
               // Update the table
               table[to] = { vertex, cost: newCostToNeighbor };

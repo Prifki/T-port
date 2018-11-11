@@ -7,10 +7,18 @@ function LoginMenu (props) {
     return (
         <div className={className}>
             <CloseButton  onClick={props.toggleLoginMenu} />
-            <h3 className="menu__title">Sign in</h3>
-            <input className="menu__input" type="text" placeholder="Login" id="login-field" />
-            <input className="menu__input" type="password" placeholder="Password" id="password-field" />
-            <SubmitButton id="login-button" text="Sign in"/>
+            {!props.isLogged ?
+              <>
+                <h3 className="menu__title">Sign in</h3>
+
+                <input className={props.loginFieldsClassName} type="text" placeholder="Login" onChange={props.updateUserNameFieldValue} onFocus={props.resetLoginInputClass} value={props.userNameFieldValue} />
+
+                <input className={props.loginFieldsClassName} type="password" placeholder="Password" onChange={props.updatePasswordFieldValue} onFocus={props.resetLoginInputClass} value={props.passwordFieldValue} />
+                <SubmitButton text="Sign in" onClick={props.authorizate} />
+              </>
+            :
+                <p className="menu--login__welcome-text">Welcome, {props.userNameFieldValue}!</p>
+            }
         </div>
     );
 }
