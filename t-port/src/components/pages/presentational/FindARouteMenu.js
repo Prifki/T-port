@@ -20,7 +20,7 @@ function FindARouteMenu(props) {
                     {props.stopBAutoCompleteItems}
                 </datalist>
 
-                <input type="time" className="menu__input" name="from_time" />
+                <input type="time" className="menu__input" name="from_time" onChange={props.updateStartTime} value={props.startTime} />
                 <SubmitButton onClick={props.findARoute} id="find-a-route-button" text="Find"/>
             </div>
         </div>

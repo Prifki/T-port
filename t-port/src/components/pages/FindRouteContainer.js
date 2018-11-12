@@ -16,6 +16,7 @@ class FindRouteContainer extends Component {
       isRouteFound: false,
       stopAAutoCompleteItems: null,
       stopBAutoCompleteItems: null,
+      startTime: this.getCurrentTime(),
       stopA: null,
       stopB: null,
       foundRoute: null,
@@ -28,7 +29,9 @@ class FindRouteContainer extends Component {
         <main>
             <div className="google-map--index"><GoogleMap markers = {this.state.markers} polyline={this.state.polyline} /></div>
 
-            {this.state.isFindARouteMenuOpened ? <FindARouteMenu stopBAutoComplete={this.stopBAutoComplete} stopAAutoComplete={this.stopAAutoComplete} isFindARouteMenuOpened={this.state.isFindARouteMenuOpened} toggleFindARouteMenu={this.toggleFindARouteMenu} findARoute={this.findARoute} stopAAutoCompleteItems={this.state.stopAAutoCompleteItems} stopBAutoCompleteItems={this.state.stopBAutoCompleteItems} /> : <FindARouteMenuWrapped toggleFindARouteMenu={this.toggleFindARouteMenu} stopA={this.state.stopA} stopB={this.state.stopB} />}
+            {this.state.isFindARouteMenuOpened ? <FindARouteMenu updateStartTime={this.updateStartTime} startTime={this.state.startTime} stopBAutoComplete={this.stopBAutoComplete} stopAAutoComplete={this.stopAAutoComplete} isFindARouteMenuOpened={this.state.isFindARouteMenuOpened} toggleFindARouteMenu={this.toggleFindARouteMenu} findARoute={this.findARoute} stopAAutoCompleteItems={this.state.stopAAutoCompleteItems} stopBAutoCompleteItems={this.state.stopBAutoCompleteItems} /> : 
+            
+            <FindARouteMenuWrapped toggleFindARouteMenu={this.toggleFindARouteMenu} stopA={this.state.stopA} stopB={this.state.stopB} />}
 
 
             {this.state.isFoundRouteMenuOpened ? <FoundRouteMenu foundRoute={this.state.foundRoute} closeFoundRouteMenu={this.closeFoundRouteMenu} isRouteFound={this.state.isRouteFound}/> : null }
@@ -36,6 +39,22 @@ class FindRouteContainer extends Component {
     );
   }
 
+  getCurrentTime = () => {
+    return (new Date()).toTimeString().substr(0,5);
+  }
+  updateStartTime = (e) => {
+    this.setState({startTime: e.target.value});
+  }
+  addMinutes = (date, minutes) => {
+    return new Date(date.getTime() + minutes*60000);
+  }
+  parseTime = (t) => {
+    var d = new Date();
+    var time = t.match( /(\d+)(?::(\d\d))?\s*(p?)/ );
+    d.setHours( parseInt( time[1]) + (time[3] ? 12 : 0) );
+    d.setMinutes( parseInt( time[2]) || 0 );
+    return d;
+  }
   findARoute = () => {
     let stopA, stopB, validA = false, validB = false;
     for (let stop in JSONdata.stops) {
@@ -58,6 +77,10 @@ class FindRouteContainer extends Component {
             polyline.push({lat: parseFloat(JSONdata.stops[each].lat), lng: parseFloat(JSONdata.stops[each].long)});
           }
         }
+      }
+      const fromTime = this.parseTime(this.state.startTime);
+      for (let i = 0; i < foundRoute.length; i+=2) {
+        foundRoute[i][1] = this.addMinutes(fromTime,foundRoute[i][1]).toTimeString().substr(0,5);
       }
       locations = locations.map((loc, index) => 
         <Marker key={index} title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />);
@@ -174,14 +197,12 @@ class FindRouteContainer extends Component {
     }
     var route = [];
     for (let stop in path){
-        route.push([path[stop],times[stop]+'min']);
+        route.push([path[stop],times[stop]]);
         //route[path[stop]] = times[stop];
     }
     //return path;
     var changes = this.searchForChanges(path.join(''));
     route = this.streetMagic(route, changes);
-    console.log(changes);
-    console.log(route);
     return route;
   }
 
