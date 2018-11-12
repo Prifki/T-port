@@ -38,7 +38,7 @@ class App extends Component {
                 {this.state.isModalCardOpen ? <CardModal closeModalCard={this.closeModalCard} title={this.state.modalCardTitle} header={this.state.modalCardTableTitles} rows={this.state.modalCardTableRows} modalCardMarkers={this.state.modalCardMarkers} polyline={this.state.polyline} isMapNeededOnModalCard={this.state.isMapNeededOnModalCard} /> : null}
 
                 <Switch>
-                    <Route exact path='/' component={FindRouteContainer}/>
+                    <Route exact path='/' render={(props) => <FindRouteContainer {...props} openModalCard={this.openModalCard} />}/>
                     <Route path='/transports' render={(props) => <TransportsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} />}/>
                     <Route path='/routes' render={(props) => <RoutesContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} />}/>
                     <Route path='/stops' render={(props) => <StopsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} />}/>

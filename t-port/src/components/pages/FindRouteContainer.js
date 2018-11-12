@@ -34,7 +34,7 @@ class FindRouteContainer extends Component {
             <FindARouteMenuWrapped toggleFindARouteMenu={this.toggleFindARouteMenu} stopA={this.state.stopA} stopB={this.state.stopB} />}
 
 
-            {this.state.isFoundRouteMenuOpened ? <FoundRouteMenu foundRoute={this.state.foundRoute} closeFoundRouteMenu={this.closeFoundRouteMenu} isRouteFound={this.state.isRouteFound}/> : null }
+            {this.state.isFoundRouteMenuOpened ? <FoundRouteMenu openModalCard={this.props.openModalCard} foundRoute={this.state.foundRoute} closeFoundRouteMenu={this.closeFoundRouteMenu} isRouteFound={this.state.isRouteFound}/> : null }
         </main>
     );
   }
@@ -81,6 +81,9 @@ class FindRouteContainer extends Component {
       const fromTime = this.parseTime(this.state.startTime);
       for (let i = 0; i < foundRoute.length; i+=2) {
         foundRoute[i][1] = this.addMinutes(fromTime,foundRoute[i][1]).toTimeString().substr(0,5);
+      }
+      for (let i = 1; i < foundRoute.length-1; i+=2) {
+        foundRoute[i][0] = 'Route '+foundRoute[i][0];
       }
       locations = locations.map((loc, index) => 
         <Marker key={index} title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />);

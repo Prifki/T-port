@@ -4,7 +4,6 @@ import NothingFoundText from './NothingFoundText';
 
 class FoundRouteMenu extends Component {
   render() {
-
     return (
 		<div className="menu menu--found-route">
 			<div className="menu--found-route-content">
@@ -23,7 +22,7 @@ class FoundRouteMenu extends Component {
     else {
       return (<ul className="bar" id="route-list">
         {this.props.foundRoute.map( (item, index) => 
-          <li key={index} ><div className="menu--found-route-content__time">{item[1]} </div><div className="menu--found-route-content__entity">{item[0]}</div></li>
+          <li key={index} ><div className="menu--found-route-content__time">{item[1]} </div><div className="menu--found-route-content__entity" onClick={() => this.props.openModalCard(item[0])} >{item[0]}</div></li>
         )}
       </ul>);
     }
