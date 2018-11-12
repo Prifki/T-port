@@ -12,6 +12,8 @@ class CardModal extends Component {
   }
   render() {
     return (
+      <>
+        <div className="blur"></div>
         <div className="card card--modal">
             <BookmarkButton onClick={() => this.props.addToFavorites(this.props.title)}/>
             <CloseButton onClick={this.props.closeModalCard} />
@@ -21,6 +23,7 @@ class CardModal extends Component {
             <div className="google-map--small"><GoogleMap markers={this.props.modalCardMarkers} polyline={this.props.polyline} /></div>
             : null}
         </div>
+      </>
     );
   }
 }
