@@ -204,7 +204,7 @@ class StopsContainer extends Component {
   generateStopCardTableRow = (arr) => {
     return arr.map( (rowData, index) => 
       <tr key={index}>
-        <td>{rowData.route}</td>
+        <td className="table__link" onClick={() => this.props.openModalCard("Route "+rowData.route)} >{rowData.route}</td>
         <td>{rowData.times.join(', ')}</td>
       </tr>
     )

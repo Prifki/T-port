@@ -328,7 +328,7 @@ class TransportsContainer extends Component {
   generateTransportCardTableRow = (arr) => {
     return arr.map( (rowData, index) => 
       <tr key={index}>
-        <td>{rowData.stopName}</td>
+        <td className="table__link" onClick={() => this.props.openModalCard(rowData.stopName)} >{rowData.stopName}</td>
         <td>{rowData.time}</td> 
       </tr>
     )

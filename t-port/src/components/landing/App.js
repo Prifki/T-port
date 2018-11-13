@@ -41,11 +41,11 @@ class App extends Component {
                 <Switch>
                     <Route exact path='/' render={(props) => <FindRouteContainer {...props} openModalCard={this.openModalCard} data={this.state.data} />}/>
                     
-                    <Route path='/transports' render={(props) => <TransportsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} removeFromFavoritesByCard={this.removeFromFavoritesByCard}  data={this.state.data} />}/>
+                    <Route path='/transports' render={(props) => <TransportsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} removeFromFavoritesByCard={this.removeFromFavoritesByCard} openModalCard={this.openModalCard} data={this.state.data} />}/>
                     
-                    <Route path='/routes' render={(props) => <RoutesContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} removeFromFavoritesByCard={this.removeFromFavoritesByCard}  data={this.state.data} />}/>
+                    <Route path='/routes' render={(props) => <RoutesContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} removeFromFavoritesByCard={this.removeFromFavoritesByCard}  openModalCard={this.openModalCard} data={this.state.data} />}/>
                     
-                    <Route path='/stops' render={(props) => <StopsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} removeFromFavoritesByCard={this.removeFromFavoritesByCard} data={this.state.data} />}/>
+                    <Route path='/stops' render={(props) => <StopsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} removeFromFavoritesByCard={this.removeFromFavoritesByCard} openModalCard={this.openModalCard} data={this.state.data} />}/>
                 </Switch>
 
                 <Footer/>
