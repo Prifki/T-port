@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, Switch, Redirect} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import BurgerButton from './presentational/BurgerButton';
 import NavBar from './presentational/NavBar';
@@ -43,7 +43,7 @@ class Header extends Component {
           {this.props.isLogged ? <FavoritesButton onClick={this.toggleFavoritesMenu} /> : null}
 
           {this.props.isLogged ?
-            <QuitButton onClick={this.props.quit} /> : 
+            <Link to="/"><QuitButton onClick={this.props.quit} /></Link> : 
             <LoginButton onClick={this.toggleLoginMenu} />}
 
           <MobileGlobalSearchButton onClick={this.toggleMobileGlobalSearch}/>

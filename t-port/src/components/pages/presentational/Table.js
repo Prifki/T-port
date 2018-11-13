@@ -9,7 +9,7 @@ function Table(props) {
             {props.header}
             <tbody>
             {props.rows}
-            {props.isEditingMode ? props.addItem : null}
+            {(props.isEditingMode && props.isAdmin) ? props.addItem : null}
             </tbody>
         </table>
       </div>

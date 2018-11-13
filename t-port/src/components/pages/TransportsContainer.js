@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import FilterByType from './presentational/FilterByType';
 import Table from './presentational/Table';
 import Pagination from './presentational/Pagination';
@@ -90,7 +91,7 @@ class TransportsContainer extends Component {
           <th>Number</th>
           <th>Route</th>
           <th onClick={() => this.sortBy('seats')} className="table__column-title" >Seats</th>
-          {this.state.isEditingMode ? <EditingColumnTitles /> : null}
+          {(this.state.isEditingMode && this.props.isAdmin) ? <EditingColumnTitles /> : null}
         </tr>
       </thead>
     );
@@ -103,7 +104,7 @@ class TransportsContainer extends Component {
         <td className="table__link" onClick={() => this.showCard(rowData.number, rowData.type)}>{rowData.number}</td>
         <td>{rowData.route}</td>
         <td>{rowData.seats}</td>
-        {this.state.isEditingMode ? <>
+        {(this.state.isEditingMode && this.props.isAdmin) ? <>
           <EditTableButton type={rowData.isEditing} onClick={() => this.editTableItem(index)} />
           <EditTableButton type={'remove'} onClick={() => this.removeTableItem(index)}/>
         </> : null}

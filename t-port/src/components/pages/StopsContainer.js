@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Marker} from 'google-maps-react';
+import { Marker } from 'google-maps-react';
 
 import Table from './presentational/Table';
 import Card from './presentational/Card';
@@ -70,7 +70,7 @@ class StopsContainer extends Component {
         <tr>
           <th onClick={() => this.sortBy('name')} className="table__column-title" >Name</th>
           <th>Routes</th>
-          {this.state.isEditingMode ? <EditingColumnTitles /> : null}
+          {(this.state.isEditingMode && this.props.isAdmin) ? <EditingColumnTitles /> : null}
         </tr>
       </thead>
       );
@@ -81,7 +81,7 @@ class StopsContainer extends Component {
       <tr key={index}>
         <td className="table__link" onClick={() => this.showCard(rowData.name, rowData.routes)}>{rowData.name}</td>
         <td>{rowData.routes.join(', ')}</td> 
-        {this.state.isEditingMode ? <>
+        {(this.state.isEditingMode && this.props.isAdmin) ? <>
         <EditTableButton type={rowData.isEditing} onClick={() => this.editTableItem(index)} />
         <EditTableButton type={'remove'} onClick={() => this.removeTableItem(index)} /></> : null}  
       </tr>
