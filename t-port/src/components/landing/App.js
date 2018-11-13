@@ -208,27 +208,29 @@ class App extends Component {
 
     generateRouteModalCardTableRow = (title) => {
         const name = title.split(' ')[1], ROUTES = this.state.data.routes, TRANSPORTS = this.state.data.transport, STOPS = this.state.data.stops;
-        let locations = [], cardData = [], stops = [];
-          for (let ROUTE in ROUTES){
-            if (name === ROUTES[ROUTE].name)
-              stops = ROUTES[ROUTE].stops;
-          }
+        let locations = [], stopNames = [], cardData = [], stops = [];
+        for (let ROUTE in ROUTES){
+          if (name === ROUTES[ROUTE].name)
+            stops.push(ROUTES[ROUTE].stops);
+        }
+        for (let stop in stops) {
           for (let STOP in STOPS){
-            for (let stop in stops){
-              if (stops[stop] === STOPS[STOP].number){
-                stops[stop] = STOPS[STOP].name;
-                locations[stop] = ({lat: STOPS[STOP].lat, long: STOPS[STOP].long, name: STOPS[STOP].name});
+            for (let each in stops[stop]) {
+              if (stops[stop][each] === STOPS[STOP].number){
+                stopNames.push(STOPS[STOP].name);
+                locations.push({lat: STOPS[STOP].lat, long: STOPS[STOP].long, name: STOPS[STOP].name});
               }
             }
           }
-          for (let i = 0; i < stops.length; i++) {
+        }
+          for (let i = 0; i < stopNames.length; i++) {
             let times = [];
             for (let TRANSPORT in TRANSPORTS){
                 if (name === TRANSPORTS[TRANSPORT].route){
                   times.push(TRANSPORTS[TRANSPORT].time[i]);
                 }
             }
-            cardData.push({stops: stops[i], times: times});
+            cardData.push({stops: stopNames[i], times: times});
           }
           return [cardData.map( (rowData, index) => 
           <tr key={index}>
