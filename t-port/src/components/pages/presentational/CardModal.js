@@ -14,7 +14,7 @@ class CardModal extends Component {
   componentDidMount() {
     this.scrollToModalCardRef();
   }
-  componentWillReceiveProps() {
+  componentDidUpdate() {
     this.scrollToModalCardRef();
   }
 

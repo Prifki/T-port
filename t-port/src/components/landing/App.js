@@ -36,8 +36,6 @@ class App extends Component {
             <>
                 <Header updateUserNameFieldValue={this.updateUserNameFieldValue} updatePasswordFieldValue={this.updatePasswordFieldValue} userNameFieldValue={this.state.userNameFieldValue} passwordFieldValue={this.state.passwordFieldValue} isLogged={this.state.isLogged} favorites={this.state.favorites} removeFromFavorites={this.removeFromFavorites} openModalCard={this.openModalCard} authorizate={this.authorizate} loginFieldsClassName={this.state.loginFieldsClassName} resetLoginInputClass={this.resetLoginInputClass} quit={this.quit} data={this.state.data} />
 
-                {this.state.isModalCardOpen ? <CardModal closeModalCard={this.closeModalCard} title={this.state.modalCardTitle} header={this.state.modalCardTableTitles} rows={this.state.modalCardTableRows} modalCardMarkers={this.state.modalCardMarkers} polyline={this.state.polyline} isMapNeededOnModalCard={this.state.isMapNeededOnModalCard} /> : null}
-
                 <Switch>
                     <Route exact path='/' render={(props) => <FindRouteContainer {...props} openModalCard={this.openModalCard} data={this.state.data} />}/>
                     
@@ -47,6 +45,8 @@ class App extends Component {
                     
                     <Route path='/stops' render={(props) => <StopsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} removeFromFavoritesByCard={this.removeFromFavoritesByCard} openModalCard={this.openModalCard} data={this.state.data} />}/>
                 </Switch>
+                
+                {this.state.isModalCardOpen ? <CardModal closeModalCard={this.closeModalCard} title={this.state.modalCardTitle} header={this.state.modalCardTableTitles} rows={this.state.modalCardTableRows} modalCardMarkers={this.state.modalCardMarkers} polyline={this.state.polyline} isMapNeededOnModalCard={this.state.isMapNeededOnModalCard} /> : null}
 
                 <Footer/>
             </>
