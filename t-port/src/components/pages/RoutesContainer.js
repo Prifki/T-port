@@ -188,28 +188,30 @@ class RoutesContainer extends Component {
   showCard = (name) => {
     let locations = [], cardData = [], polyline = [];
       const ROUTES = this.props.data.routes, TRANSPORTS = this.props.data.transport, STOPS = this.props.data.stops;
-      let stops = [], isCardInFavorites = this.checkCardForFavorites('Route ' + name);
+      let stops = [], stopNames = [], isCardInFavorites = this.checkCardForFavorites('Route ' + name);
       for (let ROUTE in ROUTES){
         if (name === ROUTES[ROUTE].name)
-          stops = ROUTES[ROUTE].stops;
+          stops.push(ROUTES[ROUTE].stops);
       }
-      for (let STOP in STOPS){
-        for (let stop in stops){
-          if (stops[stop] === STOPS[STOP].number){
-            stops[stop] = STOPS[STOP].name;
-            locations.push({lat: STOPS[STOP].lat, long: STOPS[STOP].long, name: STOPS[STOP].name});
-            polyline.push({lat: parseFloat(STOPS[STOP].lat), lng: parseFloat(STOPS[STOP].long)});
+      for (let stop in stops) {
+        for (let STOP in STOPS){
+          for (let each in stops[stop]) {
+            if (stops[stop][each] === STOPS[STOP].number){
+              stopNames.push(STOPS[STOP].name);
+              locations.push({lat: STOPS[STOP].lat, long: STOPS[STOP].long, name: STOPS[STOP].name});
+              polyline.push({lat: parseFloat(STOPS[STOP].lat), lng: parseFloat(STOPS[STOP].long)});
+            }
           }
         }
       }
-      for (let i = 0; i < stops.length; i++) {
+      for (let i = 0; i < stopNames.length; i++) {
         let times = [];
         for (let TRANSPORT in TRANSPORTS){
             if (name === TRANSPORTS[TRANSPORT].route){
               times.push(TRANSPORTS[TRANSPORT].time[i]);
             }
         }
-        cardData.push({id: i, stops: stops[i], times: times});
+        cardData.push({id: i, stops: stopNames[i], times: times});
       }
     this.setState({
       isCardShown: true,
