@@ -16,8 +16,10 @@ class FavoritesMenu extends Component {
         return (
             <div className={className}>
                 <CloseButton onClick={this.props.toggleFavoritesMenu} />
-                <FavoritesEditButton onClick={this.switchEditingMode} favoritesEditingMode={this.state.favoritesEditingMode}/>
+                {this.props.favorites.length ? <FavoritesEditButton onClick={this.switchEditingMode} favoritesEditingMode={this.state.favoritesEditingMode}/> : null}
+
                 <h3 className="menu__title">Favorites</h3>
+                
                 <ul className="menu--favorites-list">
                     {this.props.favorites.length ? items : <p>Nothing's here</p>}
                 </ul>
