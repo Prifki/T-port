@@ -13,7 +13,7 @@ class GlobalSearch extends Component {
             </div>
             : null}
             <span className="global-search__button">
-                <i className="material-icons">search</i>
+                <i className="pictorams">search</i>
             </span>
         </div>
     );

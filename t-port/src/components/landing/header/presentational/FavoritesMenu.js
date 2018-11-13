@@ -37,7 +37,7 @@ class FavoritesMenu extends Component {
         return (
             this.props.favorites.map((favoritesData, index) => 
                 <li key={index}><div className="menu--favorites-list__item" onClick={() => this.props.openModalCard(favoritesData.title)} >
-                    <i className="material-icons" >{favoritesData.type}</i>{favoritesData.title}</div>
+                    <i className="pictorams" >{favoritesData.type}</i>{favoritesData.title}</div>
                     {this.state.favoritesEditingMode ? <FavoritesRemoveButton onClick={() => this.props.removeFromFavorites(index)} /> : null}
                 </li>
             )

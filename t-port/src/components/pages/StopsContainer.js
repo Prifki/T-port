@@ -116,7 +116,7 @@ class StopsContainer extends Component {
       return (
         <thead>
         <tr>
-          <th onClick={() => this.sortBy('name')} className="table__column-title--sortable" >Name <i className="material-icons">{arrow}</i></th>
+          <th onClick={() => this.sortBy('name')} className="table__column-title--sortable" >Name <i className="pictorams">{arrow}</i></th>
           <th>Routes</th>
           {(this.state.isEditingMode && this.props.isAdmin) ? <EditingColumnTitles /> : null}
         </tr>
@@ -191,7 +191,7 @@ class StopsContainer extends Component {
       <tr>
         <td><input type="text" className="table-edit-input" placeholder="Name" name="name" value={this.props.addItemNameValue} onChange={this.updateAddItemNameValue} /></td>
         <td><input type="text" className="table-edit-input" placeholder="Routes" name="routes" value={this.props.addItemRoutesValue} onChange={this.updateAddItemRoutesValue} /></td>
-        <td onClick={this.addTableItem}><i className="material-icons table-editor-buttons">add_circle_outline</i></td>
+        <td onClick={this.addTableItem}><i className="pictorams table-editor-buttons">add_circle_outline</i></td>
         <td></td>
       </tr>
     )

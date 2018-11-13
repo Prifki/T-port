@@ -4,7 +4,7 @@ function FavoritesEditButton (props) {
     const dotsView = props.favoritesEditingMode ? 'more_horiz' : 'more_vert';
     return (
       <div className="menu__button--edit-favorites" onClick={props.onClick}>
-        <i className="material-icons">{dotsView}</i>
+        <i className="pictorams">{dotsView}</i>
       </div>
     );
 }

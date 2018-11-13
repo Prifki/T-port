@@ -115,7 +115,7 @@ class RoutesContainer extends Component {
     return (
         <thead>
           <tr>
-            <th onClick={() => this.sortBy('name')} className="table__column-title--sortable" >Route name <i className="material-icons">{arrow}</i></th>
+            <th onClick={() => this.sortBy('name')} className="table__column-title--sortable" >Route name <i className="pictorams">{arrow}</i></th>
             <th>From</th>
             <th>To</th>
             {(this.state.isEditingMode && this.props.isAdmin) ? <EditingColumnTitles /> : null}
@@ -163,7 +163,7 @@ class RoutesContainer extends Component {
         <td><input type="text" className="table-edit-input" placeholder="Name" name="name" value={this.props.addItemNameValue} onChange={this.updateAddItemNameValue} /></td>
         <td><input type="text" className="table-edit-input" placeholder="From" name="from" value={this.props.addItemFromValue} onChange={this.updateAddItemFromValue} /></td>
         <td><input type="text" className="table-edit-input" placeholder="To" name="to" value={this.props.addItemToValue} onChange={this.updateAddItemToValue} /></td>
-        <td onClick={this.addTableItem}><i className="material-icons table-editor-buttons">add_circle_outline</i></td>
+        <td onClick={this.addTableItem}><i className="pictorams table-editor-buttons">add_circle_outline</i></td>
         <td></td>
       </tr>
     )

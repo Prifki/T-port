@@ -237,13 +237,13 @@ class FindRouteContainer extends Component {
     }
     for (let each in routes) {
       if (~routes[each][0].indexOf('TM')) {
-        routes[each][1] = <i className="material-icons">tram</i>;
+        routes[each][1] = <i className="pictorams">tram</i>;
       }
       if (~routes[each][0].indexOf('TL')) {
-        routes[each][1] = <i className="material-icons">train</i>;
+        routes[each][1] = <i className="pictorams">train</i>;
       }
       if (~routes[each][0].indexOf('AB')) {
-        routes[each][1] = <i className="material-icons">directions_bus</i>;
+        routes[each][1] = <i className="pictorams">directions_bus</i>;
       }
     }
     return routes;

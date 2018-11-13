@@ -107,7 +107,7 @@ class TransportsContainer extends Component {
           <th>Type</th>
           <th>Number</th>
           <th>Route</th>
-          <th onClick={() => this.sortBy('seats')} className="table__column-title--sortable" >Seats <i className="material-icons">{arrow}</i></th>
+          <th onClick={() => this.sortBy('seats')} className="table__column-title--sortable" >Seats <i className="pictorams">{arrow}</i></th>
           {(this.state.isEditingMode && this.props.isAdmin) ? <EditingColumnTitles /> : null}
         </tr>
       </thead>
@@ -117,7 +117,7 @@ class TransportsContainer extends Component {
   generateTransportTableRow = () => {
     return this.state.transport.map( (rowData, index) => 
       <tr key={index}>
-        <td><i className="material-icons">{rowData.type}</i></td>
+        <td><i className="pictorams">{rowData.type}</i></td>
         <td className="table__link" onClick={() => this.showCard(rowData.number, rowData.type)}>{rowData.number}</td>
         <td>{rowData.route}</td>
         <td>{rowData.seats}</td>
@@ -260,7 +260,7 @@ class TransportsContainer extends Component {
         <td><input type="text" className="table-edit-input" placeholder="Number" name="number" value={this.props.addItemNumberValue} onChange={this.updateAddItemNumberValue} /></td>
         <td><input type="text" className="table-edit-input" placeholder="Route" name="route" value={this.props.addItemRoutesValue} onChange={this.updateAddItemRouteValue} /></td>
         <td><input type="text" className="table-edit-input" placeholder="Seats" name="seats" value={this.props.addItemSeatsValue} onChange={this.updateAddItemSeatsValue} /></td>
-        <td onClick={this.addTableItem}><i className="material-icons table-editor-buttons">add_circle_outline</i></td>
+        <td onClick={this.addTableItem}><i className="pictorams table-editor-buttons">add_circle_outline</i></td>
         <td></td>
       </tr>
     )
@@ -268,7 +268,7 @@ class TransportsContainer extends Component {
 
   addTableItem = () => {
     let transportArrayCopy = this.state.transport;
-    transportArrayCopy.push({id: transportArrayCopy.length, type: <i className="material-icons">{this.state.checkedType}</i>, number: this.state.addItemNumberValue, seats: this.state.addItemSeatsValue, route: this.state.addItemRouteValue, time: ["00:00","00:00","00:00"], isEditing: 'edit'});
+    transportArrayCopy.push({id: transportArrayCopy.length, type: <i className="pictorams">{this.state.checkedType}</i>, number: this.state.addItemNumberValue, seats: this.state.addItemSeatsValue, route: this.state.addItemRouteValue, time: ["00:00","00:00","00:00"], isEditing: 'edit'});
     this.setState({transport: transportArrayCopy, currentPage: Math.ceil(transportArrayCopy.length / 10)});
   }
 
