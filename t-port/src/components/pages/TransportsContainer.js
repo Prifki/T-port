@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import FilterByType from './presentational/FilterByType';
+import FilterField from './presentational/FilterField';
 import Table from './presentational/Table';
 import Pagination from './presentational/Pagination';
 import Card from './presentational/Card';
@@ -18,6 +19,7 @@ class TransportsContainer extends Component {
       isFilteredByBus: false,
       isFilteredByTram: false,
       isFilteredByTroll: false,
+      filterByRouteValue: '',
       isMapNeededOnCard: false,
       isCardInFavorites: false,
       isSortedAscending: false,
@@ -43,10 +45,8 @@ class TransportsContainer extends Component {
 
                 {/* FILTERING*/}
                 <FilterByType filterByType={this.filterByType} isFilteredByBus={this.state.isFilteredByBus} isFilteredByTram={this.state.isFilteredByTram} isFilteredByTroll={this.state.isFilteredByTroll} />
-                
-                <div className="filter-wrapper">
-                  <input type="text" className="filter__input" placeholder="Filter by route" onChange={this.filterByRoute} />
-                </div>
+
+                <FilterField filterBy={this.filterByRoute} filterByValue={this.state.filterByRouteValue} filterPlaceholder="Filter By Route" />
 
                 {/* TABLE */}
                 <Table addItemTypeValue={this.state.addItemTypeValue} addItemNumberValue={this.state.addItemNumberValue} addItemRouteValue={this.state.addItemRouteValue} addItemSeatsValue={this.state.addItemSeatsValue} header = {transportTableTitles} rows = {rows} isAdmin={this.props.isAdmin} addItem={this.state.addTransportTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} addTableItem={this.addTableItem} />
@@ -83,6 +83,7 @@ class TransportsContainer extends Component {
     this.setState({
       transport: filteredArray, 
       currentPage: 1,
+      filterByRouteValue: e.target.value,
       isFilteredByBus: false,
       isFilteredByTram: false,
       isFilteredByTroll: false
@@ -198,7 +199,8 @@ class TransportsContainer extends Component {
           isFilteredByBus: false,
           isFilteredByTram: false,
           isFilteredByTroll: false,
-          currentPage: 1
+          currentPage: 1,
+          filterByRouteValue: ''
         });
       }
       else 
@@ -207,7 +209,8 @@ class TransportsContainer extends Component {
           isFilteredByBus: tempBus,
           isFilteredByTram: tempTram,
           isFilteredByTroll: tempTroll,
-          currentPage: 1
+          currentPage: 1,
+          filterByRouteValue: ''
         });
   }
 
@@ -314,7 +317,6 @@ class TransportsContainer extends Component {
   }
 
   bookmark = () => {
-    console.log(this.props.favorites.length)
     if (this.props.favorites.length < 5)
       this.setState({isCardInFavorites: true});
     else

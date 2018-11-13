@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Marker } from 'google-maps-react';
 
 import Table from './presentational/Table';
+import FilterField from './presentational/FilterField';
 import Card from './presentational/Card';
 import EditingColumnTitles from './presentational/EditingColumnTitles';
 import EditTableButton from './presentational/EditTableButton';
@@ -21,7 +22,9 @@ class StopsContainer extends Component {
             cardTitle: null,
             addItemNameValue: '',
             addItemRoutesValue: '',
-            editTableNameItem: ''
+            editTableNameItem: '',
+            filterByNameValue: '',
+            filterByRouteValue: ''
         }
     }
   render() {
@@ -33,9 +36,9 @@ class StopsContainer extends Component {
             <div className="substrate">
                 <h2 className="page-name">Stops</h2>
 
-                <div className="filter-wrapper">
-                  <input type="text" className="filter__input" placeholder="Filter by route" onChange={this.filterByRoute} />
-                </div>
+                <FilterField filterBy={this.filterByRoute} filterByValue={this.state.filterByRouteValue} filterPlaceholder="Filter By Route" />
+                
+                <FilterField filterBy={this.filterByName} filterByValue={this.state.filterByNameValue} filterPlaceholder="Filter By Name" />
 
                 <Table addItemNameValue={this.state.addItemNameValue} addItemRoutesValue={this.state.addItemRoutesValue} header = {stopsTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode} addItem={this.state.addStopsTableItem} isEditingMode={this.state.isEditingMode} />
 
@@ -61,7 +64,23 @@ class StopsContainer extends Component {
           break;
         }
     }
-    this.setState({stops: filteredArray});
+    this.setState({
+      stops: filteredArray,
+      filterByRouteValue: e.target.value,
+      filterByNameValue: ''
+    });
+  }
+
+  filterByName = (e) => {
+    let filteredArray = this.props.data.stops;
+    filteredArray = filteredArray.filter((stop) => {
+      return ~stop.name.toUpperCase().indexOf(e.target.value.toUpperCase());
+    });
+    this.setState({
+      stops: filteredArray,
+      filterByNameValue: e.target.value,
+      filterByRouteValue: ''
+    });
   }
 
   stopsTableTitles = () => {
