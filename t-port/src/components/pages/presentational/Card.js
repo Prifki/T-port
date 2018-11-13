@@ -14,9 +14,6 @@ class Card extends Component {
   componentDidMount() {
     this.scrollToCardRef();
   }
-  componentWillReceiveProps() {
-    this.scrollToCardRef();
-  }
 
   render() {
     const type = this.props.isCardInFavorites ? 'bookmark' : 'bookmark_border';

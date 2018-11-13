@@ -258,7 +258,6 @@ class RoutesContainer extends Component {
   }
 
   bookmark = () => {
-    console.log(this.props.favorites.length)
     if (this.props.favorites.length < 5)
       this.setState({isCardInFavorites: true});
     else
