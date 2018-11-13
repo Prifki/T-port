@@ -58,7 +58,7 @@ class Header extends Component {
 
       <LoginMenu isLogged={this.props.isLogged} userNameFieldValue={this.props.userNameFieldValue} passwordFieldValue={this.props.passwordFieldValue} isLoginMenuOpen={this.state.isLoginMenuOpen} toggleLoginMenu={this.toggleLoginMenu} authorizate={this.props.authorizate} updatePasswordFieldValue={this.props.updatePasswordFieldValue} updateUserNameFieldValue={this.props.updateUserNameFieldValue} loginFieldsClassName={this.props.loginFieldsClassName} resetLoginInputClass={this.props.resetLoginInputClass} />
 
-      <FavoritesMenu openModalCard={this.props.openModalCard} isFavoritesMenuOpen={this.state.isFavoritesMenuOpen} toggleFavoritesMenu={this.toggleFavoritesMenu} favorites={this.props.favorites} removeFromFavorites={this.props.removeFromFavorites} />
+      <FavoritesMenu openModalCard={this.props.openModalCard} isFavoritesMenuOpen={this.state.isFavoritesMenuOpen} toggleFavoritesMenu={this.toggleFavoritesMenu} favorites={this.props.favorites} removeFromFavorites={this.props.removeFromFavorites} openFavoritesMenu={this.openFavoritesMenu} />
       </>
     );
   }
@@ -146,6 +146,8 @@ class Header extends Component {
       }
     });
   }
+
+  openFavoritesMenu = () => {this.setState({isFavoritesMenuOpen: true})}
 
   toggleFavoritesMenu = () => {
     this.setState( prevState => {

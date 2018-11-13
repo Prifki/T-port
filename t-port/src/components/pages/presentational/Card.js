@@ -1,26 +1,47 @@
-import React from 'react';
+import React, { Component } from 'react';
+
 import Table from './Table';
 import BookmarkButton from './BookmarkButton';
 import CloseButton from './CloseButton';
 import GoogleMap from './GoogleMap';
 
-function Card (props) {
-    const type = props.isCardInFavorites ? 'bookmark' : 'bookmark_border';
+class Card extends Component {
+  constructor(props){
+    super(props);
+    this.cardRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.scrollToCardRef();
+  }
+  componentWillReceiveProps() {
+    this.scrollToCardRef();
+  }
+
+  render() {
+    const type = this.props.isCardInFavorites ? 'bookmark' : 'bookmark_border';
     return (
-        <div className="card">
+        <div className="card" ref={this.cardRef} >
             
-            {(props.isLogged && !props.isCardInFavorites) ? <BookmarkButton onClick={() => { props.addToFavorites(props.title); props.bookmark()}} type={type} /> : null}
+            {(this.props.isLogged && !this.props.isCardInFavorites) ? <BookmarkButton onClick={() => { this.props.addToFavorites(this.props.title); this.props.bookmark()}} type={type} /> : null}
 
-            {(props.isLogged && props.isCardInFavorites)  ? <BookmarkButton onClick={() => { props.removeFromFavoritesByCard(props.title); props.unBookmark()}} type={type} /> : null}
+            {(this.props.isLogged && this.props.isCardInFavorites)  ? <BookmarkButton onClick={() => { this.props.removeFromFavoritesByCard(this.props.title); this.props.unBookmark()}} type={type} /> : null}
 
-            <CloseButton onClick={props.closeCard} />
-            <h3 className="card__title">{props.title}</h3>
-            <Table header = {props.header} rows = {props.rows} isAdmin={false} />
-            {props.isMapNeededOnCard ? 
-            <div className="google-map--small"><GoogleMap markers={props.markers}/></div>
+            <CloseButton onClick={this.props.closeCard} />
+            <h3 className="card__title">{this.props.title}</h3>
+            <Table header = {this.props.header} rows = {this.props.rows} isAdmin={false} />
+            {this.props.isMapNeededOnCard ? 
+            <div className="google-map--small"><GoogleMap markers={this.props.markers}/></div>
             : null}
         </div>
     );
+  }
+  scrollToCardRef = () => {
+    window.scrollTo({
+        top: this.cardRef.current.offsetTop, 
+        behavior: "smooth"
+    })
+  }
 }
 
 export default Card;

@@ -246,7 +246,7 @@ class StopsContainer extends Component {
         cardTitle: cardTitle,
         isCardInFavorites: isCardInFavorites,
         markers: this.generateMarkers(location)
-      })
+      });
   }
 
   generateStopCardTableRow = (arr) => {
@@ -285,7 +285,6 @@ class StopsContainer extends Component {
   }
 
   bookmark = () => {
-    console.log(this.props.favorites.length)
     if (this.props.favorites.length < 5)
       this.setState({isCardInFavorites: true});
     else
