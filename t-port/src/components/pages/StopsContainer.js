@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Marker } from 'google-maps-react';
 
 import Table from './presentational/Table';
+import Pagination from './presentational/Pagination';
 import FilterField from './presentational/FilterField';
 import Card from './presentational/Card';
 import EditingColumnTitles from './presentational/EditingColumnTitles';
@@ -24,28 +25,53 @@ class StopsContainer extends Component {
             addItemRoutesValue: '',
             editTableNameItem: '',
             filterByNameValue: '',
-            filterByRouteValue: ''
+            filterByRouteValue: '',
+            currentPage: 1
         }
     }
   render() {
     const rows = this.generateStopTableRow(),
     stopsTableTitles = this.stopsTableTitles(),
-    cardTableTitles = this.cardTableTitles();
+    cardTableTitles = this.cardTableTitles(),
+    pagination = this.generatePagination();
     return (
-        <main>
-            <div className="substrate">
-                <h2 className="page-name">Stops</h2>
+      <main>
+          <div className="substrate">
+            <h2 className="page-name">Stops</h2>
 
-                <FilterField filterBy={this.filterByRoute} filterByValue={this.state.filterByRouteValue} filterPlaceholder="Filter By Route" />
+            {/* FILTERING */}
+            <FilterField filterBy={this.filterByRoute} filterByValue={this.state.filterByRouteValue} filterPlaceholder="Filter By Route" />
                 
-                <FilterField filterBy={this.filterByName} filterByValue={this.state.filterByNameValue} filterPlaceholder="Filter By Name" />
+            <FilterField filterBy={this.filterByName} filterByValue={this.state.filterByNameValue} filterPlaceholder="Filter By Name" />
 
-                <Table addItemNameValue={this.state.addItemNameValue} addItemRoutesValue={this.state.addItemRoutesValue} header = {stopsTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode} addItem={this.state.addStopsTableItem} isEditingMode={this.state.isEditingMode} />
+            {/* TABLE */}
+            <Table addItemNameValue={this.state.addItemNameValue} addItemRoutesValue={this.state.addItemRoutesValue} header = {stopsTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode} addItem={this.state.addStopsTableItem} isEditingMode={this.state.isEditingMode} />
 
-                {this.state.isCardShown ? <Card isLogged={this.props.isLogged} addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} markers={this.state.markers} closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} isCardInFavorites={this.state.isCardInFavorites} bookmark={this.bookmark} removeFromFavoritesByCard={this.props.removeFromFavoritesByCard} unBookmark={this.unBookmark} /> : null}
+            <Pagination pagination={pagination} />
+
+            {/* CARD */}
+            {this.state.isCardShown ? <Card isLogged={this.props.isLogged} addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} markers={this.state.markers} closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} isCardInFavorites={this.state.isCardInFavorites} bookmark={this.bookmark} removeFromFavoritesByCard={this.props.removeFromFavoritesByCard} unBookmark={this.unBookmark} /> : null}
             </div>
-        </main>
+      </main>
     );
+  }
+
+  generatePagination = () => {
+    const data = this.state.stops; 
+    let pagination=[], current = this.state.currentPage;
+    for (let i = 1; i <= Math.ceil(data.length / 10); i++) {
+      if (i === current)
+        pagination.push([i, 'pagination--active']);
+      else
+        pagination.push([i, ''])
+    }
+    return pagination.map((page,index)=>
+      <div key={index} className={page[1]} onClick={() => this.changePage(index+1)}>{index+1}</div>
+    );
+  }
+
+  changePage = (page) => {
+    this.setState({currentPage: page});
   }
 
   removeTableItem = (index) => {
@@ -67,7 +93,8 @@ class StopsContainer extends Component {
     this.setState({
       stops: filteredArray,
       filterByRouteValue: e.target.value,
-      filterByNameValue: ''
+      filterByNameValue: '',
+      currentPage: 1
     });
   }
 
@@ -79,7 +106,8 @@ class StopsContainer extends Component {
     this.setState({
       stops: filteredArray,
       filterByNameValue: e.target.value,
-      filterByRouteValue: ''
+      filterByRouteValue: '',
+      currentPage: 1
     });
   }
 
@@ -105,7 +133,8 @@ class StopsContainer extends Component {
         <EditTableButton type={rowData.isEditing} onClick={() => this.editTableItem(index)} />
         <EditTableButton type={'remove'} onClick={() => this.removeTableItem(index)} /></> : null}  
       </tr>
-    )
+    ).filter((rowData, index) => { 
+      return (index >= (this.state.currentPage-1)*10 && index < (this.state.currentPage)*10)});
   }
 
   editTableItem = (index) => {
