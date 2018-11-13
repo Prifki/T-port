@@ -6,13 +6,12 @@ import Pagination from './presentational/Pagination';
 import Card from './presentational/Card';
 import EditingColumnTitles from './presentational/EditingColumnTitles';
 import EditTableButton from './presentational/EditTableButton';
-import JSONdata from './../../data/data.json';
 
 class TransportsContainer extends Component {
   constructor(props){
     super(props);
     this.state = {
-      transport: JSONdata.transport,
+      transport: this.props.data.transport,
       isEditingMode: false,
       isCardShown: false,
       addTransportTableItem: this.createAddItemRow(),
@@ -80,7 +79,7 @@ class TransportsContainer extends Component {
   }
 
   filterByRoute = (e) => {
-    let filteredArray = JSONdata.transport.filter(transport => ~transport.route.indexOf(e.target.value.toUpperCase()));
+    let filteredArray = this.props.data.transport.filter(transport => ~transport.route.indexOf(e.target.value.toUpperCase()));
     this.setState({
       transport: filteredArray, 
       currentPage: 1,
@@ -175,7 +174,7 @@ class TransportsContainer extends Component {
   }
 
   filterByType = (type) => {
-    let arrayCopy = JSONdata.transport,
+    let arrayCopy = this.props.data.transport,
     tempBus = this.state.isFilteredByBus,
     tempTram = this.state.isFilteredByTram,
     tempTroll = this.state.isFilteredByTroll;
@@ -192,7 +191,7 @@ class TransportsContainer extends Component {
       if (tempTroll)
         arrayCopy = arrayCopy.filter(transport => !(transport.type === 'train'));
       if (tempBus && tempTram && tempTroll) {
-        arrayCopy = JSONdata.transport;
+        arrayCopy = this.props.data.transport;
         this.setState({
           transport: arrayCopy,
           isFilteredByBus: false,
@@ -266,9 +265,9 @@ class TransportsContainer extends Component {
         default:
           break;
       }
-      const TRANSPORTS = JSONdata.transport,
-      ROUTES = JSONdata.routes,
-      STOPS = JSONdata.stops;
+      const TRANSPORTS = this.props.data.transport,
+      ROUTES = this.props.data.routes,
+      STOPS = this.props.data.stops;
       let schedule, routeNum, stops, stopNames = [], cardTableData = [], isCardInFavorites = this.checkCardForFavorites(cardTitle);
       for (let transport in TRANSPORTS){
         if(Object.entries(TRANSPORTS[transport])[2][1]===number){

@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {Route, Switch} from "react-router-dom";
-import {Marker} from 'google-maps-react';
+import React, { Component } from 'react';
+import { Route, Switch } from "react-router-dom";
+import { Marker } from 'google-maps-react';
 
 import JSONdata from './../../data/data.json';
 import Header from './header/Header';
@@ -15,10 +15,10 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+          data: JSONdata,
           isLogged: true,
           isAdmin: true,
-          favorites: [{"title": "Bus B012US", "type": "directions_bus"}],
-          //favorites: [{title: "Route TL13", type: "departure_board"},{title: "Smolniy", type: "place"},{"title": "Bus B012US", "type": "directions_bus"}],
+          favorites: [{title: "Route TL13", type: "departure_board"},{title: "Smolniy", type: "place"},{"title": "Bus B012US", "type": "directions_bus"}],
           isModalCardOpen: false,
           modalCardTitle: null,
           modalCardTableTitles: null,
@@ -34,15 +34,18 @@ class App extends Component {
     render() {
         return (
             <>
-                <Header updateUserNameFieldValue={this.updateUserNameFieldValue} updatePasswordFieldValue={this.updatePasswordFieldValue} userNameFieldValue={this.state.userNameFieldValue} passwordFieldValue={this.state.passwordFieldValue} isLogged={this.state.isLogged} favorites={this.state.favorites} removeFromFavorites={this.removeFromFavorites} openModalCard={this.openModalCard} authorizate={this.authorizate} loginFieldsClassName={this.state.loginFieldsClassName} resetLoginInputClass={this.resetLoginInputClass} quit={this.quit} />
+                <Header updateUserNameFieldValue={this.updateUserNameFieldValue} updatePasswordFieldValue={this.updatePasswordFieldValue} userNameFieldValue={this.state.userNameFieldValue} passwordFieldValue={this.state.passwordFieldValue} isLogged={this.state.isLogged} favorites={this.state.favorites} removeFromFavorites={this.removeFromFavorites} openModalCard={this.openModalCard} authorizate={this.authorizate} loginFieldsClassName={this.state.loginFieldsClassName} resetLoginInputClass={this.resetLoginInputClass} quit={this.quit} data={this.state.data} />
 
                 {this.state.isModalCardOpen ? <CardModal closeModalCard={this.closeModalCard} title={this.state.modalCardTitle} header={this.state.modalCardTableTitles} rows={this.state.modalCardTableRows} modalCardMarkers={this.state.modalCardMarkers} polyline={this.state.polyline} isMapNeededOnModalCard={this.state.isMapNeededOnModalCard} /> : null}
 
                 <Switch>
-                    <Route exact path='/' render={(props) => <FindRouteContainer {...props} openModalCard={this.openModalCard} />}/>
-                    <Route path='/transports' render={(props) => <TransportsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} removeFromFavoritesByCard={this.removeFromFavoritesByCard} />}/>
-                    <Route path='/routes' render={(props) => <RoutesContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} removeFromFavoritesByCard={this.removeFromFavoritesByCard} />}/>
-                    <Route path='/stops' render={(props) => <StopsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} removeFromFavoritesByCard={this.removeFromFavoritesByCard} />}/>
+                    <Route exact path='/' render={(props) => <FindRouteContainer {...props} openModalCard={this.openModalCard} data={this.state.data} />}/>
+                    
+                    <Route path='/transports' render={(props) => <TransportsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} removeFromFavoritesByCard={this.removeFromFavoritesByCard}  data={this.state.data} />}/>
+                    
+                    <Route path='/routes' render={(props) => <RoutesContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} removeFromFavoritesByCard={this.removeFromFavoritesByCard}  data={this.state.data} />}/>
+                    
+                    <Route path='/stops' render={(props) => <StopsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} removeFromFavoritesByCard={this.removeFromFavoritesByCard} data={this.state.data} />}/>
                 </Switch>
 
                 <Footer/>
@@ -63,7 +66,7 @@ class App extends Component {
     }
 
     authorizate = () => {
-        const users = JSONdata.users;
+        const users = this.state.data.users;
         let isLogged = false;
         for (let user in users) {
             if (this.state.userNameFieldValue === users[user].name
@@ -115,30 +118,30 @@ class App extends Component {
         modalCardTableRows, modalCardTableTitles, isMapNeededOnModalCard = false, modalCardMarkers=null, polyline=null;
         switch (title.substr(0,3)) {
             case 'Bus':
-                modalCardTableRows = generateTransportModalCardTableRow();
-                modalCardTableTitles = generateTransportModalCardTableTitles();
+                modalCardTableRows = this.generateTransportModalCardTableRow(title);
+                modalCardTableTitles = this.generateTransportModalCardTableTitles();
                 break;
             case 'Tra':
-                modalCardTableRows = generateTransportModalCardTableRow();
-                modalCardTableTitles = generateTransportModalCardTableTitles();
+                modalCardTableRows = this.generateTransportModalCardTableRow(title);
+                modalCardTableTitles = this.generateTransportModalCardTableTitles();
                 break;
             case 'Tro':
-                modalCardTableRows = generateTransportModalCardTableRow();
-                modalCardTableTitles = generateTransportModalCardTableTitles();
+                modalCardTableRows = this.generateTransportModalCardTableRow(title);
+                modalCardTableTitles = this.generateTransportModalCardTableTitles();
                 break;
             case 'Rou':
-                const tempRoute = generateRouteModalCardTableRow();
+                const tempRoute = this.generateRouteModalCardTableRow(title);
                 modalCardTableRows = tempRoute[0];
-                polyline = generatePolyline(tempRoute[1]);
-                modalCardMarkers = generateRouteMarkers(tempRoute[1]);
-                modalCardTableTitles = generateRouteModalCardTableTitles();
+                polyline = this.generatePolyline(tempRoute[1]);
+                modalCardMarkers = this.generateRouteMarkers(tempRoute[1]);
+                modalCardTableTitles = this.generateRouteModalCardTableTitles();
                 isMapNeededOnModalCard = true;
                 break;
             default:
-                const tempStop = generateStopModalCardTableRow();
+                const tempStop = this.generateStopModalCardTableRow(title);
                 modalCardTableRows = tempStop[0];
-                modalCardMarkers = generateStopMarker(tempStop[1]);
-                modalCardTableTitles = generateStopModalCardTableTitles();
+                modalCardMarkers = this.generateStopMarker(tempStop[1]);
+                modalCardTableTitles = this.generateStopModalCardTableTitles();
                 isMapNeededOnModalCard = true;
                 break;
           }
@@ -151,134 +154,135 @@ class App extends Component {
             modalCardMarkers: modalCardMarkers,
             polyline: polyline
         });
+    }
 
-        function generateRouteMarkers(locations) {
-            return locations.map((loc, index) => 
-            <Marker key={index} title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />)
+    generatePolyline = (locations) => {
+        let polyline = [];
+        for (let each in locations) {
+            polyline.push({lat: parseFloat(locations[each].lat), lng: parseFloat(locations[each].long)});
         }
+        return polyline;
+    }
 
-        function generatePolyline(locations) {
-            let polyline = [];
-            for (let each in locations) {
-                polyline.push({lat: parseFloat(locations[each].lat), lng: parseFloat(locations[each].long)});
-            }
-            return polyline;
-        }
+    generateStopMarker = (loc) => {
+        return <Marker title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />
+    }
 
-        function generateStopMarker(loc) {
-            return <Marker title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />
-        }
-        function generateTransportModalCardTableRow() {
-            const number = title.split(' ')[1],
-            TRANSPORTS = JSONdata.transport,
-            ROUTES = JSONdata.routes,
-            STOPS = JSONdata.stops;
-            let schedule, routeNum, stops, stopNames = [], cardTableData = [];
-            for (let transport in TRANSPORTS){
-                if (Object.entries(TRANSPORTS[transport])[2][1]===number){
-                    schedule = TRANSPORTS[transport].time;
-                    routeNum = TRANSPORTS[transport].route;
-                    for (let route in ROUTES){
-                        if (Object.entries(ROUTES[route])[0][1]===routeNum){
-                            stops = ROUTES[route].stops;
-                        }
+    generateTransportModalCardTableRow = (title) => {
+        const number = title.split(' ')[1],
+        TRANSPORTS = this.state.data.transport,
+        ROUTES = this.state.data.routes,
+        STOPS = this.state.data.stops;
+        let schedule, routeNum, stops, stopNames = [], cardTableData = [];
+        for (let transport in TRANSPORTS){
+            if (Object.entries(TRANSPORTS[transport])[2][1]===number){
+                schedule = TRANSPORTS[transport].time;
+                routeNum = TRANSPORTS[transport].route;
+                for (let route in ROUTES){
+                    if (Object.entries(ROUTES[route])[0][1]===routeNum){
+                        stops = ROUTES[route].stops;
                     }
                 }
             }
-            for (let stop in stops){
-                for (let STOP in STOPS){
-                if (stops[stop] === STOPS[STOP].number)
-                    stopNames.push(STOPS[STOP].name);
-                }
-            }
-            for (let each in stopNames){
-                cardTableData.push({stopName: stopNames[each], time: schedule[each]});
-            }
-            return cardTableData.map( (rowData, index) => 
-                  <tr key={index}>
-                    <td>{rowData.stopName}</td>
-                    <td>{rowData.time}</td>
-                  </tr>
-                )
         }
-
-        function generateTransportModalCardTableTitles() {
-            return (<thead><tr><th>Stop</th><th>Time</th></tr></thead>)
-        }
-
-        function generateRouteModalCardTableRow() {
-            const name = title.split(' ')[1], ROUTES = JSONdata.routes, TRANSPORTS = JSONdata.transport, STOPS = JSONdata.stops;
-            let locations = [], cardData = [], stops = [];
-              for (let ROUTE in ROUTES){
-                if (name === ROUTES[ROUTE].name)
-                  stops = ROUTES[ROUTE].stops;
-              }
-              for (let STOP in STOPS){
-                for (let stop in stops){
-                  if (stops[stop] === STOPS[STOP].number){
-                    stops[stop] = STOPS[STOP].name;
-                    locations[stop] = ({lat: STOPS[STOP].lat, long: STOPS[STOP].long, name: STOPS[STOP].name});
-                  }
-                }
-              }
-              for (let i = 0; i < stops.length; i++) {
-                let times = [];
-                for (let TRANSPORT in TRANSPORTS){
-                    if (name === TRANSPORTS[TRANSPORT].route){
-                      times.push(TRANSPORTS[TRANSPORT].time[i]);
-                    }
-                }
-                cardData.push({stops: stops[i], times: times});
-              }
-              return [cardData.map( (rowData, index) => 
-              <tr key={index}>
-                <td>{rowData.stops}</td>
-                <td>{rowData.times.join(', ')}</td>   
-              </tr>),locations];
-        }
-
-        function generateRouteModalCardTableTitles() {
-            return (<thead><tr><th>Stop</th><th>Time</th></tr></thead>);
-        }
-
-        function generateStopModalCardTableRow() {
-            const ROUTES = JSONdata.routes, TRANSPORTS = JSONdata.transport, STOPS = JSONdata.stops;
-            let location, routesList=[], stopName = title;
+        for (let stop in stops){
             for (let STOP in STOPS){
-              if (stopName === STOPS[STOP].name){
-                location = {name: title, lat: parseFloat(STOPS[STOP].lat), long: parseFloat(STOPS[STOP].long)};
-                stopName = STOPS[STOP].number;
-                routesList = (STOPS[STOP].routes);
+            if (stops[stop] === STOPS[STOP].number)
+                stopNames.push(STOPS[STOP].name);
+            }
+        }
+        for (let each in stopNames){
+            cardTableData.push({stopName: stopNames[each], time: schedule[each]});
+        }
+        return cardTableData.map( (rowData, index) => 
+              <tr key={index}>
+                <td>{rowData.stopName}</td>
+                <td>{rowData.time}</td>
+              </tr>
+            )
+    }
+
+    generateTransportModalCardTableTitles = () => {
+        return (<thead><tr><th>Stop</th><th>Time</th></tr></thead>)
+    }
+
+    generateRouteModalCardTableRow = (title) => {
+        const name = title.split(' ')[1], ROUTES = this.state.data.routes, TRANSPORTS = this.state.data.transport, STOPS = this.state.data.stops;
+        let locations = [], cardData = [], stops = [];
+          for (let ROUTE in ROUTES){
+            if (name === ROUTES[ROUTE].name)
+              stops = ROUTES[ROUTE].stops;
+          }
+          for (let STOP in STOPS){
+            for (let stop in stops){
+              if (stops[stop] === STOPS[STOP].number){
+                stops[stop] = STOPS[STOP].name;
+                locations[stop] = ({lat: STOPS[STOP].lat, long: STOPS[STOP].long, name: STOPS[STOP].name});
               }
             }
-            let cardData = [];
-              for (let route in routesList){
-                for (let ROUTE in ROUTES){
-                  if (ROUTES[ROUTE].name === routesList[route]){
-                    let times = [];
-                    for (let stop in ROUTES[ROUTE].stops){
-                      if (stopName === ROUTES[ROUTE].stops[stop]){
-                        for (let TRANSPORT in TRANSPORTS){
-                          if (TRANSPORTS[TRANSPORT].route === routesList[route]){
-                            times.push(TRANSPORTS[TRANSPORT].time[stop]);
-                          }
-                        }
+          }
+          for (let i = 0; i < stops.length; i++) {
+            let times = [];
+            for (let TRANSPORT in TRANSPORTS){
+                if (name === TRANSPORTS[TRANSPORT].route){
+                  times.push(TRANSPORTS[TRANSPORT].time[i]);
+                }
+            }
+            cardData.push({stops: stops[i], times: times});
+          }
+          return [cardData.map( (rowData, index) => 
+          <tr key={index}>
+            <td>{rowData.stops}</td>
+            <td>{rowData.times.join(', ')}</td>   
+          </tr>),locations];
+    }
+
+    generateRouteModalCardTableTitles = () => {
+        return (<thead><tr><th>Stop</th><th>Time</th></tr></thead>);
+    }
+
+    generateStopModalCardTableRow = (title) => {
+        const ROUTES = this.state.data.routes, TRANSPORTS = this.state.data.transport, STOPS = this.state.data.stops;
+        let location, routesList=[], stopName = title;
+        for (let STOP in STOPS){
+          if (stopName === STOPS[STOP].name){
+            location = {name: title, lat: parseFloat(STOPS[STOP].lat), long: parseFloat(STOPS[STOP].long)};
+            stopName = STOPS[STOP].number;
+            routesList = (STOPS[STOP].routes);
+          }
+        }
+        let cardData = [];
+          for (let route in routesList){
+            for (let ROUTE in ROUTES){
+              if (ROUTES[ROUTE].name === routesList[route]){
+                let times = [];
+                for (let stop in ROUTES[ROUTE].stops){
+                  if (stopName === ROUTES[ROUTE].stops[stop]){
+                    for (let TRANSPORT in TRANSPORTS){
+                      if (TRANSPORTS[TRANSPORT].route === routesList[route]){
+                        times.push(TRANSPORTS[TRANSPORT].time[stop]);
                       }
                     }
-                    cardData.push({route: routesList[route], times: times});
                   }
                 }
+                cardData.push({route: routesList[route], times: times});
               }
-            return [cardData.map( (rowData, index) => 
-                    <tr key={index}>
-                    <td>{rowData.route}</td>
-                    <td>{rowData.times.join(', ')}</td> 
-                    </tr>),location];
-        }
+            }
+          }
+        return [cardData.map( (rowData, index) => 
+                <tr key={index}>
+                <td>{rowData.route}</td>
+                <td>{rowData.times.join(', ')}</td> 
+                </tr>),location];
+    }
 
-        function generateStopModalCardTableTitles() {
-            return (<thead><tr><th>Route</th><th>Time</th></tr></thead>);
-        }
+    generateStopModalCardTableTitles = () => {
+        return (<thead><tr><th>Route</th><th>Time</th></tr></thead>);
+    }
+
+    generateRouteMarkers = (locations) => {
+        return locations.map((loc, index) => 
+        <Marker key={index} title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />)
     }
 
     closeModalCard = () => {this.setState({isModalCardOpen: false});}

@@ -11,7 +11,6 @@ import MobileGlobalSearchButton from './presentational/MobileGlobalSearchButton'
 import LoginMenu from './presentational/LoginMenu';
 import FavoritesMenu from './presentational/FavoritesMenu';
 import MobileGlobalSearch from './presentational/MobileGlobalSearch';
-import JSONdata from './../../../data/data.json';
 
 class Header extends Component {
   constructor(props) {
@@ -66,18 +65,18 @@ class Header extends Component {
   globalAutoComplete = (e) => {
     if (e.target.value) {
       let foundEntities = [];
-      for (let stop in JSONdata.stops){
-        if (~JSONdata.stops[stop].name.toUpperCase().indexOf(e.target.value.toUpperCase()))
-          foundEntities.push({name: JSONdata.stops[stop].name, type: ''});
+      for (let stop in this.props.data.stops){
+        if (~this.props.data.stops[stop].name.toUpperCase().indexOf(e.target.value.toUpperCase()))
+          foundEntities.push({name: this.props.data.stops[stop].name, type: ''});
       }
-      for (let route in JSONdata.routes){
-        if (~JSONdata.routes[route].name.toUpperCase().indexOf(e.target.value.toUpperCase()))
-          foundEntities.push({name: JSONdata.routes[route].name, type: 'Route '});
+      for (let route in this.props.data.routes){
+        if (~this.props.data.routes[route].name.toUpperCase().indexOf(e.target.value.toUpperCase()))
+          foundEntities.push({name: this.props.data.routes[route].name, type: 'Route '});
       }
-      for (let trans in JSONdata.transport){
-        if (~JSONdata.transport[trans].number.toUpperCase().indexOf(e.target.value.toUpperCase())){
+      for (let trans in this.props.data.transport){
+        if (~this.props.data.transport[trans].number.toUpperCase().indexOf(e.target.value.toUpperCase())){
           let type;
-          switch(JSONdata.transport[trans].type) {
+          switch(this.props.data.transport[trans].type) {
             case 'directions_bus':
               type = 'Bus ';
               break;
@@ -90,7 +89,7 @@ class Header extends Component {
             default:
               break;
           }
-          foundEntities.push({name: JSONdata.transport[trans].number, type: type});
+          foundEntities.push({name: this.props.data.transport[trans].number, type: type});
         }
       }
       foundEntities = foundEntities.map( (item, index) => 

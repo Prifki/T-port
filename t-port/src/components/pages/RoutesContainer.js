@@ -3,7 +3,6 @@ import { Marker } from 'google-maps-react';
 
 import Table from './presentational/Table';
 import Card from './presentational/Card';
-import JSONdata from './../../data/data.json';
 import EditingColumnTitles from './presentational/EditingColumnTitles';
 import EditTableButton from './presentational/EditTableButton';
 import GoogleMap from './presentational/GoogleMap';
@@ -93,7 +92,7 @@ class RoutesContainer extends Component {
   }
 
   handleData = () => {
-    const stops = JSONdata.stops, routes = JSONdata.routes;
+    const stops = this.props.data.stops, routes = this.props.data.routes;
     let name = [], from = [], to = [], routesData = [];
     for (let route in routes){
         for (let stop in stops){
@@ -187,7 +186,7 @@ class RoutesContainer extends Component {
 
   showCard = (name) => {
     let locations = [], cardData = [], polyline = [];
-      const ROUTES = JSONdata.routes, TRANSPORTS = JSONdata.transport, STOPS = JSONdata.stops;
+      const ROUTES = this.props.data.routes, TRANSPORTS = this.props.data.transport, STOPS = this.props.data.stops;
       let stops = [], isCardInFavorites = this.checkCardForFavorites('Route ' + name);
       for (let ROUTE in ROUTES){
         if (name === ROUTES[ROUTE].name)

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Marker} from 'google-maps-react';
 
-import JSONdata from './../../data/data.json';
 import FindARouteMenu from './presentational/FindARouteMenu';
 import FindARouteMenuWrapped from './presentational/FindARouteMenuWrapped';
 import FoundRouteMenu from './presentational/FoundRouteMenu';
@@ -57,24 +56,24 @@ class FindRouteContainer extends Component {
   }
   findARoute = () => {
     let stopA, stopB, validA = false, validB = false;
-    for (let stop in JSONdata.stops) {
-      if (this.state.stopA === JSONdata.stops[stop].name) {
-        stopA = JSONdata.stops[stop].letter;
+    for (let stop in this.props.data.stops) {
+      if (this.state.stopA === this.props.data.stops[stop].name) {
+        stopA = this.props.data.stops[stop].letter;
         validA = true;
       }
-      if (this.state.stopB === JSONdata.stops[stop].name) {
-        stopB = JSONdata.stops[stop].letter;
+      if (this.state.stopB === this.props.data.stops[stop].name) {
+        stopB = this.props.data.stops[stop].letter;
         validB = true;
       }
     }
     if (validA && validB) {
       let foundRoute = this.dijkstra(stopA, stopB), locations = [], polyline = [];
       for (let route in foundRoute){
-        for (let each in JSONdata.stops) {
-          if (foundRoute[route][0] === JSONdata.stops[each].letter){
-            foundRoute[route][0] = JSONdata.stops[each].name;
-            locations.push({lat: JSONdata.stops[each].lat, long: JSONdata.stops[each].long, name: JSONdata.stops[each].name});
-            polyline.push({lat: parseFloat(JSONdata.stops[each].lat), lng: parseFloat(JSONdata.stops[each].long)});
+        for (let each in this.props.data.stops) {
+          if (foundRoute[route][0] === this.props.data.stops[each].letter){
+            foundRoute[route][0] = this.props.data.stops[each].name;
+            locations.push({lat: this.props.data.stops[each].lat, long: this.props.data.stops[each].long, name: this.props.data.stops[each].name});
+            polyline.push({lat: parseFloat(this.props.data.stops[each].lat), lng: parseFloat(this.props.data.stops[each].long)});
           }
         }
       }
@@ -109,9 +108,9 @@ class FindRouteContainer extends Component {
   stopAAutoComplete = (e) => {
     if (e.target.value) {
       let foundEntities = [];
-      for (let stop in JSONdata.stops){
-        if (~JSONdata.stops[stop].name.toUpperCase().indexOf(e.target.value.toUpperCase()))
-          foundEntities.push(JSONdata.stops[stop].name);
+      for (let stop in this.props.data.stops){
+        if (~this.props.data.stops[stop].name.toUpperCase().indexOf(e.target.value.toUpperCase()))
+          foundEntities.push(this.props.data.stops[stop].name);
       }
       foundEntities = foundEntities.map( (item, index) => 
         <option key={index}>{item}</option>
@@ -127,9 +126,9 @@ class FindRouteContainer extends Component {
   stopBAutoComplete = (e) => {
     if (e.target.value) {
       let foundEntities = [];
-      for (let stop in JSONdata.stops){
-        if (~JSONdata.stops[stop].name.toUpperCase().indexOf(e.target.value.toUpperCase()))
-          foundEntities.push(JSONdata.stops[stop].name);
+      for (let stop in this.props.data.stops){
+        if (~this.props.data.stops[stop].name.toUpperCase().indexOf(e.target.value.toUpperCase()))
+          foundEntities.push(this.props.data.stops[stop].name);
       }
       foundEntities = foundEntities.map( (item, index) => 
         <option key={index}>{item}</option>

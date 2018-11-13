@@ -5,13 +5,12 @@ import Table from './presentational/Table';
 import Card from './presentational/Card';
 import EditingColumnTitles from './presentational/EditingColumnTitles';
 import EditTableButton from './presentational/EditTableButton';
-import JSONdata from './../../data/data.json';
 
 class StopsContainer extends Component {
     constructor(props){
         super(props);
         this.state = {
-            stops: JSONdata.stops,
+            stops: this.props.data.stops,
             isCardShown: false,
             isCardInFavorites: false,
             isEditingMode: false,
@@ -55,10 +54,10 @@ class StopsContainer extends Component {
 
   filterByRoute = (e) => {
     let filteredArray = [];
-    for (let stop in JSONdata.stops) {
-      for (let route in JSONdata.stops[stop].routes)
-        if (~JSONdata.stops[stop].routes[route].indexOf(e.target.value.toUpperCase())){
-          filteredArray.push(JSONdata.stops[stop]);
+    for (let stop in this.props.data.stops) {
+      for (let route in this.props.data.stops[stop].routes)
+        if (~this.props.data.stops[stop].routes[route].indexOf(e.target.value.toUpperCase())){
+          filteredArray.push(this.props.data.stops[stop]);
           break;
         }
     }
@@ -163,7 +162,7 @@ class StopsContainer extends Component {
   }
 
   showCard = (stopName,routesList) => {
-    const ROUTES = JSONdata.routes, TRANSPORTS = JSONdata.transport, STOPS = JSONdata.stops;
+    const ROUTES = this.props.data.routes, TRANSPORTS = this.props.data.transport, STOPS = this.props.data.stops;
     let cardTitle = stopName, location, isCardInFavorites = this.checkCardForFavorites(stopName);
     for (let STOP in STOPS){
       if (stopName === STOPS[STOP].name){
