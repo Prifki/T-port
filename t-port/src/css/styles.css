@@ -1132,6 +1132,39 @@ main {
   cursor: pointer;
 }
 
+.add-transport-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px;
+}
+.add-transport-buttons input[type=checkbox],
+.add-transport-buttons input[type=radio] {
+  display: none;
+}
+.add-transport-buttons input[type=checkbox] + label:hover {
+  background: #bfbfbf;
+}
+.add-transport-buttons input[type=checkbox]:checked + label {
+  background: #999999;
+}
+.add-transport-buttons input[type=checkbox]:checked + label:hover {
+  background: #a6a6a6;
+}
+
+.add-transport-buttons__item {
+  padding: 5px 7px;
+  margin: 0 2px;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  cursor: pointer;
+  background: #ccc;
+  border-radius: 5px;
+}
+.add-transport-buttons__item i {
+  font-size: 20px;
+}
+
 ::-webkit-scrollbar {
   width: 12px;
 }

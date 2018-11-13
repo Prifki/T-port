@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import FilterByType from './presentational/FilterByType';
+import AddTransportTypeButtons from './presentational/AddTransportTypeButtons';
 import FilterField from './presentational/FilterField';
 import Table from './presentational/Table';
 import Pagination from './presentational/Pagination';
@@ -15,18 +16,25 @@ class TransportsContainer extends Component {
       transport: this.props.data.transport,
       isEditingMode: false,
       isCardShown: false,
-      addTransportTableItem: this.createAddItemRow(),
+
       isFilteredByBus: false,
       isFilteredByTram: false,
       isFilteredByTroll: false,
+
+      isAddBusChecked: false,
+      isAddTrainChecked: false,
+      isAddTramChecked: false,
+      checkedType: '',
+
       filterByRouteValue: '',
       isMapNeededOnCard: false,
       isCardInFavorites: false,
       isSortedAscending: false,
-      addItemTypeValue: '',
+
       addItemNumberValue: '',
       addItemRouteValue: '',
       addItemSeatsValue: '',
+
       editTableRouteItem: '',
       editTableSeatsItem: '',
       editTableNumberItem: '',
@@ -37,7 +45,8 @@ class TransportsContainer extends Component {
     const rows = this.generateTransportTableRow(),
     transportTableTitles = this.transportTableTitles(),
     cardTableTitles = this.cardTableTitles(),
-    pagination = this.generatePagination();
+    pagination = this.generatePagination(),
+    addTransportTableItem =  this.createAddItemRow();
     return (
         <main>
             <div className="substrate">
@@ -49,7 +58,7 @@ class TransportsContainer extends Component {
                 <FilterField filterBy={this.filterByRoute} filterByValue={this.state.filterByRouteValue} filterPlaceholder="Filter By Route" />
 
                 {/* TABLE */}
-                <Table addItemTypeValue={this.state.addItemTypeValue} addItemNumberValue={this.state.addItemNumberValue} addItemRouteValue={this.state.addItemRouteValue} addItemSeatsValue={this.state.addItemSeatsValue} header = {transportTableTitles} rows = {rows} isAdmin={this.props.isAdmin} addItem={this.state.addTransportTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} addTableItem={this.addTableItem} />
+                <Table addItemNumberValue={this.state.addItemNumberValue} addItemRouteValue={this.state.addItemRouteValue} addItemSeatsValue={this.state.addItemSeatsValue} header = {transportTableTitles} rows = {rows} isAdmin={this.props.isAdmin} addItem={addTransportTableItem} isEditingMode={this.state.isEditingMode} toggleEditingMode={this.toggleEditingMode} addTableItem={this.addTableItem} />
 
                 <Pagination pagination={pagination} />
 
@@ -222,10 +231,32 @@ class TransportsContainer extends Component {
     })
   }
 
+  checkAddTransportButton = (type) => {
+    let isBusChecked = false, isTramChecked = false, isTrollChecked = false, checkedType;
+    if (type === 'directions_bus'){
+      checkedType = 'directions_bus'
+      isBusChecked = true;
+    }
+    if (type === 'tram') {
+      checkedType = 'tram'
+      isTramChecked = true;
+    }
+    if (type === 'train') {
+      checkedType = 'train'
+      isTrollChecked = true;
+    }
+    this.setState({
+      isAddBusChecked: isBusChecked,
+      isAddTramChecked: isTramChecked,
+      isAddTrollChecked: isTrollChecked,
+      checkedType: checkedType
+    });
+  }
+
   createAddItemRow = () => {
     return(
       <tr>
-        <td><input type="text" className="table-edit-input" placeholder="Type" name="type" value={this.props.addItemTypeValue} onChange={this.updateAddItemTypeValue} /></td>
+        <td><AddTransportTypeButtons checkAddTransportButton={this.checkAddTransportButton} isAddBusChecked={this.state.isAddBusChecked} isAddTramChecked={this.state.isAddTramChecked} isAddTrollChecked={this.state.isAddTrollChecked} /></td>
         <td><input type="text" className="table-edit-input" placeholder="Number" name="number" value={this.props.addItemNumberValue} onChange={this.updateAddItemNumberValue} /></td>
         <td><input type="text" className="table-edit-input" placeholder="Route" name="route" value={this.props.addItemRoutesValue} onChange={this.updateAddItemRouteValue} /></td>
         <td><input type="text" className="table-edit-input" placeholder="Seats" name="seats" value={this.props.addItemSeatsValue} onChange={this.updateAddItemSeatsValue} /></td>
@@ -237,13 +268,10 @@ class TransportsContainer extends Component {
 
   addTableItem = () => {
     let transportArrayCopy = this.state.transport;
-    transportArrayCopy.push({id: transportArrayCopy.length, type: this.state.addItemTypeValue, number: this.state.addItemNumberValue, seats: this.state.addItemSeatsValue, route: this.state.addItemRouteValue, time: ["00:00","00:00","00:00"], isEditing: 'edit'});
+    transportArrayCopy.push({id: transportArrayCopy.length, type: <i className="material-icons">{this.state.checkedType}</i>, number: this.state.addItemNumberValue, seats: this.state.addItemSeatsValue, route: this.state.addItemRouteValue, time: ["00:00","00:00","00:00"], isEditing: 'edit'});
     this.setState({transport: transportArrayCopy, currentPage: Math.ceil(transportArrayCopy.length / 10)});
   }
 
-  updateAddItemTypeValue = (e) => {
-    this.setState({addItemTypeValue: e.target.value});
-  }
   updateAddItemNumberValue = (e) => {
     this.setState({addItemNumberValue: e.target.value});
   }
