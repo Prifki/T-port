@@ -36,7 +36,7 @@ class Header extends Component {
           <h1 className="header__title"><a href="/">T-port</a></h1>
         </div>
         <div className="navigation-bar">
-          <NavBar />
+          <NavBar onClick={this.closeAllWindows} />
         </div>
         <div className="header-buttons">
           {this.props.isLogged ? <FavoritesButton onClick={this.toggleFavoritesMenu} /> : null}
@@ -51,15 +51,27 @@ class Header extends Component {
       </header>
 
       <MobileGlobalSearch isGlobalAutoCompleteShown={this.state.isGlobalAutoCompleteShown} isMobileGlobalSearchOpen={this.state.isMobileGlobalSearchOpen} toggleMobileGlobalSearch={this.toggleMobileGlobalSearch} globalAutoComplete={this.globalAutoComplete} globalAutoCompleteItems={this.state.globalAutoCompleteItems} chooseFromAutoComplete={this.chooseFromAutoComplete}/>
+
       <div className={burgerNavBarClassName}>
-      
-      <NavBar /></div>
+        <NavBar onClick={this.closeAllWindows} />
+      </div>
 
       <LoginMenu isLogged={this.props.isLogged} userNameFieldValue={this.props.userNameFieldValue} passwordFieldValue={this.props.passwordFieldValue} isLoginMenuOpen={this.state.isLoginMenuOpen} toggleLoginMenu={this.toggleLoginMenu} authorizate={this.props.authorizate} updatePasswordFieldValue={this.props.updatePasswordFieldValue} updateUserNameFieldValue={this.props.updateUserNameFieldValue} loginFieldsClassName={this.props.loginFieldsClassName} resetLoginInputClass={this.props.resetLoginInputClass} />
 
       <FavoritesMenu openModalCard={this.props.openModalCard} isFavoritesMenuOpen={this.state.isFavoritesMenuOpen} toggleFavoritesMenu={this.toggleFavoritesMenu} favorites={this.props.favorites} removeFromFavorites={this.props.removeFromFavorites} />
       </>
     );
+  }
+
+  closeAllWindows = () => {
+    this.setState({
+      isLoginMenuOpen: false,
+      isFavoritesMenuOpen: false,
+      isBurgerNavBarOpen: false,
+      isMobileGlobalSearchOpen: false,
+      isBurgerButtonActive: false,
+      isGlobalAutoCompleteShown: false
+    });
   }
 
   globalAutoComplete = (e) => {
