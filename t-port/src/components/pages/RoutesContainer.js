@@ -18,6 +18,7 @@ class RoutesContainer extends Component {
             addRoutesTableItem: this.createAddItemRow(),
             isSortedAscending: false,
             isMapNeededOnCard: false,
+            isCardInFavorites: false,
             markers: null,
             polyline: null,
             cardTableRows: null,
@@ -43,7 +44,7 @@ class RoutesContainer extends Component {
                 
                 <GoogleMap markers={this.state.markers} polyline={this.state.polyline} /></div>
 
-                {this.state.isCardShown ? <Card isLogged={this.props.isLogged} addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} closeCard={this.closeCard} header={this.state.cardTableTitles} rows={this.state.cardTableRows} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} /> : null}
+                {this.state.isCardShown ? <Card isLogged={this.props.isLogged} addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} closeCard={this.closeCard} header={this.state.cardTableTitles} rows={this.state.cardTableRows} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} isCardInFavorites={this.state.isCardInFavorites} bookmark={this.bookmark} removeFromFavoritesByCard={this.props.removeFromFavoritesByCard} unBookmark={this.unBookmark} /> : null}
             </div>
         </main>
     );
@@ -187,7 +188,7 @@ class RoutesContainer extends Component {
   showCard = (name) => {
     let locations = [], cardData = [], polyline = [];
       const ROUTES = JSONdata.routes, TRANSPORTS = JSONdata.transport, STOPS = JSONdata.stops;
-      let stops = [];
+      let stops = [], isCardInFavorites = this.checkCardForFavorites('Route ' + name);
       for (let ROUTE in ROUTES){
         if (name === ROUTES[ROUTE].name)
           stops = ROUTES[ROUTE].stops;
@@ -215,6 +216,7 @@ class RoutesContainer extends Component {
       cardTableRows: this.generateRoutesCardTableRow(cardData),
       cardTableTitles: this.cardTableTitles(),
       cardTitle: 'Route ' + name,
+      isCardInFavorites: isCardInFavorites,
       markers: this.generateMarkers(locations),
       polyline: polyline
     })
@@ -244,6 +246,27 @@ class RoutesContainer extends Component {
     this.setState({ 
       isCardShown: false
     });
+  }
+
+  checkCardForFavorites = (cardTitle) => {
+    for (let each in this.props.favorites) {
+      if (this.props.favorites[each].title === cardTitle) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bookmark = () => {
+    console.log(this.props.favorites.length)
+    if (this.props.favorites.length < 5)
+      this.setState({isCardInFavorites: true});
+    else
+      this.setState({isCardInFavorites: false});
+  }
+
+  unBookmark = () => {
+    this.setState({isCardInFavorites: false});
   }
 
   generateMarkers = (locations) => {

@@ -17,7 +17,8 @@ class App extends Component {
         this.state = {
           isLogged: true,
           isAdmin: true,
-          favorites: [{title: "Route TL13", type: "departure_board"},{title: "Smolniy", type: "place"},{"title": "Bus B012US", "type": "directions_bus"}],
+          favorites: [{"title": "Bus B012US", "type": "directions_bus"}],
+          //favorites: [{title: "Route TL13", type: "departure_board"},{title: "Smolniy", type: "place"},{"title": "Bus B012US", "type": "directions_bus"}],
           isModalCardOpen: false,
           modalCardTitle: null,
           modalCardTableTitles: null,
@@ -39,9 +40,9 @@ class App extends Component {
 
                 <Switch>
                     <Route exact path='/' render={(props) => <FindRouteContainer {...props} openModalCard={this.openModalCard} />}/>
-                    <Route path='/transports' render={(props) => <TransportsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} />}/>
-                    <Route path='/routes' render={(props) => <RoutesContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} />}/>
-                    <Route path='/stops' render={(props) => <StopsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} />}/>
+                    <Route path='/transports' render={(props) => <TransportsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} removeFromFavoritesByCard={this.removeFromFavoritesByCard} />}/>
+                    <Route path='/routes' render={(props) => <RoutesContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} removeFromFavoritesByCard={this.removeFromFavoritesByCard} />}/>
+                    <Route path='/stops' render={(props) => <StopsContainer {...props} isAdmin={this.state.isAdmin} addToFavorites={this.addToFavorites} favorites={this.state.favorites} isLogged={this.state.isLogged} removeFromFavoritesByCard={this.removeFromFavoritesByCard} />}/>
                 </Switch>
 
                 <Footer/>
@@ -94,6 +95,15 @@ class App extends Component {
     removeFromFavorites = index => {
         const newFavorites = this.state.favorites.filter((favorite, i) => { 
             return i !== index;
+        });
+        this.setState({
+            favorites: newFavorites
+        });
+    }
+
+    removeFromFavoritesByCard = title => {
+        const newFavorites = this.state.favorites.filter((favorite) => { 
+            return favorite.title !== title;
         });
         this.setState({
             favorites: newFavorites

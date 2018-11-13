@@ -13,6 +13,7 @@ class StopsContainer extends Component {
         this.state = {
             stops: JSONdata.stops,
             isCardShown: false,
+            isCardInFavorites: false,
             isEditingMode: false,
             isSortedAscending: false,
             addStopsTableItem: this.createAddItemRow(),
@@ -39,7 +40,7 @@ class StopsContainer extends Component {
 
                 <Table addItemNameValue={this.state.addItemNameValue} addItemRoutesValue={this.state.addItemRoutesValue} header = {stopsTableTitles} rows = {rows} isAdmin={this.props.isAdmin} toggleEditingMode={this.toggleEditingMode} addItem={this.state.addStopsTableItem} isEditingMode={this.state.isEditingMode} />
 
-                {this.state.isCardShown ? <Card isLogged={this.props.isLogged} addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} markers={this.state.markers} closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} /> : null}
+                {this.state.isCardShown ? <Card isLogged={this.props.isLogged} addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} markers={this.state.markers} closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} isCardInFavorites={this.state.isCardInFavorites} bookmark={this.bookmark} removeFromFavoritesByCard={this.props.removeFromFavoritesByCard} unBookmark={this.unBookmark} /> : null}
             </div>
         </main>
     );
@@ -163,7 +164,7 @@ class StopsContainer extends Component {
 
   showCard = (stopName,routesList) => {
     const ROUTES = JSONdata.routes, TRANSPORTS = JSONdata.transport, STOPS = JSONdata.stops;
-    let cardTitle = stopName, location;
+    let cardTitle = stopName, location, isCardInFavorites = this.checkCardForFavorites(stopName);
     for (let STOP in STOPS){
       if (stopName === STOPS[STOP].name){
 				location = {name: stopName, lat: parseFloat(STOPS[STOP].lat), long: parseFloat(STOPS[STOP].long)};
@@ -195,6 +196,7 @@ class StopsContainer extends Component {
         isCardShown: true,
         cardTableRows: this.generateStopCardTableRow(cardData),
         cardTitle: cardTitle,
+        isCardInFavorites: isCardInFavorites,
         markers: this.generateMarkers(location)
       })
   }
@@ -224,6 +226,28 @@ class StopsContainer extends Component {
       isCardShown: false
     });
   }
+
+  checkCardForFavorites = (cardTitle) => {
+    for (let each in this.props.favorites) {
+      if (this.props.favorites[each].title === cardTitle) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bookmark = () => {
+    console.log(this.props.favorites.length)
+    if (this.props.favorites.length < 5)
+      this.setState({isCardInFavorites: true});
+    else
+      this.setState({isCardInFavorites: false});
+  }
+
+  unBookmark = () => {
+    this.setState({isCardInFavorites: false});
+  }
+
   generateMarkers = (loc) => {
     try{
       return <Marker title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />

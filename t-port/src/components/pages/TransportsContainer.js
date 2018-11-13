@@ -20,6 +20,7 @@ class TransportsContainer extends Component {
       isFilteredByTram: false,
       isFilteredByTroll: false,
       isMapNeededOnCard: false,
+      isCardInFavorites: false,
       isSortedAscending: false,
       addItemTypeValue: '',
       addItemNumberValue: '',
@@ -54,7 +55,7 @@ class TransportsContainer extends Component {
                 <Pagination pagination={pagination} />
 
                 {/* CARD */}
-                {this.state.isCardShown ? <Card isLogged={this.props.isLogged} addToFavorites={this.props.addToFavorites} favorites={this.props.favorites} closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard}/>: null}
+                {this.state.isCardShown ? <Card isLogged={this.props.isLogged} addToFavorites={this.props.addToFavorites} closeCard={this.closeCard} header={cardTableTitles} rows={this.state.cardTableRows} title={this.state.cardTitle} isMapNeededOnCard={this.state.isMapNeededOnCard} isCardInFavorites={this.state.isCardInFavorites} bookmark={this.bookmark} removeFromFavoritesByCard={this.props.removeFromFavoritesByCard} unBookmark={this.unBookmark} />: null}
             </div>
         </main>
     );
@@ -251,7 +252,7 @@ class TransportsContainer extends Component {
       const TRANSPORTS = JSONdata.transport,
       ROUTES = JSONdata.routes,
       STOPS = JSONdata.stops;
-      let schedule, routeNum, stops, stopNames = [], cardTableData = [];
+      let schedule, routeNum, stops, stopNames = [], cardTableData = [], isCardInFavorites = this.checkCardForFavorites(cardTitle);
       for (let transport in TRANSPORTS){
         if(Object.entries(TRANSPORTS[transport])[2][1]===number){
           schedule = TRANSPORTS[transport].time;
@@ -275,7 +276,8 @@ class TransportsContainer extends Component {
 		  this.setState({ 
         cardTableRows: this.generateTransportCardTableRow(cardTableData),
         isCardShown: true,
-        cardTitle: cardTitle
+        cardTitle: cardTitle,
+        isCardInFavorites: isCardInFavorites
       });
   }
 
@@ -283,6 +285,27 @@ class TransportsContainer extends Component {
     this.setState({ 
       isCardShown: false
     });
+  }
+
+  checkCardForFavorites = (cardTitle) => {
+    for (let each in this.props.favorites) {
+      if (this.props.favorites[each].title === cardTitle) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bookmark = () => {
+    console.log(this.props.favorites.length)
+    if (this.props.favorites.length < 5)
+      this.setState({isCardInFavorites: true});
+    else
+      this.setState({isCardInFavorites: false});
+  }
+
+  unBookmark = () => {
+    this.setState({isCardInFavorites: false});
   }
 
   generateTransportCardTableRow = (arr) => {
