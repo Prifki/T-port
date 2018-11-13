@@ -65,10 +65,11 @@ class StopsContainer extends Component {
   }
 
   stopsTableTitles = () => {
+      const arrow = this.state.isSortedAscending ? 'arrow_drop_up' : 'arrow_drop_down';
       return (
         <thead>
         <tr>
-          <th onClick={() => this.sortBy('name')} className="table__column-title" >Name</th>
+          <th onClick={() => this.sortBy('name')} className="table__column-title--sortable" >Name <i className="material-icons">{arrow}</i></th>
           <th>Routes</th>
           {(this.state.isEditingMode && this.props.isAdmin) ? <EditingColumnTitles /> : null}
         </tr>

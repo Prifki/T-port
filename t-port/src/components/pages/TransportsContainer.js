@@ -90,13 +90,14 @@ class TransportsContainer extends Component {
   }
 
   transportTableTitles = () => {
+    const arrow = this.state.isSortedAscending ? 'arrow_drop_up' : 'arrow_drop_down';
     return (
       <thead>
         <tr>
           <th>Type</th>
           <th>Number</th>
           <th>Route</th>
-          <th onClick={() => this.sortBy('seats')} className="table__column-title" >Seats</th>
+          <th onClick={() => this.sortBy('seats')} className="table__column-title--sortable" >Seats <i className="material-icons">{arrow}</i></th>
           {(this.state.isEditingMode && this.props.isAdmin) ? <EditingColumnTitles /> : null}
         </tr>
       </thead>

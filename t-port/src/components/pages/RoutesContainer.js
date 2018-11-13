@@ -15,7 +15,7 @@ class RoutesContainer extends Component {
             isEditingMode: false,
             tableData: this.handleData(),
             addRoutesTableItem: this.createAddItemRow(),
-            isSortedAscending: false,
+            isSortedAscending: true,
             isMapNeededOnCard: false,
             isCardInFavorites: false,
             markers: null,
@@ -111,12 +111,13 @@ class RoutesContainer extends Component {
     return routesData;
   }
   routesTableTitles = () => {
+    const arrow = this.state.isSortedAscending ? 'arrow_drop_up' : 'arrow_drop_down';
     return (
         <thead>
           <tr>
-            <th onClick={() => this.sortBy('name')} >Route name</th>
-            <th onClick={() => this.sortBy('from')} >From</th>
-            <th onClick={() => this.sortBy('to')} >To</th>
+            <th onClick={() => this.sortBy('name')} className="table__column-title--sortable" >Route name <i className="material-icons">{arrow}</i></th>
+            <th>From</th>
+            <th>To</th>
             {(this.state.isEditingMode && this.props.isAdmin) ? <EditingColumnTitles /> : null}
           </tr>
         </thead>
