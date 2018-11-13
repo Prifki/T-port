@@ -185,13 +185,24 @@ class TransportsContainer extends Component {
         arrayCopy = arrayCopy.filter(transport => !(transport.type === 'tram'));
       if (tempTroll)
         arrayCopy = arrayCopy.filter(transport => !(transport.type === 'train'));
-      this.setState({
-        transport: arrayCopy,
-        isFilteredByBus: tempBus,
-        isFilteredByTram: tempTram,
-        isFilteredByTroll: tempTroll,
-        currentPage: 1
-      });
+      if (tempBus && tempTram && tempTroll) {
+        arrayCopy = JSONdata.transport;
+        this.setState({
+          transport: arrayCopy,
+          isFilteredByBus: false,
+          isFilteredByTram: false,
+          isFilteredByTroll: false,
+          currentPage: 1
+        });
+      }
+      else 
+        this.setState({
+          transport: arrayCopy,
+          isFilteredByBus: tempBus,
+          isFilteredByTram: tempTram,
+          isFilteredByTroll: tempTroll,
+          currentPage: 1
+        });
   }
 
   toggleEditingMode = () => {
