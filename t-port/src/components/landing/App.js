@@ -17,7 +17,7 @@ class App extends Component {
         this.state = {
           isLogged: true,
           isAdmin: true,
-          favorites: [{title: "Route TL13", type: "departure_board"},{title: "Route AB01", type: "departure_board"},{title: "Smolniy", type: "place"},{"title": "Bus B012US", "type": "directions_bus"}],
+          favorites: [{title: "Route TL13", type: "departure_board"},{title: "Smolniy", type: "place"},{"title": "Bus B012US", "type": "directions_bus"}],
           isModalCardOpen: false,
           modalCardTitle: null,
           modalCardTableTitles: null,
@@ -274,7 +274,14 @@ class App extends Component {
     closeModalCard = () => {this.setState({isModalCardOpen: false});}
 
     addToFavorites = (title) => {
-        let type;
+        const newFavorites = this.state.favorites;
+        let type, isUnique = true;
+
+        for (let each in newFavorites) {
+            if (title === newFavorites[each].title) {
+                isUnique = false;
+            }
+        }
         switch (title.substr(0,3)) {
             case 'Bus':
                 type = 'directions_bus';
@@ -292,8 +299,8 @@ class App extends Component {
                 type = 'place';
                 break;
           }
-        const newFavorites = this.state.favorites;
-        newFavorites.push({type: type, title: title})
+        if (isUnique && newFavorites.length < 5)
+            newFavorites.push({type: type, title: title});
         this.setState({
             favorites: newFavorites
         });
