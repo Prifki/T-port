@@ -266,7 +266,8 @@ class FindRouteContainer extends Component {
         var table = { [start]: { vertex: start, cost: 0 } };
       
         var vertex;
-        while (vertex = frontier.shift()) {
+        while (frontier.length) {
+          vertex = frontier.shift()
           // Explore unvisited neighbors
           var neighbors = map[vertex].filter(n => !visited.includes(n.vertex));
       
