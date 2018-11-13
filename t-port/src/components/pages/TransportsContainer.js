@@ -81,7 +81,13 @@ class TransportsContainer extends Component {
 
   filterByRoute = (e) => {
     let filteredArray = JSONdata.transport.filter(transport => ~transport.route.indexOf(e.target.value.toUpperCase()));
-    this.setState({transport: filteredArray, currentPage: 1});
+    this.setState({
+      transport: filteredArray, 
+      currentPage: 1,
+      isFilteredByBus: false,
+      isFilteredByTram: false,
+      isFilteredByTroll: false
+    });
   }
 
   transportTableTitles = () => {
