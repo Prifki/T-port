@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import Table from './Table';
-import BookmarkButton from './BookmarkButton';
 import CloseButton from './CloseButton';
 import GoogleMap from './GoogleMap';
 

@@ -302,7 +302,7 @@ class TransportsContainer extends Component {
       STOPS = this.props.data.stops;
       let schedule, routeNum, stops, stopNames = [], cardTableData = [], isCardInFavorites = this.checkCardForFavorites(cardTitle);
       for (let transport in TRANSPORTS){
-        if(Object.entries(TRANSPORTS[transport])[2][1]===number){
+        if(Object.entries(TRANSPORTS[transport])[1][1]===number){
           schedule = TRANSPORTS[transport].time;
           routeNum = TRANSPORTS[transport].route;
           for (let route in ROUTES){
