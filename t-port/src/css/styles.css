@@ -369,6 +369,13 @@ table th {
   vertical-align: middle;
 }
 
+.highlited {
+  background: #fd9395 !important;
+}
+.highlited .table__link:hover {
+  color: #000;
+}
+
 .table__column-title--sortable:hover {
   background: #1c2638;
   cursor: pointer;

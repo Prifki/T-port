@@ -126,8 +126,8 @@ class StopsContainer extends Component {
 
   generateStopTableRow = () => {
     return this.state.stops.map( (rowData, index) => 
-      <tr key={index}>
-        <td className="table__link" onClick={() => this.showCard(rowData.name, rowData.routes)}>{rowData.name}</td>
+      <tr key={index} className={rowData.isHighlited}>
+        <td className="table__link" onClick={() => this.showCard(rowData.name, rowData.routes, index)}>{rowData.name}</td>
         <td>{rowData.routes.join(', ')}</td> 
         {(this.state.isEditingMode && this.props.isAdmin) ? 
           <td className="table-editor-buttons__td">
@@ -211,7 +211,7 @@ class StopsContainer extends Component {
     this.setState({addItemRoutesValue: e.target.value});
   }
 
-  showCard = (stopName,routesList) => {
+  showCard = (stopName, routesList, index) => {
     const ROUTES = this.props.data.routes, TRANSPORTS = this.props.data.transport, STOPS = this.props.data.stops;
     let cardTitle = stopName, location, isCardInFavorites = this.checkCardForFavorites(stopName);
     for (let STOP in STOPS){
@@ -221,33 +221,39 @@ class StopsContainer extends Component {
       }
     }
     let cardData = [];
-      for (let route in routesList){
-        for (let ROUTE in ROUTES){
-          if (ROUTES[ROUTE].name === routesList[route]){
-            let times = [];
-            for (let stop in ROUTES[ROUTE].stops){
-              if (stopName === ROUTES[ROUTE].stops[stop]){
-                for (let TRANSPORT in TRANSPORTS){
-                  if (TRANSPORTS[TRANSPORT].route === routesList[route]){
-                    times.push(TRANSPORTS[TRANSPORT].time[stop]);
-                  }
+    for (let route in routesList){
+      for (let ROUTE in ROUTES){
+        if (ROUTES[ROUTE].name === routesList[route]){
+          let times = [];
+          for (let stop in ROUTES[ROUTE].stops){
+            if (stopName === ROUTES[ROUTE].stops[stop]){
+              for (let TRANSPORT in TRANSPORTS){
+                if (TRANSPORTS[TRANSPORT].route === routesList[route]){
+                  times.push(TRANSPORTS[TRANSPORT].time[stop]);
                 }
               }
             }
-            cardData.push({route: routesList[route], times: times});
           }
+          cardData.push({route: routesList[route], times: times});
         }
       }
-      for (let each in cardData){
-        cardData[each].id = each;
-      }
-      this.setState({
-        isCardShown: true,
-        cardTableRows: this.generateStopCardTableRow(cardData),
-        cardTitle: cardTitle,
-        isCardInFavorites: isCardInFavorites,
-        markers: this.generateMarkers(location)
-      });
+    }
+    for (let each in cardData){
+      cardData[each].id = each;
+    }
+    let newArray = this.state.stops;
+    for (let each in newArray) {
+      newArray[each].isHighlited = '';
+    }
+    newArray[index].isHighlited = 'highlited';
+    this.setState({
+      stops: newArray,
+      isCardShown: true,
+      cardTableRows: this.generateStopCardTableRow(cardData),
+      cardTitle: cardTitle,
+      isCardInFavorites: isCardInFavorites,
+      markers: this.generateMarkers(location)
+    });
   }
 
   generateStopCardTableRow = (arr) => {
@@ -271,7 +277,12 @@ class StopsContainer extends Component {
   }
 
   closeCard = () => {
+    let newArray = this.state.stops;
+    for (let each in newArray) {
+      newArray[each].isHighlited = '';
+    }
     this.setState({ 
+      stops: newArray,
       isCardShown: false
     });
   }

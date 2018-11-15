@@ -116,9 +116,9 @@ class TransportsContainer extends Component {
 
   generateTransportTableRow = () => {
     return this.state.transport.map( (rowData, index) => 
-      <tr key={index}>
+      <tr key={index} className={rowData.isHighlited}>
         <td><i className="pictorams">{rowData.type}</i></td>
-        <td className="table__link" onClick={() => this.showCard(rowData.number, rowData.type)}>{rowData.number}</td>
+        <td className="table__link" onClick={() => this.showCard(rowData.number, rowData.type, index)}>{rowData.number}</td>
         <td>{rowData.route}</td>
         <td>{rowData.seats}</td>
         {(this.state.isEditingMode && this.props.isAdmin) ? 
@@ -282,7 +282,7 @@ class TransportsContainer extends Component {
     this.setState({addItemSeatsValue: e.target.value});
   }
 
-  showCard = (number, type) => {
+  showCard = (number, type, index) => {
       let cardTitle;
       switch(type) {
         case 'directions_bus':
@@ -321,7 +321,13 @@ class TransportsContainer extends Component {
       for (let each in stopNames){
         cardTableData.push({id: each, stopName: stopNames[each], time: schedule[each]});
       }
+      let newArray = this.state.transport;
+      for (let each in newArray) {
+        newArray[each].isHighlited = '';
+      }
+      newArray[index].isHighlited = 'highlited';
 		  this.setState({ 
+        transport: newArray,
         cardTableRows: this.generateTransportCardTableRow(cardTableData),
         isCardShown: true,
         cardTitle: cardTitle,
@@ -330,7 +336,12 @@ class TransportsContainer extends Component {
   }
 
   closeCard = () => {
+    let newArray = this.state.transport;
+    for (let each in newArray) {
+      newArray[each].isHighlited = '';
+    }
     this.setState({ 
+      transport: newArray,
       isCardShown: false
     });
   }

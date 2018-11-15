@@ -58,8 +58,8 @@ class RoutesContainer extends Component {
   
   generateRoutesTableRow = () => {
     return this.state.tableData.map( (rowData, index) => 
-        <tr key={index}>
-          <td className="table__link" onClick={() => this.showCard(rowData.name)}>{rowData.name}</td>
+        <tr key={index} className={rowData.isHighlited}>
+          <td className="table__link" onClick={() => this.showCard(rowData.name, index)}>{rowData.name}</td>
           <td>{rowData.from}</td>
           <td>{rowData.to}</td>   
           {(this.state.isEditingMode && this.props.isAdmin) ? 
@@ -186,7 +186,7 @@ class RoutesContainer extends Component {
     this.setState({addItemToValue: e.target.value});
   }
 
-  showCard = (name) => {
+  showCard = (name, index) => {
     let locations = [], cardData = [], polyline = [];
       const ROUTES = this.props.data.routes, TRANSPORTS = this.props.data.transport, STOPS = this.props.data.stops;
       let stops = [], stopNames = [], isCardInFavorites = this.checkCardForFavorites('Route ' + name);
@@ -214,7 +214,13 @@ class RoutesContainer extends Component {
         }
         cardData.push({id: i, stops: stopNames[i], times: times});
       }
+      let newArray = this.state.tableData;
+      for (let each in newArray) {
+        newArray[each].isHighlited = '';
+      }
+      newArray[index].isHighlited = 'highlited';
     this.setState({
+      tableData: newArray,
       isCardShown: true,
       cardTableRows: this.generateRoutesCardTableRow(cardData),
       cardTableTitles: this.cardTableTitles(),
@@ -246,7 +252,12 @@ class RoutesContainer extends Component {
   }
 
   closeCard = () => {
+    let newArray = this.state.tableData;
+    for (let each in newArray) {
+      newArray[each].isHighlited = '';
+    }
     this.setState({ 
+      tableData: newArray,
       isCardShown: false
     });
   }
