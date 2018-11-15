@@ -187,16 +187,16 @@ class RoutesContainer extends Component {
   }
 
   showCard = (name, index) => {
-    let locations = [], cardData = [], polyline = [];
+      let locations = [], cardData = [], polyline = [], stops = [], stopNames = [], isCardInFavorites = this.checkCardForFavorites('Route ' + name);
       const ROUTES = this.props.data.routes, TRANSPORTS = this.props.data.transport, STOPS = this.props.data.stops;
-      let stops = [], stopNames = [], isCardInFavorites = this.checkCardForFavorites('Route ' + name);
       for (let ROUTE in ROUTES){
-        if (name === ROUTES[ROUTE].name)
+        if (name === ROUTES[ROUTE].name) {
           stops.push(ROUTES[ROUTE].stops);
+        }
       }
-      for (let stop in stops) {
-        for (let STOP in STOPS){
-          for (let each in stops[stop]) {
+      for (let stop in stops){
+        for (let each in stops[stop]) {
+          for (let STOP in STOPS) {
             if (stops[stop][each] === STOPS[STOP].number){
               stopNames.push(STOPS[STOP].name);
               locations.push({lat: STOPS[STOP].lat, long: STOPS[STOP].long, name: STOPS[STOP].name});
@@ -205,6 +205,7 @@ class RoutesContainer extends Component {
           }
         }
       }
+      console.log(stopNames)
       for (let i = 0; i < stopNames.length; i++) {
         let times = [];
         for (let TRANSPORT in TRANSPORTS){

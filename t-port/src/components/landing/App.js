@@ -214,8 +214,8 @@ class App extends Component {
             stops.push(ROUTES[ROUTE].stops);
         }
         for (let stop in stops) {
-          for (let STOP in STOPS){
-            for (let each in stops[stop]) {
+          for (let each in stops[stop]) {
+            for (let STOP in STOPS){
               if (stops[stop][each] === STOPS[STOP].number){
                 stopNames.push(STOPS[STOP].name);
                 locations.push({lat: STOPS[STOP].lat, long: STOPS[STOP].long, name: STOPS[STOP].name});
@@ -223,6 +223,7 @@ class App extends Component {
             }
           }
         }
+        
           for (let i = 0; i < stopNames.length; i++) {
             let times = [];
             for (let TRANSPORT in TRANSPORTS){
