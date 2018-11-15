@@ -221,6 +221,7 @@ class FindRouteContainer extends Component {
           newPath.splice(i+1,2);
         }
       }
+    //console.log(newPath);
     return newPath;
   }
 

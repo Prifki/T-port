@@ -72,7 +72,7 @@ class TransportsContainer extends Component {
   generatePagination = () => {
     const data = this.state.transport; 
     let pagination=[], current = this.state.currentPage;
-    for (let i = 1; i <= Math.ceil(data.length / 10); i++) {
+    for (let i = 1; i <= Math.ceil(data.length / 15); i++) {
       if (i === current)
         pagination.push([i, 'pagination--active']);
       else
@@ -128,7 +128,7 @@ class TransportsContainer extends Component {
           </td> : null}
       </tr>
     ).filter((rowData, index) => { 
-      return (index >= (this.state.currentPage-1)*10 && index < (this.state.currentPage)*10)});
+      return (index >= (this.state.currentPage-1)*15 && index < (this.state.currentPage)*15)});
   }
 
   compareBy = (key) => {
@@ -269,7 +269,7 @@ class TransportsContainer extends Component {
   addTableItem = () => {
     let transportArrayCopy = this.state.transport;
     transportArrayCopy.push({id: transportArrayCopy.length, type: <i className="pictorams">{this.state.checkedType}</i>, number: this.state.addItemNumberValue, seats: this.state.addItemSeatsValue, route: this.state.addItemRouteValue, time: ["00:00","00:00","00:00"], isEditing: 'edit'});
-    this.setState({transport: transportArrayCopy, currentPage: Math.ceil(transportArrayCopy.length / 10)});
+    this.setState({transport: transportArrayCopy, currentPage: Math.ceil(transportArrayCopy.length / 15)});
   }
 
   updateAddItemNumberValue = (e) => {
