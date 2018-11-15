@@ -7,7 +7,7 @@ export class MapContainer extends Component {
     return (
       <Map google={this.props.google} zoom={11} initialCenter={{lat: 59.932802, lng: 30.332459}} disableDefaultUI={true} styles={this.setMapStyles()}>
         {this.props.markers ? this.props.markers : null}
-        {this.props.polyline ? <Polyline path={this.props.polyline} strokeColor="#29b8ed" strokeOpacity={1} strokeWeight={4} />: null}
+        {this.props.polyline ? <Polyline path={this.props.polyline} strokeColor="#253149" strokeOpacity={1} strokeWeight={4} />: null}
         
       </Map>
     );

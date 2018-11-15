@@ -23,7 +23,6 @@ class CardModal extends Component {
       <>
         <div className="blur"></div>
         <div className="card card--modal" ref={this.modalCardRef} >
-            <BookmarkButton onClick={() => this.props.addToFavorites(this.props.title)}/>
             <CloseButton onClick={this.props.closeModalCard} />
             <h3 className="card__title">{this.props.title}</h3>
             <Table header = {this.props.header} rows = {this.props.rows} isAdmin={this.props.isAdmin} addItem={this.props.addItem} isEditingMode={this.props.isEditingMode} toggleEditingMode={this.props.toggleEditingMode}/>

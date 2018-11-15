@@ -33,7 +33,7 @@ class Header extends Component {
       <header>
         <div className="header__main-section">
           <BurgerButton onClick={this.toggleBurgerNavBar} isBurgerButtonActive={this.state.isBurgerButtonActive}/>
-          <h1 className="header__title"><a href="/">T-port</a></h1>
+          <h1 className="header__title"><a href="/"><div className="logo"></div></a></h1>
         </div>
         <div className="navigation-bar">
           <NavBar onClick={this.closeAllWindows} />

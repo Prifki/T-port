@@ -129,9 +129,11 @@ class StopsContainer extends Component {
       <tr key={index}>
         <td className="table__link" onClick={() => this.showCard(rowData.name, rowData.routes)}>{rowData.name}</td>
         <td>{rowData.routes.join(', ')}</td> 
-        {(this.state.isEditingMode && this.props.isAdmin) ? <>
-        <EditTableButton type={rowData.isEditing} onClick={() => this.editTableItem(index)} />
-        <EditTableButton type={'remove'} onClick={() => this.removeTableItem(index)} /></> : null}  
+        {(this.state.isEditingMode && this.props.isAdmin) ? 
+          <td className="table-editor-buttons__td">
+            <EditTableButton type={rowData.isEditing} onClick={() => this.editTableItem(index)} />
+            <EditTableButton type={'close'} onClick={() => this.removeTableItem(index)} />
+          </td> : null}  
       </tr>
     ).filter((rowData, index) => { 
       return (index >= (this.state.currentPage-1)*10 && index < (this.state.currentPage)*10)});
@@ -191,8 +193,7 @@ class StopsContainer extends Component {
       <tr>
         <td><input type="text" className="table-edit-input" placeholder="Name" name="name" value={this.props.addItemNameValue} onChange={this.updateAddItemNameValue} /></td>
         <td><input type="text" className="table-edit-input" placeholder="Routes" name="routes" value={this.props.addItemRoutesValue} onChange={this.updateAddItemRoutesValue} /></td>
-        <td onClick={this.addTableItem}><i className="pictorams table-editor-buttons">add_circle_outline</i></td>
-        <td></td>
+        <td onClick={this.addTableItem} className="centered"><i className="pictorams table-editor-buttons">add_circle_outline</i></td>
       </tr>
     )
   }

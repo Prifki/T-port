@@ -12,7 +12,6 @@
 @import menus
 @import bases
 
-//to consider - menus, bases
 #root
   min-height: 100%
   display: flex
@@ -31,7 +30,7 @@ main
   width: 85%
   height: 100%
   margin: 5px
-  border-radius: 10px
+  border-radius: 8px
   background: #f8f8f8
   z-index: 2
   display: flex
@@ -71,7 +70,7 @@ main
 .icon--closing
   font-size: 24px
   &:hover
-    color: $main-color
+    color: $additional-color
     cursor: pointer
 
 .add-transport-buttons
@@ -96,18 +95,22 @@ main
   transition: all 0.2s
   cursor: pointer
   background: #ccc
-  border-radius: 5px
+  border-radius: 8px
   i
     font-size: 20px
+
+@media (max-width: 450px)
+  body, .far, .fa
+    font-size: 3.5vw
 
 ::-webkit-scrollbar
   width: 12px
 ::-webkit-scrollbar-track
-  -webkit-border-radius: 10px
-  border-radius: 10px
+  -webkit-border-radius: 8px
+  border-radius: 8px
 ::-webkit-scrollbar-thumb
-  -webkit-border-radius: 10px
-  border-radius: 10px
+  -webkit-border-radius: 8px
+  border-radius: 8px
   background: $main-color
 ::-webkit-scrollbar-thumb:window-inactive 
   background: lighten($main-color,10%)

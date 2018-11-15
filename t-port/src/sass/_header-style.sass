@@ -23,12 +23,19 @@ header
   color: #000
   font-size: 2.7em
   text-rendering: optimizeLegibility
-  margin-left: 20px
+  margin-left: 5px
+
+.logo
+  background: url(./../images/logo.png) no-repeat
+  background-size: cover
+  width: 124px
+  height: 48px
 
 .navigation-bar
   display: flex
   flex-direction: row
   justify-content: flex-start
+  font-weight: 900
   
 .navigation-bar__item
   font-family: $menus-font
@@ -37,7 +44,7 @@ header
   font-size: 1.3em
   margin: 0 10px
   &:hover
-    color: $main-color
+    color: $additional-color
 
 .header-buttons
   display: flex
@@ -46,7 +53,7 @@ header
   div
     margin: 0 10px
   div:hover
-    color: $main-color
+    color: $additional-color
     cursor: pointer
   .pictorams
     font-size: 32px

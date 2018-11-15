@@ -18,7 +18,7 @@ class App extends Component {
           data: JSONdata,
           isLogged: true,
           isAdmin: true,
-          favorites: [{title: "Route TL13", type: "departure_board"},{title: "Smolniy", type: "place"},{"title": "Bus B012US", "type": "directions_bus"}],
+          favorites: [{title: "Route TL13", type: "departure_board"}],
           isModalCardOpen: false,
           modalCardTitle: null,
           modalCardTableTitles: null,

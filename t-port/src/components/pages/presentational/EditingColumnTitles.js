@@ -3,8 +3,7 @@ import React from 'react';
 function EditingColumnTitles() {
     return (
         <>
-        <th>Edit</th>
-        <th>Remove</th>
+        <th></th>
         </>
     )
 }
