@@ -18,7 +18,8 @@ class FindRouteContainer extends Component {
       startTime: this.getCurrentTime(),
       stopA: null,
       stopB: null,
-      stopFieldsClassName: 'menu__input',
+      stopAFieldClassName: 'menu__input',
+      stopBFieldClassName: 'menu__input',
       foundRoute: null,
       markers: null,
       polyline: null
@@ -29,7 +30,7 @@ class FindRouteContainer extends Component {
         <main>
             <div className="google-map--index"><GoogleMap markers = {this.state.markers} polyline={this.state.polyline} /></div>
 
-            {this.state.isFindARouteMenuOpened ? <FindARouteMenu updateStartTime={this.updateStartTime} startTime={this.state.startTime} stopBAutoComplete={this.stopBAutoComplete} stopAAutoComplete={this.stopAAutoComplete} isFindARouteMenuOpened={this.state.isFindARouteMenuOpened} toggleFindARouteMenu={this.toggleFindARouteMenu} findARoute={this.findARoute} stopAAutoCompleteItems={this.state.stopAAutoCompleteItems} stopBAutoCompleteItems={this.state.stopBAutoCompleteItems} stopFieldsClassName={this.state.stopFieldsClassName}/> : 
+            {this.state.isFindARouteMenuOpened ? <FindARouteMenu updateStartTime={this.updateStartTime} startTime={this.state.startTime} stopBAutoComplete={this.stopBAutoComplete} stopAAutoComplete={this.stopAAutoComplete} isFindARouteMenuOpened={this.state.isFindARouteMenuOpened} toggleFindARouteMenu={this.toggleFindARouteMenu} findARoute={this.findARoute} stopAAutoCompleteItems={this.state.stopAAutoCompleteItems} stopBAutoCompleteItems={this.state.stopBAutoCompleteItems} stopAFieldClassName={this.state.stopAFieldClassName} stopBFieldClassName={this.state.stopBFieldClassName} /> : 
             
             <FindARouteMenuWrapped toggleFindARouteMenu={this.toggleFindARouteMenu} />}
 
@@ -56,7 +57,7 @@ class FindRouteContainer extends Component {
     return d;
   }
   findARoute = () => {
-    let stopA, stopB, validA = false, validB = false;
+    let stopA, stopB, validA = false, validB = false, stopAFieldClassName = this.state.stopAFieldClassName, stopBFieldClassName = this.state.stopBFieldClassName;
     for (let stop in this.props.data.stops) {
       if (this.state.stopA === this.props.data.stops[stop].name) {
         stopA = this.props.data.stops[stop].letter;
@@ -67,6 +68,10 @@ class FindRouteContainer extends Component {
         validB = true;
       }
     }
+    if (!validA)
+      stopAFieldClassName = 'menu__input menu--login--failed-animation';
+    if (!validB)
+      stopBFieldClassName = 'menu__input menu--login--failed-animation';
     if (validA && validB) {
       let fromTime = this.parseTime(this.state.startTime);
       let foundRoute = this.dijkstra(stopA, stopB), locations = [], polyline = [];
@@ -141,7 +146,8 @@ class FindRouteContainer extends Component {
         foundRoute: null,
         markers: null,
         polyline: null,
-        stopFieldsClassName: 'menu__input menu--login--failed-animation'
+        stopAFieldClassName: stopAFieldClassName,
+        stopBFieldClassName: stopBFieldClassName
       })
     }
   }
@@ -160,7 +166,7 @@ class FindRouteContainer extends Component {
         this.setState({
           stopAAutoCompleteItems: foundEntities,
           stopA: e.target.value,
-          stopFieldsClassName: 'menu__input'
+          stopAFieldClassName: 'menu__input'
         });
       }
     }
@@ -179,7 +185,7 @@ class FindRouteContainer extends Component {
         this.setState({
           stopBAutoCompleteItems: foundEntities,
           stopB: e.target.value,
-          stopFieldsClassName: 'menu__input'
+          stopBFieldClassName: 'menu__input'
         });
       }
     }

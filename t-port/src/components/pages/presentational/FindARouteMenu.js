@@ -9,13 +9,13 @@ function FindARouteMenu(props) {
             <div className="menu--find-a-route-content">
                 <h2 className="menu__title">Find a route</h2>
 
-                <input className={props.stopFieldsClassName} type="text" placeholder="From" list="stopsA" onChange={props.stopAAutoComplete} onFocus={props.stopAAutoComplete} />
+                <input className={props.stopAFieldClassName} type="text" placeholder="From" list="stopsA" onChange={props.stopAAutoComplete} onFocus={props.stopAAutoComplete} />
 
                 <datalist id="stopsA">
                     {props.stopAAutoCompleteItems}
                 </datalist>
 
-                <input className={props.stopFieldsClassName} type="text" placeholder="To" list="stopsB" onChange={props.stopBAutoComplete} onFocus={props.stopBAutoComplete} />
+                <input className={props.stopBFieldClassName} type="text" placeholder="To" list="stopsB" onChange={props.stopBAutoComplete} onFocus={props.stopBAutoComplete} />
 
                 <datalist id="stopsB">
                     {props.stopBAutoCompleteItems}
