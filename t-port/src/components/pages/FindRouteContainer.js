@@ -110,11 +110,11 @@ class FindRouteContainer extends Component {
         for (let i=1; i<timeData.length;i++){
           timeData[i] = timeData[i]+timeData[i-1];
         }
-        console.log(timeData);
       if (timeData.length >= 1) {
-        timeData[timeData.length] = timeData[timeData.length-1]+foundRoute[foundRoute.length-1][1];
+        timeData[timeData.length] = timeData[timeData.length-1];
         for (let i = 2, j=0; i < foundRoute.length; i+=2, j++) {
           foundRoute[i][1] += timeData[j];
+        console.log(foundRoute[i][1]);
         }
       }
       for (let i = 0; i < foundRoute.length; i+=2) {
