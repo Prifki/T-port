@@ -300,14 +300,14 @@ class TransportsContainer extends Component {
       const TRANSPORTS = this.props.data.transport,
       ROUTES = this.props.data.routes,
       STOPS = this.props.data.stops;
-      let schedule, routeNum, stops, stopNames = [], cardTableData = [], isCardInFavorites = this.checkCardForFavorites(cardTitle);
+      let schedule = [], routeNum = [], stops, stopNames = [], cardTableData = [], isCardInFavorites = this.checkCardForFavorites(cardTitle);
       for (let transport in TRANSPORTS){
-        if(Object.entries(TRANSPORTS[transport])[1][1]===number){
-          schedule = TRANSPORTS[transport].time;
-          routeNum = TRANSPORTS[transport].route;
+        if (Object.entries(TRANSPORTS[transport])[1][1]===number){
+          schedule = (TRANSPORTS[transport].time);
+          routeNum.push(TRANSPORTS[transport].route);
           for (let route in ROUTES){
-            if (Object.entries(ROUTES[route])[0][1]===routeNum){
-              stops = ROUTES[route].stops;
+            if (Object.entries(ROUTES[route])[0][1].toString() === routeNum.toString()){
+              stops = (ROUTES[route].stops);
             }
           }
         }
@@ -319,7 +319,7 @@ class TransportsContainer extends Component {
         }
       }
       for (let each in stopNames){
-        cardTableData.push({id: each, stopName: stopNames[each], time: schedule[each]});
+        cardTableData.push({stopName: stopNames[each], time: schedule[each]});
       }
       let newArray = this.state.transport;
       for (let each in newArray) {

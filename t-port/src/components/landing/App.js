@@ -173,26 +173,26 @@ class App extends Component {
         TRANSPORTS = this.state.data.transport,
         ROUTES = this.state.data.routes,
         STOPS = this.state.data.stops;
-        let schedule, routeNum, stops, stopNames = [], cardTableData = [];
+        let schedule = [], routeNum = [], stops, stopNames = [], cardTableData = [];
         for (let transport in TRANSPORTS){
-            if (Object.entries(TRANSPORTS[transport])[2][1]===number){
-                schedule = TRANSPORTS[transport].time;
-                routeNum = TRANSPORTS[transport].route;
-                for (let route in ROUTES){
-                    if (Object.entries(ROUTES[route])[0][1]===routeNum){
-                        stops = ROUTES[route].stops;
-                    }
-                }
+          if (Object.entries(TRANSPORTS[transport])[1][1]===number){
+            schedule = (TRANSPORTS[transport].time);
+            routeNum.push(TRANSPORTS[transport].route);
+            for (let route in ROUTES){
+              if (Object.entries(ROUTES[route])[0][1].toString() === routeNum.toString()){
+                stops = (ROUTES[route].stops);
+              }
             }
+          }
         }
         for (let stop in stops){
-            for (let STOP in STOPS){
+          for (let STOP in STOPS){
             if (stops[stop] === STOPS[STOP].number)
-                stopNames.push(STOPS[STOP].name);
-            }
+              stopNames.push(STOPS[STOP].name);
+          }
         }
         for (let each in stopNames){
-            cardTableData.push({stopName: stopNames[each], time: schedule[each]});
+          cardTableData.push({stopName: stopNames[each], time: schedule[each]});
         }
         return cardTableData.map( (rowData, index) => 
               <tr key={index}>
