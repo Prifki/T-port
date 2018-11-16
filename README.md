@@ -1,61 +1,51 @@
-# T-Shipping
+# T-port
 
 An educational project on developing an application which simulates the operation of the information system of a transport company.
 
-## Estimated design
+## Site sections description
 
 ### Header
 
-1. Burger menu
-2. Logo & Title 
+The header contents the user functional which allows him:
 
-### Body
+* To search transport, stops and routes with autocomplete and open the corresponding cards;
+* To sign in and sign out of the application;
+* To watch and edit favorite transport, stops and routes signs.
+* To open the cards of the favorite entities.
 
-Some background behind the field with a page content.
+It contents a navigation bar as well, which hides into a burger-menu when the window is not wide enough.
+The site logo is a link to the main page and it refreshes the single-page application.
 
-#### Pages content
+### The main page
 
-1. Authorization page
-* Forms for login and password in a small menu.
-* An authorization button.
-* A link for an access recovery.
+Here is the main section of the web-application. A full-screen scrollable and zoomable map is situated here to provide the ability to watch the routes conveniently and cozy. 
 
-2. Transport list
-* A sorting and filtering menu.
-Checkboxes for the transport types and routes filtering, a checkbox for sorting by places number.
-* A table of transports.
-The columns are: number, type, route and number of places.
+There is a Find-A-Route window where the user chooses the stop from which he is going to start his trip, the last destination of his trip and the time when he wanna start. (Autocomplete is provided). When the user pushes the FIND button, the route on the map and the detailed information of the shortest trip are appearing. On the information window he can see the time of transport depatures, the type of the transport, the route names and the transfer stations. All the items are the links for the corresponding cards which can be opened in a modal window.
 
-3. Stops list
-* A sorting and filtering menu.
-Checkboxes for the routes and numbers filtering, a checkbox for sorting by a number.
-* A table of stops.
-The columns are: number and route.
-* Google map with a geoposition of a selected stop.
+### Transport
 
-4. Routes list
-* A table of routes.
-* Crossing routes button.
+On this page the full list of the available transports is shown. There is an ability to sort the column of the transport seats number by clicking on the column title. Also a user can filter the items by transport types by pushing the corresponding buttons or by routes, typing the route name into the filtering form. Table pagination is provided for the convenientness of inspecting. Clicking on a transport number will open a corresponding card.
 
-There is only one table and a checkbox which selects if the table shows all the routes or only the crossing ones.
+### Stops
 
-5. Route card
-* Route info with links to the stops cards.
-* Google map with a route shown.
+On the current page there is a list of stops which the user can sort by its name, filter by name and routes. The stop names are the links to the corresponding cards. A pagination is provided.
 
-6. Stop card
-Tabs:
-* Stop info.
-* Schedules.
+### Routes
 
-7. Transport card
-* Transport info.
+On this page the routes are shown as well as the stops of its departure and arrival. You can sort the routes list by route names. Clicking on a route name will display the route informarion on a map and open the corresponding card.
 
-8. Route searching
-* Two selects of stops: A and B. 
-* Two selects of times.
-* List of possible routes.
-* Google map with a selected route shown.
+### Cards
+
+The cards contain information of an opened entity. The stop cards also provide a map whith a marked geoposition. The displayied entities are the links for another card opening. Near the card title there is a favorites pictogram which allows you to add the current card to favorites for the further convenient usage.
 
 ### Footer
-Copyright
+
+Copyright info
+
+
+## Moderating
+
+If the user has a privilage of a modarator, it allows him to edit the table items, remove them and add another ones. There is a settings pictogram on the corners of the tables which opens the moderating functionality.
+
+
+
