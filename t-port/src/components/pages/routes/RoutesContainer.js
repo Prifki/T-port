@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Marker } from 'google-maps-react';
 
-import Table from './presentational/Table';
-import Card from './presentational/Card';
-import EditingColumnTitles from './presentational/EditingColumnTitles';
-import EditTableButton from './presentational/EditTableButton';
-import GoogleMap from './presentational/GoogleMap';
+import Table from './../presentational/Table';
+import Card from './../presentational/Card';
+import EditingColumnTitles from './../presentational/EditingColumnTitles';
+import EditTableButton from './../presentational/EditTableButton';
+import GoogleMap from './../presentational/GoogleMap';
 
 class RoutesContainer extends Component {
     constructor(props){

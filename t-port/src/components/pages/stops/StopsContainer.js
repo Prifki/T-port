@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Marker } from 'google-maps-react';
 
-import Table from './presentational/Table';
-import Pagination from './presentational/Pagination';
-import FilterField from './presentational/FilterField';
-import Card from './presentational/Card';
-import EditingColumnTitles from './presentational/EditingColumnTitles';
-import EditTableButton from './presentational/EditTableButton';
+import Table from './../presentational/Table';
+import Pagination from './../presentational/Pagination';
+import FilterField from './../presentational/FilterField';
+import Card from './../presentational/Card';
+import EditingColumnTitles from './../presentational/EditingColumnTitles';
+import EditTableButton from './../presentational/EditTableButton';
 
 class StopsContainer extends Component {
     constructor(props){

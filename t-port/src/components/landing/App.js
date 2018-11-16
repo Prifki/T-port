@@ -5,10 +5,10 @@ import { Marker } from 'google-maps-react';
 import JSONdata from './../../data/data.json';
 import Header from './header/Header';
 import Footer from './footer/Footer';
-import StopsContainer from '../pages/StopsContainer';
 import FindRouteContainer from '../pages/FindRouteContainer';
-import RoutesContainer from '../pages/RoutesContainer';
-import TransportsContainer from '../pages/TransportsContainer';
+import StopsContainer from '../pages/stops/StopsContainer';
+import RoutesContainer from '../pages/routes/RoutesContainer';
+import TransportsContainer from '../pages/transport/TransportsContainer';
 import CardModal from './../pages/presentational/CardModal';
 
 class App extends Component {

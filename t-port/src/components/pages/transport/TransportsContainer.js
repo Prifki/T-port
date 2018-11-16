@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import FilterByType from './presentational/FilterByType';
-import AddTransportTypeButtons from './presentational/AddTransportTypeButtons';
-import FilterField from './presentational/FilterField';
-import Table from './presentational/Table';
-import Pagination from './presentational/Pagination';
-import Card from './presentational/Card';
-import EditingColumnTitles from './presentational/EditingColumnTitles';
-import EditTableButton from './presentational/EditTableButton';
+import FilterByType from './../presentational/FilterByType';
+import AddTransportTypeButtons from './../presentational/AddTransportTypeButtons';
+import FilterField from './../presentational/FilterField';
+import Table from './../presentational/Table';
+import Pagination from './../presentational/Pagination';
+import Card from './../presentational/Card';
+import EditingColumnTitles from './../presentational/EditingColumnTitles';
+import EditTableButton from './../presentational/EditTableButton';
 
 class TransportsContainer extends Component {
   constructor(props){
