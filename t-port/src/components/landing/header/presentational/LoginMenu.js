@@ -3,9 +3,9 @@ import CloseButton from './CloseButton';
 import SubmitButton from './SubmitButton';
 
 function LoginMenu (props) {
-    const className = props.isLoginMenuOpen ? 'menu menu--login menu--login--active' : 'menu menu--login';
+    const menuClass = props.isLoginMenuOpen ? 'menu menu--login menu--login--active' : 'menu menu--login';
     return (
-        <div className={className}>
+        <div className={menuClass}>
             <CloseButton  onClick={props.toggleLoginMenu} />
             {!props.isLogged ?
               <>

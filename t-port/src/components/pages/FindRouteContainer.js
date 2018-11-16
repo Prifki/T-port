@@ -18,6 +18,7 @@ class FindRouteContainer extends Component {
       startTime: this.getCurrentTime(),
       stopA: null,
       stopB: null,
+      stopFieldsClassName: 'menu__input',
       foundRoute: null,
       markers: null,
       polyline: null
@@ -28,7 +29,7 @@ class FindRouteContainer extends Component {
         <main>
             <div className="google-map--index"><GoogleMap markers = {this.state.markers} polyline={this.state.polyline} /></div>
 
-            {this.state.isFindARouteMenuOpened ? <FindARouteMenu updateStartTime={this.updateStartTime} startTime={this.state.startTime} stopBAutoComplete={this.stopBAutoComplete} stopAAutoComplete={this.stopAAutoComplete} isFindARouteMenuOpened={this.state.isFindARouteMenuOpened} toggleFindARouteMenu={this.toggleFindARouteMenu} findARoute={this.findARoute} stopAAutoCompleteItems={this.state.stopAAutoCompleteItems} stopBAutoCompleteItems={this.state.stopBAutoCompleteItems} /> : 
+            {this.state.isFindARouteMenuOpened ? <FindARouteMenu updateStartTime={this.updateStartTime} startTime={this.state.startTime} stopBAutoComplete={this.stopBAutoComplete} stopAAutoComplete={this.stopAAutoComplete} isFindARouteMenuOpened={this.state.isFindARouteMenuOpened} toggleFindARouteMenu={this.toggleFindARouteMenu} findARoute={this.findARoute} stopAAutoCompleteItems={this.state.stopAAutoCompleteItems} stopBAutoCompleteItems={this.state.stopBAutoCompleteItems} stopFieldsClassName={this.state.stopFieldsClassName}/> : 
             
             <FindARouteMenuWrapped toggleFindARouteMenu={this.toggleFindARouteMenu} />}
 
@@ -139,7 +140,8 @@ class FindRouteContainer extends Component {
         isRouteFound: false,
         foundRoute: null,
         markers: null,
-        polyline: null
+        polyline: null,
+        stopFieldsClassName: 'menu__input menu--login--failed-animation'
       })
     }
   }
@@ -157,7 +159,8 @@ class FindRouteContainer extends Component {
       if (foundEntities.length) {
         this.setState({
           stopAAutoCompleteItems: foundEntities,
-          stopA: e.target.value
+          stopA: e.target.value,
+          stopFieldsClassName: 'menu__input'
         });
       }
     }
@@ -175,7 +178,8 @@ class FindRouteContainer extends Component {
       if (foundEntities.length) {
         this.setState({
           stopBAutoCompleteItems: foundEntities,
-          stopB: e.target.value
+          stopB: e.target.value,
+          stopFieldsClassName: 'menu__input'
         });
       }
     }

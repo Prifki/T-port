@@ -8,13 +8,14 @@ function FindARouteMenu(props) {
             <CloseButton onClick={props.toggleFindARouteMenu}/>
             <div className="menu--find-a-route-content">
                 <h2 className="menu__title">Find a route</h2>
-                <input className="menu__input" type="text" placeholder="From" list="stopsA" onChange={props.stopAAutoComplete} onFocus={props.stopAAutoComplete} />
+
+                <input className={props.stopFieldsClassName} type="text" placeholder="From" list="stopsA" onChange={props.stopAAutoComplete} onFocus={props.stopAAutoComplete} />
 
                 <datalist id="stopsA">
                     {props.stopAAutoCompleteItems}
                 </datalist>
 
-                <input className="menu__input" type="text" placeholder="To" list="stopsB" onChange={props.stopBAutoComplete} onFocus={props.stopBAutoComplete} />
+                <input className={props.stopFieldsClassName} type="text" placeholder="To" list="stopsB" onChange={props.stopBAutoComplete} onFocus={props.stopBAutoComplete} />
 
                 <datalist id="stopsB">
                     {props.stopBAutoCompleteItems}
