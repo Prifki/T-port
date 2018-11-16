@@ -213,11 +213,11 @@ class StopsContainer extends Component {
 
   showCard = (stopName, routesList, index) => {
     const ROUTES = this.props.data.routes, TRANSPORTS = this.props.data.transport, STOPS = this.props.data.stops;
-    let cardTitle = stopName, location, isCardInFavorites = this.checkCardForFavorites(stopName);
+    let cardTitle = stopName, stopNum, location, isCardInFavorites = this.checkCardForFavorites(stopName);
     for (let STOP in STOPS){
       if (stopName === STOPS[STOP].name){
 				location = {name: stopName, lat: parseFloat(STOPS[STOP].lat), long: parseFloat(STOPS[STOP].long)};
-        stopName = STOPS[STOP].number;
+        stopNum = STOPS[STOP].number;
       }
     }
     let cardData = [];
@@ -226,7 +226,7 @@ class StopsContainer extends Component {
         if (ROUTES[ROUTE].name === routesList[route]){
           let times = [];
           for (let stop in ROUTES[ROUTE].stops){
-            if (stopName === ROUTES[ROUTE].stops[stop]){
+            if (stopNum === ROUTES[ROUTE].stops[stop]){
               for (let TRANSPORT in TRANSPORTS){
                 if (TRANSPORTS[TRANSPORT].route === routesList[route]){
                   times.push(TRANSPORTS[TRANSPORT].time[stop]);

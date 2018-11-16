@@ -205,7 +205,6 @@ class RoutesContainer extends Component {
           }
         }
       }
-      console.log(stopNames)
       for (let i = 0; i < stopNames.length; i++) {
         let times = [];
         for (let TRANSPORT in TRANSPORTS){
