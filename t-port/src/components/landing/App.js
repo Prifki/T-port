@@ -291,6 +291,7 @@ class App extends Component {
     closeModalCard = () => {this.setState({isModalCardOpen: false});}
 
     addToFavorites = (title) => {
+      try {
         const newFavorites = this.state.favorites;
         let type, isUnique = true;
 
@@ -321,6 +322,10 @@ class App extends Component {
         this.setState({
             favorites: newFavorites
         });
+      }
+      catch (err) {
+        console.log(err);
+      }
     }
 }
 

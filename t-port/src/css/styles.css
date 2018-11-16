@@ -546,7 +546,7 @@ table th {
   position: absolute;
   z-index: 13;
   margin: auto;
-  top: 0;
+  top: 62px;
   margin: 10px 0;
   left: 5%;
   border: 1px solid #253149;

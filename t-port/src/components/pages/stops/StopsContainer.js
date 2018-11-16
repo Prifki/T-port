@@ -201,7 +201,7 @@ class StopsContainer extends Component {
   addTableItem = () => {
     let stopsArrayCopy = this.state.stops;
     stopsArrayCopy.push({number: stopsArrayCopy.length, name: this.state.addItemNameValue, routes: [this.state.addItemRoutesValue], lat: "59.9500", long: "30.359400", letter: "X", isEditing: 'edit'});
-    this.setState({stops: stopsArrayCopy});
+    this.setState({stops: stopsArrayCopy, currentPage: Math.ceil(stopsArrayCopy.length / 10)});
   }
 
   updateAddItemNameValue = (e) => {
