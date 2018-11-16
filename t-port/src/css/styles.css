@@ -152,6 +152,14 @@ header {
   height: 48px;
 }
 
+@media (max-width: 585px) {
+  .logo {
+    background: url(./../images/logo-small.png) no-repeat;
+    background-size: cover;
+    width: 48px;
+    height: 48px;
+  }
+}
 .navigation-bar {
   display: flex;
   flex-direction: row;
