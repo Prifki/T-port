@@ -43,8 +43,8 @@ class TransportsContainer extends Component {
   }
   render() {
     const rows = this.generateTransportTableRow(),
-    transportTableTitles = this.transportTableTitles(),
-    cardTableTitles = this.cardTableTitles(),
+    transportTableTitles = this.createTransportTableTitles(),
+    cardTableTitles = this.createCardTableTitles(),
     pagination = this.generatePagination(),
     addTransportTableItem =  this.createAddItemRow();
     return (
@@ -99,7 +99,7 @@ class TransportsContainer extends Component {
     });
   }
 
-  transportTableTitles = () => {
+  createTransportTableTitles = () => {
     const arrow = this.state.isSortedAscending ? 'arrow_drop_up' : 'arrow_drop_down';
     return (
       <thead>
@@ -375,7 +375,7 @@ class TransportsContainer extends Component {
     )
   }
 
-  cardTableTitles = () => {
+  createCardTableTitles = () => {
     return (
       <thead>
         <tr>
