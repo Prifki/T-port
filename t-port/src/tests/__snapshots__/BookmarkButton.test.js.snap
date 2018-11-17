@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BookmarkButton should render correctly 1`] = `
+<div
+  className="card__button--bookmark"
+>
+  <i
+    className="pictorams"
+  >
+    star_border
+  </i>
+</div>
+`;
+
+exports[`LoginMenu should render correctly 1`] = `
+<div
+  className="card__button--bookmark"
+>
+  <i
+    className="pictorams"
+  >
+    star_border
+  </i>
+</div>
+`;

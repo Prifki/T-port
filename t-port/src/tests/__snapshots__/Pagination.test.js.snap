@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginMenu should render correctly 1`] = `
+<div
+  className="menu menu--login menu--login--active"
+>
+  <CloseButton />
+  <h3
+    className="menu__title"
+  >
+    Sign in
+  </h3>
+  <input
+    placeholder="Login"
+    type="text"
+  />
+  <input
+    placeholder="Password"
+    type="password"
+  />
+  <SubmitButton
+    text="Sign in"
+  />
+</div>
+`;
+
+exports[`Pagination should render correctly 1`] = `
+<div
+  className="pagination-wrapper"
+>
+  <div
+    className="pagination"
+  />
+</div>
+`;
