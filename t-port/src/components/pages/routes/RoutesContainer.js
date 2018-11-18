@@ -59,7 +59,8 @@ class RoutesContainer extends Component {
   generateRoutesTableRow = () => {
     return this.state.tableData.map( (rowData, index) => 
         <tr key={index} className={rowData.isHighlited}>
-          <td className="table__link" onClick={() => this.showCard(rowData.name, index)}>{rowData.name}</td>
+          {(this.state.isEditingMode) ? <td>{rowData.name}</td> :
+          <td className="table__link" onClick={() => this.showCard(rowData.name, index)}>{rowData.name}</td>}
           <td>{rowData.from}</td>
           <td>{rowData.to}</td>   
           {(this.state.isEditingMode && this.props.isAdmin) ? 

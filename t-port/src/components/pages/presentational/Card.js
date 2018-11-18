@@ -23,9 +23,9 @@ class Card extends Component {
             <CloseButton onClick={this.props.closeCard} />
 
             <div className="card__header">
-            {(this.props.isLogged && !this.props.isCardInFavorites) ? <BookmarkButton onClick={() => { this.props.addToFavorites(this.props.title); this.props.bookmark()}} type={type} /> : null}
+            {(!this.props.isCardInFavorites) ? <BookmarkButton onClick={() => { this.props.addToFavorites(this.props.title); this.props.bookmark()}} type={type} /> : null}
 
-            {(this.props.isLogged && this.props.isCardInFavorites)  ? <BookmarkButton onClick={() => { this.props.removeFromFavoritesByCard(this.props.title); this.props.unBookmark()}} type={type} /> : null}
+            {(this.props.isCardInFavorites)  ? <BookmarkButton onClick={() => { this.props.removeFromFavoritesByCard(this.props.title); this.props.unBookmark()}} type={type} /> : null}
 
             <h3 className="card__title">{this.props.title}</h3>
             </div>

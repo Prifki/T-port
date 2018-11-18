@@ -118,7 +118,8 @@ class TransportsContainer extends Component {
     return this.state.transport.map( (rowData, index) => 
       <tr key={index} className={rowData.isHighlited}>
         <td><i className="pictorams">{rowData.type}</i></td>
-        <td className="table__link" onClick={() => this.showCard(rowData.number, rowData.type, index)}>{rowData.number}</td>
+        {(this.state.isEditingMode) ? <td>{rowData.number}</td> :
+          <td className="table__link" onClick={() => this.showCard(rowData.number, rowData.type, index)}>{rowData.number}</td>}
         <td>{rowData.route}</td>
         <td>{rowData.seats}</td>
         {(this.state.isEditingMode && this.props.isAdmin) ? 

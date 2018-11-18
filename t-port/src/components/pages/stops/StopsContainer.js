@@ -127,7 +127,8 @@ class StopsContainer extends Component {
   generateStopTableRow = () => {
     return this.state.stops.map( (rowData, index) => 
       <tr key={index} className={rowData.isHighlited}>
-        <td className="table__link" onClick={() => this.showCard(rowData.name, rowData.routes, index)}>{rowData.name}</td>
+        {(this.state.isEditingMode) ? <td>{rowData.name}</td> :
+        <td className="table__link" onClick={() => this.showCard(rowData.name, rowData.routes, index)}>{rowData.name}</td>}
         <td>{rowData.routes.join(', ')}</td> 
         {(this.state.isEditingMode && this.props.isAdmin) ? 
           <td className="table-editor-buttons__td">

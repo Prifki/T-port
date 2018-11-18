@@ -39,7 +39,7 @@ class Header extends Component {
           <NavBar onClick={this.closeAllWindows} />
         </div>
         <div className="header-buttons">
-          {this.props.isLogged ? <FavoritesButton onClick={this.toggleFavoritesMenu} /> : null}
+          <FavoritesButton onClick={this.toggleFavoritesMenu} />
 
           {this.props.isLogged ?
             <Link to="/"><QuitButton onClick={this.props.quit} /></Link> : 

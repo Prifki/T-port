@@ -16,8 +16,8 @@ class App extends Component {
         super(props);
         this.state = {
           data: JSONdata,
-          isLogged: true,
-          isAdmin: true,
+          isLogged: false,
+          isAdmin: false,
           favorites: [{title: "Route TL13", type: "departure_board"}],
           isModalCardOpen: false,
           modalCardTitle: null,
@@ -165,7 +165,10 @@ class App extends Component {
     }
 
     generateStopMarker = (loc) => {
+      try {
         return <Marker title={loc.name} name={loc.name} position={{lat: loc.lat, lng: loc.long}} />
+      }
+      catch (err) {console.log(err)}
     }
 
     generateTransportModalCardTableRow = (title) => {
